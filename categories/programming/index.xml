@@ -23,6 +23,16 @@ And how do you model those two distinct failure states in your API?</description
     </item>
     
     <item>
+      <title>Node.js client for Zeebe Microservices Orchestration Engine</title>
+      <link>https://joshwulf.com/blog/2019/01/zeebe-node/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/01/zeebe-node/</guid>
+      <description>Update: I now work at Camunda on Zeebe as the Node client maintainer and a Developer Advocate. Things have changed in the broker and the library since this was published - for the latest on using it, refer to my new book in development - &amp;ldquo;The Zeebe Node.js Client Guide&amp;quot;
+I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe. Check it out on GitHub and start using it now!</description>
+    </item>
+    
+    <item>
       <title>Programming Quantum Computers with Q#</title>
       <link>https://joshwulf.com/blog/programming-in-q#/</link>
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>

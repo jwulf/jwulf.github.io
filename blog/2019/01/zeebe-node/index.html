@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Node.js client for Zeebe Microservices Orchestration Engine - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Node.js client for Zeebe Microservices Orchestration Engine">
+<meta itemprop="description" content="I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe.">
+<meta itemprop="datePublished" content="2019-01-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1332">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Node.js client for Zeebe Microservices Orchestration Engine" />
+<meta property="og:description" content="I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2019/01/zeebe-node/" />
+<meta property="article:published_time" content="2019-01-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-01-29T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js client for Zeebe Microservices Orchestration Engine"/>
+<meta name="twitter:description" content="I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;title=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;title=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;description=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2019/01/zeebe-node/">Node.js client for Zeebe Microservices Orchestration Engine</a></h2>
+    
+    
+        <p>I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2019-01-29 00:00:00 &#43;0000 UTC">
+      January 29, 2019
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>7 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;title=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;title=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f&amp;description=Node.js%20client%20for%20Zeebe%20Microservices%20Orchestration%20Engine" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2019%2f01%2fzeebe-node%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2019/01/zeebe-node/" class="image featured">
+    <img src="/img/2019/01/zeebe.png" alt="">
+  </a>
+
+
+  <div class="content">
+    <p><em>Update: I now work at Camunda on Zeebe as the Node client maintainer and a Developer Advocate. Things have changed in the broker and the library since this was published - for the latest on using it, refer to my new book in development - &ldquo;<a href="https://zeebe.joshwulf.com">The Zeebe Node.js Client Guide</a>&quot;</em></p>
+<p>I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe. <a href="https://github.com/CreditSenseAU/zeebe-client-node-js">Check it out on GitHub and start using it now</a>!</p>
+<h2 id="about-zeebe">About Zeebe</h2>
+<p><a href="http://zeebe.io/">Zeebe</a> is an emerging microservices orchestration engine being <a href="https://github.com/zeebe-io/">developed in the open</a> by Camunda.</p>
+<p>It addresses one of the core issues in a distributed microservices architecture — where is the source of truth for the coordinated interaction of the entire system?</p>
+<p>While designing a green-field microservice-based system at Credit Sense, our team of six developers found ourselves constantly drawing system diagrams in Confluence — with the knowing dread that they would rapidly go out of date once we started coding. At the same time, we appreciated the view they gave us of the overall system architecture — the system we are replacing uses a complex peer-to-peer choreography that requires reasoning across multiple codebases to understand.</p>
+<p>We eventually converged on the Confluence BPMN plugin, in order to share a common language with our Business Analysts. Imagine our surprise and delight to find out that there is an orchestration engine that can parse and orchestrate the service flows in our diagrams!</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Gallery Name" href="/img/2019/01/bpmn.png" data-caption="An example BPMN diagram"><img src="/img/2019/01/bpmn.png"></a>
+    <div class="caption">An example BPMN diagram</div>
+  </div>
+
+
+<p>No more drift between our system documentation in Confluence and the implementation? I’ll take it.</p>
+<p>So after prototyping with the Zeebe Go client, we wrote a JavaScript client library (in TypeScript), and <a href="https://github.com/CreditSenseAU/zeebe-client-node-js">made it available to the Zeebe community under an Apache license</a>.</p>
+<p>We had some experience with gRPC, as we’d been looking at building our new system with our own orchestration, and just followed the <a href="https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/">gRPC + Zeebe Python client tutorial</a>. It took a bit longer than an hour, including tests, and we’re currently tracking upstream development of the 0.15 release of Zeebe, so you can expect further changes and frequent releases leading up to that release.</p>
+<h2 id="working-with-the-zeebe-team">Working with the Zeebe team</h2>
+<p>Basing a project on a developing product is a risk. As part of our evaluation, we’ve been engaged with the Zeebe developers at Camunda in Slack, on GitHub, and have had a couple of calls.</p>
+<p>The speed of their responses, and depth of expertise and passion has given us a lot of confidence in working with them. Most of the devs are in Germany, while we are in Australia. This is an advantage, because we can work around the clock. We have encountered issues, created a reproducer, opened a GitHub issue, chatted with the devs in Slack at the end of our day / beginning of theirs, and then come in the next morning to a fix and been able to keep moving forward.</p>
+<p>This bug got fixed over the recent Australia Day long weekend, and the reproducer is a good example of using the JS client library, including starting the broker using Docker: <a href="https://github.com/jwulf/zeebe-reproducer-1"><a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a></a>.</p>
+<h2 id="zeebe-modeler">Zeebe Modeler</h2>
+<p>The <a href="https://github.com/zeebe-io/zeebe-modeler">Zeebe Modeler</a> has support for the Zeebe metadata extensions that your BPMN diagrams need to be executable. However, it doesn’t yet support everything that you can do in Zeebe 0.15. We’ve been using the Camunda Modeler to add to our diagrams symbols that the Zeebe modeler doesn’t have yet.</p>
+<h2 id="using-the-javascript-zeebe-client-library">Using the JavaScript Zeebe Client Library</h2>
+<p>The library is available via <a href="https://www.npmjs.com/package/zeebe-node">npm</a>, and can be added to your project with a single command:</p>
+<pre><code>npm i zeebe-node
+</code></pre><p>Comprehensive API documentation is <a href="https://creditsenseau.github.io/zeebe-client-node-js/">available online</a>. Since the library is written in TypeScript, we generate it directly from the source code using <a href="https://typedoc.org/">TypeDoc</a>.</p>
+<p>Import the library in your code like this, in JavaScript:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">ZBClient</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;zeebe-node&#39;</span>);
+</code></pre></div><p>Or like this in TypeScript:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ZBClient</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;zeebe-node&#34;</span>;
+</code></pre></div><p>Now create a new Zeebe Client:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">zbc</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ZBClient</span>(<span style="color:#e6db74">&#34;localhost&#34;</span>);
+</code></pre></div><p>The ZBClient uses <a href="https://www.npmjs.com/package/node-grpc-client"><code>node-grpc-client</code></a> under the hood to establish a connection to a Zeebe broker on port 26500 (you can add a :${port} if you are using a different port). We initially forked node-grpc-client to add support for streaming gRPC methods. Our PR was accepted upstream, so the library is back on the mainstream.</p>
+<h2 id="deploy-a-bpmn-process-to-the-broker">Deploy a BPMN Process to the Broker</h2>
+<p>To deploy a BPMN Process, use the deployWorkflow method <a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#deployworkflow">(API doc)</a> and pass in a file path:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">deployWorkflow</span>(<span style="color:#e6db74">&#34;path/to/file.bpmn&#34;</span>);
+</code></pre></div><p>Most methods are asynchronous, because they involve a roundtrip to the broker.</p>
+<p>The response will look something like this:</p>
+<pre><code>{ bpmnProcessId: 'test-process',
+       version: 1,
+       workflowKey: '4',
+       resourceName: 'test-process.bpmn' } ],
+  key: '5' }
+</code></pre><h2 id="generating-types-from-bpmn">Generating Types from BPMN</h2>
+<p>The JS library has a BPMN Parser (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/bpmnparser.html">API doc</a>) that can emit TypeScript definitions for the string keys of task-types and message names in your BPMN document. This is useful to avoid debugging errors caused by typos, and also to analyse the completeness of your worker coverage.</p>
+<p>Here is an example of using it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">BpmnParser</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;zeebe-node&#34;</span>);
+<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outputTypes</span>(<span style="color:#a6e22e">workflowFilePath</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(
+      <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">BpmnParser</span>.<span style="color:#a6e22e">generateConstantsForBpmnFiles</span>(
+        <span style="color:#a6e22e">workflowFilePath</span>
+      )
+    );
+}
+</code></pre></div><h2 id="create-a-zeebe-worker">Create a Zeebe Worker</h2>
+<p>Now you can code up a Zeebe task worker (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbworker.html">API doc</a>). A task worker polls the broker for tasks that correspond to its <code>taskType</code> — a string key, and executes its handler for instances of tasks that are available (called jobs):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">zbTaskWorker</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">createWorker</span>(<span style="color:#e6db74">&#34;my-unique-id&#34;</span>, <span style="color:#e6db74">&#34;task-type-I-handle&#34;</span>, <span style="color:#a6e22e">handler</span>);
+</code></pre></div><p>The task handler (<a href="https://creditsenseau.github.io/zeebe-client-node-js/globals.html#zbworkertaskhandler">API Doc</a>) looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handler</span>(<span style="color:#a6e22e">job</span>, <span style="color:#a6e22e">complete</span>) {
+   <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">payload</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">job</span>.<span style="color:#a6e22e">payload</span>;
+   <span style="color:#75715e">// Business logic goes here
+</span><span style="color:#75715e"></span>   <span style="color:#a6e22e">complete</span>.<span style="color:#a6e22e">success</span>(<span style="color:#a6e22e">updatedPayload</span>);
+}
+</code></pre></div><p>The payload is a JSON object that gets passed along the Workflow instance and can be mutated by workers. We use it mainly for passing IDs as pointers, and for some flow control flags for branching logic in the Business Process, and keep state out of the engine, in databases.</p>
+<p>The job object that the handler receives looks like this:</p>
+<pre><code>{ key: '578',
+  type: 'demo-service',
+  jobHeaders:
+   { workflowInstanceKey: '574',
+     bpmnProcessId: 'test-process',
+     workflowDefinitionVersion: 1,
+     workflowKey: '3',
+     elementId: 'ServiceTask_0xdwuw7',
+     elementInstanceKey: '577' },
+  customHeaders: '{}',
+  worker: 'test-worker',
+  retries: 3,
+  deadline: '1546915422636',
+  payload: { testData: 'something' } }
+</code></pre><p>To complete the task, the handler calls the complete method that was passed into the handler, and passes back the object that is merged into the payload in the engine, for the next task in the workflow.</p>
+<p>The JS client provides an optional third parameter, worker, which you can use to get the task type of the worker, and also a convenience console logger that adds metadata for debugging.</p>
+<p>On the topic of debugging, for deeper inspection, you can start your workers with the environment variable <code>DEBUG=zeebe-node:*</code> for some verbose logging during development.</p>
+<h2 id="trigger-a-workflow">Trigger a Workflow</h2>
+<p>Now you can trigger an instance of your workflow, using the <code>createWorkflowInstance</code> method (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#createworkflowinstance">API doc</a>):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">createWorkflowInstance</span>(<span style="color:#e6db74">&#34;test-process&#34;</span>, <span style="color:#a6e22e">intialPayload</span>);
+</code></pre></div><p>The response looks like this:</p>
+<pre><code>{ workflowKey: '3',
+  bpmnProcessId: 'test-process',
+  version: 1,
+  workflowInstanceKey: '569' }
+</code></pre><h2 id="sending-a-message">Sending a Message</h2>
+<p>Workflows can contain message start events — which start a workflow when a message is received — and message catch events — which wait at the catch event until a message arrives.</p>
+<p>Message start events are correlated by the message name, and the JS library method <code>publishStartMessage</code> (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#publishstartmessage">API doc</a>) can be used to send one of these messages (this is the start method used in the <a href="https://github.com/jwulf/zeebe-reproducer-1"><a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a></a> workflow).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">await</span> <span style="color:#a6e22e">publishStartMessage</span>(<span style="color:#a6e22e">MessageName</span>.<span style="color:#a6e22e">MSG_START_TEST</span>, <span style="color:#a6e22e">payload</span>);
+</code></pre></div><p>This needs no correlation key, as the message start event is correlated by name. It also returns void — fire and forget.</p>
+<p>For message catch events, the message needs to be correlated with a workflow instance using a correlation key (see the <a href="https://docs.zeebe.io/reference/message-correlation.html">Zeebe docs</a> for more details). For this use the publishMessage method (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#publishmessage">API doc</a>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">publishMessage</span>({
+    <span style="color:#a6e22e">correlationKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;my-order-number&#34;</span>,
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MSG-payment-received&#34;</span>,
+    <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">payloadJSON</span>,
+    <span style="color:#a6e22e">messageID</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;my-message-name&#34;</span>,
+    <span style="color:#a6e22e">timeToLive</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10000</span>
+});
+</code></pre></div><h2 id="support-and-reporting-issues">Support and Reporting Issues</h2>
+<p>The JavaScript library has been developed for our use case, and it is provided under an Apache license as-is. If you want to report an issue, use the <a href="https://github.com/CreditSenseAU/zeebe-client-node-js/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">GitHub issues page</a>. For support developing Zeebe applications, the <a href="https://zeebe.io/community/">Zeebe Slack and User Forums</a> are incredible resources.</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/zeebe">zeebe</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/programming-in-q#/" class="button"><div class="previous"><div>Programming Quantum Computers with Q#</div></div></a>
+  
+  
+    <a href="/blog/typescript-maybe/" class="button"><div class="next"><div>Implementing a Maybe Pattern using a TypeScript Type Guard</div></div></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/the-impact-github-is-having/" class="image featured">
+    <img src="/img/2019/11/github.com.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/the-impact-github-is-having/">The Impact GitHub is Having on Your Software Career, Right Now…</a></h1>
+          <time class="published" datetime="">November 9, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/typescript-maybe/" class="image featured">
+    <img src="/img/2019/02/kitchen.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/typescript-maybe/">Implementing a Maybe Pattern using a TypeScript Type Guard</a></h1>
+          <time class="published" datetime="">February 12, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2019/01/zeebe-node/" class="image featured">
+    <img src="/img/2019/01/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2019/01/zeebe-node/">Node.js client for Zeebe Microservices Orchestration Engine</a></h1>
+          <time class="published" datetime="">January 29, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/programming-in-q#/" class="image featured">
+    <img src="/img/2018/09/john-azariah.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/programming-in-q#/">Programming Quantum Computers with Q#</a></h1>
+          <time class="published" datetime="">September 20, 2018</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/campjs-ix/" class="image featured">
+    <img src="/img/2018/08/there-and-back.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/campjs-ix/">CampJS IX — 2018</a></h1>
+          <time class="published" datetime="">August 14, 2018</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">6</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">6</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/event/">event<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>

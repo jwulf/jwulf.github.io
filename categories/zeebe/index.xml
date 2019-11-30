@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zeebe on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/zeebe/</link>
+    <description>Recent content in zeebe on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 29 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/zeebe/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Node.js client for Zeebe Microservices Orchestration Engine</title>
+      <link>https://joshwulf.com/blog/2019/01/zeebe-node/</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/01/zeebe-node/</guid>
+      <description>Update: I now work at Camunda on Zeebe as the Node client maintainer and a Developer Advocate. Things have changed in the broker and the library since this was published - for the latest on using it, refer to my new book in development - &amp;ldquo;The Zeebe Node.js Client Guide&amp;quot;
+I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe. Check it out on GitHub and start using it now!</description>
+    </item>
+    
+  </channel>
+</rss>
