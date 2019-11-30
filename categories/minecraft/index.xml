@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>minecraft on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/minecraft/</link>
+    <description>Recent content in minecraft on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 21 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/minecraft/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to modify Minecraft the easy way with TypeScript</title>
+      <link>https://joshwulf.com/blog/2019/04/mod-minecraft/</link>
+      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/04/mod-minecraft/</guid>
+      <description>Usually, modifying Minecraft requires coding in Java, and a lot of scaffolding. Now you can write and share Minecraft mods using TypeScript/Javascript.
+ScriptCraft is an open source JavaScript Minecraft modding library, and we’ve written support for TypeScript, and a bunch of tooling to create a familiar developer experience for those coming from JavaScript land (including Yeoman and NPM).
+In this article I’ll walk you through getting set up and building your first TypeScript Minecraft mod in under an hour — as little as 20 minutes, depending on your internet connection.</description>
+    </item>
+    
+  </channel>
+</rss>

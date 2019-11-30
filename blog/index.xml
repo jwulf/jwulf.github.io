@@ -13,19 +13,30 @@
     
     <item>
       <title>The Impact GitHub is Having on Your Software Career, Right Now…</title>
-      <link>https://joshwulf.com/blog/the-impact-github-is-having/</link>
+      <link>https://joshwulf.com/blog/2019/11/the-impact-github-is-having/</link>
       <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/the-impact-github-is-having/</guid>
+      <guid>https://joshwulf.com/blog/2019/11/the-impact-github-is-having/</guid>
       <description>Update 2019: This article was originally published on Medium.com on Feb 21, 2017, and got 183 comments on Reddit, and 237 comments on Hacker News. Many commenters said it couldn’t be done — they worked in closed source fintech shops, on BitBucket, and reasons&amp;hellip; So I quit my job as a recruiter, got a job at a closed source fintech on BitBucket, and got it done within 15 months — read about it on Open Source.</description>
     </item>
     
     <item>
+      <title>How to modify Minecraft the easy way with TypeScript</title>
+      <link>https://joshwulf.com/blog/2019/04/mod-minecraft/</link>
+      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/04/mod-minecraft/</guid>
+      <description>Usually, modifying Minecraft requires coding in Java, and a lot of scaffolding. Now you can write and share Minecraft mods using TypeScript/Javascript.
+ScriptCraft is an open source JavaScript Minecraft modding library, and we’ve written support for TypeScript, and a bunch of tooling to create a familiar developer experience for those coming from JavaScript land (including Yeoman and NPM).
+In this article I’ll walk you through getting set up and building your first TypeScript Minecraft mod in under an hour — as little as 20 minutes, depending on your internet connection.</description>
+    </item>
+    
+    <item>
       <title>Implementing a Maybe Pattern using a TypeScript Type Guard</title>
-      <link>https://joshwulf.com/blog/typescript-maybe/</link>
+      <link>https://joshwulf.com/blog/2019/02/typescript-maybe/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/typescript-maybe/</guid>
+      <guid>https://joshwulf.com/blog/2019/02/typescript-maybe/</guid>
       <description>You’re sat at a restaurant, and you order a beer. The waiter disappears into the kitchen, and returns a couple of minutes later, empty-handed. “I’m sorry,” he says. “I could not get your beer.”
 Now here is the six-million dollar question: is the restaurant out of the beer that you ordered (business logic), or is the restaurant kitchen on fire (infrastructure failure)?
 And how do you model those two distinct failure states in your API?</description>
@@ -43,10 +54,10 @@ I’m proud to announce that Credit Sense has open-sourced our Node.js client li
     
     <item>
       <title>Programming Quantum Computers with Q#</title>
-      <link>https://joshwulf.com/blog/programming-in-q#/</link>
+      <link>https://joshwulf.com/blog/2018/09/programming-in-q#/</link>
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/programming-in-q#/</guid>
+      <guid>https://joshwulf.com/blog/2018/09/programming-in-q#/</guid>
       <description>This week I’m at the NDC Developer Conference in Sydney. While here, I attended a workshop on programming Quantum computers using Q#, run by John Azariah, the creator of the Q# programming language.
 We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector algebra in multi-dimensional complex space... Entanglement and teleportation are coming. pic.twitter.com/wU7LVSeozv
 &amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) September 19, 2018  Q# is a recently released Microsoft language specifically developed for programming quantum computer operations from a classical computer.</description>
@@ -54,10 +65,10 @@ We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector 
     
     <item>
       <title>CampJS IX — 2018</title>
-      <link>https://joshwulf.com/blog/campjs-ix/</link>
+      <link>https://joshwulf.com/blog/2018/08/campjs-ix/</link>
       <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/campjs-ix/</guid>
+      <guid>https://joshwulf.com/blog/2018/08/campjs-ix/</guid>
       <description>Classic #campjs pic.twitter.com/TmnmBMF0jG
 &amp;mdash; Glen Arrowsmith (@garrows) August 10, 2018  My heartfelt thanks to the organisers and my fellow attendees at @campjs IX. It was a weekend of sleep deprivation of the body, and nourishment of the soul.
 &amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) August 13, 2018  Take me back to #CampJS - a huge thank you to all the organisers; such a thoughtful, inclusive, highly entertaining and fun packed weekend.</description>
@@ -65,10 +76,10 @@ We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector 
     
     <item>
       <title>Big Data, Big Heart Hackathon</title>
-      <link>https://joshwulf.com/blog/big-data-big-heart/</link>
+      <link>https://joshwulf.com/blog/2017/11/big-data-big-heart/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/big-data-big-heart/</guid>
+      <guid>https://joshwulf.com/blog/2017/11/big-data-big-heart/</guid>
       <description>In October 2017, I had the absolute privilege of organising the CloudTrek Big Data, Big Heart Hackathon.
 Cloud Trek’s MD, Neil Hitz, came to me with the idea for a Hackathon event that would have a humanitarian / social impact.
 I used the training I got in the Landmark Self-Expression and Leadership Program to structure the event. In that program you do a project where you mobilise one community (the target community) to cause an impact in another community (the beneficiary community).</description>
@@ -76,10 +87,10 @@ I used the training I got in the Landmark Self-Expression and Leadership Program
     
     <item>
       <title>JavaScript: Return considered harmful</title>
-      <link>https://joshwulf.com/blog/return-considered-harmful/</link>
+      <link>https://joshwulf.com/blog/2017/11/return-considered-harmful/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/return-considered-harmful/</guid>
+      <guid>https://joshwulf.com/blog/2017/11/return-considered-harmful/</guid>
       <description>JavaScript — the language of the Gods.
 return — basically the GOTO statement of 2017_*_
 _* T&amp;amp;C apply._
@@ -89,20 +100,20 @@ The classic newbie mistake in JavaScript is to ask: “Why doesn’t this work?<
     
     <item>
       <title>How to Recruit for your Startup: Tech Cofounder</title>
-      <link>https://joshwulf.com/blog/recruiting-tech-cofounder/</link>
+      <link>https://joshwulf.com/blog/2017/10/recruiting-tech-cofounder/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/recruiting-tech-cofounder/</guid>
+      <guid>https://joshwulf.com/blog/2017/10/recruiting-tech-cofounder/</guid>
       <description>I’m at the Investor Pitch night at The Triffid, in Brisbane’s Fortitude Valley. Apparently over 500 people have turned out for the event (someone says it is closer to 1000), and it is packed. Not even standing room. People are spilling out of the event space into the bar. Inside, Venture Capitalists are pitching a panel of startup founders — a reversal of the usual roles.
 I make my way through the crowd.</description>
     </item>
     
     <item>
       <title>The Second System Effect and Scaleup Failure</title>
-      <link>https://joshwulf.com/blog/second-system-effect/</link>
+      <link>https://joshwulf.com/blog/2017/09/second-system-effect/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/second-system-effect/</guid>
+      <guid>https://joshwulf.com/blog/2017/09/second-system-effect/</guid>
       <description>This article was originally posted on Medium.com.
 You validated your product-market fit. Your MVP was a hit. You even have paying customers (I already said that, right — it’s validated).
 Then you started to develop the real deal, the product that built on your original success, while fixing the errors and short-cuts, and adding the cool new features — and it all fell apart.
@@ -111,20 +122,20 @@ So what the f*&amp;amp;# went wrong?</description>
     
     <item>
       <title>Women in JavaScript</title>
-      <link>https://joshwulf.com/blog/women-in-js/</link>
+      <link>https://joshwulf.com/blog/2017/08/women-in-js/</link>
       <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/women-in-js/</guid>
+      <guid>https://joshwulf.com/blog/2017/08/women-in-js/</guid>
       <description>Scene One: Camp JS viii Last weekend I was at Camp JS viii in Melbourne. Camp JS is a community-run event that brings together JavaScript hackers from around Australia for a weekend of fun, frolicking, and JavaScripting. This year’s one was the biggest ever, with 160 attendees and 32 talks. Amazing weekend.
  Cool iron-on patch and awesome Zine organised by Anna Gerber  I got to hang out more with my peeps from BrisJS -the Brisbane JavaScript Meetup- and meet other inspiring and creative developers from around Australia and New Zealand.</description>
     </item>
     
     <item>
       <title>Righto — async done right in JavaScript</title>
-      <link>https://joshwulf.com/blog/righto/</link>
+      <link>https://joshwulf.com/blog/2017/06/righto/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/righto/</guid>
+      <guid>https://joshwulf.com/blog/2017/06/righto/</guid>
       <description>If you program in server-side JavaScript there is no way that you can avoid dealing with asynchronous functions.
 Callbacks, Promises, and async/await are some of the ways that you may have heard of dealing with asynchronous programming in JavaScript. But you may not have heard of Righto — literally the best library of all time for async programming in JS.
 Kory Nunn’s Righto library is — according to him — way better than Promises and Async/Await combined.</description>
@@ -132,10 +143,10 @@ Kory Nunn’s Righto library is — according to him — way better than Promise
     
     <item>
       <title>Biocentricism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe</title>
-      <link>https://joshwulf.com/blog/biocentrism/</link>
+      <link>https://joshwulf.com/blog/2017/05/biocentrism/</link>
       <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/biocentrism/</guid>
+      <guid>https://joshwulf.com/blog/2017/05/biocentrism/</guid>
       <description>Today’s classic cut: here’s a book review I wrote in 2014 on Robert Lanza’s “Biocentrism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe”. You’re welcome!
 After reading a lot on relativity, quantum mechanics, and consciousness, this is the first book where I felt that the author had a solid grasp of all three and was able to bring something to the conversation.
 The Western scientific revolution was predicated on an ontology of objective things that had an existence independent of observers.</description>
@@ -143,10 +154,10 @@ The Western scientific revolution was predicated on an ontology of objective thi
     
     <item>
       <title>MCT1 covered on ABC News</title>
-      <link>https://joshwulf.com/blog/mct1-abc/</link>
+      <link>https://joshwulf.com/blog/2017/04/mct1-abc/</link>
       <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/mct1-abc/</guid>
+      <guid>https://joshwulf.com/blog/2017/04/mct1-abc/</guid>
       <description>MCT1 — Minecraft for Type One Diabetes — is an open-source project that produces a modified version of Minecraft that educates children and families living with Type 1 Diabetes.
 On Sunday April 9, 2017, the project was featured on ABC News in Australia and Singapore.
 We are currently working with QUT and Diabetes Queensland on the next phase of the project, community trials.
@@ -155,10 +166,10 @@ For more information, visit the MCT1 website.</description>
     
     <item>
       <title>There is no good coding, only good refactoring</title>
-      <link>https://joshwulf.com/blog/no-good-coding/</link>
+      <link>https://joshwulf.com/blog/2017/04/no-good-coding/</link>
       <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/no-good-coding/</guid>
+      <guid>https://joshwulf.com/blog/2017/04/no-good-coding/</guid>
       <description>On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it.
  When you write code you produce functionality and technical debt. Refactoring code is the process of reducing technical debt while preserving functionality.
 Yesterday, I spent the afternoon refactoring a method in one of the Magikcraft components.
@@ -167,10 +178,10 @@ I refactored it three or four times, extracting and consolidating pieces of logi
     
     <item>
       <title>2017 Flight Centre Data Hackathon Winners</title>
-      <link>https://joshwulf.com/blog/flightcentre-hackathon/</link>
+      <link>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</link>
       <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/flightcentre-hackathon/</guid>
+      <guid>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</guid>
       <description>On 26 March, we took out second place in the 2017 Flight Centre Data Hackathon. Our team was a mix of engineers, designers, and business analysts from Magikcraft.io, Code Network, Just Digital People, and Just Media Design. A few of us have worked together on projects before, a few of us know each other but have never worked together on a project, and some of us met for the first time at Fishburners on the Friday night of the Hackathon.</description>
     </item>
     

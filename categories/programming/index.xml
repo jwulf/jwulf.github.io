@@ -13,10 +13,10 @@
     
     <item>
       <title>Implementing a Maybe Pattern using a TypeScript Type Guard</title>
-      <link>https://joshwulf.com/blog/typescript-maybe/</link>
+      <link>https://joshwulf.com/blog/2019/02/typescript-maybe/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/typescript-maybe/</guid>
+      <guid>https://joshwulf.com/blog/2019/02/typescript-maybe/</guid>
       <description>You’re sat at a restaurant, and you order a beer. The waiter disappears into the kitchen, and returns a couple of minutes later, empty-handed. “I’m sorry,” he says. “I could not get your beer.”
 Now here is the six-million dollar question: is the restaurant out of the beer that you ordered (business logic), or is the restaurant kitchen on fire (infrastructure failure)?
 And how do you model those two distinct failure states in your API?</description>
@@ -34,10 +34,10 @@ I’m proud to announce that Credit Sense has open-sourced our Node.js client li
     
     <item>
       <title>Programming Quantum Computers with Q#</title>
-      <link>https://joshwulf.com/blog/programming-in-q#/</link>
+      <link>https://joshwulf.com/blog/2018/09/programming-in-q#/</link>
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/programming-in-q#/</guid>
+      <guid>https://joshwulf.com/blog/2018/09/programming-in-q#/</guid>
       <description>This week I’m at the NDC Developer Conference in Sydney. While here, I attended a workshop on programming Quantum computers using Q#, run by John Azariah, the creator of the Q# programming language.
 We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector algebra in multi-dimensional complex space... Entanglement and teleportation are coming. pic.twitter.com/wU7LVSeozv
 &amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) September 19, 2018  Q# is a recently released Microsoft language specifically developed for programming quantum computer operations from a classical computer.</description>
@@ -45,10 +45,10 @@ We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector 
     
     <item>
       <title>JavaScript: Return considered harmful</title>
-      <link>https://joshwulf.com/blog/return-considered-harmful/</link>
+      <link>https://joshwulf.com/blog/2017/11/return-considered-harmful/</link>
       <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/return-considered-harmful/</guid>
+      <guid>https://joshwulf.com/blog/2017/11/return-considered-harmful/</guid>
       <description>JavaScript — the language of the Gods.
 return — basically the GOTO statement of 2017_*_
 _* T&amp;amp;C apply._
@@ -58,10 +58,10 @@ The classic newbie mistake in JavaScript is to ask: “Why doesn’t this work?<
     
     <item>
       <title>Righto — async done right in JavaScript</title>
-      <link>https://joshwulf.com/blog/righto/</link>
+      <link>https://joshwulf.com/blog/2017/06/righto/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/righto/</guid>
+      <guid>https://joshwulf.com/blog/2017/06/righto/</guid>
       <description>If you program in server-side JavaScript there is no way that you can avoid dealing with asynchronous functions.
 Callbacks, Promises, and async/await are some of the ways that you may have heard of dealing with asynchronous programming in JavaScript. But you may not have heard of Righto — literally the best library of all time for async programming in JS.
 Kory Nunn’s Righto library is — according to him — way better than Promises and Async/Await combined.</description>
@@ -69,10 +69,10 @@ Kory Nunn’s Righto library is — according to him — way better than Promise
     
     <item>
       <title>There is no good coding, only good refactoring</title>
-      <link>https://joshwulf.com/blog/no-good-coding/</link>
+      <link>https://joshwulf.com/blog/2017/04/no-good-coding/</link>
       <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/no-good-coding/</guid>
+      <guid>https://joshwulf.com/blog/2017/04/no-good-coding/</guid>
       <description>On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it.
  When you write code you produce functionality and technical debt. Refactoring code is the process of reducing technical debt while preserving functionality.
 Yesterday, I spent the afternoon refactoring a method in one of the Magikcraft components.

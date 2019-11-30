@@ -13,10 +13,10 @@
     
     <item>
       <title>Implementing a Maybe Pattern using a TypeScript Type Guard</title>
-      <link>https://joshwulf.com/blog/typescript-maybe/</link>
+      <link>https://joshwulf.com/blog/2019/02/typescript-maybe/</link>
       <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/typescript-maybe/</guid>
+      <guid>https://joshwulf.com/blog/2019/02/typescript-maybe/</guid>
       <description>You’re sat at a restaurant, and you order a beer. The waiter disappears into the kitchen, and returns a couple of minutes later, empty-handed. “I’m sorry,” he says. “I could not get your beer.”
 Now here is the six-million dollar question: is the restaurant out of the beer that you ordered (business logic), or is the restaurant kitchen on fire (infrastructure failure)?
 And how do you model those two distinct failure states in your API?</description>

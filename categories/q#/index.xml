@@ -13,10 +13,10 @@
     
     <item>
       <title>Programming Quantum Computers with Q#</title>
-      <link>https://joshwulf.com/blog/programming-in-q#/</link>
+      <link>https://joshwulf.com/blog/2018/09/programming-in-q#/</link>
       <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/programming-in-q#/</guid>
+      <guid>https://joshwulf.com/blog/2018/09/programming-in-q#/</guid>
       <description>This week I’m at the NDC Developer Conference in Sydney. While here, I attended a workshop on programming Quantum computers using Q#, run by John Azariah, the creator of the Q# programming language.
 We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector algebra in multi-dimensional complex space... Entanglement and teleportation are coming. pic.twitter.com/wU7LVSeozv
 &amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) September 19, 2018  Q# is a recently released Microsoft language specifically developed for programming quantum computer operations from a classical computer.</description>

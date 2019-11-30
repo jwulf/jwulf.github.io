@@ -6,27 +6,38 @@
     <description>Recent content in events on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 14 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/events/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>CampJS IX — 2018</title>
+      <link>https://joshwulf.com/blog/2018/08/campjs-ix/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2018/08/campjs-ix/</guid>
+      <description>Classic #campjs pic.twitter.com/TmnmBMF0jG
+&amp;mdash; Glen Arrowsmith (@garrows) August 10, 2018  My heartfelt thanks to the organisers and my fellow attendees at @campjs IX. It was a weekend of sleep deprivation of the body, and nourishment of the soul.
+&amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) August 13, 2018  Take me back to #CampJS - a huge thank you to all the organisers; such a thoughtful, inclusive, highly entertaining and fun packed weekend.</description>
+    </item>
+    
+    <item>
       <title>Women in JavaScript</title>
-      <link>https://joshwulf.com/blog/women-in-js/</link>
+      <link>https://joshwulf.com/blog/2017/08/women-in-js/</link>
       <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/women-in-js/</guid>
+      <guid>https://joshwulf.com/blog/2017/08/women-in-js/</guid>
       <description>Scene One: Camp JS viii Last weekend I was at Camp JS viii in Melbourne. Camp JS is a community-run event that brings together JavaScript hackers from around Australia for a weekend of fun, frolicking, and JavaScripting. This year’s one was the biggest ever, with 160 attendees and 32 talks. Amazing weekend.
  Cool iron-on patch and awesome Zine organised by Anna Gerber  I got to hang out more with my peeps from BrisJS -the Brisbane JavaScript Meetup- and meet other inspiring and creative developers from around Australia and New Zealand.</description>
     </item>
     
     <item>
       <title>2017 Flight Centre Data Hackathon Winners</title>
-      <link>https://joshwulf.com/blog/flightcentre-hackathon/</link>
+      <link>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</link>
       <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/blog/flightcentre-hackathon/</guid>
+      <guid>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</guid>
       <description>On 26 March, we took out second place in the 2017 Flight Centre Data Hackathon. Our team was a mix of engineers, designers, and business analysts from Magikcraft.io, Code Network, Just Digital People, and Just Media Design. A few of us have worked together on projects before, a few of us know each other but have never worked together on a project, and some of us met for the first time at Fishburners on the Friday night of the Hackathon.</description>
     </item>
     

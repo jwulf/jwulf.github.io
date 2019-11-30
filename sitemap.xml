@@ -28,8 +28,18 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/the-impact-github-is-having/</loc>
+    <loc>https://joshwulf.com/blog/2019/11/the-impact-github-is-having/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/2019/04/mod-minecraft/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/minecraft/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -38,7 +48,7 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/typescript-maybe/</loc>
+    <loc>https://joshwulf.com/blog/2019/02/typescript-maybe/</loc>
     <lastmod>2019-02-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,7 +73,7 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/programming-in-q#/</loc>
+    <loc>https://joshwulf.com/blog/2018/09/programming-in-q#/</loc>
     <lastmod>2018-09-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -78,17 +88,17 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/event/</loc>
+    <loc>https://joshwulf.com/categories/events/</loc>
     <lastmod>2018-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/campjs-ix/</loc>
+    <loc>https://joshwulf.com/blog/2018/08/campjs-ix/</loc>
     <lastmod>2018-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/big-data-big-heart/</loc>
+    <loc>https://joshwulf.com/blog/2017/11/big-data-big-heart/</loc>
     <lastmod>2017-11-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -98,12 +108,12 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/return-considered-harmful/</loc>
+    <loc>https://joshwulf.com/blog/2017/11/return-considered-harmful/</loc>
     <lastmod>2017-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/recruiting-tech-cofounder/</loc>
+    <loc>https://joshwulf.com/blog/2017/10/recruiting-tech-cofounder/</loc>
     <lastmod>2017-10-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -123,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/second-system-effect/</loc>
+    <loc>https://joshwulf.com/blog/2017/09/second-system-effect/</loc>
     <lastmod>2017-09-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -138,22 +148,17 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/events/</loc>
+    <loc>https://joshwulf.com/blog/2017/08/women-in-js/</loc>
     <lastmod>2017-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/women-in-js/</loc>
-    <lastmod>2017-08-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/blog/righto/</loc>
+    <loc>https://joshwulf.com/blog/2017/06/righto/</loc>
     <lastmod>2017-06-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/biocentrism/</loc>
+    <loc>https://joshwulf.com/blog/2017/05/biocentrism/</loc>
     <lastmod>2017-05-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -173,7 +178,7 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/mct1-abc/</loc>
+    <loc>https://joshwulf.com/blog/2017/04/mct1-abc/</loc>
     <lastmod>2017-04-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -183,12 +188,12 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/no-good-coding/</loc>
+    <loc>https://joshwulf.com/blog/2017/04/no-good-coding/</loc>
     <lastmod>2017-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/flightcentre-hackathon/</loc>
+    <loc>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</loc>
     <lastmod>2017-03-29T00:00:00+00:00</lastmod>
   </url>
   
