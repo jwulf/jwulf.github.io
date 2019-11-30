@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Josh Wulf</title>
-    <link>https://joshwulf.com/</link>
-    <description>Recent content on Josh Wulf</description>
+    <title>startups on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/startups/</link>
+    <description>Recent content in startups on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://joshwulf.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://joshwulf.com/categories/startups/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>The Impact GitHub is Having on Your Software Career, Right Now…</title>
-      <link>https://joshwulf.com/blog/the-impact-github-is-having/</link>
-      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/blog/the-impact-github-is-having/</guid>
-      <description>Update 2019: This article was originally published on Medium.com on Feb 21, 2017, and got 183 comments on Reddit, and 237 comments on Hacker News. Many commenters said it couldn’t be done — they worked in closed source fintech shops, on BitBucket, and reasons&amp;hellip; So I quit my job as a recruiter, got a job at a closed source fintech on BitBucket, and got it done within 15 months — read about it on Open Source.</description>
-    </item>
     
     <item>
       <title>How to Recruit for your Startup: Tech Cofounder</title>

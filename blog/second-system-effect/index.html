@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>The Second System Effect and Scaleup Failure - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="The Second System Effect and Scaleup Failure">
+<meta itemprop="description" content="How initially successful startups can fail when they develop v2">
+<meta itemprop="datePublished" content="2017-09-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-09-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1513">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="The Second System Effect and Scaleup Failure" />
+<meta property="og:description" content="How initially successful startups can fail when they develop v2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/second-system-effect/" />
+<meta property="article:published_time" content="2017-09-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-27T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Second System Effect and Scaleup Failure"/>
+<meta name="twitter:description" content="How initially successful startups can fail when they develop v2"/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=The%20Second%20System%20Effect%20and%20Scaleup%20Failure&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;title=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;title=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;description=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/second-system-effect/">The Second System Effect and Scaleup Failure</a></h2>
+    
+    
+        <p>How initially successful startups can fail when they develop v2</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2017-09-27 00:00:00 &#43;0000 UTC">
+      September 27, 2017
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>8 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=The%20Second%20System%20Effect%20and%20Scaleup%20Failure&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;title=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;title=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f&amp;description=The%20Second%20System%20Effect%20and%20Scaleup%20Failure" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2fsecond-system-effect%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/second-system-effect/" class="image featured">
+    <img src="/img/2017/09/second-system.png" alt="Pic 3">
+  </a>
+
+
+  <div class="content">
+    <p><em>This article was originally posted on <a href="https://medium.com/@sitapati/the-second-system-effect-and-scaleup-failure-in-brisbane-80478c70efd">Medium.com</a>.</em></p>
+<p>You validated your product-market fit. Your MVP was a hit. You even have paying customers (I already said that, right — it’s validated).</p>
+<p>Then you started to develop the real deal, the product that built on your original success, while fixing the errors and short-cuts, and adding the cool new features — and it all fell apart.</p>
+<p>So what the f*&amp;# went wrong?</p>
+<p>It’s simple.</p>
+<p>You poured money onto a <em>second system</em>.</p>
+<p>Fred Brooks distinguishes the second system in his 1975 book, <em>The Mythical Man-Month</em>:</p>
+<blockquote>
+<p>An architect’s first work is apt to be spare and clean. He knows he doesn’t know what he’s doing, so he does it carefully and with great restraint.</p>
+</blockquote>
+<blockquote>
+<p>As he designs the first work, frill after frill and embellishment after embellishment occur to him. These get stored away to be used “next time.” Sooner or later the first system is finished, and the architect, with firm confidence and a demonstrated mastery of that class of systems, is ready to build a second system.</p>
+</blockquote>
+<blockquote>
+<p>This second is the most dangerous system a man ever designs. When he does his third and later ones, his prior experiences will confirm each other as to the general characteristics of such systems, and their differences will identify those parts of his experience that are particular and not generalizable.</p>
+</blockquote>
+<blockquote>
+<p>The general tendency is to over-design the second system, using all the ideas and frills that were cautiously sidetracked on the first one. The result, as Ovid says, is a “big pile.”</p>
+</blockquote>
+<p>— The Mythical Man-month, Fred Brooks</p>
+<p>One of the best studies of second system failure in the modern era is <a href="https://en.wikipedia.org/wiki/Dreaming_in_Code"><em>Dreaming in Code</em>: Two Dozen Programmers, Three Years, 4,732 Bugs, and One Quest for Transcendent Software</a>, the tale of “Chandler” — Mitch Kapoor’s follow-up album to his smash hit “Lotus 1–2–3”.</p>
+<h2 id="second-systems-startups-and-the-brisbane-market">Second Systems, Startups, and the Brisbane market</h2>
+<p>One of the reasons I went to work at Just Digital People was for the opportunity to study a large number of startups and scale-ups from the inside in a short period of time. I wanted to see how software teams are built and managed at different phases; how funding is acquired and applied; how market traction is discovered and tracked; and crucially: how founders manage their internal state through this journey.</p>
+<p>I’ve seen several teams disintegrate because they embarked on second system engineering.</p>
+<p>Their initial, proven system is abandoned — whether they put it into maintenance, or spin up a second team to work on a re-implementation — and work begins on this new “v2” system that will be orders of magnitude more awesome.</p>
+<h3 id="real-examples-from-the-brisbane-market">Real Examples from the Brisbane Market</h3>
+<p>Here are four real examples from the Brisbane market (I’ll share with you what happened with each further on):</p>
+<ul>
+<li>Company A starts Angular 2 reimplementation of their ASP.NET app as separate project with one developer. Leaves five developers on main product.</li>
+<li>Company B starts .NET replacement of their PHP system with a new five-person team. Leaves existing 20+ developers on main product.</li>
+<li>Company C starts Go replacement of their VB product with a new five-person team. Leaves existing 5-person team on v1.</li>
+<li>Company D starts Go replacement of their .NET system by moving entire dev team to new project. Leaves 2 developers maintaining v1 product.</li>
+</ul>
+<h2 id="why-engineers-love-building-second-systems">Why Engineers LOVE building Second Systems</h2>
+<p>The engineers love it, because everyone loves writing greenfield code. Code is famously easier to write than it is to read.</p>
+<p>Reading your own code is easier than reading someone else’s code; but writing your own code is even easier than reading your own code from weeks ago.</p>
+<p>So engineers love writing code in a green field.
+You can do things the way that you want to do them. There are no constraints of previous choices (often poorly documented) to work within.</p>
+<p>Here are the causes of failure in developing second systems — in addition to the ones that Fred Brooks identifies:</p>
+<h3 id="1-abandoning-the-actual-dynamic-that-generated-success-in-v1--validation">1. Abandoning the actual dynamic that generated success in v1 — validation.</h3>
+<p>It’s easy to misattribute the causes of the success of v1. It becomes the “founder’s visionary prowess”, or some “magical power of the company”. Either of which would be sufficient to ensure the success of the second system — if they were true.</p>
+<p>However, what usually caused the success of the first system is iteration in close proximity to customers, with a solid feedback loop. This allows you to co-discover what works and what doesn’t work with actual users.</p>
+<p>When you take this loop out, you are left designing a system against what you think that people want, or might want, or even what they say that they want.</p>
+<p>No matter how good your ideas are, they are wrong in ways that you don’t know — and that you don’t know that you don’t know. They are wrong in ways that are in your blindspot. You need a methodology to uncover the unknown ways they are wrong as early and as often as possible.</p>
+<p>Second systems often remove this system because “now we know what to build” (based on the first system).</p>
+<p>No, you don’t.</p>
+<p>You know what to start building and validate against real users. But second systems often omit the user feedback loop.</p>
+<p>That’s fatal.</p>
+<h2 id="2-abandoning-the-actual-dynamic-that-generated-success-in-v1--user-community">2. Abandoning the actual dynamic that generated success in v1 — user community</h2>
+<p>Second systems suffer a problem when they eventually do emerge from the laboratory. No-one cares.</p>
+<p>Building v1 close to your users builds your community as it builds the product.</p>
+<p>And this has another effect, it causes your project timelines. It generates timelines that pull you forward because real people are saying: “<em>Hey, when will this be ready?</em>”</p>
+<p>Second systems are frequently built in isolation from customers. They are built in a clean room and will be rolled out “<em>when they are ready</em>”.</p>
+<p>Which is frequently: never.</p>
+<h2 id="what-happened-to-those-brisbane-examples">What Happened to those Brisbane Examples</h2>
+<h3 id="company-a">Company A</h3>
+<ul>
+<li>Company A starts Angular 2 reimplementation of their ASP.NET app as separate project with one developer. Leaves five developers on main product.</li>
+</ul>
+<p>After some time, the founder realised that Spaceship A (version 1) was pulling away at such a rate that Spaceship B (version 2) would never catch it up. It was a moving target that could not be caught because of simple physics.</p>
+<p>So he switched strategies — instead of attempting to reimplemented in Angular 2, he put the other developer onto Angular 2 implementations of portions of version 1. A “patchwork replacement” strategy.</p>
+<blockquote>
+<p>“A microservices architecture would have made it easier to do partial upgrades, rather than the monolith that we have, but we’re adopting a piecemeal approach because this is what we have.”</p>
+</blockquote>
+<p>Company is privately held and funded on customer revenue.</p>
+<h3 id="company-b">Company B</h3>
+<ul>
+<li>Company B starts .NET replacement of their PHP system with a new five-person team. Leaves existing 20+ developers on main product.</li>
+</ul>
+<p>After one year, the project was cancelled before going into production. The project did not deliver anything into production. All the technology was dismantled.</p>
+<p>Total cost over $1m. Company is funded from customer revenue.</p>
+<h3 id="company-c">Company C</h3>
+<ul>
+<li>Company C starts Go replacement of their VB product with a new five-person team. Leaves existing 5-person team on v1.</li>
+</ul>
+<p>The second system here was put into production as fast as possible, and is being developed with a set of customers. This company is walking the balance tightrope between both versions. Version 1 still accounts for 75% of their customer base and revenue. Version 2 accounts for 70% of their development spend.</p>
+<p>This company is funded on customer revenue.</p>
+<h3 id="company-d">Company D</h3>
+<ul>
+<li>Company D starts Go replacement of their .NET system by moving entire dev team to new project. Leaves 2 developers maintaining v1 product.</li>
+</ul>
+<p>Going “all on black”, this company divested itself of its organisational knowledge around version 1, by changing tech stack completely — and shifting their developers from v1 to v2.</p>
+<p>Support for v1 customers stagnated, and execution on v2 stalled as they built a new team from scratch, learned a new tech stack, and built a new product in isolation of market feedback.</p>
+<p>Basically “make all the things variables”. Exciting, but very high-risk.</p>
+<p>This company is funded by venture capital.</p>
+<h2 id="second-system-effect-at-magikcraft">Second System Effect at Magikcraft</h2>
+<p>One of the things we grapple with at Magikcraft is the temptation to build a second system.</p>
+<p>The main things that I’ve taken away so far from my observations is that software should go in front of real users as soon as possible, and should be delivered in small units — whether those are micro-services or feature releases.</p>
+<p>One thing that can temper second system effect is to treat the entire endeavour as science. Each piece of functionality is a theorem, and it needs an experiment (deployment) to validate it.</p>
+<p>Another useful model is to relate to unproven theoretical work as risk. As unproven theoretical work accumulates in the warehouse (undeployed code, or deployed yet unproven by users) the total amount of risk increases.</p>
+<p>The total amount of risk, and the rate of risk reduction are key metrics that allow you to control second system creep.</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/startups">startups</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/software-engineering">software engineering</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+  
+    <a href="/blog/recruiting-tech-cofounder/" class="button"><div class="next"><div>How to Recruit for your Startup: Tech Cofounder</div></div></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/the-impact-github-is-having/" class="image featured">
+    <img src="/img/2019/11/github.com.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/the-impact-github-is-having/">The Impact GitHub is Having on Your Software Career, Right Now…</a></h1>
+          <time class="published" datetime="">November 9, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/recruiting-tech-cofounder/" class="image featured">
+    <img src="/img/2017/10/cofounder.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/recruiting-tech-cofounder/">How to Recruit for your Startup: Tech Cofounder</a></h1>
+          <time class="published" datetime="">October 23, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/second-system-effect/" class="image featured">
+    <img src="/img/2017/09/second-system.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/second-system-effect/">The Second System Effect and Scaleup Failure</a></h1>
+          <time class="published" datetime="">September 27, 2017</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>

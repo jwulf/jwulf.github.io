@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Josh Wulf</title>
@@ -26,6 +26,33 @@
       <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recruiting</title>
+      <link>https://joshwulf.com/categories/recruiting/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/recruiting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>startups</title>
+      <link>https://joshwulf.com/categories/startups/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/startups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software engineering</title>
+      <link>https://joshwulf.com/categories/software-engineering/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/software-engineering/</guid>
       <description></description>
     </item>
     

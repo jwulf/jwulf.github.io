@@ -1,40 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://joshwulf.com/blog/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/career-development/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/github/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://joshwulf.com/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://joshwulf.com/blog/the-impact-github-is-having/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/recruiting-tech-cofounder/</loc>
+    <lastmod>2017-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/recruiting/</loc>
+    <lastmod>2017-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/startups/</loc>
+    <lastmod>2017-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/software-engineering/</loc>
+    <lastmod>2017-09-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/second-system-effect/</loc>
+    <lastmod>2017-09-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -63,7 +83,6 @@
   
   <url>
     <loc>https://joshwulf.com/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>software engineering on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/software-engineering/</link>
+    <description>Recent content in software engineering on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 27 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/software-engineering/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Second System Effect and Scaleup Failure</title>
+      <link>https://joshwulf.com/blog/second-system-effect/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/second-system-effect/</guid>
+      <description>This article was originally posted on Medium.com.
+You validated your product-market fit. Your MVP was a hit. You even have paying customers (I already said that, right — it’s validated).
+Then you started to develop the real deal, the product that built on your original success, while fixing the errors and short-cuts, and adding the cool new features — and it all fell apart.
+So what the f*&amp;amp;# went wrong?</description>
+    </item>
+    
+  </channel>
+</rss>
