@@ -21,6 +21,30 @@
     </item>
     
     <item>
+      <title>Big Data, Big Heart Hackathon</title>
+      <link>https://joshwulf.com/blog/big-data-big-heart/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/big-data-big-heart/</guid>
+      <description>In October 2017, I had the absolute privilege of organising the CloudTrek Big Data, Big Heart Hackathon.
+Cloud Trek’s MD, Neil Hitz, came to me with the idea for a Hackathon event that would have a humanitarian / social impact.
+I used the training I got in the Landmark Self-Expression and Leadership Program to structure the event. In that program you do a project where you mobilise one community (the target community) to cause an impact in another community (the beneficiary community).</description>
+    </item>
+    
+    <item>
+      <title>JavaScript: Return considered harmful</title>
+      <link>https://joshwulf.com/blog/return-considered-harmful/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/return-considered-harmful/</guid>
+      <description>JavaScript — the language of the Gods.
+return — basically the GOTO statement of 2017_*_
+_* T&amp;amp;C apply._
+Born in the turbulent crucible of an asynchronous environment, with unpredictable response times and failure rates. For programmers coming from a traditional multi-threaded environment like Java or C#, JavaScript lives in strange and alien world where storms the size of entire planets rage, and lightning bolts pierce the ether.
+The classic newbie mistake in JavaScript is to ask: “Why doesn’t this work?</description>
+    </item>
+    
+    <item>
       <title>How to Recruit for your Startup: Tech Cofounder</title>
       <link>https://joshwulf.com/blog/recruiting-tech-cofounder/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
@@ -40,6 +64,71 @@ I make my way through the crowd.</description>
 You validated your product-market fit. Your MVP was a hit. You even have paying customers (I already said that, right — it’s validated).
 Then you started to develop the real deal, the product that built on your original success, while fixing the errors and short-cuts, and adding the cool new features — and it all fell apart.
 So what the f*&amp;amp;# went wrong?</description>
+    </item>
+    
+    <item>
+      <title>Women in JavaScript</title>
+      <link>https://joshwulf.com/blog/women-in-js/</link>
+      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/women-in-js/</guid>
+      <description>Scene One: Camp JS viii Last weekend I was at Camp JS viii in Melbourne. Camp JS is a community-run event that brings together JavaScript hackers from around Australia for a weekend of fun, frolicking, and JavaScripting. This year’s one was the biggest ever, with 160 attendees and 32 talks. Amazing weekend.
+ Cool iron-on patch and awesome Zine organised by Anna Gerber  I got to hang out more with my peeps from BrisJS -the Brisbane JavaScript Meetup- and meet other inspiring and creative developers from around Australia and New Zealand.</description>
+    </item>
+    
+    <item>
+      <title>Righto — async done right in JavaScript</title>
+      <link>https://joshwulf.com/blog/righto/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/righto/</guid>
+      <description>If you program in server-side JavaScript there is no way that you can avoid dealing with asynchronous functions.
+Callbacks, Promises, and async/await are some of the ways that you may have heard of dealing with asynchronous programming in JavaScript. But you may not have heard of Righto — literally the best library of all time for async programming in JS.
+Kory Nunn’s Righto library is — according to him — way better than Promises and Async/Await combined.</description>
+    </item>
+    
+    <item>
+      <title>Biocentricism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe</title>
+      <link>https://joshwulf.com/blog/biocentrism/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/biocentrism/</guid>
+      <description>Today’s classic cut: here’s a book review I wrote in 2014 on Robert Lanza’s “Biocentrism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe”. You’re welcome!
+After reading a lot on relativity, quantum mechanics, and consciousness, this is the first book where I felt that the author had a solid grasp of all three and was able to bring something to the conversation.
+The Western scientific revolution was predicated on an ontology of objective things that had an existence independent of observers.</description>
+    </item>
+    
+    <item>
+      <title>MCT1 covered on ABC News</title>
+      <link>https://joshwulf.com/blog/mct1-abc/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/mct1-abc/</guid>
+      <description>MCT1 — Minecraft for Type One Diabetes — is an open-source project that produces a modified version of Minecraft that educates children and families living with Type 1 Diabetes.
+On Sunday April 9, 2017, the project was featured on ABC News in Australia and Singapore.
+We are currently working with QUT and Diabetes Queensland on the next phase of the project, community trials.
+For more information, visit the MCT1 website.</description>
+    </item>
+    
+    <item>
+      <title>There is no good coding, only good refactoring</title>
+      <link>https://joshwulf.com/blog/no-good-coding/</link>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/no-good-coding/</guid>
+      <description>On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it.
+ When you write code you produce functionality and technical debt. Refactoring code is the process of reducing technical debt while preserving functionality.
+Yesterday, I spent the afternoon refactoring a method in one of the Magikcraft components.
+I refactored it three or four times, extracting and consolidating pieces of logic.</description>
+    </item>
+    
+    <item>
+      <title>2017 Flight Centre Data Hackathon Winners</title>
+      <link>https://joshwulf.com/blog/flightcentre-hackathon/</link>
+      <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/flightcentre-hackathon/</guid>
+      <description>On 26 March, we took out second place in the 2017 Flight Centre Data Hackathon. Our team was a mix of engineers, designers, and business analysts from Magikcraft.io, Code Network, Just Digital People, and Just Media Design. A few of us have worked together on projects before, a few of us know each other but have never worked together on a project, and some of us met for the first time at Fishburners on the Friday night of the Hackathon.</description>
     </item>
     
   </channel>

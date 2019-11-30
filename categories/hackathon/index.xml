@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hackathon on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/hackathon/</link>
+    <description>Recent content in hackathon on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/hackathon/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Big Data, Big Heart Hackathon</title>
+      <link>https://joshwulf.com/blog/big-data-big-heart/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/big-data-big-heart/</guid>
+      <description>In October 2017, I had the absolute privilege of organising the CloudTrek Big Data, Big Heart Hackathon.
+Cloud Trek’s MD, Neil Hitz, came to me with the idea for a Hackathon event that would have a humanitarian / social impact.
+I used the training I got in the Landmark Self-Expression and Leadership Program to structure the event. In that program you do a project where you mobilise one community (the target community) to cause an impact in another community (the beneficiary community).</description>
+    </item>
+    
+    <item>
+      <title>2017 Flight Centre Data Hackathon Winners</title>
+      <link>https://joshwulf.com/blog/flightcentre-hackathon/</link>
+      <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/flightcentre-hackathon/</guid>
+      <description>On 26 March, we took out second place in the 2017 Flight Centre Data Hackathon. Our team was a mix of engineers, designers, and business analysts from Magikcraft.io, Code Network, Just Digital People, and Just Media Design. A few of us have worked together on projects before, a few of us know each other but have never worked together on a project, and some of us met for the first time at Fishburners on the Friday night of the Hackathon.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -30,6 +30,33 @@
     </item>
     
     <item>
+      <title>hackathon</title>
+      <link>https://joshwulf.com/categories/hackathon/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/hackathon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>https://joshwulf.com/categories/javascript/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://joshwulf.com/categories/programming/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>recruiting</title>
       <link>https://joshwulf.com/categories/recruiting/</link>
       <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
@@ -53,6 +80,78 @@
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/software-engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conferences</title>
+      <link>https://joshwulf.com/categories/conferences/</link>
+      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/conferences/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>diversity</title>
+      <link>https://joshwulf.com/categories/diversity/</link>
+      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/diversity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>events</title>
+      <link>https://joshwulf.com/categories/events/</link>
+      <pubDate>Mon, 14 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/events/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>book review</title>
+      <link>https://joshwulf.com/categories/book-review/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/book-review/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quantum mechanics</title>
+      <link>https://joshwulf.com/categories/quantum-mechanics/</link>
+      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/quantum-mechanics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>diabetes</title>
+      <link>https://joshwulf.com/categories/diabetes/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/diabetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mct1</title>
+      <link>https://joshwulf.com/categories/mct1/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/mct1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>media</title>
+      <link>https://joshwulf.com/categories/media/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/media/</guid>
       <description></description>
     </item>
     

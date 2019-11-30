@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>media on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/media/</link>
+    <description>Recent content in media on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 22 Apr 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/media/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MCT1 covered on ABC News</title>
+      <link>https://joshwulf.com/blog/mct1-abc/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/mct1-abc/</guid>
+      <description>MCT1 — Minecraft for Type One Diabetes — is an open-source project that produces a modified version of Minecraft that educates children and families living with Type 1 Diabetes.
+On Sunday April 9, 2017, the project was featured on ABC News in Australia and Singapore.
+We are currently working with QUT and Diabetes Queensland on the next phase of the project, community trials.
+For more information, visit the MCT1 website.</description>
+    </item>
+    
+  </channel>
+</rss>

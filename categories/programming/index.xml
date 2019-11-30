@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programming on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/programming/</link>
+    <description>Recent content in programming on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JavaScript: Return considered harmful</title>
+      <link>https://joshwulf.com/blog/return-considered-harmful/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/return-considered-harmful/</guid>
+      <description>JavaScript — the language of the Gods.
+return — basically the GOTO statement of 2017_*_
+_* T&amp;amp;C apply._
+Born in the turbulent crucible of an asynchronous environment, with unpredictable response times and failure rates. For programmers coming from a traditional multi-threaded environment like Java or C#, JavaScript lives in strange and alien world where storms the size of entire planets rage, and lightning bolts pierce the ether.
+The classic newbie mistake in JavaScript is to ask: “Why doesn’t this work?</description>
+    </item>
+    
+    <item>
+      <title>Righto — async done right in JavaScript</title>
+      <link>https://joshwulf.com/blog/righto/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/righto/</guid>
+      <description>If you program in server-side JavaScript there is no way that you can avoid dealing with asynchronous functions.
+Callbacks, Promises, and async/await are some of the ways that you may have heard of dealing with asynchronous programming in JavaScript. But you may not have heard of Righto — literally the best library of all time for async programming in JS.
+Kory Nunn’s Righto library is — according to him — way better than Promises and Async/Await combined.</description>
+    </item>
+    
+    <item>
+      <title>There is no good coding, only good refactoring</title>
+      <link>https://joshwulf.com/blog/no-good-coding/</link>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/no-good-coding/</guid>
+      <description>On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it.
+ When you write code you produce functionality and technical debt. Refactoring code is the process of reducing technical debt while preserving functionality.
+Yesterday, I spent the afternoon refactoring a method in one of the Magikcraft components.
+I refactored it three or four times, extracting and consolidating pieces of logic.</description>
+    </item>
+    
+  </channel>
+</rss>
