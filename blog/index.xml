@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>In Search of the Ultimate Keyboard Layout</title>
+      <link>https://joshwulf.com/blog/2019/11/ultimate-keyboard/</link>
+      <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/11/ultimate-keyboard/</guid>
+      <description>In July of 2018, after 35 years of typing on QWERTY layout - 24 of those years touch-typing as a professional software developer and author, I switched to the Dvorak keyboard layout.
+I couldn&#39;t tell you why I did it. I just did. At the time I was training for a physique competition (that will be another blog post). But I don&#39;t know if that had anything to do with it (maybe it was a low-carb moment&amp;hellip;).</description>
+    </item>
     
     <item>
       <title>The Impact GitHub is Having on Your Software Career, Right Now…</title>
