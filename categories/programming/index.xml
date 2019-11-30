@@ -6,10 +6,32 @@
     <description>Recent content in programming on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Implementing a Maybe Pattern using a TypeScript Type Guard</title>
+      <link>https://joshwulf.com/blog/typescript-maybe/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/typescript-maybe/</guid>
+      <description>You’re sat at a restaurant, and you order a beer. The waiter disappears into the kitchen, and returns a couple of minutes later, empty-handed. “I’m sorry,” he says. “I could not get your beer.”
+Now here is the six-million dollar question: is the restaurant out of the beer that you ordered (business logic), or is the restaurant kitchen on fire (infrastructure failure)?
+And how do you model those two distinct failure states in your API?</description>
+    </item>
+    
+    <item>
+      <title>Programming Quantum Computers with Q#</title>
+      <link>https://joshwulf.com/blog/programming-in-q#/</link>
+      <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/programming-in-q#/</guid>
+      <description>This week I’m at the NDC Developer Conference in Sydney. While here, I attended a workshop on programming Quantum computers using Q#, run by John Azariah, the creator of the Q# programming language.
+We&amp;#39;re on Task 1.2 of the Q# quantum programming workshop. Linear vector algebra in multi-dimensional complex space... Entanglement and teleportation are coming. pic.twitter.com/wU7LVSeozv
+&amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) September 19, 2018  Q# is a recently released Microsoft language specifically developed for programming quantum computer operations from a classical computer.</description>
+    </item>
     
     <item>
       <title>JavaScript: Return considered harmful</title>

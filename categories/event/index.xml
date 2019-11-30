@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>event on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/event/</link>
+    <description>Recent content in event on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 14 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/event/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CampJS IX — 2018</title>
+      <link>https://joshwulf.com/blog/campjs-ix/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/campjs-ix/</guid>
+      <description>Classic #campjs pic.twitter.com/TmnmBMF0jG
+&amp;mdash; Glen Arrowsmith (@garrows) August 10, 2018  My heartfelt thanks to the organisers and my fellow attendees at @campjs IX. It was a weekend of sleep deprivation of the body, and nourishment of the soul.
+&amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) August 13, 2018  Take me back to #CampJS - a huge thank you to all the organisers; such a thoughtful, inclusive, highly entertaining and fun packed weekend.</description>
+    </item>
+    
+  </channel>
+</rss>

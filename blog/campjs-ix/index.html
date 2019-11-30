@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>CampJS IX — 2018 - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="CampJS IX — 2018">
+<meta itemprop="description" content="This past weekend I was at CampJS with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia.">
+<meta itemprop="datePublished" content="2018-08-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-08-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2089">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="CampJS IX — 2018" />
+<meta property="og:description" content="This past weekend I was at CampJS with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/campjs-ix/" />
+<meta property="article:published_time" content="2018-08-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-08-14T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CampJS IX — 2018"/>
+<meta name="twitter:description" content="This past weekend I was at CampJS with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=CampJS%20IX%20%e2%80%94%202018&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;title=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;title=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;description=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/campjs-ix/">CampJS IX — 2018</a></h2>
+    
+    
+        <p>This past weekend I was at CampJS with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2018-08-14 00:00:00 &#43;0000 UTC">
+      August 14, 2018
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>10 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=CampJS%20IX%20%e2%80%94%202018&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;title=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;title=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f&amp;description=CampJS%20IX%20%e2%80%94%202018" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2fcampjs-ix%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/campjs-ix/" class="image featured">
+    <img src="/img/2018/08/there-and-back.jpeg" alt="">
+  </a>
+
+
+  <div class="content">
+    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Classic <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://t.co/TmnmBMF0jG">pic.twitter.com/TmnmBMF0jG</a></p>&mdash; Glen Arrowsmith (@garrows) <a href="https://twitter.com/garrows/status/1028066487607603200?ref_src=twsrc%5Etfw">August 10, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">My heartfelt thanks to the organisers and my fellow attendees at <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> IX. It was a weekend of sleep deprivation of the body, and nourishment of the soul.</p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029123182077210625?ref_src=twsrc%5Etfw">August 13, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Take me back to <a href="https://twitter.com/hashtag/CampJS?src=hash&amp;ref_src=twsrc%5Etfw">#CampJS</a> - a huge thank you to all the organisers; such a thoughtful, inclusive, highly entertaining and fun packed weekend. Too many creative and talented folks, not enough time to play werewolf with them all... <a href="https://t.co/k05XvhONut">pic.twitter.com/k05XvhONut</a></p>&mdash; Sox 🌈 (@soxyface) <a href="https://twitter.com/soxyface/status/1028984897728212998?ref_src=twsrc%5Etfw">August 13, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>This past weekend I was at <a href="https://www.campjs.com/">CampJS</a> with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The Credit Sense crew are on the way to <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a>!! <a href="https://t.co/AxNuKJYOl6">pic.twitter.com/AxNuKJYOl6</a></p>&mdash; Daniel Farmer (@FarmerLlama) <a href="https://twitter.com/FarmerLlama/status/1027761326557282306?ref_src=twsrc%5Etfw">August 10, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I’ve been with Credit Sense since February this year, and it’s a great company to work with. It’s in an exciting growth phase, working on interesting problems, and focused on creating a great organisation to solve them technically.</p>
+<p>I had a conversation with the leadership, and Credit Sense came on as a Platinum Sponsor for CampJS this year. Supporting and expanding CampJS is important to me, because it’s a conference whose focal length lands on the JavaScript community, rather than JavaScript as a technology.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Amazing <a href="https://twitter.com/ButenkoMe?ref_src=twsrc%5Etfw">@ButenkoMe</a> talks about importance of communities at <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://t.co/YI0cESP6aP">pic.twitter.com/YI0cESP6aP</a></p>&mdash; Inga Pflaumer (@IngaPflaumer) <a href="https://twitter.com/IngaPflaumer/status/1028143788831592448?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2 id="celebrating-supporting-and-expanding-diversity">Celebrating, Supporting, and Expanding Diversity</h2>
+<p>Last year (read my report from 2017), we had a lot of discussion around supporting and increasing diversity in our community. This year the discussion continued, along with committed action to make our community inclusive, safe, and accessible to as wide a spectrum as possible. Sponsorship from Credit Sense, PCCW Global, Rex Labs, Culture Amp, Lisk, and others allowed for a large number of subsidised first-timer and diversity tickets.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">IT&#39;S CAMPJS DAY!!!<br>IT&#39;S CAMPJS DAY!!!<br>IT&#39;S CAMPJS DAY!!! <a href="https://t.co/xa4XeMGCYl">pic.twitter.com/xa4XeMGCYl</a></p>&mdash; Glen Arrowsmith (@garrows) <a href="https://twitter.com/garrows/status/1027681293281067008?ref_src=twsrc%5Etfw">August 9, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>At the start of the conference Glen Arrowsmith asked how many people were CampJS first-timers, and almost half the attendees put up their hand.</p>
+<p>Laura Bailey was a first-time attendee this year. She came, gave a talk, and lead the CampJS Retrospective on Sunday afternoon.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Hey <a href="https://twitter.com/laubaiwri?ref_src=twsrc%5Etfw">@laubaiwri</a> - remember this day at @NodeGirlsBri last year? Mission accomplished. You lead an incredible retrospective at <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> this year. The expanded success of next year&#39;s CampJS started right there and then. <a href="https://t.co/4wVLD9zWSH">pic.twitter.com/4wVLD9zWSH</a></p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029169675681165312?ref_src=twsrc%5Etfw">August 14, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I ran into Glen after the retro — at 4am on Monday morning walking to my dorm after the final game of Werewolf (if you’ve played Werewolf at CampJS you understand) — and he shared with me that the feedback the organisers got in that retrospective was pure gold, and contained far more specific and actionable feedback than they typically get.</p>
+<h2 id="firsttimer-and-familyfriendly">First-timer and Family-friendly</h2>
+<p>My son, Prahlad, was also a first-time attendee. He turned 16 in June of this year, and I wanted him to spend the weekend with me, and to experience CampJS. He had a great time, playing Werewolf each night — even narrating a game — and participating in the CTF (Capture The Flag) security challenge — where he finished third overall.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Posted without context <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://t.co/Jhs3GCVQVJ">pic.twitter.com/Jhs3GCVQVJ</a></p>&mdash; Kory Nunn (@KoryNunn) <a href="https://twitter.com/KoryNunn/status/1028639594068070400?ref_src=twsrc%5Etfw">August 12, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>That my son was happy and engaged there is a testament to the conference’s inclusivity. I’ve taken him to other tech events, and when it’s just a bunch of dudes geeking out on hardcore tech he is very bored. During the conference I had the realisation — “this is something that my wife would really enjoy”. There is ukelele playing, mini golf, bush walking / running, as well as hacking, technical talks, and of course, Werewolf. You don’t really know someone until you’ve accused them of being a werewolf, lead a lynch mob, and burned them at the stake, only to find out they were innocent. Digression. In the retrospective, others talked about bringing their family, and how we might support that next year.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Learning how to synth at <a href="https://twitter.com/hashtag/codechella?src=hash&amp;ref_src=twsrc%5Etfw">#codechella</a> <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> <a href="https://t.co/6pN4ShoMCD">pic.twitter.com/6pN4ShoMCD</a></p>&mdash; Tylor Stewart (@trjstewart) <a href="https://twitter.com/trjstewart/status/1028151419793076224?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2 id="stay-healthy-keep-moving">Stay Healthy, Keep Moving</h2>
+<p>On Saturday and Sunday morning a crew went for a run in the Springbrook National Park. I joined on Sunday morning and did a 45-minute trail run to the waterfall and back.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunday morning running club?Everyone welcome🏃‍♀️🏃‍♂️ at 8am <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://twitter.com/sitapati?ref_src=twsrc%5Etfw">@sitapati</a></p>&mdash; Sox 🌈 (@soxyface) <a href="https://twitter.com/soxyface/status/1028265834676805633?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Got an invite from my cabin-mates to go see some waterfalls and lookouts a short distance from <a href="https://twitter.com/hashtag/CampJS?src=hash&amp;ref_src=twsrc%5Etfw">#CampJS</a>, totally worth it! <a href="https://t.co/xD8a0dvCWj">pic.twitter.com/xD8a0dvCWj</a></p>&mdash; Chris (@chrislewisdev) <a href="https://twitter.com/chrislewisdev/status/1028534119267950593?ref_src=twsrc%5Etfw">August 12, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>According to my heart rate monitor I burned 930 calories on that run, but I’m pretty sure I ate more than a thousand calories over my training plan during a single evening playing Werewolf — what to speak of over the weekend. I took my electronic scales with me and started with the best intentions of staying on plan — but by Saturday declared the weekend a free-fire zone.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Oh, about the profile pic there - totally not a werewolf. Unfortunate coincidence. Oh look, a new JS framework!</p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029219555673927681?ref_src=twsrc%5Etfw">August 14, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2 id="swag">Swag</h2>
+<p>Anna Gerber brought along a badge-making machine, and printed custom badges for attendees. They were cool, and people wore them all weekend — making it easy to remember people’s names. She also made badges for different JS technologies, along with some Easter Eggs.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I got the limited edition <a href="https://twitter.com/AnnaGerber?ref_src=twsrc%5Etfw">@annagerber</a> badge at <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a>! <a href="https://twitter.com/hashtag/treasuredmemories?src=hash&amp;ref_src=twsrc%5Etfw">#treasuredmemories</a> <a href="https://t.co/Eh1NRxqtO4">pic.twitter.com/Eh1NRxqtO4</a></p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029179114685526016?ref_src=twsrc%5Etfw">August 14, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I also got a badge for my Compton.JS hat. <a href="https://twitter.com/hashtag/javascript?src=hash&amp;ref_src=twsrc%5Etfw">#javascript</a> <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://t.co/UIfjEMRB90">pic.twitter.com/UIfjEMRB90</a></p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029179531729326081?ref_src=twsrc%5Etfw">August 14, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2 id="more-swag">More Swag</h2>
+<p>Matt Slater at Credit Sense organised some stylish laptop backpacks as swag for attendees, and Colin Eyre from the Credit Sense UX/Interaction Design team designed the logo for it. We wanted something that incorporated Credit Sense, but didn’t eclipse CampJS. Colin referred to it as “featuring the Hero”.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Night 1 of <a href="https://twitter.com/hashtag/CampJS?src=hash&amp;ref_src=twsrc%5Etfw">#CampJS</a> <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> <a href="https://t.co/Qx3sqAkfso">pic.twitter.com/Qx3sqAkfso</a></p>&mdash; Khuslen Baatarsukh (@khuskhuslen) <a href="https://twitter.com/khuskhuslen/status/1027837691365183488?ref_src=twsrc%5Etfw">August 10, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🤘🤘🤘 <a href="https://twitter.com/IngaPflaumer?ref_src=twsrc%5Etfw">@IngaPflaumer</a> rocking it at <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> like a rockstar 😎 <a href="https://t.co/Ikyag63rE8">pic.twitter.com/Ikyag63rE8</a></p>&mdash; SMG Studio (@smgstudio) <a href="https://twitter.com/smgstudio/status/1028119342284648448?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>The CampJS banner behind Inga was also Colin’s work, and part of Credit Sense’s contribution “featuring the Hero”.</p>
+<h2 id="making-your-own-keyboard">Making Your Own Keyboard</h2>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Nearly my turn to present at <a href="https://twitter.com/hashtag/CampJS?src=hash&amp;ref_src=twsrc%5Etfw">#CampJS</a>! <a href="https://t.co/tSwh8SAcsx">pic.twitter.com/tSwh8SAcsx</a></p>&mdash; Chris (@chrislewisdev) <a href="https://twitter.com/chrislewisdev/status/1028149116730134529?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p><a href="https://twitter.com/chrislewisdev">Chris Lewis</a> gave an awesome talk about making your own keyboard. You’ll be able to watch it when the talk videos are published. In the meantime you can read <a href="https://medium.com/@clmyles/building-a-60-keyboard-a-dz60-build-guide-679e98083221">his Medium article about it</a>. Recommend.</p>
+<h2 id="sponsors-contribution-evaluated">Sponsors’ Contribution Evaluated</h2>
+<p>In the retrospective, Kartik asked about how the sponsors’ contributions were perceived, and if people found them too intrusive. One attendee said something that I found unexpected and very insightful:</p>
+<blockquote>
+<p>The most valuable contribution they made was sending good people. They were willing to talk about anything and everything — from everyday life, to working at their company, to their areas of deep technical expertise.</p>
+</blockquote>
+<p>That’s one of those brilliant gems that is obvious once you hear it, but hidden in plain sight before you heard it.</p>
+<p>I know that I look forward each year to hear what Kevin Yank’s team has been doing with Elm at Culture Amp. and the Rex Labs crew (including the Rex Labs-alumni) are always great to hang with.</p>
+<h2 id="ludum-dare-game-jam">Ludum Dare Game Jam</h2>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A sneak peak of the Ludlam Dare game jam round up coming up at <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> from <a href="https://twitter.com/lillypiri?ref_src=twsrc%5Etfw">@lillypiri</a> and <a href="https://twitter.com/nathanhoad?ref_src=twsrc%5Etfw">@nathanhoad</a> at <a href="https://twitter.com/BrisJS?ref_src=twsrc%5Etfw">@BrisJS</a> <a href="https://t.co/chtM030cSz">pic.twitter.com/chtM030cSz</a></p>&mdash; Anna Gerber (@AnnaGerber) <a href="https://twitter.com/AnnaGerber/status/1026412413816516608?ref_src=twsrc%5Etfw">August 6, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Nathan Hoad and Lilly Piri ran a Game Jam during the camp, synchronised with the global <a href="https://ldjam.com/">Ludum Dare Game Jam</a>. The theme this year was “<em>Running out of space</em>”. Participants demoed their games on Sunday night. There were some hilarious moments — Colin wrote a side-scrolling platformer whose essential game mechanic was driven by the player filling the their hard drive with data. To complete the first level takes two bytes, the second takes seven. It increases exponentially, so to get past level 25 the game asks you to drop a 1TB file on your hard drive.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Lilly and Nathan making game development look fun and easy with Phaser at <a href="https://twitter.com/BrisJS?ref_src=twsrc%5Etfw">@BrisJS</a> - can&#39;t wait to try this out on the weekend at <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> <a href="https://t.co/gHvqlTwger">pic.twitter.com/gHvqlTwger</a></p>&mdash; Anna Gerber (@AnnaGerber) <a href="https://twitter.com/AnnaGerber/status/1026415209223602176?ref_src=twsrc%5Etfw">August 6, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Ben O’Neill won the prize for the best game with a top-down scroller.</p>
+<h2 id="capture-the-flag">Capture the Flag</h2>
+<p>The DevOps team at Credit Sense built a Capture The Flag security challenge, based on the OWASP Juice Shop, that ran over the weekend. There was something up with the configuration and it didn’t work the way we thought it would. It would leak flags as any person captured them. Prahlad figured this out early on, and gamed the system to hold first place for Friday night and most of Saturday. He lost his lead when he played Mario Kart with Kevin and Jess that afternoon, and couldn’t get it back, eventually finishing third. Team null — Khuslen, Glen, and Patrick — took out the prize on Sunday night.</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Gallery Name" href="/img/2018/08/ctf-prize.jpeg" data-caption="Patrick from Team null, the winner of the CTF, getting the Sennheiser headphones from Dain Drew."><img src="/img/2018/08/ctf-prize.jpeg"></a>
+    <div class="caption">Patrick from Team null, the winner of the CTF, getting the Sennheiser headphones from Dain Drew.</div>
+  </div>
+
+
+<h2 id="opening-keynote">Opening Keynote</h2>
+<p>I gave the opening keynote on the Saturday morning. It had the kind of humour that I use in my regular monthly slot at BrisJS “The Top 5 JavaScripts of the Internet”, and covered a lot of ground — I had 117 slides for my 30-min talk.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Failure is the mother of success.<br>❤️ this <a href="https://twitter.com/sitapati?ref_src=twsrc%5Etfw">@sitapati</a> Life has to be lived forward but it makes sense looking backwards. <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://t.co/C27H8eO8ys">pic.twitter.com/C27H8eO8ys</a></p>&mdash; Tracy Kaur (@tracykaur) <a href="https://twitter.com/tracykaur/status/1028110322832273409?ref_src=twsrc%5Etfw">August 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I tested my talk on Thursday at Credit Sense with the members of the front-end and Node Guilds, and rolled their feedback in for the version that I delivered on Saturday.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> The legendary Josh Wulf <a href="https://twitter.com/sitapati?ref_src=twsrc%5Etfw">@sitapati</a> has been fine tuning his keynote with the <a href="https://twitter.com/MyCreditSense?ref_src=twsrc%5Etfw">@MyCreditSense</a> JavaScript guild.  If it&#39;s anything like his <a href="https://twitter.com/BrisJS?ref_src=twsrc%5Etfw">@BrisJS</a> addresses it is surely going be the bomb. Make sure you check it out on Saturday morning!<a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> <a href="https://twitter.com/hashtag/JavaScript?src=hash&amp;ref_src=twsrc%5Etfw">#JavaScript</a> <a href="https://twitter.com/hashtag/guildsaregood?src=hash&amp;ref_src=twsrc%5Etfw">#guildsaregood</a> <a href="https://t.co/Y2yYmsQCi5">pic.twitter.com/Y2yYmsQCi5</a></p>&mdash; csdain (@csdain1) <a href="https://twitter.com/csdain1/status/1027422061013086208?ref_src=twsrc%5Etfw">August 9, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I started thinking about the presentation one month out from the camp, and started living my life inside what I wanted to share with attendees.</p>
+<p>I did the presentation using Reveal.js, offline. I’ve hosted an online version using Zeit’s now.sh <a href="https://revealjs-vkmypvuljq.now.sh/">here</a>.</p>
+<p>There will be a video of it, and I’m looking forward to watching it, both because I did a great job — and I’m kind of a fan of my own work — and because I always review my performances to see where I can elevate my game to the next level. After the preview at Credit Sense, when people gave me feedback, saying “that was good”, I asked: “what can I take out or add in that will take it to the next level?” All the feedback they gave got incorporated.</p>
+<p>[<em>Update: Technical difficulties - they lost the videos from the whole camp. Oh well, you had to be there!</em>]</p>
+<h2 id="sunday-keynote">Sunday Keynote</h2>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">What I got up to at <a href="https://twitter.com/hashtag/CampJS?src=hash&amp;ref_src=twsrc%5Etfw">#CampJS</a>: listened to awesome talks by <a href="https://twitter.com/sitapati?ref_src=twsrc%5Etfw">@sitapati</a>, <a href="https://twitter.com/chrislewisdev?ref_src=twsrc%5Etfw">@chrislewisdev</a> and others; participated in the <a href="https://twitter.com/hashtag/OWASP?src=hash&amp;ref_src=twsrc%5Etfw">#OWASP</a> <a href="https://twitter.com/hashtag/CTF?src=hash&amp;ref_src=twsrc%5Etfw">#CTF</a> with my team <a href="https://twitter.com/hashtag/null?src=hash&amp;ref_src=twsrc%5Etfw">#null</a> and got 1st place; did some exploring to see waterfalls &amp; glow worms at <a href="https://twitter.com/hashtag/Springbrook?src=hash&amp;ref_src=twsrc%5Etfw">#Springbrook</a> National Park! Overall a fantastic weekend :) <a href="https://t.co/L3njD5t33F">pic.twitter.com/L3njD5t33F</a></p>&mdash; Khuslen Baatarsukh (@khuskhuslen) <a href="https://twitter.com/khuskhuslen/status/1028760250013208577?ref_src=twsrc%5Etfw">August 12, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p><a href="https://twitter.com/kevdesign">Kevin Vanderbeken</a> gave the keynote on Sunday, and talked about “Micro frontends”. I joked with him that I would talk about “Nano frontends” on Saturday (you can see it in my slide deck).</p>
+<h2 id="shout-out-to-this-years-organisers">Shout out to this year’s organisers</h2>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">CampJS shout out at <a href="https://twitter.com/BrisJS?ref_src=twsrc%5Etfw">@BrisJS</a> by <a href="https://twitter.com/_kartikgupta_?ref_src=twsrc%5Etfw">@_kartikgupta_</a> - this weekend and it&#39;s going to be amazing! <a href="https://t.co/2jJ0KSuWNE">pic.twitter.com/2jJ0KSuWNE</a></p>&mdash; Anna Gerber (@AnnaGerber) <a href="https://twitter.com/AnnaGerber/status/1026411970063302656?ref_src=twsrc%5Etfw">August 6, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>This year, Kartik Gupta played a pivotal role in organising Camp JS.</p>
+<h2 id="there-and-back-again">There and back again…</h2>
+<p>Here’s the Credit Sense crew on the way home on Monday morning:</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Gallery Name" href="/img/2018/08/there-and-back.jpeg" data-caption=""><img src="/img/2018/08/there-and-back.jpeg"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Nobody can be told what <a href="https://twitter.com/hashtag/campjs?src=hash&amp;ref_src=twsrc%5Etfw">#campjs</a> is, you have to see it for yourself. Suffice to say you&#39;ll code, learn and generally have a blast; meet old and new friends; and then probably have a 14 hour sleep when you get back to reality... maybe longer.</p>&mdash; Damon Oehlman (@DamonOehlman) <a href="https://twitter.com/DamonOehlman/status/1029139574679691264?ref_src=twsrc%5Etfw">August 13, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>#truestory</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Post <a href="https://twitter.com/campjs?ref_src=twsrc%5Etfw">@campjs</a> and getting my sleep back on track. 11 hours last night. I&#39;ll do similar tonight. <a href="https://t.co/bjssKmQeU5">pic.twitter.com/bjssKmQeU5</a></p>&mdash; Josh Wulf (Alt Super Meta) (@sitapati) <a href="https://twitter.com/sitapati/status/1029122521625387008?ref_src=twsrc%5Etfw">August 13, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/event">event</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/big-data-big-heart/" class="button"><div class="previous"><div>Big Data, Big Heart Hackathon</div></div></a>
+  
+  
+    <a href="/blog/programming-in-q#/" class="button"><div class="next"><div>Programming Quantum Computers with Q#</div></div></a>
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/the-impact-github-is-having/" class="image featured">
+    <img src="/img/2019/11/github.com.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/the-impact-github-is-having/">The Impact GitHub is Having on Your Software Career, Right Now…</a></h1>
+          <time class="published" datetime="">November 9, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/typescript-maybe/" class="image featured">
+    <img src="/img/2019/02/kitchen.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/typescript-maybe/">Implementing a Maybe Pattern using a TypeScript Type Guard</a></h1>
+          <time class="published" datetime="">February 12, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/programming-in-q#/" class="image featured">
+    <img src="/img/2018/09/john-azariah.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/programming-in-q#/">Programming Quantum Computers with Q#</a></h1>
+          <time class="published" datetime="">September 20, 2018</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/campjs-ix/" class="image featured">
+    <img src="/img/2018/08/there-and-back.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/campjs-ix/">CampJS IX — 2018</a></h1>
+          <time class="published" datetime="">August 14, 2018</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/big-data-big-heart/" class="image featured">
+    <img src="/img/2017/11/big-data-big-heart.jpeg" alt="Big Data, Big Heart">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/big-data-big-heart/">Big Data, Big Heart Hackathon</a></h1>
+          <time class="published" datetime="">November 20, 2017</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">5</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">5</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/event/">event<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2019
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>

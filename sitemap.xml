@@ -33,6 +33,51 @@
   </url>
   
   <url>
+    <loc>https://joshwulf.com/categories/fp/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/typescript-maybe/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/javascript/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/programming/</loc>
+    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/programming-in-q#/</loc>
+    <lastmod>2018-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/q#/</loc>
+    <lastmod>2018-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/quantum-mechanics/</loc>
+    <lastmod>2018-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/event/</loc>
+    <lastmod>2018-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/campjs-ix/</loc>
+    <lastmod>2018-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://joshwulf.com/blog/big-data-big-heart/</loc>
     <lastmod>2017-11-20T00:00:00+00:00</lastmod>
   </url>
@@ -43,17 +88,7 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/javascript/</loc>
-    <lastmod>2017-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://joshwulf.com/blog/return-considered-harmful/</loc>
-    <lastmod>2017-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/categories/programming/</loc>
     <lastmod>2017-11-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -114,11 +149,6 @@
   
   <url>
     <loc>https://joshwulf.com/categories/book-review/</loc>
-    <lastmod>2017-05-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/categories/quantum-mechanics/</loc>
     <lastmod>2017-05-19T00:00:00+00:00</lastmod>
   </url>
   

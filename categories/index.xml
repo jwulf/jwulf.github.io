@@ -30,18 +30,18 @@
     </item>
     
     <item>
-      <title>hackathon</title>
-      <link>https://joshwulf.com/categories/hackathon/</link>
-      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      <title>fp</title>
+      <link>https://joshwulf.com/categories/fp/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://joshwulf.com/categories/hackathon/</guid>
+      <guid>https://joshwulf.com/categories/fp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>javascript</title>
       <link>https://joshwulf.com/categories/javascript/</link>
-      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/javascript/</guid>
       <description></description>
@@ -50,9 +50,45 @@
     <item>
       <title>programming</title>
       <link>https://joshwulf.com/categories/programming/</link>
-      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>q#</title>
+      <link>https://joshwulf.com/categories/q#/</link>
+      <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/q#/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quantum mechanics</title>
+      <link>https://joshwulf.com/categories/quantum-mechanics/</link>
+      <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/quantum-mechanics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>event</title>
+      <link>https://joshwulf.com/categories/event/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/event/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hackathon</title>
+      <link>https://joshwulf.com/categories/hackathon/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/hackathon/</guid>
       <description></description>
     </item>
     
@@ -116,15 +152,6 @@
       <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/book-review/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>quantum mechanics</title>
-      <link>https://joshwulf.com/categories/quantum-mechanics/</link>
-      <pubDate>Fri, 19 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/categories/quantum-mechanics/</guid>
       <description></description>
     </item>
     

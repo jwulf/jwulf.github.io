@@ -6,10 +6,32 @@
     <description>Recent content in javascript on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Implementing a Maybe Pattern using a TypeScript Type Guard</title>
+      <link>https://joshwulf.com/blog/typescript-maybe/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/typescript-maybe/</guid>
+      <description>You’re sat at a restaurant, and you order a beer. The waiter disappears into the kitchen, and returns a couple of minutes later, empty-handed. “I’m sorry,” he says. “I could not get your beer.”
+Now here is the six-million dollar question: is the restaurant out of the beer that you ordered (business logic), or is the restaurant kitchen on fire (infrastructure failure)?
+And how do you model those two distinct failure states in your API?</description>
+    </item>
+    
+    <item>
+      <title>CampJS IX — 2018</title>
+      <link>https://joshwulf.com/blog/campjs-ix/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/campjs-ix/</guid>
+      <description>Classic #campjs pic.twitter.com/TmnmBMF0jG
+&amp;mdash; Glen Arrowsmith (@garrows) August 10, 2018  My heartfelt thanks to the organisers and my fellow attendees at @campjs IX. It was a weekend of sleep deprivation of the body, and nourishment of the soul.
+&amp;mdash; Josh Wulf (Alt Super Meta) (@sitapati) August 13, 2018  Take me back to #CampJS - a huge thank you to all the organisers; such a thoughtful, inclusive, highly entertaining and fun packed weekend.</description>
+    </item>
     
     <item>
       <title>JavaScript: Return considered harmful</title>
