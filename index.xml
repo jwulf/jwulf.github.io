@@ -6,10 +6,20 @@
     <description>Recent content on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Going to Zero-Scale Zeebe on Camunda Cloud with Cloudflare Workers</title>
+      <link>https://joshwulf.com/blog/2019/12/cloudflare-slack/</link>
+      <pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2019/12/cloudflare-slack/</guid>
+      <description>I get questions about running Zeebe at &amp;ldquo;zero-scale&amp;rdquo;. That means workers that consume no resources when there are no tasks to perform.
+The Zeebe service on Camunda Cloud includes a generic HTTP-Worker that can be used to achieve this. The HTTP-Worker polls for jobs of type &amp;ldquo;Camunda-HTTP&amp;rdquo;, and then invokes a REST endpoint based on the HTTP verb and URL set in the task headers. In combination with &amp;ldquo;serverless&amp;rdquo; functions, this can be used to achieve a zero-scale architecture.</description>
+    </item>
     
     <item>
       <title>In Search of the Ultimate Keyboard Layout</title>

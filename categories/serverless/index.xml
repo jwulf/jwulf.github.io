@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>zeebe on Josh Wulf</title>
-    <link>https://joshwulf.com/categories/zeebe/</link>
-    <description>Recent content in zeebe on Josh Wulf</description>
+    <title>serverless on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/serverless/</link>
+    <description>Recent content in serverless on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 03 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://joshwulf.com/categories/zeebe/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://joshwulf.com/categories/serverless/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,16 +19,6 @@
       <guid>https://joshwulf.com/blog/2019/12/cloudflare-slack/</guid>
       <description>I get questions about running Zeebe at &amp;ldquo;zero-scale&amp;rdquo;. That means workers that consume no resources when there are no tasks to perform.
 The Zeebe service on Camunda Cloud includes a generic HTTP-Worker that can be used to achieve this. The HTTP-Worker polls for jobs of type &amp;ldquo;Camunda-HTTP&amp;rdquo;, and then invokes a REST endpoint based on the HTTP verb and URL set in the task headers. In combination with &amp;ldquo;serverless&amp;rdquo; functions, this can be used to achieve a zero-scale architecture.</description>
-    </item>
-    
-    <item>
-      <title>Node.js client for Zeebe Microservices Orchestration Engine</title>
-      <link>https://joshwulf.com/blog/2019/01/zeebe-node/</link>
-      <pubDate>Tue, 29 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/blog/2019/01/zeebe-node/</guid>
-      <description>Update: I now work at Camunda on Zeebe as the Node client maintainer and a Developer Advocate. Things have changed in the broker and the library since this was published - for the latest on using it, refer to my new book in development - &amp;ldquo;The Zeebe Node.js Client Guide&amp;quot;
-I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe. Check it out on GitHub and start using it now!</description>
     </item>
     
   </channel>
