@@ -13,11 +13,6 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/blog/2019/12/cloudflare-slack/</loc>
-    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://joshwulf.com/</loc>
     <lastmod>2019-12-03T00:00:00+00:00</lastmod>
   </url>
@@ -29,6 +24,11 @@
   
   <url>
     <loc>https://joshwulf.com/categories/zeebe/</loc>
+    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/2019/12/cloudflare-slack/</loc>
     <lastmod>2019-12-03T00:00:00+00:00</lastmod>
   </url>
   
