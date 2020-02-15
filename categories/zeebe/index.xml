@@ -31,5 +31,14 @@ The Zeebe service on Camunda Cloud includes a generic HTTP-Worker that can be us
 I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe. Check it out on GitHub and start using it now!</description>
     </item>
     
+    <item>
+      <title>20 Tips on travelling like a BOSS</title>
+      <link>https://joshwulf.com/blog/2020/01/travel-tips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/01/travel-tips/</guid>
+      <description>Over the last 20 years, I&#39;ve done a fair amount of travel around the world. My first trip out of New Zealand on my own - in 1996, to Sydney - was a hot mess. I had no idea that you have to pass through a metal detector at the airport, and I rocked up with batteries, coins, a metal chain on my wallet, a Maglite torch, and a multi-headed screwdriver in my pockets.</description>
+    </item>
+    
   </channel>
 </rss>
