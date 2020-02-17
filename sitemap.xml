@@ -4,17 +4,52 @@
   
   <url>
     <loc>https://joshwulf.com/blog/</loc>
-    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/</loc>
-    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/deployment/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/docker/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/2020/02/docker-https/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/github/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/2020/02/creating-github-action/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/javascript/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://joshwulf.com/</loc>
-    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/programming/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -48,11 +83,6 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/github/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://joshwulf.com/blog/2019/11/the-impact-github-is-having/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
@@ -74,16 +104,6 @@
   
   <url>
     <loc>https://joshwulf.com/blog/2019/02/typescript-maybe/</loc>
-    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/categories/javascript/</loc>
-    <lastmod>2019-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/categories/programming/</loc>
     <lastmod>2019-02-12T00:00:00+00:00</lastmod>
   </url>
   

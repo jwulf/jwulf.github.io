@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>docker - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="docker">
+<meta itemprop="description" content="">
+  <meta property="og:title" content="docker" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://joshwulf.com/categories/docker/" />
+<meta property="og:updated_time" content="2020-02-17T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="docker"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Categories
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=docker&amp;url=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f&amp;title=docker" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f&amp;title=docker" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f&amp;description=docker" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fjoshwulf.com%2fcategories%2fdocker%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+    <li><a href="/categories/docker/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
+
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <h1>docker</h1>
+        
+        
+            <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h2>
+    
+    
+        <p>Run multiple webapps on a single host with automated SNI and TLS certificate provisioning.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-02-17 00:00:00 &#43;0000 UTC">
+      February 17, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>2 minutes read</p>
+    
+  </div>
+</header>
+
+  
+  <a href="/blog/2020/02/docker-https/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+  
+  <p>I frequently deploy Web APIs in Docker. On a single VM I might have up to five or six services running.
+All of them have TLS certificates and are accessible via port 443 using SNI — Server Name Indication, where the request is routed to the correct backend based on the domain name of the request.</p>
+  <footer>
+    <a href="/blog/2020/02/docker-https/" class="button big">Read more</a>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/docker">docker</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/deployment">deployment</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+        
+        
+<div class="pagination">
+  
+    <a href="#" class="disabled button big previous"><i class="fas fa-angle-left"></i></a>
+  
+  
+    <a href="#" class="disabled button big next"><i class="fas fa-angle-right"></i></a>
+  
+</div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/docker-https/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/creating-github-action/" class="image featured">
+    <img src="/img/2020/02/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/creating-github-action/">How to write a GitHub Action</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2019/12/cloudflare-slack/" class="image featured">
+    <img src="/img/2019/12/serverlessComputing.jpg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2019/12/cloudflare-slack/">Zero-Scale Zeebe with Cloudflare Workers</a></h1>
+          <time class="published" datetime="">December 3, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2019/11/ultimate-keyboard/" class="image featured">
+    <img src="/img/2019/11/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2019/11/ultimate-keyboard/">In Search of the Ultimate Keyboard Layout</a></h1>
+          <time class="published" datetime="">November 30, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2019/11/the-impact-github-is-having/" class="image featured">
+    <img src="/img/2019/11/github.com.png" alt="Pic 3">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2019/11/the-impact-github-is-having/">The Impact GitHub is Having on Your Software Career, Right Now…</a></h1>
+          <time class="published" datetime="">November 9, 2019</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">8</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">8</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+    <li><a href="/categories/docker/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
+
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>
