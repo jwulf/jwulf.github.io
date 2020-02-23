@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Building your own GitHub Action.">
 <meta itemprop="datePublished" content="2020-02-17T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="500">
+<meta itemprop="wordCount" content="528">
 
 
 
@@ -322,6 +322,7 @@
   <div class="content">
     <p>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository's <code>repository_dispatch</code> REST endpoint over the GitHub API.</p>
 <p>The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.</p>
+<p>I recently wrote a <a href="https://github.com/marketplace/actions/zeebe-action">Zeebe GitHub Action</a> that allows you to <a href="https://camunda.io">Camunda Cloud</a>, and it was so easy to do that I wanted to share it with you.</p>
 <h2 id="github-action-usage-example">GitHub Action Usage Example</h2>
 <p>If you have a repo with a <code>Dockerfile</code> in it, you can build the Docker image and publish it to Docker Hub using a GitHub Action ((see this workflow in a repo on GitHub](<a href="https://github.com/jwulf/camunda-cloud-demo-json-api))">https://github.com/jwulf/camunda-cloud-demo-json-api))</a>.</p>
 <ul>
