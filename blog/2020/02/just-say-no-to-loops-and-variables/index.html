@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Just say No to loops and variables. - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Just say No to loops and variables.">
+<meta itemprop="description" content="A hot take on programming without them.">
+<meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2584">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Just say No to loops and variables." />
+<meta property="og:description" content="A hot take on programming without them." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/" />
+<meta property="article:published_time" content="2020-02-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-23T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Just say No to loops and variables."/>
+<meta name="twitter:description" content="A hot take on programming without them."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Just%20say%20No%20to%20loops%20and%20variables.&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;title=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;title=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;description=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/02/just-say-no-to-loops-and-variables/">Just say No to loops and variables.</a></h2>
+    
+    
+        <p>A hot take on programming without them.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-02-23 00:00:00 &#43;0000 UTC">
+      February 23, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>13 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Just%20say%20No%20to%20loops%20and%20variables.&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;title=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;title=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f&amp;description=Just%20say%20No%20to%20loops%20and%20variables." target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fjust-say-no-to-loops-and-variables%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+  <div class="content">
+    <p>This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I'm pretty sure a fair whack of them were homework assignments).</p>
+<p>One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (<em>Discord bots are hot right now with the kids</em>).</p>
+<p>There are certain things that people struggle with when learning to program, and when learning to program in JS.</p>
+<p><strong>Asynchronicity</strong> is one. Callbacks not so much - mostly now people are struggling with Promises (with are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: <em>they look the same</em>. At least with callbacks and Promises you have some clue in the indentation.</p>
+<p><strong>Naming</strong> is another one. The power of correctly naming entities in a program cannot be overestimated - I mean, it's one of the two hardest problems in computer science: caching, naming things, and whether or not to move to San Francisco.</p>
+<p>The impact of <em>not</em> correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that &ldquo;<em>80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE.</em>&rdquo; <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>. (I solved his problem for him.) He had started with an entity named <code>x</code> and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.</p>
+<p>As we read in <a href="https://china.usc.edu/confucius-analects-13">the Analects of Confucius</a> (&quot;<em>Confucius say</em>&quot;):</p>
+<blockquote>
+<p>Tsze-lu said, &ldquo;The ruler of Wei has been waiting for you, in order with you to administer the government. What will you consider the first thing to be done?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>The Master replied, &ldquo;What is necessary is to rectify names.&rdquo; &ldquo;So! indeed!&rdquo; said Tsze-lu. &ldquo;You are wide of the mark! Why must there be such rectification?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>The Master said, &ldquo;How uncultivated you are, Yu! A superior man, in regard to what he does not know, shows a cautious reserve.</p>
+</blockquote>
+<blockquote>
+<p>&ldquo;If names be not correct, language is not in accordance with the truth of things. If language be not in accordance with the truth of things, affairs cannot be carried on to success.</p>
+</blockquote>
+<p>Computer programming is an exercise in applied linguistics. It is precisely specifying the execution of operations to transform matter through the utterance of magic spells. Say the wrong thing, and <em>BOOM!</em> you turn into a toad. The stakes are high.</p>
+<p><strong>Mixing concerns</strong> is another common one. A symptom of the confusion that arises from this - and I really do mean <em>confusion</em> here: the <em>dosha</em>, or philosophical error described in the Sanskrit logical system of <em>Nyaya</em> as <em>bhranti darshana</em>: a mistaken perception, literally: &ldquo;an illusory vision&rdquo;. For example: thinking that a rope is a snake. That is <em>confused</em>: two things are <em>fused with</em> each other in a way that they are no longer distinct, and one is mistaken for the other.</p>
+<p>In Sanskrit philosophy, there is an entire school - <em>Samkhya</em> - dedicated to the study of <em>separation of concerns</em>. <em>Samkhya</em> is sometimes translated as &ldquo;categorisation&rdquo; or &ldquo;distinction&rdquo;.</p>
+<p>According to Wikipedia:</p>
+<blockquote>
+<p>Samkhya means &ldquo;to reckon, count, enumerate, calculate, deliberate, reason, reasoning by numeric enumeration, relating to number, rational.&rdquo; In the context of ancient Indian philosophies, Samkhya refers to the philosophical school in Hinduism based on systematic enumeration and rational examination.</p>
+</blockquote>
+<p>It comes from two words: <em>Sam</em> meaning &ldquo;the whole&rdquo; or &ldquo;totality&rdquo; (from which the English word <em>sum</em> comes to us), and <em>khya</em> meaning <em>to name</em>. The founders of this philosophical system were totally into enumerating everything categorically, and describing the relationships between categories as an access to understanding the whole.</p>
+<p>In modern software development <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> is a widely accepted best practice for reducing complexity and technical debt.</p>
+<h2 id="mixed-concerns-lead-to-exponential-complexity">Mixed Concerns lead to Exponential Complexity</h2>
+<p>One thing I noticed many novice programmers struggling with was the mixing of the concerns of data transformation - essentially a functional concern - with imperative flow control.</p>
+<p>Nothing wrong with that, but it lead them into situations where they experienced overwhelming complexity. They couldn't get the data transformation that they wanted, <em>and</em> they were struggling with building a custom state machine to produce it at the same time. The intersection of these two problems lead them to throw up their hands and turn to StackOverflow.</p>
+<p>As I said to one questioner: &ldquo;<em>when you solve a problem using loops and variables, now you have three problems</em>&quot;. You have to build a custom state machine, track mutable state, <em>and</em> you still have the original problem you were trying to solve.</p>
+<p>Now, seasoned programmers can often look at these trivial (to them) situations and see a clear way out of the scenario the new programmer has gotten themselves into, and guide the novice to correctly construct the state machine, correctly initialise and scope the variables, and get the desired data transformation with the resulting system - and you might think &ldquo;<em>what's the big deal?</em>&rdquo;</p>
+<p>It can even be a mark of pride to be able to tame it in this way. However, the novice programmer's dilemma is a microcosm that simply scales up when they continue to code this way with more prowess.</p>
+<h2 id="so-the-hot-take">So, the Hot Take</h2>
+<p>I overstepped the mark in one question. This particular week, I was in the top 0.11% of StackOverflow contributors worldwide, as recognized by the community on StackOverflow (thank you, you're welcome), and on a burn.</p>
+<p>To one question, I said:</p>
+<blockquote>
+<p>I can see two problems with your code straight away:</p>
+<ol>
+<li>Loops</li>
+<li>Variables</li>
+</ol>
+</blockquote>
+<p>I wrote a solution that used no custom state machine (no loops), and no mutable variables.</p>
+<p>Another StackOverflow contributor wrote a functioning custom state machine with mutation that also solved the problem domain, and I commented:</p>
+<blockquote>
+<p>Also, loops and variables! The more of those you do, the more complexity and moving parts you have to debug. Solid effort though. Pretty cool using a RegEx.</p>
+</blockquote>
+<p>To which he took affront - fair enough. He said:</p>
+<blockquote>
+<p>@Josh Wulf - There is no reason not to use loops and variables in code. You are ridiculous. You should know that using certain convenience functions of Array are slower performing than using for loops. Filter is actually a loop that iterates through all elements of an array, and it performs slower than for loops across the board. I recommend keeping your comments constructive and avoid passive agressive remarks like &ldquo;Solid effort though.&rdquo; Its actually a viable solution for many cases. I even pointed out that another solution on the thread might be better. Maybe write a blog where you critique?</p>
+</blockquote>
+<p>Ouch!</p>
+<p>I apologised to him, because I did overstep the mark with that comment. It's fine to have a perspective on something, but leaving a member of our professional community, who is giving their free time to contribute to others, with the experience of being disrespected is not what I am committed to.</p>
+<p>So, I apologised, and accepted his request to write a blog article about it. Thank you to that member of our community for holding me to account to the level of professional courtesy and respect that you are due, and for the opportunity to write this blog.</p>
+<p>Here we go:</p>
+<h2 id="state-mutation-and-complexity">State Mutation and Complexity</h2>
+<p>Mutable state in a program is <em>additional complexity</em>.</p>
+<p>More variables means more moving parts: <em>mo&rsquo; vars mo&rsquo; problems</em>. If an assignment is declared as mutable, guarantees about that assignment are weakened. This means that reasoning about the eventual value of that assignment in other parts of the program is complex. With TypeScript (on a strong setting), the transpiler will make a strong assertion about the <em>type</em> of the value, to reduce complexity, but it cannot make any guarantees about its eventual <em>value</em>. Without TypeScript, <em>neither</em> is guaranteed. (And at run-time, all bets are off, so you are at the mercy of the accuracy and consistency of your typings).</p>
+<p>Deliberately reducing complexity by choosing to eschew the mutant is a programming discipline, and one that I believe pays off.</p>
+<p>Douglas Crockford wrote the famous book <a href="https://www.amazon.com.au/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742">JavaScript: The Good Parts</a>, where he shared his discovery that if he deliberately avoided certain parts of the language - artificially constraining himself to a subset of the language - his productivity improved.</p>
+<p>I believe that variables belong in the category of &ldquo;things to avoid&rdquo;.</p>
+<p>I took on programming without variables, and there has only been case where the word <code>let</code> has left my mouth in the past two years:</p>
+<pre><code>let result
+try {
+    result = await asyncOpThatMayThrow()
+} catch (e) {
+    return handle(e)
+}
+
+try {
+    await useResult(result)
+} catch (e) {
+    return handleThis(e)
+}
+</code></pre><p>This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: striving for a single level of indentation. Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.</p>
+<p>I recently resolved this, and that <code>let</code> is no more for me - but that is another blog post.</p>
+<p>I see novice programmers declaring variables as <code>let</code> and <code>var</code>, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;. When you don't change it, why communicate that intent? You have incorrectly named a thing.</p>
+<p>And when you do mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.</p>
+<p>And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a case of mistaken identity mutation bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because <em>variables</em>.</p>
+<p>Just say No to variables. Try it for one year (<em>I know that seems like a long time if it represents a significant percentage of your programming career to date</em>).</p>
+<p>If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: variables.</p>
+<h2 id="custom-state-machines-loops">Custom State Machines: Loops</h2>
+<p>Loops are problematic in several ways.</p>
+<p>Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: &ldquo;<em>I have to transform every element in this array</em>&quot;. So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.</p>
+<p>That's an explosion of complexity, and leads to complex and fragile constructions that are resistant to refactoring. As the novice (or maintenance) engineer iterates on the data transformation taking place in the loop, the coupling of the state machine with the data transformation can cause the state machine to break, or to require a change in the state machine to accomodate a change in the data transformation. This is especially problematic for the novice programmer who is trying to get both to work at the same time. Now they are solving a two variable problem when they started with one!</p>
+<p>Niklaus Wirth's classic work on programming distinguished two categories: <a href="https://www.amazon.com/Algorithms-Data-Structures-Niklaus-Wirth/dp/0130220051">Algorithms and Data Structures</a>. A third concern in a program is <em>control flow</em> - in distributed systems it is <em>processes</em> - directed evolution of the program (system) state over time.</p>
+<p>By using a loop, you are putting all three in one place. Many novice programmers (and experienced ones working on new systems) are operating without a clear picture of the eventual shape of the data that they need to model the state and the transformations required to achieve the outcome. When you put all three in one place, you now have a three-variable equation that you are trying to solve at once.</p>
+<p>And you are doing it by building the machine that will apply the transformation to the data structure, manually.</p>
+<p>This, I believe, is at the core of the breakdown for many of the novice programmers who loop themselves into a knot with these assignments - I mean, work problems. They end up going: &ldquo;<em>What the heck am I even doing???</em>&rdquo;</p>
+<p>The complexity is <em>too much</em>.</p>
+<p>And what got missed, right at the outset, is that the problem is <strong>not</strong> &ldquo;<em>apply a transformation to every element in this array</em>&quot;.</p>
+<p>That is the automatic GOTO (<em>sorry, couldn't resist</em>) of the programmer armed with a loop.</p>
+<p>The problem is in fact, much, much simpler. It is: &ldquo;<em>apply a transformation to <strong>each</strong> element in this array</em>&quot;.</p>
+<p>Once this is grasped, the separation of concerns becomes clearer:</p>
+<p>&ldquo;<em>I need to write a data transformation function that takes one element and returns one transformed element</em>.&rdquo;</p>
+<p>&ldquo;<em>And I need to apply this transformer function to each element in the array</em>.&rdquo;</p>
+<p>The problem has suddenly reduced in both scope and intersectional complexity.</p>
+<p>The state machine and the transformation are now separate concerns, whose complexity can be reduced independently.</p>
+<p>Loops are imperative control flow constructs. They can be used well, but they are dangerous. They couple control flow with transformations / side effects. I believe they cause more harm than good, especially for novice programmers, because they obscure the separation of concern.</p>
+<p>Compare this:</p>
+<pre><code>function countNumbers(arr) {
+    var count = 0;
+    for (num in arr) {
+        if (Number(arr[num]) !== NaN) {
+            count++;
+        }
+    }
+    return count;
+}
+</code></pre><p>With this:</p>
+<pre><code>const isNum = n =&gt; !isNaN(parseInt(n));
+const countNumbers = arr =&gt; arr.filter(isNum).length;
+</code></pre><p>In the second, the two concerns are separated and named. They are not intermixed.</p>
+<p>The data transformation function can be unit tested with ease, and can be refactored without impact on the state machine. The code for each lives in a distinct location and isolated context.</p>
+<p>The problem is much clearer.</p>
+<p>Once the state machine is in place (<code>Array.filter</code>), the design of the data transformation can be iterated on with an automated test suite with ease, leaving the programmer to focus on one thing only.</p>
+<p>A mistake in syntax while doing that can only break one thing. The programmer is not grappling with and changing code that affects two concerns at the same time.</p>
+<p>There is no mutation to track (another surface area for bugs).</p>
+<p>This is a microcosm, but I believe one that perfectly expresses as a koan the power and beauty of taking a vow to deliberately avoid using variables and loops.</p>
+<p>I will not overstep my bounds by making an evangelical claim of some absolute truth, and I invite you to try it. Program without variables and loops, and observe how it changes the way that the problems in front of you present themselves, and what solutions emerge from taking on this discipline.</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/2020/02/docker-https/" class="button"><div class="previous"><div>Easily run multiple apps with HTTPS using Docker and LetsEncrypt</div></div></a>
+  
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/just-say-no-to-loops-and-variables/">Just say No to loops and variables.</a></h1>
+          <time class="published" datetime="">February 23, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/docker-https/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/creating-github-action/" class="image featured">
+    <img src="/img/2020/02/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/creating-github-action/">How to write a GitHub Action</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/zero-scale-zeebe-github/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/zero-scale-zeebe-github/">Zero-scale Zeebe with Camunda Cloud and GitHub Actions</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/01/travel-tips/" class="image featured">
+    <img src="/img/2020/01/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/01/travel-tips/">20 Tips on travelling like a BOSS</a></h1>
+          <time class="published" datetime="">January 30, 2020</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">9</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">9</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">4</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>

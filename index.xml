@@ -6,10 +6,21 @@
     <description>Recent content on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Just say No to loops and variables.</title>
+      <link>https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/</link>
+      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/</guid>
+      <description>This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I&#39;m pretty sure a fair whack of them were homework assignments).
+One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (Discord bots are hot right now with the kids).
+There are certain things that people struggle with when learning to program, and when learning to program in JS.</description>
+    </item>
     
     <item>
       <title>Easily run multiple apps with HTTPS using Docker and LetsEncrypt</title>
@@ -29,6 +40,24 @@ This is very easy to set up using letsencrypt-nginx-sidecar, (which builds on th
       <guid>https://joshwulf.com/blog/2020/02/creating-github-action/</guid>
       <description>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository&#39;s repository_dispatch REST endpoint over the GitHub API.
 The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.</description>
+    </item>
+    
+    <item>
+      <title>Zero-scale Zeebe with Camunda Cloud and GitHub Actions</title>
+      <link>https://joshwulf.com/blog/2020/02/zero-scale-zeebe-github/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/zero-scale-zeebe-github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>20 Tips on travelling like a BOSS</title>
+      <link>https://joshwulf.com/blog/2020/01/travel-tips/</link>
+      <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/01/travel-tips/</guid>
+      <description>Over the last 20 years, I&#39;ve done a fair amount of travel around the world. My first trip out of New Zealand on my own - in 1996, to Sydney - was a hot mess. I had no idea that you have to pass through a metal detector at the airport, and I rocked up with batteries, coins, a metal chain on my wallet, a Maglite torch, and a multi-headed screwdriver in my pockets.</description>
     </item>
     
     <item>
@@ -223,15 +252,6 @@ I refactored it three or four times, extracting and consolidating pieces of logi
       
       <guid>https://joshwulf.com/blog/2017/03/flightcentre-hackathon/</guid>
       <description>On 26 March, we took out second place in the 2017 Flight Centre Data Hackathon. Our team was a mix of engineers, designers, and business analysts from Magikcraft.io, Code Network, Just Digital People, and Just Media Design. A few of us have worked together on projects before, a few of us know each other but have never worked together on a project, and some of us met for the first time at Fishburners on the Friday night of the Hackathon.</description>
-    </item>
-    
-    <item>
-      <title>20 Tips on travelling like a BOSS</title>
-      <link>https://joshwulf.com/blog/2020/01/travel-tips/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/blog/2020/01/travel-tips/</guid>
-      <description>Over the last 20 years, I&#39;ve done a fair amount of travel around the world. My first trip out of New Zealand on my own - in 1996, to Sydney - was a hot mess. I had no idea that you have to pass through a metal detector at the airport, and I rocked up with batteries, coins, a metal chain on my wallet, a Maglite torch, and a multi-headed screwdriver in my pockets.</description>
     </item>
     
   </channel>

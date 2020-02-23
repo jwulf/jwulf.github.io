@@ -4,12 +4,32 @@
   
   <url>
     <loc>https://joshwulf.com/blog/</loc>
-    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/</loc>
-    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/javascript/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joshwulf.com/categories/programming/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -38,27 +58,22 @@
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/javascript/</loc>
+    <loc>https://joshwulf.com/categories/zeebe/</loc>
     <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/</loc>
+    <loc>https://joshwulf.com/blog/2020/02/zero-scale-zeebe-github/</loc>
     <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://joshwulf.com/categories/programming/</loc>
-    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <loc>https://joshwulf.com/blog/2020/01/travel-tips/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://joshwulf.com/categories/serverless/</loc>
-    <lastmod>2019-12-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/categories/zeebe/</loc>
     <lastmod>2019-12-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -255,10 +270,6 @@
   <url>
     <loc>https://joshwulf.com/video/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joshwulf.com/blog/2020/01/travel-tips/</loc>
   </url>
   
   <url>
