@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A hot take on programming without them.">
 <meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2581">
+<meta itemprop="wordCount" content="2593">
 
 
 
@@ -407,7 +407,7 @@ try {
 <p>Just say No to variables. Try it for one year (<em>I know that seems like a long time if it represents a significant percentage of your programming career to date</em>).</p>
 <p>If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: <em>variables</em>.</p>
 <h2 id="custom-state-machines-loops">Custom State Machines: Loops</h2>
-<p>Loops are problematic in several ways.</p>
+<p>Loops are problematic in several ways (and this applies to <code>Array.forEach</code> as well as the classic <code>for</code> loop).</p>
 <p>Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: &ldquo;<em>I have to transform every element in this array</em>&quot;. So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.</p>
 <p>That's an explosion of complexity, and leads to complex and fragile constructions that are resistant to refactoring. As the novice (or maintenance) engineer iterates on the data transformation taking place in the loop, the coupling of the state machine with the data transformation can cause the state machine to break, or to require a change in the state machine to accomodate a change in the data transformation. This is especially problematic for the novice programmer who is trying to get both to work at the same time. Now they are solving a two variable problem when they started with one!</p>
 <p>Niklaus Wirth's classic work on programming distinguished two categories: <a href="https://www.amazon.com/Algorithms-Data-Structures-Niklaus-Wirth/dp/0130220051">Algorithms and Data Structures</a>. A third concern in a program is <em>control flow</em> - in distributed systems it is <em>processes</em> - directed evolution of the program (system) state over time.</p>
