@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2937">
+<meta itemprop="wordCount" content="3032">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>14 minutes read</p>
+      <p>15 minutes read</p>
     
   </div>
 </header>
@@ -324,9 +324,9 @@
 <p>Global scope is a feature of browser JavaScript that is a source of bugs.</p>
 <p>Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.</p>
 <p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
-<p>What we will do is reduce the bug surface area significantly.</p>
+<p>What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
 <h2 id="the-question">The Question</h2>
-<p>Here is the question from StackOverflow:</p>
+<p>Here is the code from StackOverflow:</p>
 <pre><code>//global variable
 var memArray  =[];
 
@@ -337,17 +337,17 @@ function member(id, password){
   }
   var memObj1=new member(&quot;m001&quot;,&quot;123&quot;);
   memArray.push(memObj1);
-</code></pre><blockquote>
-<p>How do I send out an alert to prompt and edit each object that is push to memArray?</p>
-</blockquote>
-<h2 id="discussion">Discussion</h2>
+</code></pre><h2 id="discussion">Discussion</h2>
 <p>There is a lot going on this example that can be refactored, and we'll look at a number of things in other articles. But for now, let's look at global state.</p>
 <h3 id="memarray">memArray</h3>
 <p>The global <code>memArray</code> has two immediate issues - apart from being global.</p>
 <ul>
 <li><code>var</code></li>
 </ul>
-<p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime. Somewhere deep in the code, a function could do:</p>
+<p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime.</p>
+<p>In fact, using <code>var</code> is a declaration to the machine and to other programmers that &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
+<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a var doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
+<p>Somewhere deep in the code, a function could do:</p>
 <pre><code>memArray = []
 </code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
 <p>The chances of this happening are increased because of the second issue:</p>
