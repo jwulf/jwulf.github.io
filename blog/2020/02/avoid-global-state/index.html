@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Avoiding global mutable state in browser JS - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Avoiding global mutable state in browser JS">
+<meta itemprop="description" content="A StackOverflow refactoring.">
+<meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2608">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Avoiding global mutable state in browser JS" />
+<meta property="og:description" content="A StackOverflow refactoring." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/02/avoid-global-state/" />
+<meta property="article:published_time" content="2020-02-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-24T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Avoiding global mutable state in browser JS"/>
+<meta name="twitter:description" content="A StackOverflow refactoring."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Avoiding%20global%20mutable%20state%20in%20browser%20JS&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;title=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;title=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;description=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/02/avoid-global-state/">Avoiding global mutable state in browser JS</a></h2>
+    
+    
+        <p>A StackOverflow refactoring.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-02-24 00:00:00 &#43;0000 UTC">
+      February 24, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>13 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Avoiding%20global%20mutable%20state%20in%20browser%20JS&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;title=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;title=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f&amp;description=Avoiding%20global%20mutable%20state%20in%20browser%20JS" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2favoid-global-state%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/02/avoid-global-state/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+  <div class="content">
+    <p>Global scope is a feature of browser JavaScript that is a source of bugs.</p>
+<p>Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.</p>
+<p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
+<p>What we will do is reduce the bug surface area significantly.</p>
+<h2 id="the-question">The Question</h2>
+<p>Here is <a href="https://stackoverflow.com/questions/60359864/javascript-send-out-an-alert-to-prompt-and-edit-array/60369452#60369452">the question from StackOverflow</a>:</p>
+<pre><code>//global variable
+var memArray  =[];
+
+//object    
+function member(id, password){
+  this.id          = id; 
+  this.pwd         = password
+  }
+  var memObj1=new member(&quot;m001&quot;,&quot;123&quot;);
+  memArray.push(memObj1);
+</code></pre><blockquote>
+<p>How do I send out an alert to prompt and edit each object that is push to memArray?</p>
+</blockquote>
+<h2 id="discussion">Discussion</h2>
+<p>There is a lot going on this example that can be refactored, and we'll look at a number of things in other articles. But for now, let's look at global state.</p>
+<h3 id="memarray">memArray</h3>
+<p>The global <code>memArray</code> has two immediate issues - apart from being global.</p>
+<ul>
+<li><code>var</code></li>
+</ul>
+<p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime. Somewhere deep in the code, a function could do:</p>
+<pre><code>memArray = []
+</code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
+<p>The chances of this happening are increased because of the second issue:</p>
+<ul>
+<li>Naming</li>
+</ul>
+<p>See this article about <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">the importance of naming</a>.</p>
+<p>In code examples on StackOverflow, I always name global variables like this: <code>EvilGlobalMembersArray</code>.</p>
+<p>There is no way someone is accidentally reusing that in a local scope. At the very least, <code>GlobalMembersArray</code> is an unambiguous name that communicates what it is.</p>
+<h2 id="first-refactor">First Refactor</h2>
+<pre><code>const GlobalMembersArray = []
+</code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is convention that takes away cognitive load when reading the code. If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at.</p>
+<h2 id="mutation">Mutation</h2>
+<p>The global is now not reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> mess with the contents.</p>
+<p>Presumably, we are going to want to add to, remove from, and update elements in this array.</p>
+<p>By exposing only the array as a global variable, we have devolved responsibility for mutating it to local functions in the application.</p>
+<p>That concern, and hence the complexity of it, is now spread through-out the application. Bugs related to mutating the array can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.</p>
+<h2 id="second-refactor--iife">Second Refactor - IIFE</h2>
+<p>Rather than expose an array, we should expose an object that encapsulates the state, <em>plus</em> mutation methods. And we will not expose the actual state, because local functions can still and may be tempted to mutate it directly. Instead we will return <em>a copy of the state</em>, so that the only way to update it is via the object methods.</p>
+<p>We can do this using an IIFE - an <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">Immediately Invoked Function Expression</a>, a JavaScript function that immediately executes can return an object that has a private scope inside a closure.</p>
+<p>In terms of ES6 classes, it is roughly analogous to creating an instance of a class that has private methods.</p>
+<p>Here it is with no accessors:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {}
+})()
+</code></pre><p>Note the enclosing <code>()</code> and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
+<h2 id="implementing-getmembers">Implementing <code>getMembers</code></h2>
+<p>Now we will provide a method to return <em>a copy</em> of the <code>_members</code> array:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    getMembers: () =&gt; [..._members]
+  }
+})()
+</code></pre><p>The <a href="https://javascript.info/rest-parameters-spread#spread-syntax">ES6 spread syntax</a> - <code>[...members]</code> - <em>spreads</em> the contents of the local members array into a new array, and returns that.</p>
+<p>Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have <em>a copy</em> of the global state, not a reference to the global state.</p>
+<p>Note that because the elements of the array are objects, they can still mutate members within the copy, and that <em>will</em> affect the global state, because they are references to objects.</p>
+<p>We can avoid that scenario like this:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    getMembers: () =&gt; _members.map(m =&gt; ({...m}))
+  }
+})()
+</code></pre><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> function returns a new array, so the consumer has no reference to the global state array.</p>
+<p>In the map <a href="https://en.wikipedia.org/wiki/Functional_predicate">predicate function</a> - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of the member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
+<p>Now local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
+<h2 id="implementing-setmembers">Implementing <code>setMembers</code></h2>
+<p>The first method we will implement is a hydration method that allows a local function to pass in an array of members.</p>
+<p>I'll take out <code>getMembers</code> for now to make it easier to read:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    setMembers: members =&gt; _members = members.map(m =&gt; ({...m}))
+  }
+})()
+</code></pre><p>Here we use the Spread syntax to copy the members to a new array, and this becomes the global members.</p>
+<p>This means that a local function cannot set the global state by passing in an array of members, and then mutate the global state by mutating one of the members that it passed in.</p>
+<p>If we did a naive assignment:</p>
+<pre><code>setMembers: members =&gt; _members = [...members]
+</code></pre><p>Then the local function calling this method would have a local reference to the member objects that are now in the state store. By spreading them, we make a copy - another object in memory that the local function has no reference to.</p>
+<h2 id="implementing-updatemember">Implementing <code>updateMember</code></h2>
+<p>It is likely that a business requirement for this application is that you can update a member.</p>
+<p>So, we will implement an <code>updateMember</code> function. We will use <code>Array.map</code> to return a new array. To implement the predicate function, let's describe what we want it to do in plain language:</p>
+<blockquote>
+<p>For each member in the state, if the member id equals the id of the update, return the updated member; otherwise return the member.</p>
+</blockquote>
+<p>So, our predicate function looks like this:</p>
+<pre><code>member =&gt; member.id === update.id ? update : member
+</code></pre><p>We are using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">ternary operator</a> here to implement <code>if-then-else</code> in a single expression.</p>
+<p>We can probably shorten the name we use for <code>member</code> to <code>m</code>, because the context is sufficient to provide information about what it is:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    updateMember: update =&gt; (_members = _members.map(m =&gt; m.id === update.id? update : m))
+  }
+})()
+</code></pre><p>We enclose the assignment operation <code>_members = </code> in parens <code>()</code> to indicate that we did not forget to return a value, and intended only the side-effect. We could have put it in <code>{}</code>, but that will cause code formatters to turn our single line into three.</p>
+<h2 id="designing-for-failure">Designing for failure</h2>
+<p>20% of programming is getting it to work. The other 80% is programming for <em>when it doesn't work</em>.</p>
+<p>What happens if a local function requests to update a member who is not in the state? At the moment, the local function receives no information from the call to <code>updateMember</code>, and if you look at the code, what will happen is&hellip; nothing.</p>
+<p>The predicate function will never match, and the new state will be a new copy of the existing state, unmodified.</p>
+<p>We could throw an exception. This gives us the opportunity to figure out where the bug in the application is that it is trying to update a member that doesn't exist. This is a good idea.</p>
+<p>We could also rename the <code>updateMember</code> operation to <code>upsertMember</code> and insert or update (or create a new API for it). We would lose some safety and introduce a surface area for bugs with this, because a mis-behaving update function could create new members, or a member creation call with a duplicate <code>id</code> would update the existing member instead. So we are not going to do that.</p>
+<p>Instead, let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a <code>getMember</code> function that we can use. So, let's implement that.</p>
+<h2 id="implementing-getmember">Implementing <code>getMember</code></h2>
+<p>It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we can do that in one place and one place only in the application: here.</p>
+<p>Then we only have to test it in one place, and we only ever have to get it to work in one place. That reduces the surface area for bugs in the application.</p>
+<p>We can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>Array.filter</code></a> to find elements in an array:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    getMember: id =&gt; _members.filter(m =&gt; m.id === id)
+  }
+})()
+</code></pre><p>The <code>getMember</code> array will now return an array with either zero (if no member with that id exists in the state) or one&hellip; hang on, what happens if there is more than one member in the array with the same <code>id</code>? In that case it will return more than one member.</p>
+<p>Probably, the business requirement is that member <code>id</code> is unique. So we will take that into account when we write the <code>addMember</code> function.</p>
+<p>So it will return an array with 0 or 1 members in it. Probably local functions want a member or <code>undefined</code>.</p>
+<p>Although, we can provide a better API if we return an object like this:</p>
+<pre><code>{
+  found: true
+  member: Member
+} |
+{
+  found: false
+  member: undefined
+}
+</code></pre><p>Then consumers of this API using TypeScript can use a <a href="https://medium.com/@sitapati/implementing-a-maybe-pattern-using-a-typescript-type-guard-81b55efc0af0">Type Guard</a> to get safety against accessing an <code>undefined</code> value, and our API forces them to use it.</p>
+<p>This reduces bugs. Otherwise, we are relying on every local function in the application remembering to test it for <code>undefined</code> before accessing it - another surface area for bugs.</p>
+<p>So:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  return {
+    getMember: id =&gt; {
+      const member = _members.filter(m =&gt; m.id === id)
+      return member.length === 1 ? 
+        { found: true, member: member[0]} :
+        { found: false, member: undefined }
+    }
+  }
+})()
+</code></pre><p>Nice API.</p>
+<h2 id="throwing-on-impossible-update">Throwing on impossible update</h2>
+<p>We can now consume <code>getMember</code> from our own API to guard against an update error.</p>
+<p>How can we do that? We need to lift our API to its own context inside the closure, like this:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  const Store = {
+  }
+  return Store
+})()
+</code></pre><p>Now we have a private to our own API, as <code>Store</code>. So we can use it to see if the member the local function wants to update, actually exists, and if not, throw.</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  const Store = {
+    updateMember: update =&gt; {
+      const member = Store.getMember(update.id)
+      if (!member.found) {
+        throw new Error(`No member with id ${update.id} in the store!`)
+      }
+      _members = _members.map(m =&gt; m.id === update.id? update : m)
+    }
+  }
+  return Store
+})()
+</code></pre><h2 id="implementing-putmember">Implementing <code>putMember</code></h2>
+<p>Probably, a business requirement of the application will be to put a new member in the store.</p>
+<p>We have to make a decision here about the behaviour of the store. What happens if a local function attempts to put a member with an <code>id</code> that is already in the store?</p>
+<p>That's probably a bug somewhere further upstream in the application logic, so we will throw an exception to allow debugging to start.</p>
+<p>So we can do this:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  const Store = {
+    putMember: member =&gt; {
+      if (Store.getMember(member.id).found) {
+        throw new Error(`${member.id} already exists!`)
+      }
+      _members = [..._members, {...member}]
+    },
+    updateMember: update =&gt; {
+      const u = needsMember(needsArg(u))
+      const member = Store.getMember(u.id)
+      if (!member.found) {
+        throw new Error(`No member with id ${u.id} in the store!`)
+      }
+      _members = _members.map(m =&gt; m.id === u.id? update : m)
+    }
+  }
+  return Store
+})()
+</code></pre><h2 id="dealing-with-a-undefined-id">Dealing with a undefined id</h2>
+<p>Another potential bug that we can detect here is a local function passing in either <code>undefined</code> or a member with an <code>id</code> that is undefined.</p>
+<p>We can write a helper function for this, and call it on all operations where it is a problem:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  const needsArg = arg =&gt; {
+    if (!member) {
+      throw new Error (`Undefined passed as argument to Store!`)
+    }
+    return arg
+  }
+  const needsId = member =&gt; {
+    if (!member.id) {
+      throw new Error (`Undefined id on member passed as argument to Store!`)
+    }
+    return member
+  }
+})()
+</code></pre><p>Here is how we use this:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+  const needsArg = arg =&gt; {
+    if (!member) {
+      throw new Error (`Undefined passed as argument to Store!`)
+    }
+    return arg
+  }
+  const needsId = member =&gt; {
+    if (!member.id) {
+      throw new Error (`Undefined id on member passed as argument to Store!`)
+    }
+    return member
+  }
+  const Store = {
+    putMember: member =&gt; {
+      const m = needsId(needsArg(member))
+      if (Store.getMember(m.id).found) {
+        throw new Error(`${m.id} already exists!`)
+      }
+      _members = [..._members, {...m}]
+    }
+  }
+  return Store
+})()
+</code></pre><h2 id="putting-it-all-together">Putting it all together</h2>
+<p>Here is the whole thing:</p>
+<pre><code>const GlobalMemberStore = (() =&gt; {
+  let _members = []
+
+  const needsArg = arg =&gt; {
+    if (!arg) {
+      throw new Error (`Undefined passed as argument to Store!`)
+    }
+    return arg
+  }
+  const needsId = member =&gt; {
+    if (!member.id) {
+      throw new Error (`Undefined id on member passed as argument to Store!`)
+    }
+    return member
+  }
+
+  const Store = {
+    setMembers: members =&gt; _members = members.map(m =&gt; ({...m})),
+    getMembers: () =&gt; [..._members],
+    getMember: id =&gt; _members.filter(m =&gt; m.id === needsArg(id))
+    putMember: member =&gt; {
+      const m = needsId(needsArg(member))
+      if (Store.getMember(m.id).found) {
+        throw new Error(`${m.id} already exists!`)
+      }
+      _members = [..._members, {...m}]
+    },
+    updateMember: update =&gt; {
+      const u = needsId(needsArg(update))
+      if (!Store.getMember(m.id).found) {
+        throw new Error(`${m.id} does not exists!`)
+      }
+      _members = _members.map(m =&gt; m.id === u.id? update : m)
+  }
+  return Store
+})()
+</code></pre><p>This may seem like way more complexity than:</p>
+<pre><code>var memArray = []
+</code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. You will end up doing all of this anyway, but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
+<p>And it will be really hard to refactor in the future.</p>
+<p>With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.</p>
+<p>#winning</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="button"><div class="previous"><div>Just say No to loops and variables.</div></div></a>
+  
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/avoid-global-state/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/avoid-global-state/">Avoiding global mutable state in browser JS</a></h1>
+          <time class="published" datetime="">February 24, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/just-say-no-to-loops-and-variables/">Just say No to loops and variables.</a></h1>
+          <time class="published" datetime="">February 23, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/docker-https/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/creating-github-action/" class="image featured">
+    <img src="/img/2020/02/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/creating-github-action/">How to write a GitHub Action</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/zero-scale-zeebe-github/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/zero-scale-zeebe-github/">Zero-scale Zeebe with Camunda Cloud and GitHub Actions</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">10</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">10</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">4</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>

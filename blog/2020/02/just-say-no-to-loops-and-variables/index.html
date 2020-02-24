@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A hot take on programming without them.">
 <meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2584">
+<meta itemprop="wordCount" content="2585">
 
 
 
@@ -320,12 +320,13 @@
 
 
   <div class="content">
-    <p>This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I'm pretty sure a fair whack of them were homework assignments).</p>
+    <p>This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (<em>I'm pretty sure a fair whack of them were homework assignments</em>).</p>
 <p>One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (<em>Discord bots are hot right now with the kids</em>).</p>
 <p>There are certain things that people struggle with when learning to program, and when learning to program in JS.</p>
-<p><strong>Asynchronicity</strong> is one. Callbacks not so much - mostly now people are struggling with Promises (with are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: <em>they look the same</em>. At least with callbacks and Promises you have some clue in the indentation.</p>
+<p><strong>Asynchronicity</strong> is one. Callbacks not so much - mostly now people are struggling with Promises (which are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: <em>they look the same</em>. At least with callbacks and Promises you have some clue in the indentation.</p>
 <p><strong>Naming</strong> is another one. The power of correctly naming entities in a program cannot be overestimated - I mean, it's one of the two hardest problems in computer science: caching, naming things, and whether or not to move to San Francisco.</p>
-<p>The impact of <em>not</em> correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that &ldquo;<em>80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE.</em>&rdquo; <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>. (I solved his problem for him.) He had started with an entity named <code>x</code> and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.</p>
+<p>The impact of <em>not</em> correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that &ldquo;<em>80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE.</em>&rdquo; <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>. (I solved his problem for him.)</p>
+<p>He had started with an entity named <code>x</code> and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.</p>
 <p>As we read in <a href="https://china.usc.edu/confucius-analects-13">the Analects of Confucius</a> (&quot;<em>Confucius say</em>&quot;):</p>
 <blockquote>
 <p>Tsze-lu said, &ldquo;The ruler of Wei has been waiting for you, in order with you to administer the government. What will you consider the first thing to be done?&rdquo;</p>
@@ -383,7 +384,7 @@
 <p>Deliberately reducing complexity by choosing to eschew the mutant is a programming discipline, and one that I believe pays off.</p>
 <p>Douglas Crockford wrote the famous book <a href="https://www.amazon.com.au/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742">JavaScript: The Good Parts</a>, where he shared his discovery that if he deliberately avoided certain parts of the language - artificially constraining himself to a subset of the language - his productivity improved.</p>
 <p>I believe that variables belong in the category of &ldquo;things to avoid&rdquo;.</p>
-<p>I took on programming without variables, and there has only been case where the word <code>let</code> has left my mouth in the past two years:</p>
+<p>I took on programming without variables, and there has only been one case where the word <code>let</code> has left my mouth in the past two years:</p>
 <pre><code>let result
 try {
     result = await asyncOpThatMayThrow()
@@ -396,13 +397,15 @@ try {
 } catch (e) {
     return handleThis(e)
 }
-</code></pre><p>This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: striving for a single level of indentation. Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.</p>
+</code></pre><p>This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: <em>striving for a single level of indentation</em>.</p>
+<p>Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.</p>
 <p>I recently resolved this, and that <code>let</code> is no more for me - but that is another blog post.</p>
-<p>I see novice programmers declaring variables as <code>let</code> and <code>var</code>, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;. When you don't change it, why communicate that intent? You have incorrectly named a thing.</p>
-<p>And when you do mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.</p>
-<p>And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a case of mistaken identity mutation bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because <em>variables</em>.</p>
+<p>I see novice programmers declaring variables as <code>let</code> and <code>var</code>, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
+<p>When you don't change it, why communicate that intent? You have incorrectly named a thing.</p>
+<p>And when you <em>do</em> mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.</p>
+<p>And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a &ldquo;<em>case of mistaken identity mutation</em>&rdquo; bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because <em>variables</em>.</p>
 <p>Just say No to variables. Try it for one year (<em>I know that seems like a long time if it represents a significant percentage of your programming career to date</em>).</p>
-<p>If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: variables.</p>
+<p>If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: <em>variables</em>.</p>
 <h2 id="custom-state-machines-loops">Custom State Machines: Loops</h2>
 <p>Loops are problematic in several ways.</p>
 <p>Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: &ldquo;<em>I have to transform every element in this array</em>&quot;. So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.</p>
@@ -480,6 +483,8 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
     <a href="/blog/2020/02/docker-https/" class="button"><div class="previous"><div>Easily run multiple apps with HTTPS using Docker and LetsEncrypt</div></div></a>
   
   
+    <a href="/blog/2020/02/avoid-global-state/" class="button"><div class="next"><div>Avoiding global mutable state in browser JS</div></div></a>
+  
 </div>
 
 
@@ -490,6 +495,21 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
       <header>
         <h1>Recent posts</h1>
       </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/avoid-global-state/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/avoid-global-state/">Avoiding global mutable state in browser JS</a></h1>
+          <time class="published" datetime="">February 24, 2020</time>
+        </header>
+      </article>
       
       <article class="mini-post">
         <section>
@@ -551,21 +571,6 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/01/travel-tips/" class="image featured">
-    <img src="/img/2020/01/zeebe.png" alt="">
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/01/travel-tips/">20 Tips on travelling like a BOSS</a></h1>
-          <time class="published" datetime="">January 30, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -585,12 +590,12 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">9</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">10</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">9</span></a>
+              <a href="/categories/programming/">programming<span class="count">10</span></a>
             
           
           <li>

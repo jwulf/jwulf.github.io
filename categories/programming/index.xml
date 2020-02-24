@@ -6,10 +6,21 @@
     <description>Recent content in programming on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Avoiding global mutable state in browser JS</title>
+      <link>https://joshwulf.com/blog/2020/02/avoid-global-state/</link>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/avoid-global-state/</guid>
+      <description>Global scope is a feature of browser JavaScript that is a source of bugs.
+Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.
+In this refactoring we are not going to be able to completely eliminate global state - mostly because we don&#39;t have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</description>
+    </item>
     
     <item>
       <title>Just say No to loops and variables.</title>
