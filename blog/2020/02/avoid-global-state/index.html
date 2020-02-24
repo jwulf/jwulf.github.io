@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3151">
+<meta itemprop="wordCount" content="3290">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>15 minutes read</p>
+      <p>16 minutes read</p>
     
   </div>
 </header>
@@ -346,7 +346,7 @@ function member(id, password){
 </ul>
 <p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime.</p>
 <p>In fact, using <code>var</code> is a declaration to the machine and to other programmers that &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
-<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a <code>var</code> doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
+<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a <code>var</code> doesn't make the <em>contents</em> of the array mutable - you have to do real deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> itself can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
 <p>Somewhere deep in the code, a function could do:</p>
 <pre><code>memArray = []
 </code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
@@ -376,7 +376,8 @@ function member(id, password){
   let _members = []
   return {}
 })()
-</code></pre><p>Note the enclosing <code>()</code> and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
+</code></pre><p>Note the enclosing <code>()</code> and the immediate invocation: <code>(() =&gt; {})()</code>.</p>
+<p>In this case, we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
 <p><em>But, but&hellip; aren't you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
 <p>Look, we <em>can</em> remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
 <p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application.</p>
@@ -390,7 +391,7 @@ function member(id, password){
 })()
 </code></pre><p>The <a href="https://javascript.info/rest-parameters-spread#spread-syntax">ES6 spread syntax</a> - <code>[...members]</code> - <em>spreads</em> the contents of the local members array into a new array, and returns that.</p>
 <p>Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have <em>a copy</em> of the global state, not a reference to the global state.</p>
-<p>Note, however, that because the elements of the array are <em>objects</em>, local functions can still mutate members within the copy, and that <em>will</em> affect the global state - because they are references to objects.</p>
+<p>Note, however, that because the elements of the array are <em>objects</em>, local functions can still mutate members within the copy, and that <em>will</em> affect the global state - because the array elements are references to objects. The internal state array and the copy we just returned are <em>different</em> arrays, but they contain references to the <em>same</em> <code>member</code> objects</p>
 <p>We can avoid that scenario like this:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
@@ -398,9 +399,12 @@ function member(id, password){
     getMembers: () =&gt; _members.map(m =&gt; ({...m}))
   }
 })()
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array.</p>
-<p>In the map <a href="https://en.wikipedia.org/wiki/Functional_predicate">predicate function</a> - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of each member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
-<p>Now, local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the <a href="https://en.wikipedia.org/wiki/Functional_predicate"><em>predicate function</em></a> to each value in the original array, and putting the return value in the new array.</p>
+<p>It is &ldquo;make a new array by applying this transform to each element in this other array&rdquo;.</p>
+<p>In the predicate function - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of each member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
+<p>When you return an object in a one-liner arrow function, you need to put <code>()</code> around it so the interpreter doesn't interpret the contents of <code>{}</code> as function code, but knows that it is an object, so: <code>m =&gt; ({...m})</code>.</p>
+<p>Now we have a new array, and new objects in the array.</p>
+<p>Local functions now have access to the <em>value</em> of the global members state, but the actual global state is immutable by them, because they have no reference to it. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
 <h2 id="implementing-setmembers">Implementing <code>setMembers</code></h2>
 <p>The first method we will implement is a hydration method that allows a local function to pass in an array of members.</p>
 <p>I'll take out <code>getMembers</code> for now to make it easier to read:</p>
@@ -622,7 +626,7 @@ function member(id, password){
 })()
 </code></pre><p>This may seem like way more complexity than:</p>
 <pre><code>var memArray = []
-</code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. <em>You will end up doing all of this anyway</em>, but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
+</code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. <em>You will end up doing all of this anyway</em> - but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
 <p>And it will be really hard to refactor in the future.</p>
 <p>With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.</p>
 <p>#winning</p>
