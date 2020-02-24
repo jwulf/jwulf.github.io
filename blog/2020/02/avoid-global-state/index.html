@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3290">
+<meta itemprop="wordCount" content="3291">
 
 
 
@@ -607,7 +607,7 @@ function member(id, password){
   const Store = {
     setMembers: members =&gt; (_members = members.map(m =&gt; ({...m}))),
     getMembers: () =&gt; _members.map(m =&gt; ({...m})),
-    getMember: id =&gt; _members.filter(m =&gt; m.id === needsArg(id))
+    getMember: id =&gt; _members.filter(m =&gt; m.id === needsArg(id)),
     putMember: member =&gt; {
       const m = needsId(needsArg(member))
       if (Store.getMember(m.id).found) {
@@ -621,6 +621,7 @@ function member(id, password){
         throw new Error(`${m.id} does not exists!`)
       }
       _members = _members.map(m =&gt; m.id === u.id? update : m)
+    }
   }
   return Object.freeze(Store)
 })()
