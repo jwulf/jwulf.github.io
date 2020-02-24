@@ -17,9 +17,7 @@
       <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/avoid-global-state/</guid>
-      <description>Global scope is a feature of browser JavaScript that is a source of bugs.
-Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.
-In this refactoring we are not going to be able to completely eliminate global state - mostly because we don&#39;t have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</description>
+      <description>This is part of a series of posts where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</description>
     </item>
     
     <item>
@@ -28,7 +26,7 @@ In this refactoring we are not going to be able to completely eliminate global s
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/</guid>
-      <description>This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I&#39;m pretty sure a fair whack of them were homework assignments).
+      <description>Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I&#39;m pretty sure a fair whack of them were homework assignments).
 One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (Discord bots are hot right now with the kids).
 There are certain things that people struggle with when learning to program, and when learning to program in JS.</description>
     </item>

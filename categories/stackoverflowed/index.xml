@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stackoverflowed on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/stackoverflowed/</link>
+    <description>Recent content in stackoverflowed on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/stackoverflowed/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Avoiding global mutable state in browser JS</title>
+      <link>https://joshwulf.com/blog/2020/02/avoid-global-state/</link>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/avoid-global-state/</guid>
+      <description>This is part of a series of posts where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</description>
+    </item>
+    
+  </channel>
+</rss>

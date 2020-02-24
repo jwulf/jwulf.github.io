@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2608">
+<meta itemprop="wordCount" content="2937">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>13 minutes read</p>
+      <p>14 minutes read</p>
     
   </div>
 </header>
@@ -320,12 +320,13 @@
 
 
   <div class="content">
-    <p>Global scope is a feature of browser JavaScript that is a source of bugs.</p>
+    <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</em></p>
+<p>Global scope is a feature of browser JavaScript that is a source of bugs.</p>
 <p>Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.</p>
 <p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
 <p>What we will do is reduce the bug surface area significantly.</p>
 <h2 id="the-question">The Question</h2>
-<p>Here is <a href="https://stackoverflow.com/questions/60359864/javascript-send-out-an-alert-to-prompt-and-edit-array/60369452#60369452">the question from StackOverflow</a>:</p>
+<p>Here is the question from StackOverflow:</p>
 <pre><code>//global variable
 var memArray  =[];
 
@@ -358,15 +359,15 @@ function member(id, password){
 <p>There is no way someone is accidentally reusing that in a local scope. At the very least, <code>GlobalMembersArray</code> is an unambiguous name that communicates what it is.</p>
 <h2 id="first-refactor">First Refactor</h2>
 <pre><code>const GlobalMembersArray = []
-</code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is convention that takes away cognitive load when reading the code. If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at.</p>
+</code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is naming by convention that takes away cognitive load when reading the code. If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at.</p>
 <h2 id="mutation">Mutation</h2>
-<p>The global is now not reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> mess with the contents.</p>
+<p>The global is now <em>not</em> reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> mutate the contents.</p>
 <p>Presumably, we are going to want to add to, remove from, and update elements in this array.</p>
 <p>By exposing only the array as a global variable, we have devolved responsibility for mutating it to local functions in the application.</p>
-<p>That concern, and hence the complexity of it, is now spread through-out the application. Bugs related to mutating the array can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.</p>
+<p>That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.</p>
 <h2 id="second-refactor--iife">Second Refactor - IIFE</h2>
 <p>Rather than expose an array, we should expose an object that encapsulates the state, <em>plus</em> mutation methods. And we will not expose the actual state, because local functions can still and may be tempted to mutate it directly. Instead we will return <em>a copy of the state</em>, so that the only way to update it is via the object methods.</p>
-<p>We can do this using an IIFE - an <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">Immediately Invoked Function Expression</a>, a JavaScript function that immediately executes can return an object that has a private scope inside a closure.</p>
+<p>We can do this using an IIFE - an <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">Immediately Invoked Function Expression</a>, a JavaScript function that immediately executes and can return an object that has a private scope inside a closure.</p>
 <p>In terms of ES6 classes, it is roughly analogous to creating an instance of a class that has private methods.</p>
 <p>Here it is with no accessors:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
@@ -374,6 +375,9 @@ function member(id, password){
   return {}
 })()
 </code></pre><p>Note the enclosing <code>()</code> and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
+<p><em>But, but&hellip; aren't you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
+<p>Look, we <em>can</em> remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
+<p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application.</p>
 <h2 id="implementing-getmembers">Implementing <code>getMembers</code></h2>
 <p>Now we will provide a method to return <em>a copy</em> of the <code>_members</code> array:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
@@ -384,7 +388,7 @@ function member(id, password){
 })()
 </code></pre><p>The <a href="https://javascript.info/rest-parameters-spread#spread-syntax">ES6 spread syntax</a> - <code>[...members]</code> - <em>spreads</em> the contents of the local members array into a new array, and returns that.</p>
 <p>Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have <em>a copy</em> of the global state, not a reference to the global state.</p>
-<p>Note that because the elements of the array are objects, they can still mutate members within the copy, and that <em>will</em> affect the global state, because they are references to objects.</p>
+<p>Note, however, that because the elements of the array are <em>objects</em>, local functions can still mutate members within the copy, and that <em>will</em> affect the global state - because they are references to objects.</p>
 <p>We can avoid that scenario like this:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
@@ -392,9 +396,9 @@ function member(id, password){
     getMembers: () =&gt; _members.map(m =&gt; ({...m}))
   }
 })()
-</code></pre><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> function returns a new array, so the consumer has no reference to the global state array.</p>
-<p>In the map <a href="https://en.wikipedia.org/wiki/Functional_predicate">predicate function</a> - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of the member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
-<p>Now local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
+</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array.</p>
+<p>In the map <a href="https://en.wikipedia.org/wiki/Functional_predicate">predicate function</a> - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of each member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
+<p>Now, local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
 <h2 id="implementing-setmembers">Implementing <code>setMembers</code></h2>
 <p>The first method we will implement is a hydration method that allows a local function to pass in an array of members.</p>
 <p>I'll take out <code>getMembers</code> for now to make it easier to read:</p>
@@ -411,9 +415,16 @@ function member(id, password){
 </code></pre><p>Then the local function calling this method would have a local reference to the member objects that are now in the state store. By spreading them, we make a copy - another object in memory that the local function has no reference to.</p>
 <h2 id="implementing-updatemember">Implementing <code>updateMember</code></h2>
 <p>It is likely that a business requirement for this application is that you can update a member.</p>
-<p>So, we will implement an <code>updateMember</code> function. We will use <code>Array.map</code> to return a new array. To implement the predicate function, let's describe what we want it to do in plain language:</p>
+<p>So, we will implement an <code>updateMember</code> function. We will use <code>Array.map</code> to return a new array. A naive approach to this might be &ldquo;<em>let's iterate over the array using <code>forEach</code> and mutate the element we are updating</em>&quot;. See the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Loops and Variables</a>&rdquo; for an in-depth explanation of why you <em>don't</em> want to do that.</p>
+<p>To implement the predicate function, let's describe what we want it to do in plain language:</p>
 <blockquote>
-<p>For each member in the state, if the member id equals the id of the update, return the updated member; otherwise return the member.</p>
+<p>For each member in the state,</p>
+</blockquote>
+<blockquote>
+<p>if the member id equals the id of the update, return the update;</p>
+</blockquote>
+<blockquote>
+<p>otherwise return the member.</p>
 </blockquote>
 <p>So, our predicate function looks like this:</p>
 <pre><code>member =&gt; member.id === update.id ? update : member
@@ -431,12 +442,25 @@ function member(id, password){
 <p>What happens if a local function requests to update a member who is not in the state? At the moment, the local function receives no information from the call to <code>updateMember</code>, and if you look at the code, what will happen is&hellip; nothing.</p>
 <p>The predicate function will never match, and the new state will be a new copy of the existing state, unmodified.</p>
 <p>We could throw an exception. This gives us the opportunity to figure out where the bug in the application is that it is trying to update a member that doesn't exist. This is a good idea.</p>
-<p>We could also rename the <code>updateMember</code> operation to <code>upsertMember</code> and insert or update (or create a new API for it). We would lose some safety and introduce a surface area for bugs with this, because a mis-behaving update function could create new members, or a member creation call with a duplicate <code>id</code> would update the existing member instead. So we are not going to do that.</p>
-<p>Instead, let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a <code>getMember</code> function that we can use. So, let's implement that.</p>
+<p>Let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a <code>getMember</code> function that we can use. So, let's implement that.</p>
 <h2 id="implementing-getmember">Implementing <code>getMember</code></h2>
-<p>It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we can do that in one place and one place only in the application: here.</p>
+<p>It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we <em>can</em> do that in &ldquo;one place, and one place only&rdquo; in the application: <em>here</em>.</p>
 <p>Then we only have to test it in one place, and we only ever have to get it to work in one place. That reduces the surface area for bugs in the application.</p>
-<p>We can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>Array.filter</code></a> to find elements in an array:</p>
+<p>We can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>Array.filter</code></a> to find elements in an array. <code>Array.filter</code> returns a new array containing only the elements from the original array for whom the predicate function returned true.</p>
+<p>The predicate function is straight forward:</p>
+<blockquote>
+<p>Return true if the <code>member.id</code> equals the requested <code>id</code>;</p>
+</blockquote>
+<blockquote>
+<p>otherwise, return false</p>
+</blockquote>
+<p>Reducing that down, we get:</p>
+<blockquote>
+<p>Return <code>member.id</code> equals requested <code>id</code></p>
+</blockquote>
+<p>or:</p>
+<pre><code>m =&gt; m.id === id
+</code></pre><p>So,</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
   return {
@@ -479,7 +503,7 @@ function member(id, password){
   }
   return Store
 })()
-</code></pre><p>Now we have a private to our own API, as <code>Store</code>. So we can use it to see if the member the local function wants to update, actually exists, and if not, throw.</p>
+</code></pre><p>Now we have a private reference to our own API, as <code>Store</code>. So we can use it to see if the member that the local function wants to update, actually exists - and if not, throw.</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
   const Store = {
@@ -520,7 +544,7 @@ function member(id, password){
 })()
 </code></pre><h2 id="dealing-with-a-undefined-id">Dealing with a undefined id</h2>
 <p>Another potential bug that we can detect here is a local function passing in either <code>undefined</code> or a member with an <code>id</code> that is undefined.</p>
-<p>We can write a helper function for this, and call it on all operations where it is a problem:</p>
+<p>We can write helper functions for this, and call them on all operations where it is a requirement:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
   const needsArg = arg =&gt; {
@@ -539,18 +563,6 @@ function member(id, password){
 </code></pre><p>Here is how we use this:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
-  const needsArg = arg =&gt; {
-    if (!member) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member =&gt; {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
   const Store = {
     putMember: member =&gt; {
       const m = needsId(needsArg(member))
@@ -562,7 +574,13 @@ function member(id, password){
   }
   return Store
 })()
-</code></pre><h2 id="putting-it-all-together">Putting it all together</h2>
+</code></pre><h2 id="freeze">Freeze!</h2>
+<p>For our final touch, we are going to freeze the API object using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"><code>Object.freeze</code></a>:</p>
+<pre><code>return Object.freeze(Store)
+</code></pre><p>This prevents anyone from overwriting or modifying the API methods themselves.</p>
+<p>If you wanted, you could (deep) freeze all the return values from the API methods. That would deny local function consumers of the objects the ability to mutate the return values. They would need to use spread on them. We're not going to do that right now.</p>
+<p>Freezing objects has an impact on performance. Freezing the API is not going to make a huge difference, so the safety is worth it. The objects returned from the API are copies, so freezing them is overkill, IMHO.</p>
+<h2 id="putting-it-all-together">Putting it all together</h2>
 <p>Here is the whole thing:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
   let _members = []
@@ -581,8 +599,8 @@ function member(id, password){
   }
 
   const Store = {
-    setMembers: members =&gt; _members = members.map(m =&gt; ({...m})),
-    getMembers: () =&gt; [..._members],
+    setMembers: members =&gt; (_members = members.map(m =&gt; ({...m}))),
+    getMembers: () =&gt; _members.map(m =&gt; ({...m})),
     getMember: id =&gt; _members.filter(m =&gt; m.id === needsArg(id))
     putMember: member =&gt; {
       const m = needsId(needsArg(member))
@@ -598,14 +616,24 @@ function member(id, password){
       }
       _members = _members.map(m =&gt; m.id === u.id? update : m)
   }
-  return Store
+  return Object.freeze(Store)
 })()
 </code></pre><p>This may seem like way more complexity than:</p>
 <pre><code>var memArray = []
-</code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. You will end up doing all of this anyway, but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
+</code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. <em>You will end up doing all of this anyway</em>, but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
 <p>And it will be really hard to refactor in the future.</p>
 <p>With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.</p>
 <p>#winning</p>
+<h2 id="further-resources">Further Resources</h2>
+<p>This approach to state management has become popular in JS in recent years, and is the basis of the approach used by:</p>
+<ul>
+<li><a href="https://reactjs.org/docs/state-and-lifecycle.html">React <code>setState</code></a></li>
+<li><a href="https://redux.js.org/introduction/getting-started/">Redux</a></li>
+<li><a href="https://www.freecodecamp.org/news/an-introduction-to-the-flux-architectural-pattern-674ea74775c9/">Flux</a></li>
+<li><a href="https://www.npmjs.com/package/immutable">Immutable.JS</a></li>
+<li><a href="https://github.com/ohager/nanoflux">Nanoflux</a> (<em>My personal favorite</em>)</li>
+</ul>
+<p>If you grasped the concepts and rational for the refactorings that I made in this example, you will be well-placed to understand these mature, more sophisticated (and generalised) implementations.</p>
 
   </div>
   <footer>
@@ -621,6 +649,9 @@ function member(id, password){
           
             
             <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/stackoverflowed">stackoverflowed</a></li>
           
         </ul>
       </li>
@@ -865,6 +896,11 @@ function member(id, password){
           <li>
             
               <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/stackoverflowed/">stackoverflowed<span class="count">1</span></a>
             
           
           </li>
