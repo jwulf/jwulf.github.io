@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3291">
+<meta itemprop="wordCount" content="3493">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>16 minutes read</p>
+      <p>17 minutes read</p>
     
   </div>
 </header>
@@ -321,6 +321,7 @@
 
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</em></p>
+<p><em>The accompanying GitHub repo for this article can be found <a href="https://github.com/jwulf/immutable-global-store">here</a>.</em></p>
 <p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn't just impact the whole application - it creates a <em>entire new surface area</em> for bugs <em>across the entire code base</em>, that has to be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in <em>every function</em> increases as soon as you have global state.</p>
 <p>Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.</p>
 <p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
@@ -494,13 +495,15 @@ function member(id, password){
     getMember: id =&gt; {
       const member = _members.filter(m =&gt; m.id === id)
       return member.length === 1 ? 
-        { found: true, member: member[0]} :
+        { found: true, member: {...member[0]}} :
         { found: false, member: undefined }
     }
   }
 })()
-</code></pre><p>Nice API.</p>
+</code></pre><p>Remember to Spread the member to return a copy (I picked this up when the test case failed <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js#L109">here</a>).</p>
+<p>Nice API.</p>
 <h2 id="throwing-on-impossible-update">Throwing on impossible update</h2>
+<p>Another significant advantage of this approach is that we put all our business validation rules about the data in a single place: in the store. They are not spread throughout the application, and the responsibility of everyone and no-one. They can be put in one place, tested automatically, updated in one place, and if a local function violates them, we will find out immediately when it tries to store the data, through an exception.</p>
 <p>We can now consume <code>getMember</code> from our own API to guard against an update error.</p>
 <p>How can we do that? We need to lift our API to its own context inside the closure, like this:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
@@ -607,7 +610,12 @@ function member(id, password){
   const Store = {
     setMembers: members =&gt; (_members = members.map(m =&gt; ({...m}))),
     getMembers: () =&gt; _members.map(m =&gt; ({...m})),
-    getMember: id =&gt; _members.filter(m =&gt; m.id === needsArg(id)),
+    getMember: id =&gt; {
+      const member = _members.filter(m =&gt; m.id === id)
+      return member.length === 1 ? 
+        { found: true, member: {...member[0]}} :
+        { found: false, member: undefined }
+    },
     putMember: member =&gt; {
       const m = needsId(needsArg(member))
       if (Store.getMember(m.id).found) {
@@ -617,8 +625,8 @@ function member(id, password){
     },
     updateMember: update =&gt; {
       const u = needsId(needsArg(update))
-      if (!Store.getMember(m.id).found) {
-        throw new Error(`${m.id} does not exists!`)
+      if (!Store.getMember(u.id).found) {
+        throw new Error(`${u.id} does not exists!`)
       }
       _members = _members.map(m =&gt; m.id === u.id? update : m)
     }
@@ -629,7 +637,8 @@ function member(id, password){
 <pre><code>var memArray = []
 </code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. <em>You will end up doing all of this anyway</em> - but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
 <p>And it will be really hard to refactor in the future.</p>
-<p>With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.</p>
+<p>With this approach, the total technical complexity of this concern is now encapsulated in one place in your application. It is testable through automated tests - <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js">as demonstrated in the accompanying repo</a>. There are 125 lines of test code for 40 lines of code. So 165 lines of code to replace <code>var memArray = []</code>.</p>
+<p>However, business validation of the data now has a place to live, and the entire expected usage of this array is now implemented such that local functions cannot introduce bugs related to it - only their local use of it.</p>
 <p>#winning</p>
 <h2 id="further-resources">Further Resources</h2>
 <p>This approach to state management has become popular in JS in recent years, and is the basis of the approach used by:</p>
