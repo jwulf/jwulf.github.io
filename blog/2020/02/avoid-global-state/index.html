@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3032">
+<meta itemprop="wordCount" content="3074">
 
 
 
@@ -321,8 +321,8 @@
 
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</em></p>
-<p>Global scope is a feature of browser JavaScript that is a source of bugs.</p>
-<p>Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.</p>
+<p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn't impact the whole application - it creates a entire surface area for bugs that must be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in every function increases as soon as you have global state.</p>
+<p>Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.</p>
 <p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
 <p>What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
 <h2 id="the-question">The Question</h2>
