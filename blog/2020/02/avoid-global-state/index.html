@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3074">
+<meta itemprop="wordCount" content="3151">
 
 
 
@@ -321,7 +321,7 @@
 
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</em></p>
-<p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn't impact the whole application - it creates a entire surface area for bugs that must be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in every function increases as soon as you have global state.</p>
+<p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn't just impact the whole application - it creates a <em>entire new surface area</em> for bugs <em>across the entire code base</em>, that has to be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in <em>every function</em> increases as soon as you have global state.</p>
 <p>Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.</p>
 <p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
 <p>What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
@@ -346,10 +346,11 @@ function member(id, password){
 </ul>
 <p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime.</p>
 <p>In fact, using <code>var</code> is a declaration to the machine and to other programmers that &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
-<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a var doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
+<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a <code>var</code> doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
 <p>Somewhere deep in the code, a function could do:</p>
 <pre><code>memArray = []
 </code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
+<p>And this bug in one function somewhere, that maybe doesn't even use this global state (<em>it probably doesn't, or the programmer wouldn't have reused the variable name</em>), just broke <em>everything</em> that does use it. And when you go to hunt it down, it is not in any of your functions that <em>do</em> use the global state.</p>
 <p>The chances of this happening are increased because of the second issue:</p>
 <ul>
 <li>Naming</li>
@@ -359,11 +360,12 @@ function member(id, password){
 <p>There is no way someone is accidentally reusing that in a local scope. At the very least, <code>GlobalMembersArray</code> is an unambiguous name that communicates what it is.</p>
 <h2 id="first-refactor">First Refactor</h2>
 <pre><code>const GlobalMembersArray = []
-</code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is naming by convention that takes away cognitive load when reading the code. If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at.</p>
+</code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is &ldquo;naming by convention&rdquo; that takes away cognitive load when reading the code.</p>
+<p>If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at, and I'm not using that name for a local variable.</p>
 <h2 id="mutation">Mutation</h2>
-<p>The global is now <em>not</em> reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> mutate the contents.</p>
-<p>Presumably, we are going to want to add to, remove from, and update elements in this array.</p>
-<p>By exposing only the array as a global variable, we have devolved responsibility for mutating it to local functions in the application.</p>
+<p>The global is now <em>not</em> reassignable, <em>and</em> unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> still mutate the contents.</p>
+<p>You want that, right? Presumably, we are going to want to add to, remove from, and update elements in this array.</p>
+<p><em>No</em>. By exposing just the array globally, we have <em>devolved responsibility</em> for mutating it to local functions in the application.</p>
 <p>That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.</p>
 <h2 id="second-refactor--iife">Second Refactor - IIFE</h2>
 <p>Rather than expose an array, we should expose an object that encapsulates the state, <em>plus</em> mutation methods. And we will not expose the actual state, because local functions can still and may be tempted to mutate it directly. Instead we will return <em>a copy of the state</em>, so that the only way to update it is via the object methods.</p>
@@ -749,15 +751,15 @@ function member(id, password){
       <article class="mini-post">
         <section>
           
-  <a href="/blog/2020/02/zero-scale-zeebe-github/" class="image featured">
-    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  <a href="/blog/2020/01/travel-tips/" class="image featured">
+    <img src="/img/2020/01/zeebe.png" alt="">
   </a>
 
 
         </section>
         <header>
-          <h1><a href="/blog/2020/02/zero-scale-zeebe-github/">Zero-scale Zeebe with Camunda Cloud and GitHub Actions</a></h1>
-          <time class="published" datetime="">February 17, 2020</time>
+          <h1><a href="/blog/2020/01/travel-tips/">20 Tips on travelling like a BOSS</a></h1>
+          <time class="published" datetime="">January 30, 2020</time>
         </header>
       </article>
       
@@ -790,17 +792,17 @@ function member(id, password){
           
           <li>
             
-              <a href="/categories/zeebe/">zeebe<span class="count">4</span></a>
-            
-          
-          <li>
-            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
-              <a href="/categories/github/">github<span class="count">3</span></a>
+              <a href="/categories/zeebe/">zeebe<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">2</span></a>
             
           
           <li>
