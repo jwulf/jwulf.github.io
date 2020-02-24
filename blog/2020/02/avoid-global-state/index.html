@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3493">
+<meta itemprop="wordCount" content="3500">
 
 
 
@@ -381,7 +381,7 @@ function member(id, password){
 <p>In this case, we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
 <p><em>But, but&hellip; aren't you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
 <p>Look, we <em>can</em> remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
-<p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application.</p>
+<p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application. And the resulting code is <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js">fully unit-testable</a>.</p>
 <h2 id="implementing-getmembers">Implementing <code>getMembers</code></h2>
 <p>Now we will provide a method to return <em>a copy</em> of the <code>_members</code> array:</p>
 <pre><code>const GlobalMemberStore = (() =&gt; {
