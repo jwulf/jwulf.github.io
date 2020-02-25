@@ -12,7 +12,7 @@
 <meta itemprop="description" content="A StackOverflow refactoring.">
 <meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="3500">
+<meta itemprop="wordCount" content="2960">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>17 minutes read</p>
+      <p>14 minutes read</p>
     
   </div>
 </header>
@@ -328,17 +328,9 @@
 <p>What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
 <h2 id="the-question">The Question</h2>
 <p>Here is the code from StackOverflow:</p>
-<pre><code>//global variable
-var memArray  =[];
+<script type="application/javascript" src="https://gist.github.com/jwulf/c3b59f4915d4f644ea1a2c4ea0b26bed.js"></script>
 
-//object    
-function member(id, password){
-  this.id          = id; 
-  this.pwd         = password
-  }
-  var memObj1=new member(&quot;m001&quot;,&quot;123&quot;);
-  memArray.push(memObj1);
-</code></pre><h2 id="discussion">Discussion</h2>
+<h2 id="discussion">Discussion</h2>
 <p>There is a lot going on this example that can be refactored, and we'll look at a number of things in other articles. But for now, let's look at global state.</p>
 <h3 id="memarray">memArray</h3>
 <p>The global <code>memArray</code> has two immediate issues - apart from being global.</p>
@@ -373,34 +365,24 @@ function member(id, password){
 <p>We can do this using an IIFE - an <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">Immediately Invoked Function Expression</a>, a JavaScript function that immediately executes and can return an object that has a private scope inside a closure.</p>
 <p>In terms of ES6 classes, it is roughly analogous to creating an instance of a class that has private methods.</p>
 <p>Here it is with no accessors:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {}
-})()
-</code></pre><p>Note the enclosing <code>()</code> and the immediate invocation: <code>(() =&gt; {})()</code>.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/e018ef5088172b7f150703dcb411fd47.js"></script>
+
+<p>Note the enclosing <code>()</code> and the immediate invocation: <code>(() =&gt; {})()</code>.</p>
 <p>In this case, we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
 <p><em>But, but&hellip; aren't you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
 <p>Look, we <em>can</em> remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
 <p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application. And the resulting code is <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js">fully unit-testable</a>.</p>
 <h2 id="implementing-getmembers">Implementing <code>getMembers</code></h2>
 <p>Now we will provide a method to return <em>a copy</em> of the <code>_members</code> array:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    getMembers: () =&gt; [..._members]
-  }
-})()
-</code></pre><p>The <a href="https://javascript.info/rest-parameters-spread#spread-syntax">ES6 spread syntax</a> - <code>[...members]</code> - <em>spreads</em> the contents of the local members array into a new array, and returns that.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/fd13d5d43c2edccc9766c0384c6476a6.js"></script>
+
+<p>The <a href="https://javascript.info/rest-parameters-spread#spread-syntax">ES6 spread syntax</a> - <code>[...members]</code> - <em>spreads</em> the contents of the local members array into a new array, and returns that.</p>
 <p>Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have <em>a copy</em> of the global state, not a reference to the global state.</p>
 <p>Note, however, that because the elements of the array are <em>objects</em>, local functions can still mutate members within the copy, and that <em>will</em> affect the global state - because the array elements are references to objects. The internal state array and the copy we just returned are <em>different</em> arrays, but they contain references to the <em>same</em> <code>member</code> objects</p>
 <p>We can avoid that scenario like this:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    getMembers: () =&gt; _members.map(m =&gt; ({...m}))
-  }
-})()
-</code></pre><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the <a href="https://en.wikipedia.org/wiki/Functional_predicate"><em>predicate function</em></a> to each value in the original array, and putting the return value in the new array.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/532ea53b2e317ee72d28ba1ba598a40b.js"></script>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the <a href="https://en.wikipedia.org/wiki/Functional_predicate"><em>predicate function</em></a> to each value in the original array, and putting the return value in the new array.</p>
 <p>It is &ldquo;make a new array by applying this transform to each element in this other array&rdquo;.</p>
 <p>In the predicate function - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of each member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
 <p>When you return an object in a one-liner arrow function, you need to put <code>()</code> around it so the interpreter doesn't interpret the contents of <code>{}</code> as function code, but knows that it is an object, so: <code>m =&gt; ({...m})</code>.</p>
@@ -409,13 +391,9 @@ function member(id, password){
 <h2 id="implementing-setmembers">Implementing <code>setMembers</code></h2>
 <p>The first method we will implement is a hydration method that allows a local function to pass in an array of members.</p>
 <p>I'll take out <code>getMembers</code> for now to make it easier to read:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    setMembers: members =&gt; _members = members.map(m =&gt; ({...m}))
-  }
-})()
-</code></pre><p>Here we use the Spread syntax to copy the members to a new array, and this becomes the global members.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/eff4b5ae21437b66bc0e1cb4a76da1e5.js"></script>
+
+<p>Here we use the Spread syntax to copy the members to a new array, and this becomes the global members.</p>
 <p>This means that a local function cannot set the global state by passing in an array of members, and then mutate the global state by mutating one of the members that it passed in.</p>
 <p>If we did a naive assignment:</p>
 <pre><code>setMembers: members =&gt; _members = [...members]
@@ -437,13 +415,9 @@ function member(id, password){
 <pre><code>member =&gt; member.id === update.id ? update : member
 </code></pre><p>We are using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator">ternary operator</a> here to implement <code>if-then-else</code> in a single expression.</p>
 <p>We can probably shorten the name we use for <code>member</code> to <code>m</code>, because the context is sufficient to provide information about what it is:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    updateMember: update =&gt; (_members = _members.map(m =&gt; m.id === update.id? update : m))
-  }
-})()
-</code></pre><p>We enclose the assignment operation <code>_members = </code> in parens <code>()</code> to indicate that we did not forget to return a value, and intended only the side-effect. We could have put it in <code>{}</code>, but that will cause code formatters to turn our single line into three.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/bb7572767d92c80257a32116feed39eb.js"></script>
+
+<p>We enclose the assignment operation <code>_members = </code> in parens <code>()</code> to indicate that we did not forget to return a value, and intended only the side-effect. We could have put it in <code>{}</code>, but that will cause code formatters to turn our single line into three.</p>
 <h2 id="designing-for-failure">Designing for failure</h2>
 <p>20% of programming is getting it to work. The other 80% is programming for <em>when it doesn't work</em>.</p>
 <p>What happens if a local function requests to update a member who is not in the state? At the moment, the local function receives no information from the call to <code>updateMember</code>, and if you look at the code, what will happen is&hellip; nothing.</p>
@@ -468,13 +442,9 @@ function member(id, password){
 <p>or:</p>
 <pre><code>m =&gt; m.id === id
 </code></pre><p>So,</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    getMember: id =&gt; _members.filter(m =&gt; m.id === id)
-  }
-})()
-</code></pre><p>The <code>getMember</code> array will now return an array with either zero (if no member with that id exists in the state) or one&hellip; hang on, what happens if there is more than one member in the array with the same <code>id</code>? In that case it will return more than one member.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/0d6712191a4e53b7ca067a846ba87a2c.js"></script>
+
+<p>The <code>getMember</code> array will now return an array with either zero (if no member with that id exists in the state) or one&hellip; hang on, what happens if there is more than one member in the array with the same <code>id</code>? In that case it will return more than one member.</p>
 <p>Probably, the business requirement is that member <code>id</code> is unique. So we will take that into account when we write the <code>addMember</code> function.</p>
 <p>So it will return an array with 0 or 1 members in it. Probably local functions want a member or <code>undefined</code>.</p>
 <p>Although, we can provide a better API if we return an object like this:</p>
@@ -489,101 +459,34 @@ function member(id, password){
 </code></pre><p>Then consumers of this API using TypeScript can use a <a href="https://medium.com/@sitapati/implementing-a-maybe-pattern-using-a-typescript-type-guard-81b55efc0af0">Type Guard</a> to get safety against accessing an <code>undefined</code> value, and our API forces them to use it.</p>
 <p>This reduces bugs. Otherwise, we are relying on every local function in the application remembering to test it for <code>undefined</code> before accessing it - another surface area for bugs.</p>
 <p>So:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  return {
-    getMember: id =&gt; {
-      const member = _members.filter(m =&gt; m.id === id)
-      return member.length === 1 ? 
-        { found: true, member: {...member[0]}} :
-        { found: false, member: undefined }
-    }
-  }
-})()
-</code></pre><p>Remember to Spread the member to return a copy (I picked this up when the test case failed <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js#L109">here</a>).</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/57634fe589b39b06f6a9f5c90373566f.js"></script>
+
+<p>Remember to Spread the member to return a copy (I picked this up when the test case failed <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js#L109">here</a>).</p>
 <p>Nice API.</p>
 <h2 id="throwing-on-impossible-update">Throwing on impossible update</h2>
 <p>Another significant advantage of this approach is that we put all our business validation rules about the data in a single place: in the store. They are not spread throughout the application, and the responsibility of everyone and no-one. They can be put in one place, tested automatically, updated in one place, and if a local function violates them, we will find out immediately when it tries to store the data, through an exception.</p>
 <p>We can now consume <code>getMember</code> from our own API to guard against an update error.</p>
 <p>How can we do that? We need to lift our API to its own context inside the closure, like this:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  const Store = {
-  }
-  return Store
-})()
-</code></pre><p>Now we have a private reference to our own API, as <code>Store</code>. So we can use it to see if the member that the local function wants to update, actually exists - and if not, throw.</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  const Store = {
-    updateMember: update =&gt; {
-      const member = Store.getMember(update.id)
-      if (!member.found) {
-        throw new Error(`No member with id ${update.id} in the store!`)
-      }
-      _members = _members.map(m =&gt; m.id === update.id? update : m)
-    }
-  }
-  return Store
-})()
-</code></pre><h2 id="implementing-putmember">Implementing <code>putMember</code></h2>
+<script type="application/javascript" src="https://gist.github.com/jwulf/8f981b5bf15a27411113c30d98a1cd04.js"></script>
+
+<p>Now we have a private reference to our own API, as <code>Store</code>. So we can use it to see if the member that the local function wants to update, actually exists - and if not, throw.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/1a38076de9ce19bd5e72f0b809e7c66d.js"></script>
+
+<h2 id="implementing-putmember">Implementing <code>putMember</code></h2>
 <p>Probably, a business requirement of the application will be to put a new member in the store.</p>
 <p>We have to make a decision here about the behaviour of the store. What happens if a local function attempts to put a member with an <code>id</code> that is already in the store?</p>
 <p>That's probably a bug somewhere further upstream in the application logic, so we will throw an exception to allow debugging to start.</p>
 <p>So we can do this:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  const Store = {
-    putMember: member =&gt; {
-      if (Store.getMember(member.id).found) {
-        throw new Error(`${member.id} already exists!`)
-      }
-      _members = [..._members, {...member}]
-    },
-    updateMember: update =&gt; {
-      const u = needsMember(needsArg(u))
-      const member = Store.getMember(u.id)
-      if (!member.found) {
-        throw new Error(`No member with id ${u.id} in the store!`)
-      }
-      _members = _members.map(m =&gt; m.id === u.id? update : m)
-    }
-  }
-  return Store
-})()
-</code></pre><h2 id="dealing-with-a-undefined-id">Dealing with a undefined id</h2>
+<script type="application/javascript" src="https://gist.github.com/jwulf/430210f61fafa828342a0f61e808e14f.js"></script>
+
+<h2 id="dealing-with-a-undefined-id">Dealing with a undefined id</h2>
 <p>Another potential bug that we can detect here is a local function passing in either <code>undefined</code> or a member with an <code>id</code> that is undefined.</p>
 <p>We can write helper functions for this, and call them on all operations where it is a requirement:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  const needsArg = arg =&gt; {
-    if (!member) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member =&gt; {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
-})()
-</code></pre><p>Here is how we use this:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
-  const Store = {
-    putMember: member =&gt; {
-      const m = needsId(needsArg(member))
-      if (Store.getMember(m.id).found) {
-        throw new Error(`${m.id} already exists!`)
-      }
-      _members = [..._members, {...m}]
-    }
-  }
-  return Store
-})()
-</code></pre><h2 id="freeze">Freeze!</h2>
+<p>{{ gist jwulf a0664d542037c385b81e8495811c537d }}</p>
+<p>Here is how we use this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/4f27e96edf4a2e825d0cdf05352be7c2.js"></script>
+
+<h2 id="freeze">Freeze!</h2>
 <p>For our final touch, we are going to freeze the API object using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"><code>Object.freeze</code></a>:</p>
 <pre><code>return Object.freeze(Store)
 </code></pre><p>This prevents anyone from overwriting or modifying the API methods themselves.</p>
@@ -591,49 +494,9 @@ function member(id, password){
 <p>Freezing objects has an impact on performance. Freezing the API is not going to make a huge difference, so the safety is worth it. The objects returned from the API are copies, so freezing them is overkill, IMHO.</p>
 <h2 id="putting-it-all-together">Putting it all together</h2>
 <p>Here is the whole thing:</p>
-<pre><code>const GlobalMemberStore = (() =&gt; {
-  let _members = []
+<script type="application/javascript" src="https://gist.github.com/jwulf/c97e95c6bec88a049332dd42092b29bc.js"></script>
 
-  const needsArg = arg =&gt; {
-    if (!arg) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member =&gt; {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
-
-  const Store = {
-    setMembers: members =&gt; (_members = members.map(m =&gt; ({...m}))),
-    getMembers: () =&gt; _members.map(m =&gt; ({...m})),
-    getMember: id =&gt; {
-      const member = _members.filter(m =&gt; m.id === id)
-      return member.length === 1 ? 
-        { found: true, member: {...member[0]}} :
-        { found: false, member: undefined }
-    },
-    putMember: member =&gt; {
-      const m = needsId(needsArg(member))
-      if (Store.getMember(m.id).found) {
-        throw new Error(`${m.id} already exists!`)
-      }
-      _members = [..._members, {...m}]
-    },
-    updateMember: update =&gt; {
-      const u = needsId(needsArg(update))
-      if (!Store.getMember(u.id).found) {
-        throw new Error(`${u.id} does not exists!`)
-      }
-      _members = _members.map(m =&gt; m.id === u.id? update : m)
-    }
-  }
-  return Object.freeze(Store)
-})()
-</code></pre><p>This may seem like way more complexity than:</p>
+<p>This may seem like way more complexity than:</p>
 <pre><code>var memArray = []
 </code></pre><p>However, this is the <em>actual</em> complexity involved in this data structure in the application. <em>You will end up doing all of this anyway</em> - but it will be spread throughout your application in manipulation and mutation of that array, and <code>if</code> statements, and fixing bugs in various places.</p>
 <p>And it will be really hard to refactor in the future.</p>
@@ -650,6 +513,7 @@ function member(id, password){
 <li><a href="https://github.com/ohager/nanoflux">Nanoflux</a> (<em>My personal favorite</em>)</li>
 </ul>
 <p>If you grasped the concepts and rational for the refactorings that I made in this example, you will be well-placed to understand these mature, more sophisticated (and generalised) implementations.</p>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the [Zeebe Node.js client. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
   <footer>
