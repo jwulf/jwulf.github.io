@@ -336,16 +336,16 @@ const c; // has no meaning
 let b = &quot;World&quot;
 </code></pre><p>You are communicating to the world - by which I mean machine reasoners (like ESLint, your IDE's language service, and the JS run-time itself) and other programmers:</p>
 <blockquote>
-<p>I intend the the value of this assignment change over the course of execution. Do not rely on the eventual value of this assignment.</p>
+<p>I intend that the value of this assignment change over the course of execution. Do not rely on the eventual value of this assignment.</p>
 </blockquote>
-<p>What this means for other programmers is that if they encounter this reference later in the code base, they have to go back through all the intervening code and mentally execute it to reason about its value at that point in the code.</p>
+<p>What this means for other programmers is that when they encounter this reference later in the code base, they have to go back through all the intervening code, and mentally execute it to reason about its value at that point in the code.</p>
 <p>This is a source of complexity in comprehending and working with a code base.</p>
 <p>For machine reasoners, their ability to detect errors related to this reference is weakened. They cannot, for example, detect an error where you mistype a variable name and assign a new value to this variable when you meant something else; or if someone reuses the variable name in an enclosed scope but forgets to declare it, like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/d302fde251bc273ee920fb9a96aa8c9c.js"></script>
 
 <p>For runtimes, a <code>const</code> declaration can be replaced with its value inline. To do this with a <code>var</code> or <code>let</code> that is never reassigned requires an optimizer to run all possible code paths involving that reference.</p>
 <p>I see programmers declaring assignments using <code>var</code> and <code>let</code> where the assignment does not change during the lifetime of the reference.</p>
-<p>In this case, it is quite simple: the declaration is misnamed. The programmer has miscommunicated their intent. They <strong>do not</strong> intend the reference value of the assignment to change over the course of execution. In this case, the term that matches their intent is <code>const</code>.</p>
+<p>In this case, it is quite simple: the declaration is misstated. The programmer has miscommunicated their intent. They <strong>do not</strong> intend the reference value of the assignment to change over the course of execution. In this case, the term that matches their intent is <code>const</code>.</p>
 <p><strong>Recommendation</strong>: For all simple values that do not change (like a URL string), use <code>const</code>.</p>
 <h2 id="understanding-object-references">Understanding Object References</h2>
 <p>One characteristic of JavaScript is that objects, including arrays, and assigned by reference.</p>
