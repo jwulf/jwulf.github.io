@@ -6,10 +6,19 @@
     <description>Recent content in javascript on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Providing a Semantic API</title>
+      <link>https://joshwulf.com/blog/2020/02/providing-a-semantic-api/</link>
+      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/providing-a-semantic-api/</guid>
+      <description>This is part of a series of posts where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, and &amp;ldquo;There is no such thing as good coding, only good refactoring&amp;rdquo;.</description>
+    </item>
     
     <item>
       <title>Avoiding global mutable state in browser JS</title>

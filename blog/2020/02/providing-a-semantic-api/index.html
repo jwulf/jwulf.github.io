@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Providing a Semantic API - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Providing a Semantic API">
+<meta itemprop="description" content="A StackOverflow refactoring.">
+<meta itemprop="datePublished" content="2020-02-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-26T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1688">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Providing a Semantic API" />
+<meta property="og:description" content="A StackOverflow refactoring." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/02/providing-a-semantic-api/" />
+<meta property="article:published_time" content="2020-02-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-26T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Providing a Semantic API"/>
+<meta name="twitter:description" content="A StackOverflow refactoring."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Providing%20a%20Semantic%20API&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;title=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;title=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;description=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/02/providing-a-semantic-api/">Providing a Semantic API</a></h2>
+    
+    
+        <p>A StackOverflow refactoring.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-02-26 00:00:00 &#43;0000 UTC">
+      February 26, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>8 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Providing%20a%20Semantic%20API&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;title=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;title=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f&amp;description=Providing%20a%20Semantic%20API" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fproviding-a-semantic-api%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/02/providing-a-semantic-api/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+  <div class="content">
+    <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, <strong>and</strong> &ldquo;There is no such thing as good coding, only good refactoring&rdquo;.</em></p>
+<p>The meaning of &ldquo;<em>semantics</em>&quot;, according to the Oxford Dictionary:</p>
+<blockquote>
+<p>The branch of linguistics and logic concerned with meaning. There are a number of branches and subbranches of semantics, including formal semantics, which studies the logical aspects of meaning, such as sense, reference, implication, and logical form, lexical semantics, which studies word meanings and word relations, and conceptual semantics, which studies the cognitive structure of meaning.</p>
+</blockquote>
+<p>Computer programming is an exercise in applied linguistics. It is precisely specifying the execution of operations to transform matter through the utterance of magic spells.</p>
+<p>Writing code that the computer can understand (and that executes correctly) is only one level of the practice of Computer Programming. As Martin Fowler <a href="https://medium.com/young-coder/5-famous-programming-quotes-explained-4da607906c1">puts it</a>:</p>
+<blockquote>
+<p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
+</blockquote>
+<p>A <em>Semantic API</em> is &ldquo;an interface that provides information about usage of the interface&rdquo; (<em>my definition</em>). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.</p>
+<p>Providing a Semantic API is part of improving the <a href="https://ngeor.com/2017/09/16/ergonomics-and-apis.html">developer ergonomics</a>, or Dev UX, of your code.</p>
+<p>An API is an <em>Application Programming Interface</em>. Although it has come to refer to REST APIs and other external interfaces, every function that you write has an API. If you write libraries that are reused by other developers, as I do with the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>, paying careful attention to developer ergonomics is important.</p>
+<p>But even if you don't write libraries, every function that you write is potentially consumed by other developers working on the code base - and minimally by at least one - <em>you</em>.</p>
+<h2 id="the-question">The Question</h2>
+<p>Here is the original code from StackOverflow:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/c3b59f4915d4f644ea1a2c4ea0b26bed.js"></script>
+
+<p>I refactored the global variable previously, in the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoiding global mutable state in Browser JS</a>&quot;. This time we are going to refactor the <code>member</code> function to improve the API ergonomics.</p>
+<h2 id="naming">Naming</h2>
+<p>The importance of naming to reduce cognitive load and increase the comprehensibility of your code (both for you and for others) cannot be overstated. See <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">this previous article</a> for more detail.</p>
+<p>In the case of this function, we can see looking at the reference to <code>this</code> inside <code>member</code> that this function is intended to be called with the <code>new</code> keyword, to return an instance.</p>
+<p>We can signal this using <em>naming by convention</em>. If we make all &ldquo;newable&rdquo; objects in the codebase start with a capital letter we communicate information about the function through the name - semantic naming.</p>
+<h2 id="first-refactor">First Refactor</h2>
+<p>So, the first refactor:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/08f1346f4138c81c00f2e9254f3d68b4.js"></script>
+
+<p>I changed the name of the function to <code>Member</code>. If you are disciplined about using this as a naming convention, then any consumers of the <code>Member</code> function know automatically that it must be <code>new</code>ed.</p>
+<p>This reduces the chances of a bug like this creeping into your code:</p>
+<pre><code>const memObj1 = member(&quot;m001&quot;, &quot;123&quot;)
+</code></pre><p>I changed the property name from <code>pwd</code> to <code>password</code> to match the function parameter name. This allows programmers consuming this API to reuse the naming. Forcing them to mentally map a different property from the parameter name is friction that will make using the API unpleasant for them.</p>
+<p>I also changed <code>var</code> to <code>const</code>. This is also semantics. <code>var</code> communicates to the machine and to other programmers &ldquo;<em>I intend that the value of this assignment change over the course of execution. Do not rely on the value of this assignment</em>&quot;, forcing them to reason across the codebase about its eventual value.</p>
+<p><code>const</code>, on the other hand, communicates &ldquo;<em>this is an immutable assignment</em>&quot;. The machine will throw if you accidentally attempt a mutation, and other programmers do not need to read code between the assignment and an eventual use, later in the codebase, to know what is going on.</p>
+<p>I also changed the name of <code>memArray</code> to <code>GlobalMembersArray</code>. This is not a newable object, but the prefix <code>Global</code>, by convention, tells me that it is a global object, and suffix <code>Array</code> tells me that it is an array - anywhere that I encounter it in the code. See <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">this article</a> for a full refactor of this variable.</p>
+<p>Finally, I changed the name of <code>memObj1</code> to <code>member1</code>. It is a small change, but it increases the overall comprehensibility of the code.</p>
+<h2 id="second-refactor">Second Refactor</h2>
+<p>The function as it stands now communicates little information about its parameters.</p>
+<p>Fortunately, they are well named, so by looking at the function signature we can see what they are.</p>
+<p>When writing code that calls the function in a good IDE, we will see the function signature, and know to call it with two arguments - and we will see the names of the parameters that these arguments will be applied to.</p>
+<p>However, when we are reading the codebase, that information is lost:</p>
+<pre><code>const member1 = Member(&quot;m001&quot;, &quot;123&quot;)
+</code></pre><p>We have no information here about the meaning (the semantics) of the arguments at this point in the code.</p>
+<p>An improvement to the signature of the <code>Member</code> function is to use <em>an object</em> with named keys:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/9b6b4a78166b100d64454a8f08cc2c39.js"></script>
+
+<p>With a very small refactor of the function signature - the addition of two characters: <code>{}</code> - we now have information about the arguments passed to it everywhere in the application.</p>
+<p>This style of function signature uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">ES6 destructuring assignment</a> to take an anonymous object and immediately <em>destructure</em> the named properties of the object into the local variables <code>id</code> and <code>password</code> in the scope of the function.</p>
+<p>We get two things from this:</p>
+<ol>
+<li>Greater protection against mixing up the arguments we pass in. It is easy to do: <code>new member(&quot;pwd&quot;, &quot;001&quot;)</code>, less easy to mistakenly do <code>new Member({id: &quot;pwd&quot;, password: &quot;001&quot;})</code>.</li>
+<li>We now have information about the function signature and the semantics of the call everywhere we see it in the codebase.</li>
+</ol>
+<p>Additionally, if you are using TypeScript with VSCode, you can get autocompletion for the parameters with Ctrl-Space.</p>
+<p>#winning</p>
+<h2 id="the-next-level">The next level</h2>
+<p>You could stop here, and it is a significant improvement.</p>
+<p>You can take it to the next level, though, by supplying <a href="https://jsdoc.app/">JSDoc</a> comments for the function. JSDoc is a human- and machine-readable syntax that IDEs can use for code completion and linting of your code.</p>
+<p>We do not have information about the <em>type</em> of the parameters that <code>Member</code> takes.</p>
+<p><code>password</code> is probably a string, but what about <code>id</code>? Is it a string, or a number? Not even by looking at the function can we tell. We do know, from looking at the example usage that the designer intends it to take a string.</p>
+<p>But how can we communicate that to consumers of the function, and preferably at the point they are using it, rather than requiring them to find the declaration and read a comment there?</p>
+<p>With TypeScript, you can annotate the types on the function signature:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/337369cf70ef095b203e6c6bd622d290.js"></script>
+
+<p>If you are not using TypeScript, you can use JSDoc comments to provide this metadata, and good IDEs will make use of it.</p>
+<p><a href="https://jsdoc.app/tags-param.html#parameters-with-properties">Annotating destructured parameter signatures</a> is a little tricky, but here is how you do it for this function.</p>
+<p>Remember that I said that the destructured assignment takes an anonymous object?</p>
+<p>Well, in the JSDoc comment, we have to name the object in order to be able to name and describe its properties:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/7dff5fbe2666a12b1ce152a11185c8c7.js"></script>
+
+<p>While we are at it, we can annotate the function to communicate to both the machine (IDE linting) and humans that the function <em>must</em> be newed. This takes our naming by convention to another level, because good IDEs will be able to a consuming programmer that they forgot to <code>new</code> our function, if they forget.</p>
+<p>To do that, we use the <a href="https://jsdoc.app/tags-constructs.html">JSDoc <code>@constructs</code> annotation</a>.</p>
+<p>Finally, we can also supply information about the new object that gets returned. This provides consumers with information not only about the API surface of our function, but information about the object they create with it.</p>
+<p>IDEs and linting tools can use this to provide auto-completion and catch bugs related to instances of <code>Member</code> objects that consumers create.</p>
+<p>We use the JSDoc <a href="https://jsdoc.app/tags-typedef.html"><code>@typedef</code></a> and <a href="https://jsdoc.app/tags-property.html"><code>@property</code></a> annotations to do this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/0ca50dcd0b19aa0b6ae77ca76f7528df.js"></script>
+
+<p>At this point, a good IDE knows exactly what is going on, and can provide intelligent guidance to consumers of your API:</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="IDE Completion" href="/img/2020/02/ide-completion.png" data-caption=""><img src="/img/2020/02/ide-completion.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p>The IDE knows that I have an instance of a <code>Member</code> object, and it knows about the name and type of each of its properties. (The theme is <a href="https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode">Synthwave</a> and the font <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a> if you were wondering.)</p>
+<p>#winning</p>
+<p>You can also have <a href="https://eslint.org/">ESLint</a> running in CI, for example in a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow">GitHub Actions Workflow</a>, to catch bugs relating to the use of this API, before they hit production.</p>
+<h2 id="using-typescript">Using TypeScript</h2>
+<p>Honestly though, writing that much JSDoc is a pain. One of the issues with it is that it is possible to refactor the function and not update the JSDoc. You have to do double the work to make sure they stay in sync.</p>
+<p>Especially when you are prototyping, you don't want to add that much overhead. But you would like the safety and IDE assist that you get from it.</p>
+<p>In that case, you want <a href="https://www.typescriptlang.org/">TypeScript</a>. The IDE autocompletion and type-safety is directly tied to the inline declaration of types, and not to a decoupled description that you have to write.</p>
+<p>Unless you are firmly wedded to using plain JS, TypeScript is a better solution. With automatic type definition generation, you can provide code that JS programmers can consume with typings that their IDE can use.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://devhints.io/jsdoc">JSDoc Cheatsheet</a></li>
+<li><a href="http://speakingjs.com/es5/ch29.html">Speaking JS Chapter on JSDoc</a></li>
+<li><a href="https://www.typescriptlang.org/">TypeScript</a></li>
+</ul>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/stackoverflowed">stackoverflowed</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/2020/02/avoid-global-state/" class="button"><div class="previous"><div>Avoiding global mutable state in browser JS</div></div></a>
+  
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/providing-a-semantic-api/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/providing-a-semantic-api/">Providing a Semantic API</a></h1>
+          <time class="published" datetime="">February 26, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/avoid-global-state/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/avoid-global-state/">Avoiding global mutable state in browser JS</a></h1>
+          <time class="published" datetime="">February 24, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/just-say-no-to-loops-and-variables/">Just say No to loops and variables.</a></h1>
+          <time class="published" datetime="">February 23, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/docker-https/" class="image featured">
+    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/creating-github-action/" class="image featured">
+    <img src="/img/2020/02/zeebe.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/creating-github-action/">How to write a GitHub Action</a></h1>
+          <time class="published" datetime="">February 17, 2020</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">11</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">11</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/stackoverflowed/">stackoverflowed<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>
