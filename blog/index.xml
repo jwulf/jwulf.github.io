@@ -21,6 +21,17 @@
     </item>
     
     <item>
+      <title>Shun the Mutant</title>
+      <link>https://joshwulf.com/blog/2020/02/shun-the-mutant/</link>
+      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/shun-the-mutant/</guid>
+      <description>There are three ways you can declare and assign in JS in 2020:
+let a = &amp;quot;Hello&amp;quot; var b = &amp;quot;World&amp;quot; const c = &amp;quot;!&amp;quot; These are &amp;ldquo;declarations with assignment&amp;rdquo;, as opposed to &amp;ldquo;declaration without assignment&amp;rdquo; - which can only be done with let and var:
+let a; var b; const c; // has no meaning To understand the difference between let and var, you can refer to this excellent answer on StackOverflow.</description>
+    </item>
+    
+    <item>
       <title>Avoiding global mutable state in browser JS</title>
       <link>https://joshwulf.com/blog/2020/02/avoid-global-state/</link>
       <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
