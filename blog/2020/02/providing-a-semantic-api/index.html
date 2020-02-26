@@ -321,6 +321,7 @@
 
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, <strong>and</strong> &ldquo;There is no such thing as good coding, only good refactoring&rdquo;.</em></p>
+<p>A <em>Semantic API</em> is &ldquo;an interface that provides information about usage of the interface&rdquo; (<em>my definition</em>). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.</p>
 <p>The meaning of &ldquo;<em>semantics</em>&quot;, according to the Oxford Dictionary:</p>
 <blockquote>
 <p>The branch of linguistics and logic concerned with meaning. There are a number of branches and subbranches of semantics, including formal semantics, which studies the logical aspects of meaning, such as sense, reference, implication, and logical form, lexical semantics, which studies word meanings and word relations, and conceptual semantics, which studies the cognitive structure of meaning.</p>
@@ -330,7 +331,6 @@
 <blockquote>
 <p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
 </blockquote>
-<p>A <em>Semantic API</em> is &ldquo;an interface that provides information about usage of the interface&rdquo; (<em>my definition</em>). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.</p>
 <p>Providing a Semantic API is part of improving the <a href="https://ngeor.com/2017/09/16/ergonomics-and-apis.html">developer ergonomics</a>, or Dev UX, of your code.</p>
 <p>An API is an <em>Application Programming Interface</em>. Although it has come to refer to REST APIs and other external interfaces, every function that you write has an API. If you write libraries that are reused by other developers, as I do with the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>, paying careful attention to developer ergonomics is important.</p>
 <p>But even if you don't write libraries, every function that you write is potentially consumed by other developers working on the code base - and minimally by at least one - <em>you</em>.</p>
