@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!">
 <meta itemprop="datePublished" content="2020-02-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1195">
+<meta itemprop="wordCount" content="1449">
 
 
 
@@ -263,7 +263,7 @@
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>6 minutes read</p>
+      <p>7 minutes read</p>
     
   </div>
 </header>
@@ -376,6 +376,19 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
 <p>Late at night I googled for <a href="https://fpchat-invite.herokuapp.com/">an FP Slack</a> to get some help, and ended up on the one where gcanti himself holds court!</p>
 <p>He helped me out by lifting the file reader into the Either context. The code from line 46 - 54 was written by gcanti himself, from my description of the problem.</p>
 <p>Rather than a These, it uses a construct called a <a href="https://gcanti.github.io/fp-ts/modules/ValidationT.ts.html"><code>Validation</code></a>.</p>
+<h2 id="addendum-on-testability">Addendum on testability</h2>
+<p>After I published this article, I got some feedback on it from the FP Chat Slack:</p>
+<blockquote>
+<p>I would've usually extracted any pure functions created during the refactor from the body of the original function.</p>
+</blockquote>
+<p>Here is what it looks like with that done (I left <code>error</code> in to document both return values):</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/5ffa03d23baa993635a69dd62ebe1e0f.js"></script>
+
+<p>The logic of the program is clearly expressed. You can see deploy and error outcomes, and you see: buffer or files - if buffer, deploy; otherwise read the files and then either report the error or deploy.</p>
+<p>And the functions with no dependencies are now unit testable in isolation. I put them into two sub-directories: <code>pure</code>, and <code>impure</code> (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.</p>
+<p>These are all easily testable - the impure file reading function needs a little more setup to test. My code is now more expressive of its intent, and testable.</p>
+<p>With the non-FP implementations - even the fp-inspired refactor - you are forced to mentally reason through the execution of the code to understand what it does; and it is tightly coupled - meaning that you have to test the composition of side-effects <em>and</em> logic to ensure that the entire method does what it says on the box, in all permutations.</p>
+<p>This refactor is a functional specification of the method, plus some unit-testable functions that are composed to implement it.</p>
 <p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
