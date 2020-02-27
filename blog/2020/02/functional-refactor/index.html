@@ -2,23 +2,31 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>zeebe - Josh Wulf</title>
+<title>A Functional Refactor of Zeebe Node - Josh Wulf</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
   <meta name="generator" content="Hugo 0.60.0" />
-  <meta itemprop="name" content="zeebe">
-<meta itemprop="description" content="">
-  <meta property="og:title" content="zeebe" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://joshwulf.com/categories/zeebe/" />
-<meta property="og:updated_time" content="2020-02-27T00:00:00+00:00" />
+  <meta itemprop="name" content="A Functional Refactor of Zeebe Node">
+<meta itemprop="description" content="Using the fp-ts library to refactor Zeebe Node">
+<meta itemprop="datePublished" content="2020-02-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1195">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="A Functional Refactor of Zeebe Node" />
+<meta property="og:description" content="Using the fp-ts library to refactor Zeebe Node" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/02/functional-refactor/" />
+<meta property="article:published_time" content="2020-02-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-27T00:00:00+00:00" />
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="zeebe"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="A Functional Refactor of Zeebe Node"/>
+<meta name="twitter:description" content="Using the fp-ts library to refactor Zeebe Node"/>
 <meta name="twitter:site" content="@sitapati"/>
 
   
@@ -53,7 +61,7 @@
       <a href="/">
         
           
-            Categories
+            Blog
           
         
       </a>
@@ -138,37 +146,37 @@
 
   
     
-    <a href="//twitter.com/share?text=zeebe&amp;url=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=A%20Functional%20Refactor%20of%20Zeebe%20Node&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f&amp;title=zeebe" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f&amp;title=zeebe" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f&amp;description=zeebe" target="_blank" rel="noopener" class="share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;description=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn pinterest">
           <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fjoshwulf.com%2fcategories%2fzeebe%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -191,8 +199,6 @@
     <footer>
       <ul class="socnet-icons">
         
-    <li><a href="/categories/zeebe/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
@@ -241,40 +247,139 @@
 </section>
 
       <main id="site-main">
-        <h1>zeebe</h1>
-        
-        
-            <article class="post">
+        <article class="post">
   <header>
   <div class="title">
     
-        <h2><a href="/blog/2019/01/zeebe-node/">Node.js client for Zeebe Microservices Orchestration Engine</a></h2>
+        <h2><a href="/blog/2020/02/functional-refactor/">A Functional Refactor of Zeebe Node</a></h2>
     
     
-        <p>I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe.</p>
+        <p>Using the fp-ts library to refactor Zeebe Node</p>
     
 </div>
   <div class="meta">
-    <time class="published" datetime="2019-01-29 00:00:00 &#43;0000 UTC">
-      January 29, 2019
+    <time class="published" datetime="2020-02-27 00:00:00 &#43;0000 UTC">
+      February 27, 2020
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>7 minutes read</p>
+      <p>6 minutes read</p>
     
   </div>
 </header>
 
+  <section id="socnet-share">
+    
+
+
+
+
   
-  <a href="/blog/2019/01/zeebe-node/" class="image featured">
-    <img src="/img/2019/01/zeebe.png" alt="">
+    
+    <a href="//twitter.com/share?text=A%20Functional%20Refactor%20of%20Zeebe%20Node&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;description=A%20Functional%20Refactor%20of%20Zeebe%20Node" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/02/functional-refactor/" class="image featured">
+    <img src="/img/2020/02/zeebe-node.png" alt="">
   </a>
 
 
-  
-  <p><em>Update: I now work at Camunda on Zeebe as the Node client maintainer and a Developer Advocate. Things have changed in the broker and the library since this was published - for the latest on using it, refer to my new book in development - &ldquo;<a href="https://zeebe.joshwulf.com">The Zeebe Node.js Client Guide</a>&quot;</em></p>
+  <div class="content">
+    <blockquote>
+<p>There is no such thing as good coding, only good refactoring.</p>
+</blockquote>
+<p>I recently did a bunch of work on the <a href="https://npmjs.org/zeebe-node">Zeebe Node.js client</a> for the upcoming 0.23 release. Zeebe Node is a client library for the <a href="https://zeebe.io">Zeebe Microservices Workflow Orchestration Engine</a>, and I maintain it.</p>
+<p>While doing other work, I took the opportunity to refactor one method, <code>deployWorkflows</code>, to add a feature that I wanted it to have. I used <a href="https://github.com/gcanti/fp-ts">fp-ts</a>, a TypeScript Functional Programming library to do it.</p>
+<p>I discovered fp-ts after I used <a href="https://github.com/gcanti/io-ts">io-ts</a>, another library by the same author - <a href="https://dev.to/gcanti">Giulio Canti</a> (gcanti), to decode the environment variables for the Zeebe GitHub Action.</p>
+<p>The benefit of using io-ts is that it allows you to express run-time validations of required and optional parameters that also provide design-time type checking and intellisense. Handy!</p>
+<p>You really only appreciate it when you've tried to <a href="https://github.com/jwulf/ghettohub-db/blob/master/src/parameters.ts">write that kind of code by hand</a>. I got run-time validation with property key maps, but couldn't get intellisense without writing interfaces - double handling.</p>
+<p>Using io-ts got me &ldquo;<em>two for the price of one</em>&quot;. One set of definitions for strong typing in the IDE <em>and</em> run-time validation.</p>
+<p>It did mean, however, that I had to make my consuming code deal with the Monads that io-ts returns, so it pulled in fp-ts.</p>
+<p>After using fp-ts, I could see an opportunity to use the FP approach to implement this new feature in Zeebe Node, so I did.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>The <code>deployWorkflows</code> method takes an object (containing a buffer), a single filename (string), or an array of filenames. It then constructs a <a href="https://docs.zeebe.io/reference/grpc.html#deployworkflow-rpc">DeployWorkflowRequest</a> gRPC payload to send to Zeebe.</p>
+<p>It does this by either appending the object, or if it gets a string, putting it in an array, and then mapping over the array to read the files into buffers. It then maps over that array to construct the DeployWorkflowRequest.</p>
+<p>If one of the files cannot be found, it immediately throws.</p>
+<p>Here is the code, before refactoring:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/068397de244ad0e21f035df04c3a3bd6.js"></script>
+
+<p>It's pretty simple and easy to understand. It has <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">no variables and no loops</a>. It does have a few <code>if</code> statements that could be refactored to ternaries. That would reduce the indentation.</p>
+<p>Basically, there are three parts to the logic:</p>
+<p>First, if the argument is not an array, put it in an array. Now we have an array of ( one or more strings, or an object ).</p>
+<p>Next, we map over the array, and for each element, if it is an object, append the request. If it
+is a string, read the file and append the resulting buffer; then deploy - or throw if we can't find a file.</p>
+<p>Some data transformation, and two outcomes: deploy or throw.</p>
+<p>The issue with this implementation is that we cannot return information about <em>multiple</em> missing files - only the first one we encounter.</p>
+<p>I would like it to read all the files, and exit if one or more are missing with a list of <em>all</em> missing files.</p>
+<h2 id="refactor-without-fpts">Refactor Without fp-ts</h2>
+<p>This could actually be accomplished by mapping the array with a file reader function and returning <code>{buffer}</code> or <code>{error}</code> objects, then reducing that, then either throwing or constructing the request, like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/60e1d53d0b38056f9acfd82e05946125.js"></script>
+
+<p>Actually, that's a pretty good solution right there. It borrows heavily from the kind of thinking I had to do to accomplish this with fp-ts. It's obvious to me in hindsight! :-)</p>
+<p>Recently I've been reading <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/">Professor Frisby's Mostly Adequate Guide to Functional Programming</a> - a book on FP in vanilla JS. That has also been changing how I think about coding in JS.</p>
+<p>This refactor uses the functional construct of an <a href="https://gcanti.github.io/fp-ts/modules/Either.ts.html"><code>Either</code></a>, where errors flow down the left-hand path, and values down the right. The <code>read</code> function returns an <code>Either</code>. It returns <em>either</em> an error or a result.</p>
+<p>We map the read function over the workflows array, and end up with an array of <code>Either&lt;Error, Buffer&gt;</code>.</p>
+<p>We then reduce that array down to a single object whose functional type is called <a href="https://gcanti.github.io/fp-ts/modules/These.ts.html"><code>These</code></a>. It contains a collection of Errors and Buffers. We have an anonymous <code>These</code>, and immediately destructure it into its left-hand <code>errors</code> and right-hand <code>buffers</code>.</p>
+<p>We then test the left-hand side of the <code>These</code>, and if it contains any errors, we throw with a list of the missing files - otherwise we move forward with deploying the Buffers.</p>
+<h2 id="refactor-in-fpts">Refactor in fp-ts</h2>
+<p>Here is what I actually ended up with. This uses the fp-ts first-class entity <code>Either</code>, which has it own methods.</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/d90f7812126c307184104bb69e69b24a.js"></script>
+
+<p>The difference between this one, and the non-fp-ts refactor (that I literally banged up while writing this article), is that in my non-fp-ts implementation I am hand-rolling the Either and the These. Custom-coding them.</p>
+<p>There are two problems with this - the first is that you can't lean into the type system as hard as you can when you use first class Monads that understand how they compose.</p>
+<p>Writing the program with fp-ts is the process of writing the transformations as type signatures, then using the fp-ts functions to implement the type transformations. Then you put your data inside those functions, and it flows from one end to the other.</p>
+<p>That reducer in my non-fp-ts refactor is the kind of thing that is encapsulated by the fp-ts library. That reducer is a custom state reducing machine, and writing those is error-prone and rework.</p>
+<p>The other problem is that with custom-coded implementations, it is more work for other programmers to parse the code. There is no reuse of familiar constructs. That reducer is pretty dense.</p>
+<p>It's easy to think that every problem is novel and needs custom code, but after you've been programming for a while, you start to recognise that there are a limited set of problems and data flow patterns, and well established and maintained solutions for them.</p>
+<p>And finally, as Alan Perlis said in his <a href="http://pu.inf.uni-tuebingen.de/users/klaeren/epigrams.html">epigrams on programming</a>:</p>
+<blockquote>
+<p>&ldquo;A language that doesn't affect the way you think about programming, is not worth knowing.&rdquo;</p>
+</blockquote>
+<p>Definitely, this refactor using fp-ts changed the way I think about programming. That kind of reducer may look like something from Mars, but it is just implementing a simple FP concept. Once you know that, it makes perfect sense. And if you know enough to make sense of it, the next question you'd ask is: &ldquo;<em>why did you reimplement that reduction?</em>&rdquo;</p>
+<h2 id="props-to-gcanti">Props to gcanti</h2>
+<p>I was struggling with how to accomplish the reduction of <code>Either&lt;Error, Buffer&gt;[] =&gt; These&lt;Error[], Buffer[]&gt;</code> in fp-ts. I read this article by gcanti about <a href="https://dev.to/gcanti/getting-started-with-fp-ts-either-vs-validation-5eja">Either and Validation</a>, but couldn't figure out how to do it with an array.</p>
+<p>Late at night I googled for <a href="https://fpchat-invite.herokuapp.com/">an FP Slack</a> to get some help, and ended up on the one where gcanti himself holds court!</p>
+<p>He helped me out by lifting the file reader into the Either context. The code from line 46 - 54 was written by gcanti himself, from my description of the problem.</p>
+<p>Rather than a These, it uses a construct called a <a href="https://gcanti.github.io/fp-ts/modules/ValidationT.ts.html"><code>Validation</code></a>.</p>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
+
+  </div>
   <footer>
-    <a href="/blog/2019/01/zeebe-node/" class="button big">Read more</a>
     <ul class="stats">
   
     
@@ -290,6 +395,9 @@
           
             
             <li><a class="article-category-link" href="https://joshwulf.com/categories/zeebe">zeebe</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/fp-ts">fp-ts</a></li>
           
         </ul>
       </li>
@@ -307,16 +415,14 @@
   </footer>
 </article>
 
-        
-        
+
 <div class="pagination">
   
-    <a href="/categories/zeebe/" class="button big previous"><i class="fas fa-angle-left"></i></a>
+    <a href="/blog/2020/02/providing-a-semantic-api/" class="button"><div class="previous"><div>Providing a Semantic API</div></div></a>
   
-  
-    <a href="#" class="disabled button big next"><i class="fas fa-angle-right"></i></a>
   
 </div>
+
 
       </main>
       <section id="site-sidebar">
@@ -574,8 +680,6 @@
   
       <ul class="socnet-icons">
         
-    <li><a href="/categories/zeebe/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 

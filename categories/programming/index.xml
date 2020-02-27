@@ -6,10 +6,21 @@
     <description>Recent content in programming on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Functional Refactor of Zeebe Node</title>
+      <link>https://joshwulf.com/blog/2020/02/functional-refactor/</link>
+      <pubDate>Thu, 27 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/functional-refactor/</guid>
+      <description>There is no such thing as good coding, only good refactoring.
+ I recently did a bunch of work on the Zeebe Node.js client for the upcoming 0.23 release. Zeebe Node is a client library for the Zeebe Microservices Workflow Orchestration Engine, and I maintain it.
+While doing other work, I took the opportunity to refactor one method, deployWorkflows, to add a feature that I wanted it to have. I used fp-ts, a TypeScript Functional Programming library to do it.</description>
+    </item>
     
     <item>
       <title>Providing a Semantic API</title>
