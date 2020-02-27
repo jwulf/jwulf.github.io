@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!">
 <meta itemprop="datePublished" content="2020-02-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1449">
+<meta itemprop="wordCount" content="1459">
 
 
 
@@ -385,7 +385,7 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
 <script type="application/javascript" src="https://gist.github.com/jwulf/5ffa03d23baa993635a69dd62ebe1e0f.js"></script>
 
 <p>The logic of the program is clearly expressed. You can see deploy and error outcomes, and you see: buffer or files - if buffer, deploy; otherwise read the files and then either report the error or deploy.</p>
-<p>And the functions with no dependencies are now unit testable in isolation. I put them into two sub-directories: <code>pure</code>, and <code>impure</code> (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.</p>
+<p>What I realised as soon as I moved them out, is that the functions with no dependencies are unit testable in isolation. I put them into two sub-directories: <code>pure</code>, and <code>impure</code> (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.</p>
 <p>These are all easily testable - the impure file reading function needs a little more setup to test. My code is now more expressive of its intent, and testable.</p>
 <p>With the non-FP implementations - even the fp-inspired refactor - you are forced to mentally reason through the execution of the code to understand what it does; and it is tightly coupled - meaning that you have to test the composition of side-effects <em>and</em> logic to ensure that the entire method does what it says on the box, in all permutations.</p>
 <p>This refactor is a functional specification of the method, plus some unit-testable functions that are composed to implement it.</p>
