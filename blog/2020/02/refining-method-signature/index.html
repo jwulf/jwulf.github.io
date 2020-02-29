@@ -12,7 +12,7 @@
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1690">
+<meta itemprop="wordCount" content="1688">
 
 
 
@@ -396,7 +396,7 @@
 
 <p>Marginally better. It reduces cognitive load when encountering the library for the first time, and for using it. But my original sin against clean code principles is still there for the world to see.</p>
 <h2 id="method-overloads">Method Overloads</h2>
-<p>In statically-compiled languages such as Java and C#, you can provide an alternate method implementation with the same name but a different parameter signature. On compilation, the compiler resolves the one you mean from a combination of the method name and the parameter signature, and links the call to the correct implementation.</p>
+<p>In statically-compiled languages such as Java and C#, you can provide multiple method implementations with the same name but different parameter signatures. On compilation, the compiler resolves the one you mean from a combination of the method name and the parameter signature, and links the call to the correct implementation.</p>
 <p>With TypeScript, you can provide different parameter signatures for the same method, but because all type information is erased at run-time, you have to handle the various signatures in a single implementation.</p>
 <p>Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards compatible way.</p>
 <p>I held off on it, and finally bit the bullet and did it in the work for the 0.23.0-alpha.1 release, providing an alternate method signature, one that no longer requires the worker id as an argument.</p>
