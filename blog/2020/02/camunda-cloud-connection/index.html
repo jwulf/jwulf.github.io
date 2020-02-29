@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1444">
+<meta itemprop="wordCount" content="1446">
 
 
 
@@ -376,7 +376,7 @@
 <p>See the article &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoiding Global Mutable State in Browser JS</a>&rdquo; and the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant##valid-use-of-variables">Valid use of variables</a>&rdquo; section in the article &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant##valid-use-of-variables">Shun the mutant - the case for <code>const</code></a>&rdquo; for more discussion about this.</p>
 <p>That implementing connection characteristics requires changes to multiple components is a <a href="https://en.wikipedia.org/wiki/Code_smell">code smell</a> that indicates there is a first-class concern with no, or an incorrectly bounded, materialised entity in the code.</p>
 <p>It is time for a significant refactor. The time required for this refactor is not trivial, and I conveniently ignored the error message until it became a failing test suite, then looked long and hard at the code before committing to this.</p>
-<p>This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to handle various failure conditions. However, you don't have to be Einstein to realise that:</p>
+<p>This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to signal and handle various failure conditions. However, you don't have to be Einstein to realise that:</p>
 <blockquote>
 <p>“We can not solve our problems with the same level of thinking that created them.” - Albert Einstein</p>
 </blockquote>
