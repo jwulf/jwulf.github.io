@@ -12,7 +12,7 @@
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1671">
+<meta itemprop="wordCount" content="1679">
 
 
 
@@ -363,7 +363,30 @@
 <p>If it should be ignored, why is it even visible?</p>
 </blockquote>
 <p>I also found myself having to supply information to the method every time I used it that was just thrown away.</p>
-<p>With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can't just change the signature in a breaking way. The problems of success.</p>
+<p>With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can't just change the signature in a breaking way. That breaks it for a lot of people.</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Zeebe Node" href="/img/2020/02/npm-downloads.png" data-caption=""><img src="/img/2020/02/npm-downloads.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p>The problems of success.</p>
 <h2 id="making-a-required-parameter-optional">Making a required parameter &ldquo;optional&rdquo;</h2>
 <p>The first thing I did, for my own sanity, is make that first parameter - <code>id</code> - nullable. So the signature changed like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/2bed7fa5f6f084fed317cd4ba6a5e731.js"></script>
