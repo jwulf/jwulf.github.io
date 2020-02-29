@@ -12,7 +12,7 @@
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1717">
+<meta itemprop="wordCount" content="1726">
 
 
 
@@ -421,7 +421,7 @@
 <p>But wait - <em>there's more</em>!</p>
 <p>Now you have to decode the call at run-time by examining the actual parameters that you received, and determining which signature the caller used, and which parameter is which.</p>
 <p>That is why the implementation signature (not shown to consumers) contains parameter names like <code> taskHandlerOrOptions</code>.</p>
-<p>To reduce the internal complexity of the method (<em>that's</em> about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function:</p>
+<p>To reduce the internal complexity of the method (<em>that's</em> about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function.</p>
 <p>The entire impact on the <em>internal</em> complexity of the method is this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/0dfa6db868afa330f6a9035f57a5aea4.js"></script>
 
@@ -432,10 +432,10 @@
 <p>That's a lot of internal complexity required to go from:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/183b62dce9d1cfe70f05201f6599495a.js"></script>
 
-<p>to this (with backwards compatibility):</p>
+<p>to this, <em>with backwards-compatibility</em>:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/4a3c8a3c10d3dc886b49b573a5c4e8fc.js"></script>
 
-<p>Going to the third signature, with a single object parameter, will be a small amount of additional code. A new signature overload, a line or two in the decoder, then changes to documentation and a test or two.</p>
+<p>Going to the third signature, with a single object parameter, will be a small amount of additional code: a new signature overload, a line or two in the decoder, then changes to documentation, and a test or two (<em>because I don't touch the implementation, just the run-time decoder</em>).</p>
 <p>And to think:</p>
 <p><strong>All that code could have been avoided by using an object parameter for a method that takes more than one parameter</strong></p>
 <p>/<em>makes note</em>.</p>
