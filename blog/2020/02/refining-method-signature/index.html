@@ -12,7 +12,7 @@
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1716">
+<meta itemprop="wordCount" content="1717">
 
 
 
@@ -324,9 +324,9 @@
 <p>One early design decision has haunted me for the last year, causing me sleepless nights as I toss and turn, tormented by my guilty conscience.</p>
 <p>The <code>ZBClient.createWorker()</code> method - to create a new job worker process - takes as one of its parameters an <code>id</code>, used to uniquely identify a specific instance of a worker in events exported from the broker.</p>
 <p>Events viewed in the exporter records contain information like &ldquo;<em>Worker THX-1138 activated 3 jobs</em>&quot;.</p>
-<p>It turns out, after using the library extensively myself, and observing others use it, that this parameter is not widely used. In fact, the <a href="https://www.npmjs.com/package/@payk/nestjs-zeebe">Zeebe NestJS integration</a>, (written by <a href="https://github.com/danshapir">Dan Shapir</a> at <a href="http://www.payk.com.au/">Pay-K</a>) which integrates the Zeebe Node client with the excellent <a href="https://nestjs.com/">NestJS framework</a>, auto-assigns ids to the workers. The ability to assign a specific <code>id</code> for the worker is not exposed to the user.</p>
+<p>It turns out, after using the library extensively myself, and observing others use it, that this parameter is not widely used (yet). In fact, the <a href="https://www.npmjs.com/package/@payk/nestjs-zeebe">Zeebe NestJS integration</a>, (written by <a href="https://github.com/danshapir">Dan Shapir</a> at <a href="http://www.payk.com.au/">Pay-K</a>) which integrates the Zeebe Node client with the excellent <a href="https://nestjs.com/">NestJS framework</a>, auto-assigns ids to the workers. The ability to assign a specific <code>id</code> for the worker is not exposed to the user.</p>
 <p>That's not to say that it will not be used in the future. In larger systems with more worker processes than the ones currently in use, the id may well be derived from an environment variable, to allow misbehaving worker instances (including out-of-date ones) to be identified and dealt with.</p>
-<p>But for now, requiring a worker id to create a worker is clunky.</p>
+<p>But for now, <em>requiring</em> a worker id to create a worker is clunky.</p>
 <p>The source of my problem here is that I violated a principle explained in Bob Martin's &ldquo;<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Clean Code: A Handbook of Agile Software Craftsmanship</a>&quot;:</p>
 <blockquote>
 <p>The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided where possible. More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.</p>
