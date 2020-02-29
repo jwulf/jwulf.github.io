@@ -355,6 +355,7 @@
 <p><code>const</code>, on the other hand, communicates &ldquo;<em>this is an immutable assignment</em>&quot;. The machine will throw if you accidentally attempt a mutation, and other programmers do not need to read code between the assignment and an eventual use, later in the codebase, to know what is going on.</p>
 <p>I also changed the name of <code>memArray</code> to <code>GlobalMembersArray</code>. This is not a newable object, but the prefix <code>Global</code>, by convention, tells me that it is a global object, and suffix <code>Array</code> tells me that it is an array - anywhere that I encounter it in the code. See <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">this article</a> for a full refactor of this variable.</p>
 <p>Finally, I changed the name of <code>memObj1</code> to <code>member1</code>. It is a small change, but it increases the overall comprehensibility of the code.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="second-refactor">Second Refactor</h2>
 <p>The function as it stands now communicates little information about its parameters.</p>
 <p>Fortunately, they are well named, so by looking at the function signature we can see what they are.</p>
@@ -491,6 +492,21 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2020/02/refining-method-signature/" class="image featured">
+    <img src="/img/2020/02/zeebe-overload.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/refining-method-signature/">Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript</a></h1>
+          <time class="published" datetime="">February 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/02/camunda-cloud-connection/" class="image featured">
     <img src="/img/2020/02/zeebe-state-machine.png" alt="">
   </a>
@@ -548,21 +564,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/02/avoid-global-state/" class="image featured">
-    <img src="/img/2020/02/stack-overflow.png" alt="">
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/02/avoid-global-state/">Avoiding global mutable state in browser JS</a></h1>
-          <time class="published" datetime="">February 24, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -582,17 +583,17 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">14</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">15</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">14</span></a>
+              <a href="/categories/programming/">programming<span class="count">15</span></a>
             
           
           <li>
             
-              <a href="/categories/zeebe/">zeebe<span class="count">5</span></a>
+              <a href="/categories/zeebe/">zeebe<span class="count">6</span></a>
             
           
           <li>
@@ -718,6 +719,11 @@
           <li>
             
               <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/typescript/">typescript<span class="count">1</span></a>
             
           
           </li>

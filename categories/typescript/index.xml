@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>typescript on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/typescript/</link>
+    <description>Recent content in typescript on Josh Wulf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://joshwulf.com/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript</title>
+      <link>https://joshwulf.com/blog/2020/02/refining-method-signature/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/refining-method-signature/</guid>
+      <description>When I wrote the first iteration of the Zeebe Node client library in the first months of 2019, I didn&#39;t have any experience in using it. How could I - it didn&#39;t exist.
+One early design decision has haunted me for the last year, causing me sleepless nights as I toss and turn, tormented by my guilty conscience.
+The ZBClient.createWorker() method - to create a new job worker process - takes as one of its parameters an id, used to uniquely identify a specific instance of a worker in events exported from the broker.</description>
+    </item>
+    
+  </channel>
+</rss>
