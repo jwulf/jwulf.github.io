@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>fp-ts on Josh Wulf</title>
-    <link>https://joshwulf.com/categories/fp-ts/</link>
-    <description>Recent content in fp-ts on Josh Wulf</description>
+    <title>Camunda Cloud on Josh Wulf</title>
+    <link>https://joshwulf.com/categories/camunda-cloud/</link>
+    <description>Recent content in Camunda Cloud on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://joshwulf.com/categories/fp-ts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://joshwulf.com/categories/camunda-cloud/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,17 +20,6 @@
       <description>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.
 I was immediately forced to deal with something I&#39;d been conveniently ignoring - Camunda Cloud gRPC connections always fail initially, before eventually succeeding.
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &amp;ldquo;READY&amp;rdquo; state.</description>
-    </item>
-    
-    <item>
-      <title>A Functional Refactor of Zeebe Node with fp-ts</title>
-      <link>https://joshwulf.com/blog/2020/02/functional-refactor/</link>
-      <pubDate>Thu, 27 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/blog/2020/02/functional-refactor/</guid>
-      <description>There is no such thing as good coding, only good refactoring.
- I recently did a bunch of work on the Zeebe Node.js client for the upcoming 0.23 release. Zeebe Node is a client library for the Zeebe Microservices Workflow Orchestration Engine, and I maintain it.
-While doing other work, I took the opportunity to refactor one method, deployWorkflows, to add a feature that I wanted it to have. I used fp-ts, a TypeScript Functional Programming library to do it.</description>
     </item>
     
   </channel>

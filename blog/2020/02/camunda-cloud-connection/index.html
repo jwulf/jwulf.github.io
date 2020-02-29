@@ -2,31 +2,31 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>A Functional Refactor of Zeebe Node with fp-ts - Josh Wulf</title>
+<title>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One - Josh Wulf</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
   <meta name="generator" content="Hugo 0.60.0" />
-  <meta itemprop="name" content="A Functional Refactor of Zeebe Node with fp-ts">
-<meta itemprop="description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!">
-<meta itemprop="datePublished" content="2020-02-27T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1465">
+  <meta itemprop="name" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One">
+<meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
+<meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1407">
 
 
 
 <meta itemprop="keywords" content="" />
-  <meta property="og:title" content="A Functional Refactor of Zeebe Node with fp-ts" />
-<meta property="og:description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!" />
+  <meta property="og:title" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One" />
+<meta property="og:description" content="Building a state machine with business rules to deal with connection characteristics" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://joshwulf.com/blog/2020/02/functional-refactor/" />
-<meta property="article:published_time" content="2020-02-27T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-02-27T00:00:00+00:00" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/02/camunda-cloud-connection/" />
+<meta property="article:published_time" content="2020-02-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-29T00:00:00+00:00" />
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="A Functional Refactor of Zeebe Node with fp-ts"/>
-<meta name="twitter:description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!"/>
+<meta name="twitter:title" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One"/>
+<meta name="twitter:description" content="Building a state machine with business rules to deal with connection characteristics"/>
 <meta name="twitter:site" content="@sitapati"/>
 
   
@@ -146,37 +146,37 @@
 
   
     
-    <a href="//twitter.com/share?text=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;description=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;description=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn pinterest">
           <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -251,15 +251,15 @@
   <header>
   <div class="title">
     
-        <h2><a href="/blog/2020/02/functional-refactor/">A Functional Refactor of Zeebe Node with fp-ts</a></h2>
+        <h2><a href="/blog/2020/02/camunda-cloud-connection/">Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One</a></h2>
     
     
-        <p>Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!</p>
+        <p>Building a state machine with business rules to deal with connection characteristics</p>
     
 </div>
   <div class="meta">
-    <time class="published" datetime="2020-02-27 00:00:00 &#43;0000 UTC">
-      February 27, 2020
+    <time class="published" datetime="2020-02-29 00:00:00 &#43;0000 UTC">
+      February 29, 2020
     </time>
     <span class="author">Josh Wulf</span>
     
@@ -276,37 +276,37 @@
 
   
     
-    <a href="//twitter.com/share?text=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;title=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f&amp;description=A%20Functional%20Refactor%20of%20Zeebe%20Node%20with%20fp-ts" target="_blank" rel="noopener" class="share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f&amp;description=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20One" target="_blank" rel="noopener" class="share-btn pinterest">
           <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2ffunctional-refactor%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcamunda-cloud-connection%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -314,84 +314,90 @@
 
   </section>
   
-  <a href="/blog/2020/02/functional-refactor/" class="image featured">
-    <img src="/img/2020/02/zeebe-node.png" alt="">
+  <a href="/blog/2020/02/camunda-cloud-connection/" class="image featured">
+    <img src="/img/2020/02/zeebe-state-machine.png" alt="">
   </a>
 
 
   <div class="content">
-    <blockquote>
-<p>There is no such thing as good coding, only good refactoring.</p>
-</blockquote>
-<p>I recently did a bunch of work on the <a href="https://npmjs.org/zeebe-node">Zeebe Node.js client</a> for the upcoming 0.23 release. Zeebe Node is a client library for the <a href="https://zeebe.io">Zeebe Microservices Workflow Orchestration Engine</a>, and I maintain it.</p>
-<p>While doing other work, I took the opportunity to refactor one method, <code>deployWorkflows</code>, to add a feature that I wanted it to have. I used <a href="https://github.com/gcanti/fp-ts">fp-ts</a>, a TypeScript Functional Programming library to do it.</p>
-<p>I discovered fp-ts after I used <a href="https://github.com/gcanti/io-ts">io-ts</a>, another library by the same author - <a href="https://dev.to/gcanti">Giulio Canti</a> (gcanti), to decode the environment variables for the Zeebe GitHub Action.</p>
-<p>The benefit of using io-ts is that it allows you to express run-time validations of required and optional parameters that also provide design-time type checking and intellisense. Handy!</p>
-<p>You really only appreciate it when you've tried to <a href="https://github.com/jwulf/ghettohub-db/blob/master/src/parameters.ts">write that kind of code by hand</a>. I got run-time validation with property key maps, but couldn't get intellisense without writing interfaces - double handling.</p>
-<p>Using io-ts got me &ldquo;<em>two for the price of one</em>&quot;. One set of definitions for strong typing in the IDE <em>and</em> run-time validation.</p>
-<p>It did mean, however, that I had to make my consuming code deal with the Monads that io-ts returns, so it pulled in fp-ts.</p>
-<p>After using fp-ts, I could see an opportunity to use the FP approach to implement this new feature in Zeebe Node, so I did.</p>
-<h2 id="the-problem">The Problem</h2>
-<p>The <code>deployWorkflows</code> method takes an object (containing a buffer), a single filename (string), or an array of filenames. It then constructs a <a href="https://docs.zeebe.io/reference/grpc.html#deployworkflow-rpc">DeployWorkflowRequest</a> gRPC payload to send to Zeebe.</p>
-<p>It does this by either appending the object, or if it gets a string, putting it in an array, and then mapping over the array to read the files into buffers. It then maps over that array to construct the DeployWorkflowRequest.</p>
-<p>If one of the files cannot be found, it immediately throws.</p>
-<p>Here is the code, before refactoring:</p>
-<script type="application/javascript" src="https://gist.github.com/jwulf/068397de244ad0e21f035df04c3a3bd6.js"></script>
+    <p>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.</p>
+<p>I was immediately forced to deal with something I'd been conveniently ignoring - Camunda Cloud gRPC connections <em>always</em> fail initially, before eventually succeeding.</p>
+<p>This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &ldquo;READY&rdquo; state.</p>
+<p>This is a characteristic of this connection that differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).</p>
+<p>What that looks like for a user is:</p>
 
-<p>It's pretty simple and easy to understand. It has <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">no variables and no loops</a>. It does have a few <code>if</code> statements that could be refactored to ternaries. That would reduce the indentation.</p>
-<p>Basically, there are three parts to the logic:</p>
-<p>First, if the argument is not an array, put it in an array. Now we have an array of ( one or more strings, or an object ).</p>
-<p>Next, we map over the array, and for each element, if it is an object, append the request. If it
-is a string, read the file and append the resulting buffer; then deploy - or throw if we can't find a file.</p>
-<p>Some data transformation, and two outcomes: deploy or throw.</p>
-<p>The issue with this implementation is that we cannot return information about <em>multiple</em> missing files - only the first one we encounter.</p>
-<p>I would like it to read all the files, and exit if one or more are missing with a list of <em>all</em> missing files.</p>
-<h2 id="refactor-without-fpts">Refactor Without fp-ts</h2>
-<p>This could actually be accomplished by mapping the array with a file reader function and returning <code>{buffer}</code> or <code>{error}</code> objects, then reducing that, then either throwing or constructing the request, like this:</p>
-<script type="application/javascript" src="https://gist.github.com/jwulf/60e1d53d0b38056f9acfd82e05946125.js"></script>
 
-<p>Actually, that's a pretty good solution right there. It borrows heavily from the kind of thinking I had to do to accomplish this with fp-ts. It's obvious to me in hindsight! :-)</p>
-<p>Recently I've been reading <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/">Professor Frisby's Mostly Adequate Guide to Functional Programming</a> - a book on FP in vanilla JS. That has also been changing how I think about coding in JS.</p>
-<p>This refactor uses the functional construct of an <a href="https://gcanti.github.io/fp-ts/modules/Either.ts.html"><code>Either</code></a>, where errors flow down the left-hand path, and values down the right. The <code>read</code> function returns an <code>Either</code>. It returns <em>either</em> an error or a result.</p>
-<p>We map the read function over the workflows array, and end up with an array of <code>Either&lt;Error, Buffer&gt;</code>.</p>
-<p>We then reduce that array down to a single object whose functional type is called <a href="https://gcanti.github.io/fp-ts/modules/These.ts.html"><code>These</code></a>. It contains a collection of Errors and Buffers. We have an anonymous <code>These</code>, and immediately destructure it into its left-hand <code>errors</code> and right-hand <code>buffers</code>.</p>
-<p>We then test the left-hand side of the <code>These</code>, and if it contains any errors, we throw with a list of the missing files - otherwise we move forward with deploying the Buffers.</p>
-<h2 id="refactor-in-fpts">Refactor in fp-ts</h2>
-<p>Here is what I actually ended up with. This uses the fp-ts first-class entity <code>Either</code>, which has it own methods.</p>
-<script type="application/javascript" src="https://gist.github.com/jwulf/d90f7812126c307184104bb69e69b24a.js"></script>
 
-<p>The difference between this one, and the non-fp-ts refactor (that I literally banged up while writing this article), is that in my non-fp-ts implementation I am hand-rolling the Either and the These. Custom-coding them.</p>
-<p>There are two problems with this - the first is that you can't lean into the type system as hard as you can when you use first class Monads that understand how they compose.</p>
-<p>Writing the program with fp-ts is the process of writing the transformations as type signatures, then using the fp-ts functions to implement the type transformations. Then you put your data inside those functions, and it flows from one end to the other.</p>
-<p>That reducer in my non-fp-ts refactor is the kind of thing that is encapsulated by the fp-ts library. That reducer is a custom state reducing machine, and writing those is error-prone and rework.</p>
-<p>The other problem is that with custom-coded implementations, it is more work for other programmers to parse the code. There is no reuse of familiar constructs. That reducer is pretty dense.</p>
-<p>It's easy to think that every problem is novel and needs custom code, but after you've been programming for a while, you start to recognise that there are a limited set of problems and data flow patterns, and well established and maintained solutions for them.</p>
-<p>And finally, as Alan Perlis said in his <a href="http://pu.inf.uni-tuebingen.de/users/klaeren/epigrams.html">epigrams on programming</a>:</p>
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Camunda Cloud" href="/img/2020/02/camunda-cloud-connection-characteristics.png" data-caption=""><img src="/img/2020/02/camunda-cloud-connection-characteristics.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p>I had been ignoring this as &ldquo;expected behaviour&rdquo;, and my <a href="http://matizmo.com/the-importance-of-ras-and-its-implications-with-your-content-the-cocktail-party-phenomenon/">reticular activating system</a> had conveniently made it invisible to me.</p>
+<p>The failure of the integration tests made it abundantly clear that this is actually <em>not</em> expected behaviour in the formal specifications for the client (the tests).</p>
+<h2 id="designing-for-developer-ux">Designing for Developer UX</h2>
+<p>It is bad user experience (UX) design.</p>
+<p>When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing, <em>and</em> whether they are doing it right. When it is not working as they expect, they don't know if their expectation is erroneous or they have done something incorrectly. Users are often unaware even that they <em>have</em> a model of the system composed of expectations they hold as a hypothesis. Instead, they think: &ldquo;<em>Something is wrong. This is not working.</em>&rdquo;</p>
+<p>There are four things that can be at the cause of this:</p>
+<ul>
+<li>The user has missed a step or made a mistake in their code or configuration.</li>
+<li>There is an intermittent failure condition (network down, service interruption).</li>
+<li>There is a bug in the library.</li>
+<li>The user's expectation is incorrect (actual behaviour is correct, expected behaviour is incorrect).</li>
+</ul>
+<p>Surfacing that last one - <em>the unexamined hypotheses that the user holds about the system as their working model of the system</em> - is why bug reports request &ldquo;Expected Behaviour&rdquo; and &ldquo;Actual Behaviour&rdquo; in their templates.</p>
+<p><em>Any</em> message presented to the user while they are developing their model of the system <em>must</em> take into account that the user's model is unformed, and the user is usually not consciously forming the model. I mean <em>any</em> message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message (<a href="https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048">an example from the Zeebe Forum</a>), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely (<a href="https://github.com/zeebe-io/zeebe/issues/3890">GitHub issue &ldquo;Reword Blocking request DEBUG Message&rdquo;</a>).</p>
+<p>This particular message in the Zeebe Node client - that <em>every single connection</em> to Camunda Cloud <em>always</em> emits an error, is <strong>terrible</strong> for UX.</p>
+<p>New users have enough uncertainty already. This behaviour guarantees that <em>even if they do everything correctly</em>, they are still going to be thinking: &ldquo;<em>I've done something wrong, it's not working.</em>&rdquo;</p>
+<p>And if they <em>have</em> done something incorrectly and it is not working, this message provides them with no clue as to what <em>that</em> is, and will lead them on a <a href="https://en.wiktionary.org/wiki/wild-goose_chase">wild-goose chase</a>.</p>
+<p>It has to go.</p>
+<h2 id="the-current-grpc-state-machine">The Current gRPC State Machine</h2>
+<p>The current gRPC connection state machine has evolved over time. It started off pretty simple, then evolved to emit error events, then a <a href="https://github.com/creditsenseau/zeebe-client-node-js/issues/71">ready event for the downstream Node-RED client</a>, then <a href="https://github.com/creditsenseau/zeebe-client-node-js/issues/80">managing the gRPC Error 8 event</a> for Broker back pressure response.</p>
+<p>As these features were added, the responsibility for managing the representation of the current connection state (that's a <a href="(https://www.joshwulf.com/blog/2020/02/shun-the-mutant##valid-use-of-variables)">true variable in the code</a>), debouncing transitions (<em>the channel state can flap about wildly during retries when it does go down - and this requires managing more state: time</em>), and attaching different user-defined event handlers (<em>if you add one for worker job streaming to the same connection used for client commands, it gets called for both</em>), got split between the <code>ZBClient</code>, <code>ZBWorker</code>, and <code>GRPCClient</code> classes. This happened because these various patches were made one after the other, with no refactoring.</p>
+<p>Now, adding the concept of &ldquo;connection characteristics&rdquo; will exponentially complicate already fragile code. State management is the bane of program correctness and a source of interminable bugs and edge conditions. State needs to be coalesced as an encapsulated concern in an application to avoid leaking this complexity into the other components in an application, and making changes to state management a distributed concern that touches many components.</p>
+<p>See the article &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoiding Global Mutable State in Browser JS</a>&rdquo; and the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant##valid-use-of-variables">Valid use of variables</a>&rdquo; section in the article &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant##valid-use-of-variables">Shun the mutant - the case for <code>const</code></a>&rdquo; for more discussion about this.</p>
+<p>That implementing connection characteristics requires changes to multiple components is a <a href="https://en.wikipedia.org/wiki/Code_smell">code smell</a> that indicates there is a first-class concern with no, or an incorrectly bounded, materialised entity in the code.</p>
+<p>It is time for a significant refactor. The time required for this refactor is not trivial, and I looked long and hard at the code before determining this (<em>and ignored the error message until it became a failing test suite</em>).</p>
+<p>This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to handle various failure conditions. However, you don't have to be Einstein to realise that:</p>
 <blockquote>
-<p>&ldquo;A language that doesn't affect the way you think about programming, is not worth knowing.&rdquo;</p>
+<p>“We can not solve our problems with the same level of thinking that created them.” - Albert Einstein</p>
 </blockquote>
-<p>Definitely, this refactor using fp-ts changed the way I think about programming. That kind of reducer may look like something from Mars, but it is just implementing a simple FP concept. Once you know that, it makes perfect sense. And if you know enough to make sense of it, the next question you'd ask is: &ldquo;<em>why did you reimplement that reduction?</em>&rdquo;</p>
-<h2 id="props-to-gcanti">Props to gcanti</h2>
-<p>I was struggling with how to accomplish the reduction of <code>Either&lt;Error, Buffer&gt;[] =&gt; These&lt;Error[], Buffer[]&gt;</code> in fp-ts. I read this article by gcanti about <a href="https://dev.to/gcanti/getting-started-with-fp-ts-either-vs-validation-5eja">Either and Validation</a>, but couldn't figure out how to do it with an array.</p>
-<p>Late at night I googled for <a href="https://fpchat-invite.herokuapp.com/">an FP Slack</a> to get some help, and ended up on the one where gcanti himself holds court!</p>
-<p>He helped me out by lifting the file reader into the Either context. The code from line 46 - 54 was written by gcanti himself, from my description of the problem.</p>
-<p>Rather than a These, it uses a construct called a <a href="https://gcanti.github.io/fp-ts/modules/ValidationT.ts.html"><code>Validation</code></a>.</p>
-<h2 id="addendum-on-testability">Addendum on testability</h2>
-<p>After I published this article, I got some feedback on it from the FP Chat Slack:</p>
+<p>In this case, adding the concept of &ldquo;Connection Characteristics&rdquo; with differential behaviours to a non-first class abstraction is asking for a million bug reports and an unending game of whack-a-mole where fixing one problem causes problems with other behaviours.</p>
+<p>No thanks. I'll suck up the refactor costs.</p>
+<p>The code should model the domain. We now have in the domain &ldquo;<em>various gRPC connection classes with different business rules for handling their characteristics</em>&quot;, so we are going to refactor the code to model that bounded context.</p>
+<p>Fortunately, I already have the behavioural specification written - my integration tests. If I change nothing in those, I just have to make Camunda Cloud's integration test go green and keep the CircleCI one green, and I can be confident that it works as expected.</p>
+<p>As Evan Burchard explains, in his excellent book &ldquo;<a href="https://www.amazon.com/Refactoring-JavaScript-Turning-Code-Into/dp/1491964928">Refactoring JavaScript: Turning Bad Code into Good Code</a>&quot;:</p>
 <blockquote>
-<p>I would've usually extracted any pure functions created during the refactor from the body of the original function.</p>
+<p>When we have any code that lacks tests (or at least a documented way of executing it), we do not want to change this code. We can’t refactor it, because we won’t be able to verify that the behavior doesn’t change.</p>
 </blockquote>
-<p>Here is what it looks like with that done (I left <code>error</code> in to document both return values):</p>
-<script type="application/javascript" src="https://gist.github.com/jwulf/5ffa03d23baa993635a69dd62ebe1e0f.js"></script>
-
-<p>The logic of the program is clearly expressed. You can see deploy and error outcomes, and you see on lines 20 - 24:</p>
-<blockquote>
-<p><em>Takes either a buffer or files - if buffer, deploy; otherwise read the files, then either report the error or deploy</em>.</p>
-</blockquote>
-<p>I realised, as soon as I moved them out, that the functions with no dependencies are unit testable in isolation. I put them into two sub-directories: <code>pure</code> and <code>impure</code> (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.</p>
-<p>These are all easily testable - the impure file reading function needs a little more setup to test. My code is now more expressive of its intent, and more testable.</p>
-<p>With the non-FP implementations - even the fp-inspired refactor - you are forced to mentally reason through the execution of the code to understand what it does; and it is tightly coupled - meaning that you have to test the composition of side-effects <em>and</em> logic to ensure that the entire method does what it says on the box, in all permutations.</p>
-<p>This refactor is a functional specification of the method, plus some unit-testable functions that are composed to implement it.</p>
+<h2 id="step-one-explain-it-in-plain-language">Step One: Explain it in plain language</h2>
+<p>The first step is to write a specification in a non-executable language - aka plain English.</p>
+<p>This is the initial specification, and it should strive to be an unambiguous definition.</p>
+<p>I created a GitHub issue &ldquo;<a href="https://github.com/creditsenseau/zeebe-client-node-js/issues/133">Manage that Camunda Cloud connections <em>always</em> error before eventually succeeding</a>&quot;, and described the motivation for the refactor in there.</p>
+<p>Then, I added a <a href="https://github.com/creditsenseau/zeebe-client-node-js/issues/133#issuecomment-592862739">design specification as a comment</a>.</p>
+<p>I am going to separate the functionality into two layers:</p>
+<ul>
+<li>The underlying GRPCClient that manages the gRPC connection and emits state events.</li>
+<li>An intermediary Business Rules component that models the connection characteristics and ensures that various connections behave the same at the API level.</li>
+</ul>
+<p>There is one concern whose location I am not yet clear about. I am thinking that the GRPCClient will have a method to turn on a buffering mode, where it buffers state transition events, and then returns the eventual state with a list of intermediate transitions, after a specified period of time.</p>
+<p>This allows me to turn this on for Camunda Cloud connections, and throw away those initial failures, reporting only the ultimate result.</p>
+<p>This may complicate the GRPCClient state machine by adding an additional state machine to it (<em>managing time, and the current operational mode</em>), so I may move this into the Connection Characteristics component. We shall see. It's a working hypothesis. Gotta start with some kind of vision, and keep re-evaluating along the way.</p>
+<p>OK, let the fun begin!</p>
 <p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
@@ -415,6 +421,9 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
             
             <li><a class="article-category-link" href="https://joshwulf.com/categories/fp-ts">fp-ts</a></li>
           
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/camunda-cloud">Camunda Cloud</a></li>
+          
         </ul>
       </li>
     
@@ -434,10 +443,8 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
 
 <div class="pagination">
   
-    <a href="/blog/2020/02/providing-a-semantic-api/" class="button"><div class="previous"><div>Providing a Semantic API</div></div></a>
+    <a href="/blog/2020/02/functional-refactor/" class="button"><div class="previous"><div>A Functional Refactor of Zeebe Node with fp-ts</div></div></a>
   
-  
-    <a href="/blog/2020/02/camunda-cloud-connection/" class="button"><div class="next"><div>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One</div></div></a>
   
 </div>
 

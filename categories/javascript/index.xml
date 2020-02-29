@@ -6,10 +6,21 @@
     <description>Recent content in javascript on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 27 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One</title>
+      <link>https://joshwulf.com/blog/2020/02/camunda-cloud-connection/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/02/camunda-cloud-connection/</guid>
+      <description>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.
+I was immediately forced to deal with something I&#39;d been conveniently ignoring - Camunda Cloud gRPC connections always fail initially, before eventually succeeding.
+This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &amp;ldquo;READY&amp;rdquo; state.</description>
+    </item>
     
     <item>
       <title>A Functional Refactor of Zeebe Node with fp-ts</title>
