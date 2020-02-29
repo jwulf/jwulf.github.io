@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1410">
+<meta itemprop="wordCount" content="1412">
 
 
 
@@ -362,7 +362,8 @@
 <li>The user's expectation is incorrect (actual behaviour is correct, expected behaviour is incorrect).</li>
 </ul>
 <p>Surfacing that last one - <em>the unexamined hypotheses that the user holds about the system as their working model of the system</em> - is why bug reports request &ldquo;Expected Behaviour&rdquo; and &ldquo;Actual Behaviour&rdquo; in their templates.</p>
-<p><em>Any</em> message presented to the user while they are developing their model of the system <em>must</em> take into account that the user's model is unformed, and the user is usually not consciously forming the model. I mean <em>any</em> message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message (<a href="https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048">an example from the Zeebe Forum</a>), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely (<a href="https://github.com/zeebe-io/zeebe/issues/3890">GitHub issue &ldquo;Reword Blocking request DEBUG Message&rdquo;</a>).</p>
+<p><em>Any</em> message presented to the user while they are developing their model of the system <em>must</em> take into account that the user's model is unformed, and also that the user is usually not <em>consciously</em> forming the model.</p>
+<p>I mean <em>any</em> message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message (<a href="https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048">an example from the Zeebe Forum</a>), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely (<a href="https://github.com/zeebe-io/zeebe/issues/3890">GitHub issue &ldquo;Reword Blocking request DEBUG Message&rdquo;</a>).</p>
 <p>This particular message in the Zeebe Node client - that <em>every single connection</em> to Camunda Cloud <em>always</em> emits an error, is <strong>terrible</strong> for UX.</p>
 <p>New users have enough uncertainty already. This behaviour guarantees that <em>even if they do everything correctly</em>, they are still going to be thinking: &ldquo;<em>I've done something wrong, it's not working.</em>&rdquo;</p>
 <p>And if they <em>have</em> done something incorrectly and it is not working, this message provides them with no clue as to what <em>that</em> is, and will lead them on a <a href="https://en.wiktionary.org/wiki/wild-goose_chase">wild-goose chase</a>.</p>
