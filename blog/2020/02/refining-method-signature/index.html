@@ -12,7 +12,7 @@
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1708">
+<meta itemprop="wordCount" content="1716">
 
 
 
@@ -388,7 +388,7 @@
 
 <p>The problems of success.</p>
 <h2 id="making-a-required-parameter-optional">Making a required parameter &ldquo;optional&rdquo;</h2>
-<p>The first thing I did, for my own sanity, is make that first parameter - <code>id</code> - nullable. So the signature changed like this:</p>
+<p>The first thing I did, for my own sanity, is make that first parameter - <code>id</code> - nullable (assigning a UUID if <code>null</code> is passed in). So the signature changed like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/2bed7fa5f6f084fed317cd4ba6a5e731.js"></script>
 
 <p>Now you can write (and examples look like) this:</p>
