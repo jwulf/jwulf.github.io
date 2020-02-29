@@ -12,7 +12,7 @@
 <meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1407">
+<meta itemprop="wordCount" content="1402">
 
 
 
@@ -323,7 +323,7 @@
     <p>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.</p>
 <p>I was immediately forced to deal with something I'd been conveniently ignoring: <strong>Camunda Cloud gRPC connections <em>always</em> report failure initially, before eventually succeeding</strong>.</p>
 <p>This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &ldquo;READY&rdquo; state.</p>
-<p>This is a characteristic of this connection that differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).</p>
+<p>This &ldquo;connection characteristic&rdquo; differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).</p>
 <p>What that looks like for a user is:</p>
 
 
