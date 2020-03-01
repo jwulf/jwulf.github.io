@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Camunda Cloud</title>
       <link>https://joshwulf.com/categories/camunda-cloud/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/camunda-cloud/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>fp-ts</title>
       <link>https://joshwulf.com/categories/fp-ts/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/fp-ts/</guid>
       <description></description>
@@ -32,7 +32,7 @@
     <item>
       <title>javascript</title>
       <link>https://joshwulf.com/categories/javascript/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/javascript/</guid>
       <description></description>
@@ -41,9 +41,18 @@
     <item>
       <title>programming</title>
       <link>https://joshwulf.com/categories/programming/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zeebe</title>
+      <link>https://joshwulf.com/categories/zeebe/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/zeebe/</guid>
       <description></description>
     </item>
     
@@ -53,15 +62,6 @@
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/typescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>zeebe</title>
-      <link>https://joshwulf.com/categories/zeebe/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/categories/zeebe/</guid>
       <description></description>
     </item>
     

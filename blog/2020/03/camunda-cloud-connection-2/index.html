@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two">
+<meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
+<meta itemprop="datePublished" content="2020-03-01T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-01T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1802">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two" />
+<meta property="og:description" content="Building a state machine with business rules to deal with connection characteristics" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/03/camunda-cloud-connection-2/" />
+<meta property="article:published_time" content="2020-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-01T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two"/>
+<meta name="twitter:description" content="Building a state machine with business rules to deal with connection characteristics"/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;description=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/03/camunda-cloud-connection-2/">Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two</a></h2>
+    
+    
+        <p>Building a state machine with business rules to deal with connection characteristics</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-03-01 00:00:00 &#43;0000 UTC">
+      March 1, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>9 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;title=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f&amp;description=Refactoring%20the%20Zeebe%20Node%20gRPC%20State%20Machine%20for%20Camunda%20Cloud%3a%20Part%20Two" target="_blank" rel="noopener" class="share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fcamunda-cloud-connection-2%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+
+  <div class="content">
+    <p><em>See <a href="https://www.joshwulf.com/blog/2020/02/camunda-cloud-connection/">Part One of this series here</a></em>.</p>
+<p>I'm refactoring the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node client</a> to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in <a href="https://camunda.io">Camunda Cloud</a>.</p>
+<p>Right now, here is what it looks like connecting to Camunda Cloud with the Zeebe Node client:</p>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Zeebe Node" href="/img/2020/03/camunda-cloud-before.png" data-caption=""><img src="/img/2020/03/camunda-cloud-before.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p>Boo!</p>
+<p>The gRPC connection with Camunda Cloud has different characteristics to self-hosted Zeebe, particularly on initial connection, and there is nowhere in the current Node client architecture to model different expectations of connection behaviour. So I am adding a &ldquo;<em>Connection Characteristics Middleware</em>&rdquo; to it.</p>
+<p>The next step in doing the refactor of the gRPC connection management is to refamiliarise myself with its current operation.</p>
+<p>I did this by reading through the <a href="https://github.com/jwulf/zeebe-client-node-js/blob/38102e7faaebafe199abd7da4e02bb35a6011ab0/src/lib/GRPCClient.ts">current source code of the <code>GRPCClient</code> class</a> and creating a BPMN diagram that models its behaviour.</p>
+<p>BPMN - &ldquo;<a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation">Business Process Model and Notation</a>&rdquo; is an XML standard for modelling business processes that can be rendered graphically. BPMN is perfect for modelling state machines, because that's what a business model is.</p>
+<p>I used the <a href="https://camunda.com/download/modeler/">Camunda Modeler</a> to create the diagram. It has more symbol support than the Zeebe modeler currently does. I'm not intending to execute this diagram, so I don't need to worry about compatibility.</p>
+<p>After creating a model of the current behaviour, I uploaded it to <a href="https://cawemo.com">Cawemo</a>, Camunda's web-based collaborative modeling platform. Here it is:</p>
+<iframe
+  src="https://cawemo.com/embed/93db6405-211b-499e-ac12-f867c875b63d"
+  style="width:700px;height:500px;border:1px solid #ccc"
+  allowfullscreen
+></iframe>
+
+<h3 id="sidenote-hugo-shortcode-for-cawemo-models">Sidenote: Hugo Shortcode for Cawemo models</h3>
+<p>To get the model to embed in my blog, I wrote a Hugo shortcode:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/e88c8b69ee9c3e86332e04f176bfcd3d.js"></script>
+
+<h2 id="model-symbols">Model symbols</h2>
+<p>The gRPC State Machine is heavily asynchronous, and event-driven - as you can imagine. I modelled callbacks as subprocesses, and noted when something is a Promise.</p>
+<p>Escalation to the new &ldquo;<em>Connection Characteristics Business Rules Middleware</em>&rdquo; that we are building are noted using the <a href="https://docs.camunda.org/manual/7.12/reference/bpmn20/events/escalation-events/">Escalation Event symbol</a>.</p>
+<p>Signals are used to trigger the debouncing connected (ready) / disconnected (error) state machines.</p>
+<h2 id="preliminary-conclusion">Preliminary Conclusion</h2>
+<p>Looking over it, I'm actually pretty happy with the design. I'm not surprised though - I <em>am</em> pretty good. At least <a href="https://www.joshwulf.com/blog/2020/02/refining-method-signature/">most of the time</a>. And I did refine that state machine continuously over the last year, as I used it in production.</p>
+<p>There are some obvious escalation points, and it looks like the refactor is going to be mostly lifting the inline logging out of the <code>GRPCClient</code> class and putting it in the middleware, where we encapsulate the business rules around connection characteristics.</p>
+<h2 id="start-mashing-keys">Start Mashing Keys</h2>
+<p>I think I will create a <code>GrpcConnectionFactory</code> class. Instead of directly instantiating a gRPC client as it does now, the ZBClient will get one from this factory.</p>
+<p>The factory will be responsible for instantiating the GRPCClient and a Middleware component with the correct profile; wiring them up; and then passing back the wired up client to the ZBClient. That makes my refactor of the ZBClient code minimal: I just replace all <code>new GRPCClient()</code> calls with <code>GrpcConnectionFactory.getClient()</code>.</p>
+<p>While I'm at it, I will rename the GRPCClient class to GrpcClient to break all existing references and normalise my naming.</p>
+<p>I will make the Middleware component responsible for detecting the correct profile to use, determining what constitutes exceptional behaviour of the gRPC connection, and logging it out.</p>
+<p>This will mean injecting the configured logger into it, but we're already doing that with the GRPCClient - I mean GrpcClient - so not much change there.</p>
+<p>The GrpcClient will no longer log exceptions. Instead it will emit events, and the Middleware component will log them, or supress them, and will also have to maintain some state to determine if an error event during connection is final (after a timeout), or was transient. So it needs to be stateful.</p>
+<p>From my reading of the source code, it looks like I just replace logging in the GrpcClient with events emitted to the Middleware.</p>
+<p>It would be good to be able to make the GrpcClient class private to a module or namespace, but I don't know if you can do that in TypeScript without <a href="https://stackoverflow.com/questions/17162989/typescript-private-class-inside-class-or-something-similar">putting them in the same file</a>. Anyway, the linter settings in the project disallow modules and namespaces. And it's not exported from the library, so <em>whatevs</em>.</p>
+<h2 id="grpcconnectionfactory">GrpcConnectionFactory</h2>
+<p>First cut, I just make a class with a static method <code>getGrpcClient</code>, have it take the same args as the <code>GrpcClient</code> constructor, and return a new instance of the class:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/dc1a619a8da2435526af24d2237a362e.js"></script>
+
+<p>And just like that, we have created a new level of indirection - <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering">the fundamental theorem of software engineering</a>:</p>
+<blockquote>
+<p>&ldquo;We can solve any problem by introducing an extra level of indirection.&rdquo;</p>
+</blockquote>
+<h2 id="grpcmiddleware">GrpcMiddleware</h2>
+<p>OK, so this needs to be a stateful class. Let's create some profile types first, and some characteristic profiles.</p>
+<p>I'll use a <a href="https://mariusschulz.com/blog/string-literal-types-in-typescript">string literal union type</a> for the profile names, and key the characteristics map using them.</p>
+<p>I don't know what shape the characteristics rules will have yet, so I'll type them <code>any</code> for now, but using an alias so that I can update the typing across the entire system when I know what it is:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/efcdc1c36c852b876969d20f384b0079.js"></script>
+
+<p>OK, now the class. It will take in the entire config being passed to the GrpcClient constructor, and we can do an initial naive detection by looking for the address of Camunda Cloud in the host string:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/e95df07ea94b8147699228bf752f9d01.js"></script>
+
+<p>Actually, I need to get the GrpcClient in here. I could move the detection up to the factory, and then pass in the profile and the GrpcClient at the same time - using a parameter object <em>of course</em>.</p>
+<p>Here it what it looks like after that refactor:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/7a41b260caf30cce7972739a0559ea03.js"></script>
+
+<p>The unassigned call to a new GrpcMiddleware looks a bit weird. We won't have a reference to it, but it won't get garbage collected because it will attach event listeners to the GrpcClient.</p>
+<p>We can test the GrpcMiddleware by passing in a mock event emitter as the GrpcClient.</p>
+<h2 id="logging">Logging</h2>
+<p>Next, I rip out the logging from GrpcClient, and put it into the GrpcMiddleware. Then I just look for log calls in GrpcClient and turn them into events for the middleware.</p>
+<p>Oh, OK - to configure the logger with the right namespace, I need the config. OK, I guess I delegate creation of the client to the GrpcMiddleware after all.</p>
+<p>Now the factory looks like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/19ed3181415f5de5870655ff6df4084a.js"></script>
+
+<p>OK, I create a new ZBLogger in the middleware. Now it looks like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/9e44a5ddc0b2e124943edd30bee04734.js"></script>
+
+<h2 id="events">Events</h2>
+<p>The GrpcClient already emits events. You can chain event listeners to instances of ZBClient and ZBWorker to react to connection (&lsquo;ready&rsquo;) and disconnection (&lsquo;error&rsquo;) events already. I can't change the names of those, because they are a public API.</p>
+<p>I should namespace events for the Middleware so it clear where they are going, rather than using plain strings.</p>
+<p>I will have to redirect all events through the middleware, actually - otherwise custom listeners on clients connected to Camunda Cloud will not get the benefit of the middleware.</p>
+<p>This poses a challenge, actually. I can trap the current event emitters in the middleware, but since the ZBClient only has access to the GrpcClient, and not the middleware, I will need to re-emit them <em>through</em> the GrpcClient from the middleware. I've never tried that. Let me see if it can be done&hellip;</p>
+<p>OK, my IDE is telling me I can call <code>this.GrpcClient.emit('error')</code>, so we will redirect all events through the middleware.</p>
+<p>I will create namespaced events for the existing events as well as the new ones, which will break the connection right now, and then re-emit them from the middleware later. So in the GrpcClient:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/7398a833081e6390fc6977cf7e3f3544.js"></script>
+
+<p>And here is an example of redirecting the existing log messages and events in GrpcClient to the new Middleware:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/5c27cbcead60acabb07643296852869f.js"></script>
+
+<p>Now I can modify my Middleware to construct an intercepted GrpcClient that behaves just like the existing one. This is a good checkpoint, because I can verify my hypotheses and work so far by running the standard unit tests. So I make my GrpcMiddleware component like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/43e8b92ebf14e209542205c3f35af275.js"></script>
+
+<h2 id="eventdriven-spooky-action-at-a-distance">Event-driven: Spooky Action at a Distance</h2>
+<p>When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to emit events. That pattern went out, because in lead to unpredictable and hard to reason about architectures.</p>
+<p>Adding namespaced events helps us out here, but - apart from the hell I just created for myself <a href="https://stackoverflow.com/questions/17683458/how-do-i-commit-case-sensitive-only-filename-changes-in-git/17688308#17688308">changing filename casings on a case-insensitive file system</a> - the GrpcClient just went into a stackoverflow loop.</p>
+<p>It turns out that it listens to the same signals internally that it uses to communicate publicly. As soon as I intercepted them in the middleware and rebroadcast them, it went into a loop.</p>
+<p>I fixed that by changing the string value of the Middleware namespaced events - but it means that those events are not only informing the world, but also informing parts of GrpcClient.</p>
+<p>I'm not going to fix that now (<em>just like I didn't fix it then</em>). It's technical debt though. Changes to the &ldquo;Middleware-facing&rdquo; events will have unpredictable side-effects on the GrpcClient behaviour. I will have to fix those at some point.</p>
+<p>On second thoughts, <em>something something</em> <a href="https://www.joshwulf.com/blog/2020/02/refining-method-signature/">write the best code you can at the time that you write it</a>.</p>
+<p>Architecture diagram in hand, I carefully trace the logic, and create namespaced <code>InternalSignal</code> events for GrpcClient to use internally.</p>
+<h2 id="hours-later">Hours later&hellip;</h2>
+<p>Don't emit an event named &lsquo;error&rsquo; from an event emitter with no listeners attached, otherwise your code will throw. <em>Just so you know&hellip;</em></p>
+<p>In the end, I realised that the GrpcClient and the ZBLogger are so tightly coupled that they need to come at the same time from the same place.</p>
+<p>I put the state management into a component called <code>StatefulLogInterceptor</code>. The <code>ConnectionFactory</code> static class takes a Grpc configuration and a Log configuration, and returns a wired GrpcClient and ZBLogger. They are wired together via a StatefulLogInterceptor.</p>
+<p>Check it out:</p>
+<h3 id="before">Before</h3>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Zeebe Node" href="/img/2020/03/camunda-cloud-before.png" data-caption=""><img src="/img/2020/03/camunda-cloud-before.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<h3 id="after">After</h3>
+
+
+
+  
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Zeebe Node" href="/img/2020/03/camunda-cloud-after.png" data-caption=""><img src="/img/2020/03/camunda-cloud-after.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p>Under the hood, the behaviour of the gRPC connection is <em>exactly</em> the same. However, now the library detects that it is connecting to Camunda Cloud, and changes its output while the connection is being established.</p>
+<p>You can see from both that it takes about three seconds for the gRPC connection to settle. Our expectation with Camunda Cloud, however, is that there will be error events emitted as this happens - and there is no benefit exposing these to users. They are expected behaviour.</p>
+<p>Once the connection is established, the behaviour from that point is the same as a self-hosted connection. If the Camunda Cloud connection doesn't settle within five seconds, <em>all</em> the emitted errors are presented to the user (<em>they are being buffered in the background</em>).</p>
+<p>The adaptive behaviour is completely disabled when the log level is set to DEBUG.</p>
+<p><strong>Happy</strong>.</p>
+<p>Next: get the tests to pass.</p>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/zeebe">zeebe</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/fp-ts">fp-ts</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/camunda-cloud">Camunda Cloud</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/2020/02/refining-method-signature/" class="button"><div class="previous"><div>Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript</div></div></a>
+  
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/03/camunda-cloud-connection-2/">Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two</a></h1>
+          <time class="published" datetime="">March 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/refining-method-signature/" class="image featured">
+    <img src="/img/2020/02/zeebe-overload.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/refining-method-signature/">Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript</a></h1>
+          <time class="published" datetime="">February 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/camunda-cloud-connection/" class="image featured">
+    <img src="/img/2020/02/zeebe-state-machine.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/camunda-cloud-connection/">Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One</a></h1>
+          <time class="published" datetime="">February 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/functional-refactor/" class="image featured">
+    <img src="/img/2020/02/zeebe-node.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/functional-refactor/">A Functional Refactor of Zeebe Node with fp-ts</a></h1>
+          <time class="published" datetime="">February 27, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/02/providing-a-semantic-api/" class="image featured">
+    <img src="/img/2020/02/stack-overflow.png" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/02/providing-a-semantic-api/">Providing a Semantic API</a></h1>
+          <time class="published" datetime="">February 26, 2020</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">16</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">16</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">7</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/stackoverflowed/">stackoverflowed<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/camunda-cloud/">camunda-cloud<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/typescript/">typescript<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>
