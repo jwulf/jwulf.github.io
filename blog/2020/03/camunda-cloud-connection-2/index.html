@@ -423,7 +423,7 @@
 <script type="application/javascript" src="https://gist.github.com/jwulf/43e8b92ebf14e209542205c3f35af275.js"></script>
 
 <h2 id="eventdriven-spooky-action-at-a-distance">Event-driven: Spooky Action at a Distance</h2>
-<p>When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to emit events. That pattern went out, because in lead to unpredictable and hard to reason about architectures.</p>
+<p>When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to <a href="https://www.sderosiaux.com/articles/2015/02/12/how-to-communicate-between-react-components/">emit events</a>. That pattern went out, because in lead to unpredictable and hard to reason about architectures.</p>
 <p>Adding namespaced events helps us out here, but - apart from the hell I just created for myself <a href="https://stackoverflow.com/questions/17683458/how-do-i-commit-case-sensitive-only-filename-changes-in-git/17688308#17688308">changing filename casings on a case-insensitive file system</a> - the GrpcClient just went into a stackoverflow loop.</p>
 <p>It turns out that it listens to the same signals internally that it uses to communicate publicly. As soon as I intercepted them in the middleware and rebroadcast them, it went into a loop.</p>
 <p>I fixed that by changing the string value of the Middleware namespaced events - but it means that those events are not only informing the world, but also informing parts of GrpcClient.</p>
