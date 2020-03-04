@@ -341,7 +341,7 @@
 <p>Now you have created bug surface areas for &ldquo;off-by-one&rdquo; errors and &ldquo;array index out of bounds&rdquo; errors.</p>
 <p>You had one job - now you are juggling four variables, and one of them is an actual footgun (the other three are just pretending to be).</p>
 <p>There is <em>already</em> a state machine for a 1:1 data transformation of elements of an array: <code>Array.map</code>. It encapsulates this functionality.</p>
-<p>Here is the polyfill for <code>Array.prototype.map</code>, from MDN:</p>
+<p>Here is the polyfill for <code>Array.prototype.map</code>, from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">MDN</a>:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/05a31e21fa38937508bf17a39c1476d9.js"></script>
 
 <p>That is a state machine, and it does <em>exactly</em> what your code is tryna do - but it does it without leaking its variables into your application.</p>
@@ -363,7 +363,7 @@
 <p>And that's what <code>Array.map</code> is.</p>
 <p>If you were programming this way, then you would invent <code>Array.map</code> from first principles, simply through the process of extracting all these state machines out of your code through refactoring.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h2 id="how-to-use-arraymap">How to use Array.map</h2>
+<h2 id="how-to-use-arraymaphowtousearraymap"><a href="#how-to-use-array-map">How to use Array.map</a></h2>
 <p>Here is the original code again:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/b46b22b2b293f87dae2e2b384e7b4172.js"></script>
 
