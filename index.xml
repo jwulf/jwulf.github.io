@@ -6,10 +6,21 @@
     <description>Recent content on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Zeebe Node Batch Worker</title>
+      <link>https://joshwulf.com/blog/2020/03/zb-batch-worker/</link>
+      <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/03/zb-batch-worker/</guid>
+      <description>Zeebe is a workflow engine for orchestrating microservices, using BPMN models to define complex workflows that can be monitored operationally using a graphical representation of the process state.
+Thanks to a feature request from Jimmy Beaudoin, the 0.23.0-alpha.1 release of the Zeebe Node client introduces a new worker - the ZBBatchWorker.
+Motivation Sometimes you have external resources that your microservices access - maybe a database or a rate-limited or pay-per-call API.</description>
+    </item>
     
     <item>
       <title>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two</title>

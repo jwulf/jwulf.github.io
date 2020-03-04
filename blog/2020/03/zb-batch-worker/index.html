@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>Easily run multiple apps with HTTPS using Docker and LetsEncrypt - Josh Wulf</title>
+<title>The Zeebe Node Batch Worker - Josh Wulf</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -20,25 +20,25 @@
 
 
   <meta name="generator" content="Hugo 0.60.0" />
-  <meta itemprop="name" content="Easily run multiple apps with HTTPS using Docker and LetsEncrypt">
-<meta itemprop="description" content="Run multiple webapps on a single host with automated SNI and TLS certificate provisioning.">
-<meta itemprop="datePublished" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="399">
+  <meta itemprop="name" content="The Zeebe Node Batch Worker">
+<meta itemprop="description" content="A new Zeebe Node worker allows you to batch access to external resources, for great justice.">
+<meta itemprop="datePublished" content="2020-03-03T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-03T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1197">
 
 
 
 <meta itemprop="keywords" content="" />
-  <meta property="og:title" content="Easily run multiple apps with HTTPS using Docker and LetsEncrypt" />
-<meta property="og:description" content="Run multiple webapps on a single host with automated SNI and TLS certificate provisioning." />
+  <meta property="og:title" content="The Zeebe Node Batch Worker" />
+<meta property="og:description" content="A new Zeebe Node worker allows you to batch access to external resources, for great justice." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://joshwulf.com/blog/2020/02/docker-https/" />
-<meta property="article:published_time" content="2020-02-17T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-02-17T00:00:00+00:00" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/03/zb-batch-worker/" />
+<meta property="article:published_time" content="2020-03-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-03T00:00:00+00:00" />
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Easily run multiple apps with HTTPS using Docker and LetsEncrypt"/>
-<meta name="twitter:description" content="Run multiple webapps on a single host with automated SNI and TLS certificate provisioning."/>
+<meta name="twitter:title" content="The Zeebe Node Batch Worker"/>
+<meta name="twitter:description" content="A new Zeebe Node worker allows you to batch access to external resources, for great justice."/>
 <meta name="twitter:site" content="@sitapati"/>
 
   
@@ -158,31 +158,31 @@
 
   
     
-    <a href="//twitter.com/share?text=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=The%20Zeebe%20Node%20Batch%20Worker&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f&amp;title=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f&amp;title=The%20Zeebe%20Node%20Batch%20Worker" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f&amp;title=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f&amp;title=The%20Zeebe%20Node%20Batch%20Worker" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -257,19 +257,19 @@
   <header>
   <div class="title">
     
-        <h2><a href="/blog/2020/02/docker-https/">Easily run multiple apps with HTTPS using Docker and LetsEncrypt</a></h2>
+        <h2><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h2>
     
     
-        <p>Run multiple webapps on a single host with automated SNI and TLS certificate provisioning.</p>
+        <p>A new Zeebe Node worker allows you to batch access to external resources, for great justice.</p>
     
 </div>
   <div class="meta">
-    <time class="published" datetime="2020-02-17 00:00:00 &#43;0000 UTC">
-      February 17, 2020
+    <time class="published" datetime="2020-03-03 00:00:00 &#43;0000 UTC">
+      March 3, 2020
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>2 minutes read</p>
+      <p>6 minutes read</p>
     
   </div>
 </header>
@@ -282,31 +282,31 @@
 
   
     
-    <a href="//twitter.com/share?text=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=The%20Zeebe%20Node%20Batch%20Worker&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f&amp;title=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f&amp;title=The%20Zeebe%20Node%20Batch%20Worker" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f&amp;title=Easily%20run%20multiple%20apps%20with%20HTTPS%20using%20Docker%20and%20LetsEncrypt" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f&amp;title=The%20Zeebe%20Node%20Batch%20Worker" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fdocker-https%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2fzb-batch-worker%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -314,62 +314,68 @@
 
   </section>
   
-  <a href="/blog/2020/02/docker-https/" class="image featured">
-    <img src="/img/2020/02/docker-letsencrypt-schema.png" alt="">
+  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
+    <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
   </a>
 
 
   <div class="content">
-    <p>I frequently deploy Web APIs in Docker. On a single VM I might have up to five or six services running.
-All of them have TLS certificates and are accessible via port 443 using SNI — Server Name Indication, where the request is routed to the correct backend based on the domain name of the request.</p>
-<p>This is very easy to set up using <a href="https://github.com/jwulf/letsencrypt-nginx-sidecar">letsencrypt-nginx-sidecar</a>, (which builds on <a href="https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion">this project</a> and <a href="https://github.com/jwilder/nginx-proxy">this project</a>).</p>
-<p>This approach is super-quick to set up and use, and reliable — I’ve been using it for a couple of years now, with no issues. It uses an nginx reverse proxy that listens to a Docker network. When a container joins the Docker network, the nginx reverse proxy adds an entry to route requests to it, and a companion container contacts LetsEncrypt to automatically provision a certificate for TLS connections to that domain.
-Setting it up is easy.</p>
-<h2 id="set-up">Set up</h2>
-<ul>
-<li>Git clone the repo:</li>
-</ul>
-<pre><code>git clone https://github.com/jwulf/letsencrypt-nginx-sidecar.git
-</code></pre><ul>
-<li>Now create a Docker network for your containers:</li>
-</ul>
-<pre><code>docker network create letsencrypt
-</code></pre><ul>
-<li>Start the nginx proxy and LetsEncrypt companion:</li>
-</ul>
-<pre><code>cd sidecar &amp;&amp; docker-compose up -d
-</code></pre><p>That’s it! You can now deploy multiple webapps to this host using docker-compose and have them automatically proxied with TLS.</p>
-<p>You have a proxy running that can route requests to your webapps based on the domain name of the request, and which will automatically get (and renew) a certificate for TLS as you add new webapps.</p>
-<h2 id="adding-a-web-app">Adding a web app</h2>
-<p>Any time you want to add another web app to this network:</p>
-<ul>
-<li>
-<p>First set up the DNS record for the domain to point to the host machine’s external interface.</p>
-</li>
-<li>
-<p>In the <code>docker-compose.yml</code> file for the webapp, add the following environment variables:</p>
-</li>
-</ul>
-<pre><code>environment:
-  # Set to the port that your webapp listens on
-  VIRTUAL_PORT=3000
-  # Can be comma-separated list
-  VIRTUAL_HOST=mysubdomain.mydomain.com 
-  # The domain for the cert, can also be comma-separated
-  LETSENCRYPT_HOST=mysubdomain.mydomain.com
-  # Your email for the cert
-  LETSENCRYPT_EMAIL=me@gmail.com
-</code></pre><ul>
-<li>Add a networks entry to have your webapp join the <code>letsencrypt</code> network:</li>
-</ul>
-<pre><code>networks:
-  default:
-    external:
-      name: letsencrypt
-</code></pre><p>Thats it!</p>
-<p>Your webapp container will join the network, and the proxy and companion containers will do the rest.</p>
-<p>Your webapp container does not need to map any ports in the <code>docker-compose.yml</code> file. The nginx proxy handles all external communication and routes requests over the Docker network.</p>
-<p>You can see an example of a complete <code>docker-compose.yml</code> file in <a href="https://github.com/jwulf/camunda-cloud-demo-json-api/blob/master/deploy/docker-compose.yml">this repo</a>.</p>
+    <p><em><a href="https://zeebe.io">Zeebe</a> is a workflow engine for orchestrating microservices, using BPMN models to define complex workflows that can be monitored operationally using a graphical representation of the process state.</em></p>
+<p>Thanks to <a href="https://github.com/creditsenseau/zeebe-client-node-js/issues/134">a feature request from Jimmy Beaudoin</a>, the 0.23.0-alpha.1 release of the <a href="https://npmjs.org/zeebe-node">Zeebe Node client</a> introduces a new worker - the <code>ZBBatchWorker</code>.</p>
+<h2 id="motivation">Motivation</h2>
+<p>Sometimes you have external resources that your microservices access - maybe a database or a rate-limited or pay-per-call API.</p>
+<p>In these cases, you want to batch up calls that make logical sense and can happen at the same time. These calls are <em>not</em> correlated in your BPMN model. The workflows know nothing about each other, but they do require access to the same resources.</p>
+<p>In this case, the worker that accesses the external resource is the point where correlation can take place. It knows when these calls are taking place, and can buffer and batch these calls, dispatch them to the external system, then update each of the processes.</p>
+<p>The <code>ZBBatchWorker</code> class encapsulates this functionality.</p>
+<p>It buffers jobs in the worker until either a minimum batch size is reached, or the maximum batch timeout is reached, then executes its job handler function on an <em>array</em> of jobs. The <code>ZBWorker</code>, in contrast, executes its job handler immediately on a single job.</p>
+<h2 id="creating-a-zbbatchworker">Creating a ZBBatchWorker</h2>
+<p>Here is how you create a <code>ZBBatchWorker</code>:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/36f027a4db515b7f21c5d64a8c5f855f.js"></script>
+
+<p>Note that the <code>timeout</code> value must be greater than the <code>jobBatchMaxTime</code>. The <code>timeout</code> is the amount of time that the worker tells the broker it needs to complete the task.</p>
+<p>In this example, for each job that the worker pulls from the broker, it tells the broker that it needs 80 seconds to complete it, max. After 80 seconds, the broker will make that job available to another <code>activateJobs</code> call from a worker. So the batch worker should make sure it gets the job done before then.</p>
+<p>If you set the <code>timeout</code> less than the <code>jobBatchMaxTime</code>, the worker will emit a warning message to the logs. I considered having it throw, but what do I know - someone may come up with a crazy, innovative way to exploit this behaviour, and I'm all about that.</p>
+<p>You want to ensure you allow enough time to deal with any retry logic (related to the external API) that you put in your handler.</p>
+<h2 id="the-zbbatchworker-handler">The ZBBatchWorker handler</h2>
+<p>The <code>ZBWorker</code> handler takes a job - a read-only JavaScript object with the job data, a <code>complete</code> object - with methods to signal the completion state of the job, and an instance of the <code>worker</code> - to allow you to log from the handler using the worker's configured log.</p>
+<p>The <code>ZBBatchWorker</code> handler, on the other hand, takes <em>an array</em> of jobs, and an instance of the worker.</p>
+<p>To allow you to signal the completion state of each of the individual jobs in the batch, the jobs in the array have the complete methods attached to them.</p>
+<p>So, here is a handler that demonstrates doing nothing more than completing each job with <code>success</code>:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/5141d26d600cbec3a90819d2dc81a0e9.js"></script>
+
+<h2 id="unhandled-exceptions">Unhandled Exceptions</h2>
+<p>You need to carefully manage exceptions in your handler.</p>
+<p>The <code>ZBWorker</code> will fail a job if an unhandled exception takes place in the job handler, and it has an option to fail the entire workflow if you want that behaviour.</p>
+<p>With the <code>ZBBatchWorker</code>, we don't know what state the job batch is in, or how your handler will act after throwing an unhandled exception. So, no action is taken by the library.</p>
+<p>It also cannot catch errors deep in the handler code, for example inside <code>map</code> or <code>forEach</code> predicate functions, so you gotta manage that.</p>
+<h2 id="internal-implementation-details">Internal Implementation Details</h2>
+<p>There is no API in the broker for batching jobs. You can request a maximum number of jobs at a time, but there is no guarantee about a minimum. You cannot send a request that will be fulfilled when there are enough available jobs.</p>
+<p>So, all the management of the batching takes place on the client.</p>
+<p>To implement this, I used a pattern that I described in the &ldquo;<a href="https://jwulf.github.io/blog/2020/02/shun-the-mutant#valid-use-of-variables">Valid Use of Variables</a>&rdquo; section of the article &ldquo;<a href="https://jwulf.github.io/blog/2020/02/shun-the-mutant">Shun the Mutant - The case for <code>const</code></a>&quot;, wrapping the batching functionality into a small state machine with an API:</p>
+<p>Here is a BPMN diagram of the state machine:</p>
+<iframe
+  src="https://cawemo.com/embed/20e50f02-50cc-4005-96d6-bf50380f4097"
+  style="width:700px;height:500px;border:1px solid #ccc"
+  allowfullscreen
+></iframe>
+
+<p><em>BPMN is great for representing the operation of state machines - the directed evolution of state over time. The embedded diagram was created using the <a href="https://bpmn.io/modeler/">Camunda Modeler</a>, and is hosted on <a href="https://cawemo.com/">Cawemo</a>.</em></p>
+<p>And the code that implements it:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/b789f4da4df827e7007c5e4e7e1b938f.js"></script>
+
+<p>It has two variables in it, but these are &ldquo;true variables&rdquo;. It is a <em>state machine</em>, so it has to model <em>actual</em> variables in the system. One represents the batched jobs. The other is the batch timer.</p>
+<p>The batch timer is started when the first job is pushed into the batch array. From that point, two things will trigger the execution of the job handler on the array of batched jobs: either a job will be pushed in via the <code>batch</code> API method that takes the count of jobs to the maximum batch size, or the timer will trigger the execution.</p>
+<h2 id="race-conditions">Race conditions?</h2>
+<p>That's not a lot of code, but a lot of thought has gone into it.</p>
+<p>I am still slightly concerned about race conditions in this code at high volumes. I gotta admit - my knowledge of how the Node.js event loop and timers work is not complete. Even after reading through <a href="https://nodejs.org/uk/docs/guides/event-loop-timers-and-nexttick/">The Node.js Event Loop, Timers, and <code>process.nextTick()</code></a>, I'm still not 100% clear if this code is susceptible to interrupts that cause its internal state to become inconsistent.</p>
+<p>The issue is that two different triggers can cause the execution (timer interrupt, or call to <code>batch</code>), and consumers can call <code>batch</code> while the execution is taking place.</p>
+<p>I <em>think</em> that I have guaranteed synchronous execution through <code>execute</code> up to the handler invocation before another call to <code>batch</code> is processed - but I'm not sure.</p>
+<p>I'm <em>pretty sure</em> that if the handler does any I/O, then at <em>that</em> point the execution will yield to the event loop - and all my state machine's mutating code happens before then.</p>
+<p>I pass in a <em>copy</em> of the batched jobs and scrub the state's batched jobs before calling the handler, so that <em>should</em> take care of it.</p>
+<p>Anyway, you'll be glad to know that I'm thinking like this about your run-time state and data while you use the library, <em>and</em> I will get completely flat on this.</p>
+<p>Managing state and time are the biggest sources of complexity in an application, so I've encapsulated all of that with respect to this concern inside a state machine.</p>
+<p>The complexity of managing this state is not leaked out into the application, and although the race condition that I'm concerned about is not easy to test for, it <em>is</em> easy to reason about in such a small bounded context. So all I need to do to be sure that this works as advertised is to increase my understanding of the event loop.</p>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
   <footer>
@@ -381,10 +387,16 @@ Setting it up is easy.</p>
         <ul>
           
             
-            <li><a class="article-category-link" href="https://joshwulf.com/categories/docker">docker</a></li>
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
           
             
-            <li><a class="article-category-link" href="https://joshwulf.com/categories/deployment">deployment</a></li>
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/zeebe">zeebe</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/typescript">typescript</a></li>
           
         </ul>
       </li>
@@ -405,10 +417,8 @@ Setting it up is easy.</p>
 
 <div class="pagination">
   
-    <a href="/blog/2020/02/creating-github-action/" class="button"><div class="previous"><div>How to write a GitHub Action</div></div></a>
+    <a href="/blog/2020/03/camunda-cloud-connection-2/" class="button"><div class="previous"><div>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two</div></div></a>
   
-  
-    <a href="/blog/2020/02/just-say-no-to-loops-and-variables/" class="button"><div class="next"><div>Just say No to loops and variables.</div></div></a>
   
 </div>
 
