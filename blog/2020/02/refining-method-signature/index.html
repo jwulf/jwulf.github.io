@@ -6,13 +6,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
 
   <meta name="generator" content="Hugo 0.60.0" />
   <meta itemprop="name" content="Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript">
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
 <meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1726">
+<meta itemprop="wordCount" content="1739">
 
 
 
@@ -170,12 +182,6 @@
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2frefining-method-signature%2f&amp;description=Providing%20a%20method%20signature%20overload%20for%20Zeebe%20Node%27s%20%60createWorker%60%20using%20TypeScript" target="_blank" rel="noopener" class="share-btn pinterest">
-          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
-        </a>
-  
-
-  
         <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2frefining-method-signature%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
@@ -300,12 +306,6 @@
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2frefining-method-signature%2f&amp;description=Providing%20a%20method%20signature%20overload%20for%20Zeebe%20Node%27s%20%60createWorker%60%20using%20TypeScript" target="_blank" rel="noopener" class="share-btn pinterest">
-          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
-        </a>
-  
-
-  
         <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2frefining-method-signature%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
@@ -315,7 +315,7 @@
   </section>
   
   <a href="/blog/2020/02/refining-method-signature/" class="image featured">
-    <img src="/img/2020/02/zeebe-overload.png" alt="">
+    <img src="/img/2020/02/zeebe-overload-feature.png" alt="">
   </a>
 
 
@@ -403,6 +403,7 @@
 <p>Why didn't I just go all the way and move to a single parameter object? Because I'm an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that's a mistake that will pile more technical debt in. I've designed it to reduce that, by encapsulating the new concern that I've added (run-time decoding of the signature).</p>
 <p>My plan is to add the third method overload to a single parameter object in a future release, if it makes sense. The jury is still out on that. If it needs extension, that will definitely be part of that work.</p>
 <p>This is not released yet, so there is still time for me to deliberate and go all in on the object parameter.</p>
+<p><em><strong>Update:</strong> I did it. It has a single parameter signature now, as well.</em></p>
 <h2 id="creating-a-method-overload-in-typescript">Creating a method overload in TypeScript</h2>
 <p>Here is what violating the single parameter principle will cost you, if you have to maintain backwards-compatibility:</p>
 <p>To go from this in the README:</p>
@@ -500,6 +501,10 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2020/03/camunda-cloud-connection-2/" class="image featured">
+    <img src="/img/2020/03/camunda-cloud-after.png" alt="">
+  </a>
+
 
         </section>
         <header>
@@ -512,7 +517,7 @@
         <section>
           
   <a href="/blog/2020/02/refining-method-signature/" class="image featured">
-    <img src="/img/2020/02/zeebe-overload.png" alt="">
+    <img src="/img/2020/02/zeebe-overload-feature.png" alt="">
   </a>
 
 
