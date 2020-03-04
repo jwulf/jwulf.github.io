@@ -357,7 +357,7 @@
 <h2 id="internal-implementation-details">Internal Implementation Details</h2>
 <p>There is no API in the broker for batching jobs. You can request a maximum number of jobs at a time, but there is no guarantee about a minimum. You cannot send a request that will be fulfilled when there are enough available jobs.</p>
 <p>So, all the management of the batching takes place on the client.</p>
-<p>To implement this, I used a pattern that I described in the &ldquo;<a href="https://jwulf.github.io/blog/2020/02/shun-the-mutant#valid-use-of-variables">Valid Use of Variables</a>&rdquo; section of the article &ldquo;<a href="https://jwulf.github.io/blog/2020/02/shun-the-mutant">Shun the Mutant - The case for <code>const</code></a>&quot;, wrapping the batching functionality into a small state machine with an API:</p>
+<p>To implement this, I used a pattern that I described in the &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant#valid-use-of-variables">Valid Use of Variables</a>&rdquo; section of the article &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant">Shun the Mutant - The case for <code>const</code></a>&quot;, wrapping the batching functionality into a small state machine with an API:</p>
 <p>Here is a BPMN diagram of the state machine:</p>
 <iframe
   src="https://cawemo.com/embed/20e50f02-50cc-4005-96d6-bf50380f4097"
