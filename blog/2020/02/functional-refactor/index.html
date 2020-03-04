@@ -346,6 +346,7 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
 <p>Some data transformation, and two outcomes: deploy or throw.</p>
 <p>The issue with this implementation is that we cannot return information about <em>multiple</em> missing files - only the first one we encounter.</p>
 <p>I would like it to read all the files, and exit if one or more are missing with a list of <em>all</em> missing files.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="refactor-without-fpts">Refactor Without fp-ts</h2>
 <p>This could actually be accomplished by mapping the array with a file reader function and returning <code>{buffer}</code> or <code>{error}</code> objects, then reducing that, then either throwing or constructing the request, like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/60e1d53d0b38056f9acfd82e05946125.js"></script>
