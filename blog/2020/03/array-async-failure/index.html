@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>How to write a GitHub Action - Josh Wulf</title>
+<title>Handling failure and success in an array of asynchronous tasks - Josh Wulf</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -20,25 +20,29 @@
 
 
   <meta name="generator" content="Hugo 0.60.0" />
-  <meta itemprop="name" content="How to write a GitHub Action">
-<meta itemprop="description" content="Building your own GitHub Action.">
-<meta itemprop="datePublished" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="528">
+  <meta itemprop="name" content="Handling failure and success in an array of asynchronous tasks">
+<meta itemprop="description" content="Handling failure and success in an array of asynchronous tasks whose execution may fail. TLDR; Promise.allSettled()">
+<meta itemprop="datePublished" content="2020-03-08T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-08T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="832">
+<meta itemprop="image" content="https://joshwulf.com/img/2020/02/stack-overflow.png">
 
 
 
 <meta itemprop="keywords" content="" />
-  <meta property="og:title" content="How to write a GitHub Action" />
-<meta property="og:description" content="Building your own GitHub Action." />
+  <meta property="og:title" content="Handling failure and success in an array of asynchronous tasks" />
+<meta property="og:description" content="Handling failure and success in an array of asynchronous tasks whose execution may fail. TLDR; Promise.allSettled()" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://joshwulf.com/blog/2020/02/creating-github-action/" />
-<meta property="article:published_time" content="2020-02-17T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-02-17T00:00:00+00:00" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/03/array-async-failure/" />
+<meta property="og:image" content="https://joshwulf.com/img/2020/02/stack-overflow.png" />
+<meta property="article:published_time" content="2020-03-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-08T00:00:00+00:00" />
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="How to write a GitHub Action"/>
-<meta name="twitter:description" content="Building your own GitHub Action."/>
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://joshwulf.com/img/2020/02/stack-overflow.png"/>
+
+<meta name="twitter:title" content="Handling failure and success in an array of asynchronous tasks"/>
+<meta name="twitter:description" content="Handling failure and success in an array of asynchronous tasks whose execution may fail. TLDR; Promise.allSettled()"/>
 <meta name="twitter:site" content="@sitapati"/>
 
   
@@ -158,31 +162,31 @@
 
   
     
-    <a href="//twitter.com/share?text=How%20to%20write%20a%20GitHub%20Action&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f&amp;title=How%20to%20write%20a%20GitHub%20Action" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f&amp;title=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f&amp;title=How%20to%20write%20a%20GitHub%20Action" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f&amp;title=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -257,19 +261,19 @@
   <header>
   <div class="title">
     
-        <h2><a href="/blog/2020/02/creating-github-action/">How to write a GitHub Action</a></h2>
+        <h2><a href="/blog/2020/03/array-async-failure/">Handling failure and success in an array of asynchronous tasks</a></h2>
     
     
-        <p>Building your own GitHub Action.</p>
+        <p>Handling failure and success in an array of asynchronous tasks whose execution may fail. TLDR; Promise.allSettled()</p>
     
 </div>
   <div class="meta">
-    <time class="published" datetime="2020-02-17 00:00:00 &#43;0000 UTC">
-      February 17, 2020
+    <time class="published" datetime="2020-03-08 00:00:00 &#43;0000 UTC">
+      March 8, 2020
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>3 minutes read</p>
+      <p>4 minutes read</p>
     
   </div>
 </header>
@@ -282,31 +286,31 @@
 
   
     
-    <a href="//twitter.com/share?text=How%20to%20write%20a%20GitHub%20Action&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f&amp;title=How%20to%20write%20a%20GitHub%20Action" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f&amp;title=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f&amp;title=How%20to%20write%20a%20GitHub%20Action" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f&amp;title=Handling%20failure%20and%20success%20in%20an%20array%20of%20asynchronous%20tasks" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f02%2fcreating-github-action%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f03%2farray-async-failure%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -314,87 +318,67 @@
 
   </section>
   
-  <a href="/blog/2020/02/creating-github-action/" class="image featured">
-    <img src="/img/2020/02/zeebe.png" alt="">
+  <a href="/blog/2020/03/array-async-failure/" class="image featured">
+    
+      <img src="/img/2020/02/stack-overflow.png" alt="">
+    
   </a>
 
 
   <div class="content">
-    <p>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository's <code>repository_dispatch</code> REST endpoint over the GitHub API.</p>
-<p>The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.</p>
-<p>I recently wrote a <a href="https://github.com/marketplace/actions/zeebe-action">Zeebe GitHub Action</a> that allows you to <a href="https://camunda.io">Camunda Cloud</a>, and it was so easy to do that I wanted to share it with you.</p>
-<h2 id="github-action-usage-example">GitHub Action Usage Example</h2>
-<p>If you have a repo with a <code>Dockerfile</code> in it, you can build the Docker image and publish it to Docker Hub using a GitHub Action ((see this workflow in a repo on GitHub](<a href="https://github.com/jwulf/camunda-cloud-demo-json-api))">https://github.com/jwulf/camunda-cloud-demo-json-api))</a>.</p>
-<ul>
-<li>
-<p>Add a <code>.github/workflows/docker_publish.yml</code> file to your repo.</p>
-</li>
-<li>
-<p>Paste in the following content, and edit the value for <code>DOCKER_IMAGE_NAME</code>:</p>
-</li>
-</ul>
-<pre><code>name: Docker Image CI
+    <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, <strong>and</strong> &ldquo;There is no such thing as good coding, only good refactoring&rdquo;.</em></p>
+<p>Here is the original code under discussion:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/b934f3a0e3551c25ab7aa85fba90ed36.js"></script>
 
-on: [push]
-env:
-  DOCKER_IMAGE_NAME: sitapati/camunda-cloud-demo-json-api
+<p>The questioner asks:</p>
+<blockquote>
+<p>But I am not sure where do I need to put try-catch block. Wrapping each content function? Or inside my async function and for operator.</p>
+</blockquote>
+<p>I'm going to give my answer verbatim from StackOverflow, and then a little extension to it.</p>
+<p><em>Astute readers will recognise this pattern from &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/functional-refactor/">A Functional Refactor of Zeebe Node with fp-ts</a></em>.</p>
+<h2 id="answer">Answer</h2>
+<p>Depends how and where you want to handle failure.</p>
+<p>One approach to &ldquo;an array of asynchronous tasks whose execution may fail&rdquo; is a pattern like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/6e163088f80b3b59644ad7c1abbc81a6.js"></script>
 
-jobs:
-  publish_docker:
-    runs-on: ubuntu-latest
+<p>You can chain a <code>.catch()</code> handler on an <code>async</code> function, and it has the same effect as wrapping it in <code>try/catch</code>.</p>
+<p>More in &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/functional-refactor/">A Functional Refactor of Zeebe Node with fp-ts</a>, if you are interested. The section &ldquo;<em>Refactor without fp-ts</em>&rdquo; shows how to reduce that array from <code>[{error: e} | {success: res}]</code> to <code>{error: [], success: []}</code>, which is way easier to work with:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/443ec653fe0aee1fbf78afa332f58773.js"></script>
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Publish Docker image to Registry
-        uses: elgohr/Publish-Docker-Github-Action@2.12
-        with:
-          name: ${{ env.DOCKER_IMAGE_NAME }}
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          dockerfile: Dockerfile
-          tags: 'latest'
-</code></pre><ul>
-<li>
-<p>Add two secrets to your repo's Secrets in the repo setting - your Docker Hub username as <code>DOCKER_USERNAME</code> and your Docker Hub password as <code>DOCKER_PASSWORD</code>.</p>
-</li>
-<li>
-<p>Push to your repository.</p>
-</li>
-</ul>
-<p>You will now see a workflow run in the &ldquo;Actions&rdquo; tab that will build the image from the Dockerfile and publish it to Docker Hub.</p>
-<h2 id="but-thats-just-the-beginning">But that's just the beginning</h2>
-<p>Less immediately obvious uses for GitHub Actions include building <a href="https://github.com/jwulf/camunda-cloud-starter">zero-install tutorials and demos</a>, and <a href="https://github.com/jwulf/ghettohub-db">using a GitHub repo as a JSON database</a>!</p>
-<p>Creating a GitHub Action is simple. In this tutorial, I walk you through creating one. There are, broadly speaking, two types of GitHub Actions:</p>
+<p>This is an FP type called Either - an operation may return &ldquo;either&rdquo; (in this case) a value or an error.</p>
+<p>Your code doesn't throw with this approach.</p>
+<p>If you know that something may fail, it's not exceptional. Exceptions are when some unexpected failure occurs, IMHO.</p>
+<p>&ldquo;<em>Tasks that may fail</em>&rdquo; that are known ahead of time just need the error path code written.</p>
+<p>If you take this approach, I recommend building it as a first-class state reducing machine, like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/919cb46fd4ca6a129356296d8141b22d.js"></script>
+
+<h2 id="further-discussion">Further discussion</h2>
+<p>A couple of things are missing from this.</p>
 <ul>
-<li><strong>Docker</strong>: your action pulls down a Docker image and executes something using the Docker container.</li>
-<li><strong>JavaScript</strong>: your action runs JavaScript code.</li>
+<li>The ability to correlate the error and success results to the original task.</li>
+<li>Custom error-handling per task.</li>
 </ul>
-<p>You can also execute shell scripts, by invoking them from a JavaScript action.</p>
-<p>For this example, we are going to create an action that responds to a <code>repository_dispatch</code> event sent to a repo, and commits some data to the repo in response (we'll invoke a shell script for that part). This allows you to use a repo as a place to store data sent in over HTTP. I used this approach to make <a href="https://github.com/jwulf/ghettohub-db">GhettoHub DB</a>, a low-fi JSON Database in a GitHub repo.</p>
-<h2 id="typescript-github-action-template">TypeScript GitHub Action Template</h2>
-<p>The easiest way to create a GitHub Action is to use the <a href="https://github.com/actions/typescript-action">TypeScript Action</a> template repo.</p>
-<ul>
-<li>
-<p>Click the &ldquo;Use this template&rdquo; button in the GitHub web UI to fork this repo to a new repo in your GitHub account. It's a convention to put <code>-action</code> at the end of the repo name.</p>
-</li>
-<li>
-<p>Clone the repository to your local machine.</p>
-</li>
-<li>
-<p>Install the dependencies with <code>npm i</code> (or <code>pnpm i</code> if you use <a href="https://pnpm.js.org/">pnpm</a>).</p>
-</li>
-</ul>
-<p>Now you are ready to write your first GitHub action!</p>
-<h2 id="actionscore">@actions/core</h2>
-<p>The package <a href=""><code>@actions/core</code></a> contains the basic functions for interacting with the environment:</p>
-<ul>
-<li><code>core.getInput()</code></li>
-<li><code>core.setOutput()</code></li>
-<li><code>core.info()</code></li>
-<li><code>core.error()</code></li>
-<li><code>core.setFailed()</code></li>
-</ul>
-<p>** Under construction: Stay tuned for more **</p>
+<p>What gets populated into the eventual arrays of errors and results and just the outputs. You can answer the questions &ldquo;<em>How many tasks succeeded/failed and with what results/errors</em>&quot;, but you cannot answer the question &ldquo;<em>Which specific tasks failed?</em>&rdquo;</p>
+<p>To do this, you would need either to pass a correlation through this machine, or report the result back to something listening to the task.</p>
+<h2 id="application-architecture">Application Architecture</h2>
+<p>How you do this really depends on <em>where you plan to deal with the failure and success of the operations</em>.</p>
+<p>Now we start to move into the question of the <em>structure</em> of your application - the application architecture, the set of patterns and conventions that you use to assemble the logic of your application. And this is, in fact, at the crux of this question.</p>
+<p>If you build a <em>generalised</em> machine for <em>this class of operation</em> (executing an array of asynchronous tasks that may succeed or fail), you cannot generalise specific operation error handling.</p>
+<p>Do you want the caller to pass in an array of tasks, and then deal with the aggregate of success and failure?</p>
+<p>Or do you want each task to be (at least optionally) responsible for dealing with it, and report the aggregate to the caller?</p>
+<p>The easiest way to do it, would be to create an <code>AsyncTask</code> class that has a run method, and require (or just allow) it to take a <code>success</code> and <code>failure</code> callback in its constructor. This allows the tasks themselves to handle their own failure and success if they want.</p>
+<p>So, the <code>AsyncTask</code> class looks something like this:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/bc75bd014393be0a39a70f14f5bc2976.js"></script>
+
+<p>The executor now needs to deal with Promise branching, rather than just Promise chaining. The impact is in the <code>runWithResult</code> function:</p>
+<script type="application/javascript" src="https://gist.github.com/jwulf/668e0097484c2ad7e3e513c4577ec199.js"></script>
+
+<h2 id="actually-doing-this">Actually doing this</h2>
+<p>I wouldn't actually do this, but it is an interesting exercise.</p>
+<p>You do need an application architecture - rather than custom-coding inline, refactoring the state machinery out to a first-class concern. The <em>logic</em> of your application is usually the custom part that actually produces unique business value.</p>
+<p>However, rather than writing this state machinery, I would use something like <code>fp-ts</code>, or in this specific case - I'd probably use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled"><code>Promise.allSettled</code></a>, a state machine that does <em>exactly</em> this, and is built in to JavaScript (supported from Node 12.9.0, Chrome 76, and Firefox 71). If you are using TypeScript, you need to target the <code>es2020</code> lib.</p>
+<p>It's further evidence that state machines - when they are a means to an end in your application, rather than what your application does - belong is well-tested, sealed black boxes with a defined API that prevents them leaking their complexity into other areas of your application code.</p>
+<p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
   <footer>
@@ -412,7 +396,7 @@ jobs:
             <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
           
             
-            <li><a class="article-category-link" href="https://joshwulf.com/categories/github">github</a></li>
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/stackoverflowed">stackoverflowed</a></li>
           
         </ul>
       </li>
@@ -433,10 +417,8 @@ jobs:
 
 <div class="pagination">
   
-    <a href="/blog/2020/01/travel-tips/" class="button"><div class="previous"><div>20 Tips on travelling like a BOSS</div></div></a>
+    <a href="/blog/2020/03/why-array-map/" class="button"><div class="previous"><div>Why Array.map</div></div></a>
   
-  
-    <a href="/blog/2020/02/docker-https/" class="button"><div class="next"><div>Easily run multiple apps with HTTPS using Docker and LetsEncrypt</div></div></a>
   
 </div>
 

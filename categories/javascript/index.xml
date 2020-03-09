@@ -6,10 +6,19 @@
     <description>Recent content in javascript on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 04 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://joshwulf.com/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Handling failure and success in an array of asynchronous tasks</title>
+      <link>https://joshwulf.com/blog/2020/03/array-async-failure/</link>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/03/array-async-failure/</guid>
+      <description>This is part of a series of posts where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, and &amp;ldquo;There is no such thing as good coding, only good refactoring&amp;rdquo;.</description>
+    </item>
     
     <item>
       <title>Why Array.map</title>
