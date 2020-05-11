@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>minecraft - Josh Wulf</title>
+<title>Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier - Josh Wulf</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -20,17 +20,29 @@
 
 
   <meta name="generator" content="Hugo 0.60.0" />
-  <meta itemprop="name" content="minecraft">
-<meta itemprop="description" content="">
-  <meta property="og:title" content="minecraft" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://joshwulf.com/categories/minecraft/" />
-<meta property="og:updated_time" content="2019-04-21T00:00:00+00:00" />
+  <meta itemprop="name" content="Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier">
+<meta itemprop="description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question.">
+<meta itemprop="datePublished" content="2020-05-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="655">
+<meta itemprop="image" content="https://joshwulf.com/img/2020/02/stack-overflow.png">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="minecraft"/>
-<meta name="twitter:description" content=""/>
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier" />
+<meta property="og:description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/05/five-lessons/" />
+<meta property="og:image" content="https://joshwulf.com/img/2020/02/stack-overflow.png" />
+<meta property="article:published_time" content="2020-05-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-11T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://joshwulf.com/img/2020/02/stack-overflow.png"/>
+
+<meta name="twitter:title" content="Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier"/>
+<meta name="twitter:description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question."/>
 <meta name="twitter:site" content="@sitapati"/>
 
   
@@ -65,7 +77,7 @@
       <a href="/">
         
           
-            Categories
+            Blog
           
         
       </a>
@@ -150,31 +162,31 @@
 
   
     
-    <a href="//twitter.com/share?text=minecraft&amp;url=https%3a%2f%2fjoshwulf.com%2fcategories%2fminecraft%2f" target="_blank" rel="noopener" class="share-btn twitter">
+    <a href="//twitter.com/share?text=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" rel="noopener" class="share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fcategories%2fminecraft%2f" target="_blank" rel="noopener" class="share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" rel="noopener" class="share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fminecraft%2f&amp;title=minecraft" target="_blank" rel="noopener" class="share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f&amp;title=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier" target="_blank" rel="noopener" class="share-btn reddit">
           <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fcategories%2fminecraft%2f&amp;title=minecraft" target="_blank" rel="noopener" class="share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f&amp;title=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier" target="_blank" rel="noopener" class="share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check out this post by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fjoshwulf.com%2fcategories%2fminecraft%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" class="share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -197,8 +209,6 @@
     <footer>
       <ul class="socnet-icons">
         
-    <li><a href="/categories/minecraft/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
@@ -247,40 +257,150 @@
 </section>
 
       <main id="site-main">
-        <h1>minecraft</h1>
-        
-        
-            <article class="post">
+        <article class="post">
   <header>
   <div class="title">
     
-        <h2><a href="/blog/2019/04/mod-minecraft/">How to modify Minecraft the easy way with TypeScript</a></h2>
+        <h2><a href="/blog/2020/05/five-lessons/">Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier</a></h2>
     
     
-        <p>Mod Minecraft with TypeScript</p>
+        <p>A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question.</p>
     
 </div>
   <div class="meta">
-    <time class="published" datetime="2019-04-21 00:00:00 &#43;0000 UTC">
-      April 21, 2019
+    <time class="published" datetime="2020-05-11 00:00:00 &#43;0000 UTC">
+      May 11, 2020
     </time>
     <span class="author">Josh Wulf</span>
     
-      <p>5 minutes read</p>
+      <p>4 minutes read</p>
     
   </div>
 </header>
 
+  <section id="socnet-share">
+    
+
+
+
+
   
-  <a href="/blog/2019/04/mod-minecraft/" class="image featured">
-    <img src="/img/2019/04/sma-generator.png" alt="">
+    
+    <a href="//twitter.com/share?text=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f&amp;title=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f&amp;title=Five%20Lessons%20from%20refactoring%20StackOverflow%20code%20that%20will%20make%20your%20JS%20coding%20journey%20253%25%20easier" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f05%2ffive-lessons%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/05/five-lessons/" class="image featured">
+    
+      <img src="/img/2020/02/stack-overflow.png" alt="">
+    
   </a>
 
 
+  <div class="content">
+    <p>The GitHub repo with the code for this talk is <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs">here</a>.</p>
+<p>You can watch the video of the talk, including the live refactoring, <a href="https://youtu.be/rLzljZmdBNM?t=3075">here on YouTube</a>, or below.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rLzljZmdBNM?t=3075" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="background">Background</h2>
+<p>In early 2020, I noticed that my worldwide ranking on StackOverflow had dropped, and I was only in the top 25% in the world.</p>
+<p>Unacceptable.</p>
+<p>I went on a burn, and I'm now back in the top 0.60% - where I belong. ;-)</p>
+
+
+
   
-  <p>Usually, modifying Minecraft requires coding in Java, and a lot of scaffolding. Now you can write and share Minecraft mods using TypeScript/Javascript.</p>
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="fancybox">
+    <a data-fancybox="Five Lessons from Refactoring StackOverflow" href="/img/2020/05/stackoverflow-ranking.png" data-caption=""><img src="/img/2020/05/stackoverflow-ranking.png"></a>
+    <div class="caption"></div>
+  </div>
+
+
+<p><img src="img/2020/05/stackoverflow-ranking.png" alt=""></p>
+<p>When you expose yourself to a vast amount of data in a short period of time, patterns start to emerge.</p>
+<p>I noticed that 80% of questions in the JavaScript tag on StackOverflow had the same fundamental problems.</p>
+<p>They required much deeper refactors than the answer &ldquo;<em>How do I get this code to work</em>&quot;, so they were really out of scope for an answer.</p>
+<p>To capture them somewhere, I started a category on my blog called &ldquo;<a href="https://www.joshwulf.com/categories/stackoverflowed/">StackOverflowed</a>&rdquo; where I described the deeper issues, and refactored them.</p>
+<p>In the BrisJS talk, I cover the top five things that, I believe, will most improve your JS programming; and did a live refactor of a question from StackOverflow.</p>
+<h2 id="the-five-things-and-one-bonus">The Five Things (and one bonus)</h2>
+<h3 id="0-let-vs-var-vs-const">0. Let vs Var vs Const</h3>
+<p>Use <code>const</code> for <em>everything</em>. Anything that is left is part of a state machine, and should be encapsulated.</p>
+<p>Understand that arrays and objects, and should be declared as <code>const</code>, even if you push to them. And if you push to an array, it's a state machine.</p>
+<p>See the article <a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant/">Shun the Mutant</a> on my blog.</p>
+<h3 id="1-global-mutable-state">1. Global Mutable State</h3>
+<p>Any genuine variables represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value returning interfaces. See <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js">01-global-mutable-state.js</a>, and the article <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoid Global State</a> on my blog.</p>
+<h3 id="2-loops">2. Loops</h3>
+<p>Loops are state machines. When you solve a problem using a loop, now you have two problems.</p>
+<p>Mostly, people thing &ldquo;I have to do something to every element in this array&rdquo;, and construct a loop.</p>
+<p>However, what you need to do is &ldquo;do something to each element in this array&rdquo; - which means a function and Array.map.</p>
+<p>See the article <a href="https://www.joshwulf.com/blog/2020/03/why-array-map/">Why Array.map</a> on my blog.</p>
+<h3 id="3-data-transformation">3. Data transformation</h3>
+<p>Niklaus Wirth wrote the classic book &ldquo;<a href="https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs">Algorithms + Data Structures = Programs</a>&rdquo; in 1976.</p>
+<p>A lot of programming is transforming data structures. If you are doing a lot of complex transformations, revisit the data structures.</p>
+<p>If you don't control input data structures (for example, you consume them for a web service you don't control), then you will have to transform them.</p>
+<p>If you find yourself writing a loop and using Array.push, you should be doing Array.map.</p>
+<p>Correctly and accurately naming your data structures, intermediate data structures, and transformer functions will make the Dao clear.</p>
+<p>See the article <a href="https://www.joshwulf.com/blog/2020/02/providing-a-semantic-api/">Providing a Semantic API</a> on my blog.</p>
+<h3 id="4-promises">4. Promises</h3>
+<p>A lot of JS programming is async. A common problem is &ldquo;retrieve some data from a service, make some determinations based on that data, then retrieve some other data, return that data to the caller&rdquo;.</p>
+<p>In this case, you want Promise.all, Array.map, and Array.filter.</p>
+<p>See the article <a href="https://www.joshwulf.com/blog/2020/03/array-async-failure/">Handling Failure and Success in an Array of Asynchronous Tasks</a> on my blog.</p>
+<h3 id="bonus-naming">Bonus: Naming</h3>
+<p>80% of programming is naming things. When things are correctly named, the Dao becomes clear.</p>
+<h2 id="live-refactoring-a-stackoverflow-question">Live Refactoring a StackOverflow Question</h2>
+<p>In the BrisJS talk, I refactored a StackOverflow question live. It was the third question on the page in the JavaScript tag when I went on there, and demonstrates many of the factors that I cover.</p>
+<p>The question that I refactored is <a href="https://stackoverflow.com/questions/61724541/array-of-promises-in-a-promise-array/61727830#61727830">here</a>.</p>
+<p>The code for the refactor is <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs">here</a>.</p>
+<p>You can see the question in <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/demo.js">demo.js</a>, along with stub code to mock the services returning the remote data structures.</p>
+<p>To run it: <code>node demo.js</code>.</p>
+<p>A refactor with no loops and no variables is in <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/refactor.js">refactor.js</a>.</p>
+<p>To run it: <code>node refactor.js</code>.</p>
+
+  </div>
   <footer>
-    <a href="/blog/2019/04/mod-minecraft/" class="button big">Read more</a>
     <ul class="stats">
   
     
@@ -289,7 +409,13 @@
         <ul>
           
             
-            <li><a class="article-category-link" href="https://joshwulf.com/categories/minecraft">minecraft</a></li>
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/stackoverflowed">stackoverflowed</a></li>
           
         </ul>
       </li>
@@ -307,16 +433,14 @@
   </footer>
 </article>
 
-        
-        
+
 <div class="pagination">
   
-    <a href="#" class="disabled button big previous"><i class="fas fa-angle-left"></i></a>
+    <a href="/blog/2020/03/array-async-failure/" class="button"><div class="previous"><div>Handling failure and success in an array of asynchronous tasks</div></div></a>
   
-  
-    <a href="#" class="disabled button big next"><i class="fas fa-angle-right"></i></a>
   
 </div>
+
 
       </main>
       <section id="site-sidebar">
@@ -589,8 +713,6 @@
   
       <ul class="socnet-icons">
         
-    <li><a href="/categories/minecraft/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
