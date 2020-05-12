@@ -24,7 +24,7 @@
 <meta itemprop="description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question.">
 <meta itemprop="datePublished" content="2020-05-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-05-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="655">
+<meta itemprop="wordCount" content="694">
 <meta itemprop="image" content="https://joshwulf.com/img/2020/02/stack-overflow.png">
 
 
@@ -368,10 +368,11 @@
 <h2 id="the-five-things-and-one-bonus">The Five Things (and one bonus)</h2>
 <h3 id="0-let-vs-var-vs-const">0. Let vs Var vs Const</h3>
 <p>Use <code>const</code> for <em>everything</em>. Anything that is left is part of a state machine, and should be encapsulated.</p>
-<p>Understand that arrays and objects, and should be declared as <code>const</code>, even if you push to them. And if you push to an array, it's a state machine.</p>
+<p>Understand that arrays and objects are <em>object references</em>, and should be declared as <code>const</code>. It's a common misconception that the array contents are immutable if declared as <code>const</code>.</p>
+<p>The object reference of an array is unchanged, even if you modify <em>the contents</em> of the array. And if you push to an array, it's a <em>state machine</em> - so you should refer to the next point.</p>
 <p>See the article <a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant/">Shun the Mutant</a> on my blog.</p>
 <h3 id="1-global-mutable-state">1. Global Mutable State</h3>
-<p>Any genuine variables represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value returning interfaces. See <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js">01-global-mutable-state.js</a>, and the article <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoid Global State</a> on my blog.</p>
+<p>Any genuine variables in a program represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value-returning interfaces. See <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js">01-global-mutable-state.js</a>, and the article <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoid Global State</a> on my blog.</p>
 <h3 id="2-loops">2. Loops</h3>
 <p>Loops are state machines. When you solve a problem using a loop, now you have two problems.</p>
 <p>Mostly, people thing &ldquo;I have to do something to every element in this array&rdquo;, and construct a loop.</p>
