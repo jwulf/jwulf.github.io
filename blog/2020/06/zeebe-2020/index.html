@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Writing a Zeebe Client in 2020 - Josh Wulf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <meta name="generator" content="Hugo 0.60.0" />
+  <meta itemprop="name" content="Writing a Zeebe Client in 2020">
+<meta itemprop="description" content="Some architectural lessons from 18 months of maintaining the Zeebe Node.js client.">
+<meta itemprop="datePublished" content="2020-06-23T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-06-23T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2578">
+<meta itemprop="image" content="https://joshwulf.com/img/2019/01/zeebe.png">
+
+
+
+<meta itemprop="keywords" content="" />
+  <meta property="og:title" content="Writing a Zeebe Client in 2020" />
+<meta property="og:description" content="Some architectural lessons from 18 months of maintaining the Zeebe Node.js client." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joshwulf.com/blog/2020/06/zeebe-2020/" />
+<meta property="og:image" content="https://joshwulf.com/img/2019/01/zeebe.png" />
+<meta property="article:published_time" content="2020-06-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-23T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://joshwulf.com/img/2019/01/zeebe.png"/>
+
+<meta name="twitter:title" content="Writing a Zeebe Client in 2020"/>
+<meta name="twitter:description" content="Some architectural lessons from 18 months of maintaining the Zeebe Node.js client."/>
+<meta name="twitter:site" content="@sitapati"/>
+
+  
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+      
+      
+      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/add-on.css">
+    
+  
+  
+  
+  
+    
+  
+</head>
+
+  <body>
+    
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/">
+        
+          
+            Blog
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu">
+      
+        
+          
+          
+            <a href="/" class="link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="/books/" class="link"><i class='fa fa-book'></i> Books</a>
+          
+        
+      
+        
+          
+          
+            <a href="/blog/" class="link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="/talks/" class="link"><i class='fas fa-chalkboard-teacher'></i> Talks</a>
+          
+        
+      
+        
+          
+          
+            <a href="/video/" class="link"><i class='fab fa-twitch'></i> Twitch</a>
+          
+        
+      
+        
+          
+          
+            <a href="/categories/" class="link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="/contact/" class="link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      
+
+    </menu>
+    
+
+    <a href="#share-menu" class="share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="lang-menu" class="flyout-menu">
+  <a href="#" lang="en" class="link active">English (en)</a>
+  
+    
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Writing%20a%20Zeebe%20Client%20in%202020&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f&amp;title=Writing%20a%20Zeebe%20Client%20in%202020" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f&amp;title=Writing%20a%20Zeebe%20Client%20in%202020" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro">
+  <a href="/"><img src="/img/main/logo.jpg" class="circle" width="" alt="Josh Wulf" /></a>
+  <header>
+    <h1>Josh Wulf</h1>
+  </header>
+  <main>
+    <p>Open Source Developer Advocate</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        <article class="post">
+  <header>
+  <div class="title">
+    
+        <h2><a href="/blog/2020/06/zeebe-2020/">Writing a Zeebe Client in 2020</a></h2>
+    
+    
+        <p>Some architectural lessons from 18 months of maintaining the Zeebe Node.js client.</p>
+    
+</div>
+  <div class="meta">
+    <time class="published" datetime="2020-06-23 00:00:00 &#43;0000 UTC">
+      June 23, 2020
+    </time>
+    <span class="author">Josh Wulf</span>
+    
+      <p>13 minutes read</p>
+    
+  </div>
+</header>
+
+  <section id="socnet-share">
+    
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Writing%20a%20Zeebe%20Client%20in%202020&amp;url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" rel="noopener" class="share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" rel="noopener" class="share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f&amp;title=Writing%20a%20Zeebe%20Client%20in%202020" target="_blank" rel="noopener" class="share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f&amp;title=Writing%20a%20Zeebe%20Client%20in%202020" target="_blank" rel="noopener" class="share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="mailto:?subject=Check out this post by Josh%20Wulf&amp;body=https%3a%2f%2fjoshwulf.com%2fblog%2f2020%2f06%2fzeebe-2020%2f" target="_blank" class="share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+  </section>
+  
+  <a href="/blog/2020/06/zeebe-2020/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+  <div class="content">
+    <p>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &ldquo;<a href="https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/">Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial</a>&quot;.</p>
+<p>As of June 18, 2020, we have Zeebe client libraries in <a href="https://github.com/zeebe-io/zeebe/tree/master/clients/java">Java</a> and <a href="https://github.com/zeebe-io/zeebe/tree/master/clients/go">Go</a>, maintained by the core Zeebe Engineering team, as well as community-supported clients in <a href="https://github.com/zeebe-io/zeebe-client-csharp">C#</a>, <a href="https://github.com/syconpmm/DelphiZeeBeClient">Delphi</a>, <a href="https://github.com/CreditSenseAU/zeebe-client-node-js">Node.js</a>, <a href="https://pypi.org/project/zeebe-grpc/">Python</a>, <a href="https://github.com/zeebe-io/zeebe-client-ruby">Ruby</a>, and <a href="https://github.com/xmclark/zeebest">Rust</a>; as well as <a href="https://github.com/VilledeMontreal/workit">Workit</a> - a Node.js client that can talk to both Zeebe and Camunda - and a <a href="https://github.com/marketplace/actions/zeebe-action">Zeebe GitHub Action</a>.</p>
+<p>If you are interested in creating a new Zeebe client library in your favorite language, the 2018 article is still a great place to get started.</p>
+<p>In this article I want to share some observations from developing the Node.js library over the past 18 months.</p>
+<h2 id="managing-the-grpc-channel">Managing the gRPC Channel</h2>
+<p>If you are writing a Zeebe client, the first place to start is by getting the gRPC Protocol definition for the Zeebe API. The 0.23.2 broker protocol is <a href="https://github.com/zeebe-io/zeebe/blob/0.23.2/gateway-protocol/src/main/proto/gateway.proto">here</a>.</p>
+<p>This file contains the remote procedures that your library will call on the Zeebe Gateway, and definitions of the request and response objects (<em>messages</em> in gRPC terms).</p>
+<p>The first thing that your client will do is construct a gRPC channel, using your language's implementation of gRPC. No application programmer wants to deal with that low-level, so that's what your client library will do.</p>
+<p>Then, your client will provide an API to the programmer, onte that exposes the Zeebe API in some form.</p>
+<p>With the gRPC channel, you may find yourself tuning various low-level connection parameters, especially when you connect to Camunda Cloud. The connection to a Zeebe broker is direct, whereas the connection to Camunda Cloud passes through an nginx proxy. This changes the connection characteristics.</p>
+<h2 id="binding-the-api-to-a-cluster">Binding the API to a Cluster</h2>
+<p>You will probably want to manage the cluster connection details in one place. Users of your library will want to work with a specific broker cluster, and they will not want to provide the connection details with every call - so your library will probably take the connection details and return an API that is bound to that cluster.</p>
+<h2 id="what-abstractions">What Abstractions?</h2>
+<p>These first two - the gRPC channel and the connection details - are fairly straight-forward and obvious.</p>
+<p>Beyond that, there are some philosophical design choices to make about your library implementation. That is: how much and what kind of abstraction it will provide over the Zeebe API.</p>
+<p>The Zeebe API has methods to deploy a workflow definition to the broker, create (and start) a workflow instance, to publish a message to the broker, to cancel a workflow instance, to update the variables of a workflow instance. It also has methods to activate available jobs, and to complete an activated job, fail an activated job, or raise a BPMN error in an activated job.</p>
+<p>Your language client may be no more than a language-level API to the Zeebe gRPC API.</p>
+<p>In this case, it is the responsibility of users of your library to construct the request objects to use with the API calls. They also have to manage retries and errors.</p>
+<h2 id="connection-characteristics">Connection Characteristics</h2>
+<p>The gRPC channel may throw errors during connection to the Zeebe broker on Camunda Cloud, as it negotiates the oAuth credentials and the nginx proxy. In that case, you might suppress errors if the library detects that it is connecting to Camunda Cloud, to normalise the behaviour for applications using your library.</p>
+<h2 id="error-handling-and-retries">Error handling and Retries</h2>
+<p>One thing you may want to do is abstract some error handling. For example, if the broker is experiencing high latency internally, it will return a gRPC Error Code 8 to signal Back Pressure. Your library may respond that by doing an automatic back-off retry. Or it may not implement anything, and leave it to the user to handle this in their own code. Or it may be configurable - so that users can opt-in to retries on backpressure, or catch an exception / supply a handler for that case.</p>
+<p>The broker may simply be unavailable. Perhaps the developer is working with a dockerised broker, and the broker has not started yet. In this case, does an attempt to deploy a workflow definition throw an error, or does your library transparently retry the operation until the broker starts?</p>
+<p>In the case of business errors, you probably want to throw an exception, return an error object, or take an error path supplied to your API. For example, a gRPC Error Code 5 signals that an element was not found. This response will be sent if a program attempts to start an instance of a workflow definition that does not exist on the broker.</p>
+<p>These kinds of considerations dictate the developer ergonomics of your library, and how opinionated it is about application behaviour / how much it requires the developer to code.</p>
+<p>Making your library configurable, so that it has both an opinionated behaviour that matches 80% of its anticipated use-cases, but can be switched to an unopinionated mode for the other 20%, makes it more flexible. It also makes it more complicated internally, and increases the number of cases that you have to test.</p>
+<h2 id="workers">Workers</h2>
+<p>Conceptually, we talk about Zeebe &ldquo;job workers&rdquo;. These are programs that activate jobs, execute some handler code with the metadata and variable payload of the job, and then return a response to the broker.</p>
+<p>In terms of the Zeebe gRPC API, this concern is purely logical. If you provided nothing more than a thin layer over the Zeebe gRPC API, then application developers will need to manage a number of concerns in their own code.</p>
+<p>If your library takes connection details and returns a bound API that does nothing more than implements the Zeebe gRPC calls in the language of your client implementation, then application programmers will need to:</p>
+<ul>
+<li>Compute the current capacity of the worker</li>
+<li>Construct an <code>ActivateJobsRequest</code> object with the number of jobs to activate.</li>
+<li>Make the <code>ActivateJobs</code> call to the broker.</li>
+<li>Deal with an error response - back-off retry?</li>
+<li>Handle the response, including demarshalling the payload to a native data structure if needed.</li>
+<li>Execute a handler on each of the jobs returned.</li>
+<li>Handle exceptions in the handler.</li>
+<li>Construct either a <code>CompleteJobRequest</code>, a <code>FailJobRequest</code>, or a <code>ThrowErrorRequest</code> for each job, then call the appropriate API to send it.</li>
+<li>Manage the current capacity.</li>
+<li>Loop again.</li>
+</ul>
+<p>This is the essential behaviour of a Zeebe worker program.</p>
+<p>As you can see from this description, it is amenable to abstraction. With just the raw API exposed, users of your library are going to be repeating a lot of structural coding with every worker they write.</p>
+<p>You might create just the raw language binding, and then implement an opinionated framework in another package that uses your library, or as an opt-in feature.</p>
+<p>That's probably a good separation of concerns.</p>
+<h2 id="lessons-from-the-nodejs-client">Lessons from the Node.js client</h2>
+<p>With the Node.js library, I took the approach of building an opinionated framework, including an opinionated worker in the client library. Over time, in response to requests from users, I exposed more unmanaged APIs, <em>and</em> added more opinionated functionality.</p>
+<p>The library has 18 months of development and 42 releases. It started without a clear picture of how Zeebe works, or how it would be used. It was built initially to get something working for an early POC using Zeebe. As a result, it has some internal Frankenstein complexity.</p>
+<p>If I could go back and do it over, knowing what I know now, I would implement it with a clear separation of concerns, and using the principle of least knowledge between the layers, to coalesce concerns and prevent logic from being split across components.</p>
+<p>Before I sketch this out, let me say this: if you are building a new client, build the simplest, most direct mapping first. If you take any inspiration from this, take it as a picture of a future state.</p>
+<p>Having said that, here is how I would construct it:</p>
+<h3 id="developer-ergonomics"><em>Developer Ergonomics</em></h3>
+<p>Let's start with the end in mind:</p>
+<p><em>How will developers use this library?</em></p>
+<p>A developer can import the library to their project, and then call a method to get back a connected API to a Zeebe broker.</p>
+<p>They pass in to this method (either explicitly or via environment / config file) the connection details for the cluster, and some configuration options, such as the retry strategy.</p>
+<p>What they get back from that call is a connected API that uses the retry strategy they requested.</p>
+<p>It also has a method for creating a worker. That method takes a task type and a handler function, and returns a handle to the worker that can be used to close the worker, or to listen for error events.</p>
+<h3 id="grpc-connection-component"><em>gRPC Connection component</em></h3>
+<p>The gRPC Connection component takes connection details for a cluster, and creates and manages the gRPC channel.</p>
+<p>This component scans the <code>proto</code> file and dynamically generates the gRPC methods.</p>
+<p>This component establishes a connection to the cluster, exposes the actual gRPC method calls, and emits network and business errors.</p>
+<p>It needs to leverage some other objects that manage things like OAuth credential exchange for Camunda Cloud. These are best to be injected via the constructor. This makes the component testable, and maintains a clean separation of concern.</p>
+<h3 id="oauth-component"><em>OAuth component</em></h3>
+<p>This is a component that handles retrieving the OAuth credentials from Camunda Cloud, caching them on disk, and managing their lifecycle.</p>
+<h3 id="retry-machine-component"><em>Retry Machine component</em></h3>
+<p>This component is a retry machine. It takes a retry strategy in its constructor, and returns a functional machine that can take an API operation as an argument and apply the retry strategy to it.</p>
+<h3 id="connection-characteristic-middleware"><em>Connection Characteristic Middleware</em></h3>
+<p>This component wraps a gRPC Connection component, and suppresses or propagates its errors based on profiles. This is where you handle Camunda Cloud's initial connection behaving differently from self-hosted Zeebe. Based on the expectation of the connection's characteristics, this Middleware normalises its behaviour so that the application gets the same experience no matter what it is connecting to.</p>
+<p>The constructor takes the dependencies of the gRPC Connection component, creates a gRPC Connection component, and wires it to the Middleware.</p>
+<h3 id="the-zeebe-api"><em>The Zeebe API</em></h3>
+<p>The gRPC connection class has the actual methods, but they are dynamically constructed. This means it has no typing information. The next layer is a concrete, strongly typed implementation of the proto file.</p>
+<p>The Zeebe API component is stateful, and takes a Middleware-wrapped gRPC connection, and a retry machine in its constructor.</p>
+<p>It exposes an API that consumes and produces native JavaScript objects. Internally, it performs the marshalling / demarshalling. For example, the <code>variables</code> payload is a string in the Zeebe gRPC protocol. But it is stringified JSON. So the Zeebe API component parses it to JSON on receipt, before returning it to the program, and accepts JSON from the program, which it stringifies, before sending it over the gRPC connection.</p>
+<p>When an API operation is invoked from the program, the retry machine calls it over the gRPC connection, and manages the retry before passing an error or result back up the chain to the caller.</p>
+<h3 id="worker-factory-component"><em>Worker Factory Component</em></h3>
+<p>The Worker Factory component is used to create Zeebe workers. It takes connection configuration in its constructor, and has a <code>createWorker</code> method. This method takes a task type and a worker handler, creates a gRPC connection component, and constructs and returns a worker. With the Node implementation, each worker needs its own gRPC connection. The <code>ActivateJobs</code> gRPC call is a <em>streaming gRPC method</em> (returns a stream), and errors are thrown asynchronously as events. This means that they cannot be correlated to a particular worker if there is a shared connection. Also, any &ldquo;synchronous&rdquo; methods over that channel will also trigger the stream error handler, so you cannot share it with the rest of the API.</p>
+<p>So the Worker Factory component also creates its own Zeebe API component to use for the job completion gRPC calls, with retry configuration.</p>
+<h3 id="worker-component"><em>Worker Component</em></h3>
+<p>This component manages the lifecycle of <code>ActivateJob</code> requests and the corresponding <code>CompleteJobRequest</code>, <code>FailJobRequest</code>, and <code>ThrowErrorRequest</code> to complete jobs. It also manages unchecked exceptions in the worker handler, and the capacity of the worker - which is used to construct the <code>ActivateJobsRequest</code>.</p>
+<p>It is created in response to a call to the <code>createWorker</code> method of the Worker Factory component. It takes a task type and a worker handler function. The Worker Factory's Zeebe API is also passed in to the Worker constructor, to give it a channel to complete jobs with a managed retry.</p>
+<h3 id="configuration-hydration-component"><em>Configuration Hydration Component</em></h3>
+<p>This component can take an explicit configuration from code, and then reads any configuration files and the environment, and resolves all of these to return a complete configuration.</p>
+<p>This is where you put all the defaults, all configuration parameters, and all precedence rules. It is very testable.</p>
+<h3 id="the-factory-component"><em>The Factory Component</em></h3>
+<p>The top-level Factory component assembles the machine. It takes connection and retry configuration, and:</p>
+<ol>
+<li>creates a Configuration Hydration Component and gets the configuration</li>
+<li>constructs an OAuth component (if needed)</li>
+<li>constructs a retry machine</li>
+<li>injects those into a Connection Characteristic Middleware component</li>
+<li>injects that into a Zeebe API component</li>
+<li>constructs a Worker Factory component, injecting the middleware-wrapped gRPC component</li>
+</ol>
+<p>And finally, returns the Zeebe API and the Worker Factory to the application.</p>
+<p>Missing from here is Logging, and also the error handling strategy.</p>
+<h2 id="errors">Errors</h2>
+<p>Errors can occur in a number of different places, and for different causes.</p>
+<p>Broadly speaking, there are two categories of errors:</p>
+<ul>
+<li>Network Errors</li>
+<li>Broker Communicated Errors</li>
+</ul>
+<p>Network errors are things like gRPC Error Code 14: Cannot Connect. That can be caused by the network being down, unresolvable DNS, or the broker not having started.</p>
+<p>These errors can be retried homogenously - that is to say, you can make a statement like &ldquo;Retry for n minutes | indefinitely | never&rdquo; for these errors as a class.</p>
+<p>Broker communicated errors are of two types:</p>
+<ul>
+<li>Retryable</li>
+<li>Not Retryable</li>
+</ul>
+<p>The retryable error is really only gRPC Error Code 8, which signals backpressure.
+Business errors like 5, Element Not Found, should not be retried, and need to be propagated to the application logic.</p>
+<p>Allowing API calls to be wrapped with an error handler enables the application to handle them. Network errors in the Node client emit an event that the developer can listen for. This allows an application to alert if it loses connectivity. This is why normalising the initial connection is important - otherwise applications may alert during the initial connection to Camunda Cloud.</p>
+<p>Errors from the worker, which is a long-running functional component, are a different concern. What should happen if the worker attempts to complete a job, but cannot. Should it keep trying forever? What happens if it re-establishes a connection, and the attempt to complete the job fails, because another worker got the job and completed it in the meantime?</p>
+<p>You probably want to log these errors, but not propagate them to the application logic - since there is nothing that the application can do about it.</p>
+<h2 id="ideal-architecture">Ideal Architecture</h2>
+<p>This is pretty much the current architecture of the Node client - however, implemented in an evolutionary way, rather than as a clean architecture.</p>
+<p>The separation of concerns isn't as clear cut as this picture, and there is a lot of code to support backward-compatibility. As the client has evolved to its current level of sophistication, it has added signature overloads and code to support them.</p>
+<p>If I were doing a significant refactor, or starting from scratch, this is how I would I do it now.</p>
+
+  </div>
+  <footer>
+    <ul class="stats">
+  
+    
+    
+      <li class="categories">
+        <ul>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/javascript">javascript</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/programming">programming</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/zeebe">zeebe</a></li>
+          
+            
+            <li><a class="article-category-link" href="https://joshwulf.com/categories/typescript">typescript</a></li>
+          
+        </ul>
+      </li>
+    
+  
+  
+    <li class="tags">
+      <ul>
+        <li>None</li>
+      </ul>
+    </li>
+  
+</ul>
+
+  </footer>
+</article>
+
+
+<div class="pagination">
+  
+    <a href="/blog/2020/05/five-lessons/" class="button"><div class="previous"><div>Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier</div></div></a>
+  
+  
+</div>
+
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent posts</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/06/zeebe-2020/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/06/zeebe-2020/">Writing a Zeebe Client in 2020</a></h1>
+          <time class="published" datetime="">June 23, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/05/five-lessons/" class="image featured">
+    
+      <img src="/img/2020/02/stack-overflow.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/05/five-lessons/">Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier</a></h1>
+          <time class="published" datetime="">May 11, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/03/array-async-failure/" class="image featured">
+    
+      <img src="/img/2020/02/stack-overflow.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/03/array-async-failure/">Handling failure and success in an array of asynchronous tasks</a></h1>
+          <time class="published" datetime="">March 8, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/03/why-array-map/" class="image featured">
+    
+      <img src="/img/2020/02/stack-overflow.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
+          <time class="published" datetime="">March 4, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
+    
+      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
+          <time class="published" datetime="">March 3, 2020</time>
+        </header>
+      </article>
+      
+      
+        <a href="/blog/" class="button">See more</a>
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/programming/">programming<span class="count">21</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/zeebe/">zeebe<span class="count">9</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/stackoverflowed/">stackoverflowed<span class="count">6</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/events/">events<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/camunda-cloud/">camunda-cloud<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/github/">github<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/quantum-mechanics/">quantum-mechanics<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/startups/">startups<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/book-review/">book-review<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/career-development/">career-development<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/conferences/">conferences<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/deployment/">deployment<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diabetes/">diabetes<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/diversity/">diversity<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/docker/">docker<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/fp/">fp<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/mct1/">mct1<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/media/">media<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/minecraft/">minecraft<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/q/">q#<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/recruiting/">recruiting<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/serverless/">serverless<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/software-engineering/">software-engineering<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  <section id="mini-bio">
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>test</p>
+    <footer>
+      <a href="/about" class="button">Learn More</a>
+    </footer>
+  </section>
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/jwulf" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+<li><a href="//stackoverflow.com/users/1758461" target="_blank" rel="noopener" title="Stack Overflow" class="fab fa-stack-overflow"></a></li>
+
+
+
+
+
+
+
+
+
+<li><a href="//linkedin.com/in/sitapati" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+<li><a href="//facebook.com/sitapati" target="_blank" rel="noopener" title="Facebook" class="fab fa-facebook"></a></li>
+
+
+
+
+
+
+
+
+<li><a href="//instagram.com/beastmodewulf" target="_blank" rel="noopener" title="Instagram" class="fab fa-instagram"></a></li>
+
+<li><a href="//twitter.com/sitapati" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:josh@magikcraft.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        Josh Wulf
+      
+    . <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/html.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/js.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/toml.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/typescript.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <script src=/js/util.js></script>
+  <script src=/js/main.js></script>
+  <script src=/js/add-on.js></script>
+  
+
+
+
+
+
+    </div>
+  </body>
+</html>
