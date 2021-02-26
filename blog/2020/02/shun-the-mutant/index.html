@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Shun the Mutant - the case for const">
 <meta itemprop="description" content="TLDR; only use variables for actual mutable state, and put them inside testable state machines.">
-<meta itemprop="datePublished" content="2020-02-26T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-26T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-26T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1584">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Shun the Mutant - the case for const" />
 <meta property="og:description" content="TLDR; only use variables for actual mutable state, and put them inside testable state machines." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -329,12 +330,12 @@ const c = &quot;!&quot;
 var b;
 const c; // has no meaning
 </code></pre><p>To understand the difference between <code>let</code> and <code>var</code>, you can refer to <a href="https://stackoverflow.com/a/11444416/1758461">this excellent answer on StackOverflow</a>.</p>
-<p>I'm here today to make the case for <code>const</code>.</p>
+<p>I&rsquo;m here today to make the case for <code>const</code>.</p>
 <h2 id="semantics-of-mutability">Semantics of Mutability</h2>
 <p>When you use <code>var</code> or <code>let</code> in a declaration with assignment, by which I mean:</p>
 <pre><code>var a = &quot;Hello&quot;
 let b = &quot;World&quot;
-</code></pre><p>You are communicating to the world - by which I mean machine reasoners (like ESLint, your IDE's language service, and the JS run-time itself) and other programmers:</p>
+</code></pre><p>You are communicating to the world - by which I mean machine reasoners (like ESLint, your IDE&rsquo;s language service, and the JS run-time itself) and other programmers:</p>
 <blockquote>
 <p>I intend that the value of this assignment change over the course of execution. Do not rely on the eventual value of this assignment.</p>
 </blockquote>
@@ -362,7 +363,7 @@ let b = &quot;World&quot;
 
 <p>When you run this code, whether in Node or a browser console, you will see that <code>a</code> first refers to an object, then refers to <code>undefined</code>.</p>
 <p>However, the object that got created continues to exist, and keeps logging.</p>
-<p>Although we say loosely that &ldquo;<em><code>a</code> is an object</em>&quot;, in fact <code>a</code> is a <em>reference</em> to an object that exists independently.</p>
+<p>Although we say loosely that &ldquo;<em><code>a</code> is an object</em>&rdquo;, in fact <code>a</code> is a <em>reference</em> to an object that exists independently.</p>
 <p>When a novice programmer creates a statement like <code>var a = []</code>, they may reason: &ldquo;<em>I want to mutate that array, so I need to declare it as <code>var</code>, so that it is mutable.</em>&rdquo;</p>
 <p>What gets created here, however, is not a mutable array and a reference to it <code>a</code>, but rather a mutable array and a <em>mutable reference</em> to it.</p>
 <p>In our logging object example above, we changed the reference <code>a</code> to <code>undefined</code>, and lost the reference to the object.</p>
@@ -381,17 +382,17 @@ let b = &quot;World&quot;
 <li>Assigning a new object reference. eg: <code>members = [...members, ...newMember]</code></li>
 </ul>
 <p>All of these are actual reference mutations that require the use of <code>let</code> or <code>var</code>.</p>
-<p>Note that <code>members.push(newMember)</code> mutates the contents of the referenced array, and thus <code>members</code> itself can be declared as <code>const</code>. I'm not advocating using <code>Array.push</code>, and will deal with it further on.</p>
+<p>Note that <code>members.push(newMember)</code> mutates the contents of the referenced array, and thus <code>members</code> itself can be declared as <code>const</code>. I&rsquo;m not advocating using <code>Array.push</code>, and will deal with it further on.</p>
 <p>All of these mutable references create code that is complex to reason about, and can lead to couplings that are hard to test, because they represent state.</p>
 <p>Once all the faux variables have been renamed to <code>const</code>, a variable that is mutated inside a function usually indicates the presence of a custom state machine. Sometimes a custom state machine is necessary, but less often than you would think.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h2 id="valid-use-of-variablesvaliduseofvariables"><a href="#valid-use-of-variables">Valid use of variables</a></h2>
+<h2 id="valid-use-of-variablesvalid-use-of-variables"><a href="#valid-use-of-variables">Valid use of variables</a></h2>
 <p>Valid uses for a variable can be to represent internal state, for example:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/269745c95b98c0308b95c472066c24c0.js"></script>
 
 <p>In this example, we need a variable to represent the connected status of our <code>GRPCConnection</code>. It is <em>literally</em> its state, and we have no other way to represent it (we assume here that the object returned by <code>gRPC()</code> does not capture and expose it).</p>
 <p>This is the correct use of a variable. It represents (models) some <em>real mutable state</em> in the system - rather than creating mutable state where none exists.</p>
-<p>However, externally, we do not expose state. We return a <code>const</code> value that <em>represents the state of the connection at a point in time</em>. That doesn't change. It is an immutable statement.</p>
+<p>However, externally, we do not expose state. We return a <code>const</code> value that <em>represents the state of the connection at a point in time</em>. That doesn&rsquo;t change. It is an immutable statement.</p>
 <p>State machines require rigorous testing to be reliable.</p>
 <p>This custom state machine is hard to test. It has a hard dependency on <code>gRPC</code>, which provokes the state transitions.</p>
 <p>To make this state machine testable, we would want to inject the <code>gRPC</code> implementation like this:</p>
@@ -469,6 +470,38 @@ let b = &quot;World&quot;
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -517,40 +550,6 @@ let b = &quot;World&quot;
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -570,12 +569,12 @@ let b = &quot;World&quot;
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -590,17 +589,17 @@ let b = &quot;World&quot;
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -616,6 +615,11 @@ let b = &quot;World&quot;
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -666,11 +670,6 @@ let b = &quot;World&quot;
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -775,12 +774,12 @@ let b = &quot;World&quot;
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

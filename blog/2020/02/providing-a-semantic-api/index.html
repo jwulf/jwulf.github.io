@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Providing a Semantic API">
 <meta itemprop="description" content="A StackOverflow refactoring.">
-<meta itemprop="datePublished" content="2020-02-26T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-26T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-26T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1643">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Providing a Semantic API" />
 <meta property="og:description" content="A StackOverflow refactoring." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -322,7 +323,7 @@
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, <strong>and</strong> &ldquo;There is no such thing as good coding, only good refactoring&rdquo;.</em></p>
 <p>A <em>Semantic API</em> is &ldquo;an interface that provides information about usage of the interface&rdquo; (<em>my definition</em>). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all of the above.</p>
-<p>The meaning of &ldquo;<em>semantics</em>&quot;, according to the Oxford Dictionary:</p>
+<p>The meaning of &ldquo;<em>semantics</em>&rdquo;, according to the Oxford Dictionary:</p>
 <blockquote>
 <p>The branch of linguistics and logic concerned with meaning.</p>
 </blockquote>
@@ -333,12 +334,12 @@
 </blockquote>
 <p>Providing a Semantic API is part of improving the <a href="https://ngeor.com/2017/09/16/ergonomics-and-apis.html">developer ergonomics</a>, or Dev UX, of your code.</p>
 <p>An API is an <em>Application Programming Interface</em>. Although it has come to refer to REST APIs and other external interfaces, every function that you write has an API. If you write libraries that are reused by other developers, as I do with the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>, paying careful attention to developer ergonomics is important.</p>
-<p>But even if you don't write libraries, every function that you write is potentially consumed by other developers working on the code base - and minimally by at least one - <em>you</em>.</p>
+<p>But even if you don&rsquo;t write libraries, every function that you write is potentially consumed by other developers working on the code base - and minimally by at least one - <em>you</em>.</p>
 <h2 id="the-question">The Question</h2>
 <p>Here is the original code from StackOverflow:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/c3b59f4915d4f644ea1a2c4ea0b26bed.js"></script>
 
-<p>I refactored the global variable previously, in the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoiding global mutable state in Browser JS</a>&quot;. This time we are going to refactor the <code>member</code> function to improve the API ergonomics.</p>
+<p>I refactored the global variable previously, in the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoiding global mutable state in Browser JS</a>&rdquo;. This time we are going to refactor the <code>member</code> function to improve the API ergonomics.</p>
 <h2 id="naming">Naming</h2>
 <p>The importance of naming to reduce cognitive load and increase the comprehensibility of your code (both for you and for others) cannot be overstated. See <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">this previous article</a> for more detail.</p>
 <p>In the case of this function, we can see looking at the reference to <code>this</code> inside <code>member</code> that this function is intended to be called with the <code>new</code> keyword, to return an instance.</p>
@@ -351,8 +352,8 @@
 <p>This reduces the chances of a bug like this creeping into your code:</p>
 <pre><code>const memObj1 = member(&quot;m001&quot;, &quot;123&quot;)
 </code></pre><p>I changed the property name from <code>pwd</code> to <code>password</code> to match the function parameter name. This allows programmers consuming this API to reuse the naming. Forcing them to mentally map a different property from the parameter name is friction that will make using the API unpleasant for them.</p>
-<p>I also changed <code>var</code> to <code>const</code>. This is also semantics. <code>var</code> communicates to the machine and to other programmers &ldquo;<em>I intend that the value of this assignment change over the course of execution. Do not rely on the value of this assignment</em>&quot;, forcing them to reason across the codebase about its eventual value.</p>
-<p><code>const</code>, on the other hand, communicates &ldquo;<em>this is an immutable assignment</em>&quot;. The machine will throw if you accidentally attempt a mutation, and other programmers do not need to read code between the assignment and an eventual use, later in the codebase, to know what is going on.</p>
+<p>I also changed <code>var</code> to <code>const</code>. This is also semantics. <code>var</code> communicates to the machine and to other programmers &ldquo;<em>I intend that the value of this assignment change over the course of execution. Do not rely on the value of this assignment</em>&rdquo;, forcing them to reason across the codebase about its eventual value.</p>
+<p><code>const</code>, on the other hand, communicates &ldquo;<em>this is an immutable assignment</em>&rdquo;. The machine will throw if you accidentally attempt a mutation, and other programmers do not need to read code between the assignment and an eventual use, later in the codebase, to know what is going on.</p>
 <p>I also changed the name of <code>memArray</code> to <code>GlobalMembersArray</code>. This is not a newable object, but the prefix <code>Global</code>, by convention, tells me that it is a global object, and suffix <code>Array</code> tells me that it is an array - anywhere that I encounter it in the code. See <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">this article</a> for a full refactor of this variable.</p>
 <p>Finally, I changed the name of <code>memObj1</code> to <code>member1</code>. It is a small change, but it increases the overall comprehensibility of the code.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
@@ -425,7 +426,7 @@
 <p>You can also have <a href="https://eslint.org/">ESLint</a> running in CI, for example in a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow">GitHub Actions Workflow</a>, to catch bugs relating to the use of this API, before they hit production.</p>
 <h2 id="using-typescript">Using TypeScript</h2>
 <p>Honestly though, writing that much JSDoc is a pain. One of the issues with it is that it is possible to refactor the function and not update the JSDoc. You have to do double the work to make sure they stay in sync.</p>
-<p>Especially when you are prototyping, you don't want to add that much overhead. But you would like the safety and IDE assist that you get from it.</p>
+<p>Especially when you are prototyping, you don&rsquo;t want to add that much overhead. But you would like the safety and IDE assist that you get from it.</p>
 <p>In that case, you want <a href="https://www.typescriptlang.org/">TypeScript</a>. The IDE autocompletion and type-safety is directly tied to the inline declaration of types, and not to a decoupled description that you have to write.</p>
 <p>Unless you are firmly wedded to using plain JS, TypeScript is a better solution. With automatic type definition generation, you can provide code that JS programmers can consume with typings that their IDE can use.</p>
 <h2 id="resources">Resources</h2>
@@ -492,6 +493,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -540,40 +573,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -593,12 +592,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -613,17 +612,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -639,6 +638,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -689,11 +693,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -798,12 +797,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

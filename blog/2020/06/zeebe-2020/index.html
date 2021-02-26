@@ -19,17 +19,18 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Writing a Zeebe Client in 2020">
 <meta itemprop="description" content="Some architectural lessons from 18 months of maintaining the Zeebe Node.js client.">
-<meta itemprop="datePublished" content="2020-06-23T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-06-23T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-06-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-06-23T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2578">
 <meta itemprop="image" content="https://joshwulf.com/img/2019/01/zeebe.png">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Writing a Zeebe Client in 2020" />
 <meta property="og:description" content="Some architectural lessons from 18 months of maintaining the Zeebe Node.js client." />
 <meta property="og:type" content="article" />
@@ -58,7 +59,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -326,14 +327,14 @@
 
 
   <div class="content">
-    <p>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &ldquo;<a href="https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/">Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial</a>&quot;.</p>
+    <p>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &ldquo;<a href="https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/">Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial</a>&rdquo;.</p>
 <p>As of June 18, 2020, we have Zeebe client libraries in <a href="https://github.com/zeebe-io/zeebe/tree/master/clients/java">Java</a> and <a href="https://github.com/zeebe-io/zeebe/tree/master/clients/go">Go</a>, maintained by the core Zeebe Engineering team, as well as community-supported clients in <a href="https://github.com/zeebe-io/zeebe-client-csharp">C#</a>, <a href="https://github.com/syconpmm/DelphiZeeBeClient">Delphi</a>, <a href="https://github.com/CreditSenseAU/zeebe-client-node-js">Node.js</a>, <a href="https://pypi.org/project/zeebe-grpc/">Python</a>, <a href="https://github.com/zeebe-io/zeebe-client-ruby">Ruby</a>, and <a href="https://github.com/xmclark/zeebest">Rust</a>; as well as <a href="https://github.com/VilledeMontreal/workit">Workit</a> - a Node.js client that can talk to both Zeebe and Camunda - and a <a href="https://github.com/marketplace/actions/zeebe-action">Zeebe GitHub Action</a>.</p>
 <p>If you are interested in creating a new Zeebe client library in your favorite language, the 2018 article is still a great place to get started.</p>
 <p>In this article I want to share some observations from developing the Node.js library over the past 18 months.</p>
 <h2 id="managing-the-grpc-channel">Managing the gRPC Channel</h2>
 <p>If you are writing a Zeebe client, the first place to start is by getting the gRPC Protocol definition for the Zeebe API. The 0.23.2 broker protocol is <a href="https://github.com/zeebe-io/zeebe/blob/0.23.2/gateway-protocol/src/main/proto/gateway.proto">here</a>.</p>
 <p>This file contains the remote procedures that your library will call on the Zeebe Gateway, and definitions of the request and response objects (<em>messages</em> in gRPC terms).</p>
-<p>The first thing that your client will do is construct a gRPC channel, using your language's implementation of gRPC. No application programmer wants to deal with that low-level, so that's what your client library will do.</p>
+<p>The first thing that your client will do is construct a gRPC channel, using your language&rsquo;s implementation of gRPC. No application programmer wants to deal with that low-level, so that&rsquo;s what your client library will do.</p>
 <p>Then, your client will provide an API to the programmer, onte that exposes the Zeebe API in some form.</p>
 <p>With the gRPC channel, you may find yourself tuning various low-level connection parameters, especially when you connect to Camunda Cloud. The connection to a Zeebe broker is direct, whereas the connection to Camunda Cloud passes through an nginx proxy. This changes the connection characteristics.</p>
 <h2 id="binding-the-api-to-a-cluster">Binding the API to a Cluster</h2>
@@ -371,7 +372,7 @@
 <p>This is the essential behaviour of a Zeebe worker program.</p>
 <p>As you can see from this description, it is amenable to abstraction. With just the raw API exposed, users of your library are going to be repeating a lot of structural coding with every worker they write.</p>
 <p>You might create just the raw language binding, and then implement an opinionated framework in another package that uses your library, or as an opt-in feature.</p>
-<p>That's probably a good separation of concerns.</p>
+<p>That&rsquo;s probably a good separation of concerns.</p>
 <h2 id="lessons-from-the-nodejs-client">Lessons from the Node.js client</h2>
 <p>With the Node.js library, I took the approach of building an opinionated framework, including an opinionated worker in the client library. Over time, in response to requests from users, I exposed more unmanaged APIs, <em>and</em> added more opinionated functionality.</p>
 <p>The library has 18 months of development and 42 releases. It started without a clear picture of how Zeebe works, or how it would be used. It was built initially to get something working for an early POC using Zeebe. As a result, it has some internal Frankenstein complexity.</p>
@@ -379,7 +380,7 @@
 <p>Before I sketch this out, let me say this: if you are building a new client, build the simplest, most direct mapping first. If you take any inspiration from this, take it as a picture of a future state.</p>
 <p>Having said that, here is how I would construct it:</p>
 <h3 id="developer-ergonomics"><em>Developer Ergonomics</em></h3>
-<p>Let's start with the end in mind:</p>
+<p>Let&rsquo;s start with the end in mind:</p>
 <p><em>How will developers use this library?</em></p>
 <p>A developer can import the library to their project, and then call a method to get back a connected API to a Zeebe broker.</p>
 <p>They pass in to this method (either explicitly or via environment / config file) the connection details for the cluster, and some configuration options, such as the retry strategy.</p>
@@ -395,7 +396,7 @@
 <h3 id="retry-machine-component"><em>Retry Machine component</em></h3>
 <p>This component is a retry machine. It takes a retry strategy in its constructor, and returns a functional machine that can take an API operation as an argument and apply the retry strategy to it.</p>
 <h3 id="connection-characteristic-middleware"><em>Connection Characteristic Middleware</em></h3>
-<p>This component wraps a gRPC Connection component, and suppresses or propagates its errors based on profiles. This is where you handle Camunda Cloud's initial connection behaving differently from self-hosted Zeebe. Based on the expectation of the connection's characteristics, this Middleware normalises its behaviour so that the application gets the same experience no matter what it is connecting to.</p>
+<p>This component wraps a gRPC Connection component, and suppresses or propagates its errors based on profiles. This is where you handle Camunda Cloud&rsquo;s initial connection behaving differently from self-hosted Zeebe. Based on the expectation of the connection&rsquo;s characteristics, this Middleware normalises its behaviour so that the application gets the same experience no matter what it is connecting to.</p>
 <p>The constructor takes the dependencies of the gRPC Connection component, creates a gRPC Connection component, and wires it to the Middleware.</p>
 <h3 id="the-zeebe-api"><em>The Zeebe API</em></h3>
 <p>The gRPC connection class has the actual methods, but they are dynamically constructed. This means it has no typing information. The next layer is a concrete, strongly typed implementation of the proto file.</p>
@@ -407,7 +408,7 @@
 <p>So the Worker Factory component also creates its own Zeebe API component to use for the job completion gRPC calls, with retry configuration.</p>
 <h3 id="worker-component"><em>Worker Component</em></h3>
 <p>This component manages the lifecycle of <code>ActivateJob</code> requests and the corresponding <code>CompleteJobRequest</code>, <code>FailJobRequest</code>, and <code>ThrowErrorRequest</code> to complete jobs. It also manages unchecked exceptions in the worker handler, and the capacity of the worker - which is used to construct the <code>ActivateJobsRequest</code>.</p>
-<p>It is created in response to a call to the <code>createWorker</code> method of the Worker Factory component. It takes a task type and a worker handler function. The Worker Factory's Zeebe API is also passed in to the Worker constructor, to give it a channel to complete jobs with a managed retry.</p>
+<p>It is created in response to a call to the <code>createWorker</code> method of the Worker Factory component. It takes a task type and a worker handler function. The Worker Factory&rsquo;s Zeebe API is also passed in to the Worker constructor, to give it a channel to complete jobs with a managed retry.</p>
 <h3 id="configuration-hydration-component"><em>Configuration Hydration Component</em></h3>
 <p>This component can take an explicit configuration from code, and then reads any configuration files and the environment, and resolves all of these to return a complete configuration.</p>
 <p>This is where you put all the defaults, all configuration parameters, and all precedence rules. It is very testable.</p>
@@ -444,7 +445,7 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
 <p>You probably want to log these errors, but not propagate them to the application logic - since there is nothing that the application can do about it.</p>
 <h2 id="ideal-architecture">Ideal Architecture</h2>
 <p>This is pretty much the current architecture of the Node client - however, implemented in an evolutionary way, rather than as a clean architecture.</p>
-<p>The separation of concerns isn't as clear cut as this picture, and there is a lot of code to support backward-compatibility. As the client has evolved to its current level of sophistication, it has added signature overloads and code to support them.</p>
+<p>The separation of concerns isn&rsquo;t as clear cut as this picture, and there is a lot of code to support backward-compatibility. As the client has evolved to its current level of sophistication, it has added signature overloads and code to support them.</p>
 <p>If I were doing a significant refactor, or starting from scratch, this is how I would I do it now.</p>
 
   </div>
@@ -490,6 +491,8 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
     <a href="/blog/2020/05/five-lessons/" class="button"><div class="previous"><div>Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier</div></div></a>
   
   
+    <a href="/blog/2020/12/rate-limiter/" class="button"><div class="next"><div>Rate-limiting REST calls</div></div></a>
+  
 </div>
 
 
@@ -500,6 +503,38 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
       <header>
         <h1>Recent posts</h1>
       </header>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
       
       <article class="mini-post">
         <section>
@@ -552,40 +587,6 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -605,12 +606,12 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -625,17 +626,17 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -651,6 +652,11 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -701,11 +707,6 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -810,12 +811,12 @@ Business errors like 5, Element Not Found, should not be retried, and need to be
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

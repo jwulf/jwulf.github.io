@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="How to write a GitHub Action">
 <meta itemprop="description" content="Building your own GitHub Action.">
-<meta itemprop="datePublished" content="2020-02-17T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-17T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-17T00:00:00+00:00" />
 <meta itemprop="wordCount" content="528">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="How to write a GitHub Action" />
 <meta property="og:description" content="Building your own GitHub Action." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -320,7 +321,7 @@
 
 
   <div class="content">
-    <p>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository's <code>repository_dispatch</code> REST endpoint over the GitHub API.</p>
+    <p>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository&rsquo;s <code>repository_dispatch</code> REST endpoint over the GitHub API.</p>
 <p>The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.</p>
 <p>I recently wrote a <a href="https://github.com/marketplace/actions/zeebe-action">Zeebe GitHub Action</a> that allows you to <a href="https://camunda.io">Camunda Cloud</a>, and it was so easy to do that I wanted to share it with you.</p>
 <h2 id="github-action-usage-example">GitHub Action Usage Example</h2>
@@ -355,14 +356,14 @@ jobs:
           tags: 'latest'
 </code></pre><ul>
 <li>
-<p>Add two secrets to your repo's Secrets in the repo setting - your Docker Hub username as <code>DOCKER_USERNAME</code> and your Docker Hub password as <code>DOCKER_PASSWORD</code>.</p>
+<p>Add two secrets to your repo&rsquo;s Secrets in the repo setting - your Docker Hub username as <code>DOCKER_USERNAME</code> and your Docker Hub password as <code>DOCKER_PASSWORD</code>.</p>
 </li>
 <li>
 <p>Push to your repository.</p>
 </li>
 </ul>
 <p>You will now see a workflow run in the &ldquo;Actions&rdquo; tab that will build the image from the Dockerfile and publish it to Docker Hub.</p>
-<h2 id="but-thats-just-the-beginning">But that's just the beginning</h2>
+<h2 id="but-thats-just-the-beginning">But that&rsquo;s just the beginning</h2>
 <p>Less immediately obvious uses for GitHub Actions include building <a href="https://github.com/jwulf/camunda-cloud-starter">zero-install tutorials and demos</a>, and <a href="https://github.com/jwulf/ghettohub-db">using a GitHub repo as a JSON database</a>!</p>
 <p>Creating a GitHub Action is simple. In this tutorial, I walk you through creating one. There are, broadly speaking, two types of GitHub Actions:</p>
 <ul>
@@ -370,12 +371,12 @@ jobs:
 <li><strong>JavaScript</strong>: your action runs JavaScript code.</li>
 </ul>
 <p>You can also execute shell scripts, by invoking them from a JavaScript action.</p>
-<p>For this example, we are going to create an action that responds to a <code>repository_dispatch</code> event sent to a repo, and commits some data to the repo in response (we'll invoke a shell script for that part). This allows you to use a repo as a place to store data sent in over HTTP. I used this approach to make <a href="https://github.com/jwulf/ghettohub-db">GhettoHub DB</a>, a low-fi JSON Database in a GitHub repo.</p>
+<p>For this example, we are going to create an action that responds to a <code>repository_dispatch</code> event sent to a repo, and commits some data to the repo in response (we&rsquo;ll invoke a shell script for that part). This allows you to use a repo as a place to store data sent in over HTTP. I used this approach to make <a href="https://github.com/jwulf/ghettohub-db">GhettoHub DB</a>, a low-fi JSON Database in a GitHub repo.</p>
 <h2 id="typescript-github-action-template">TypeScript GitHub Action Template</h2>
 <p>The easiest way to create a GitHub Action is to use the <a href="https://github.com/actions/typescript-action">TypeScript Action</a> template repo.</p>
 <ul>
 <li>
-<p>Click the &ldquo;Use this template&rdquo; button in the GitHub web UI to fork this repo to a new repo in your GitHub account. It's a convention to put <code>-action</code> at the end of the repo name.</p>
+<p>Click the &ldquo;Use this template&rdquo; button in the GitHub web UI to fork this repo to a new repo in your GitHub account. It&rsquo;s a convention to put <code>-action</code> at the end of the repo name.</p>
 </li>
 <li>
 <p>Clone the repository to your local machine.</p>
@@ -452,6 +453,38 @@ jobs:
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -500,40 +533,6 @@ jobs:
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -553,12 +552,12 @@ jobs:
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -573,17 +572,17 @@ jobs:
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -599,6 +598,11 @@ jobs:
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -649,11 +653,6 @@ jobs:
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -758,12 +757,12 @@ jobs:
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

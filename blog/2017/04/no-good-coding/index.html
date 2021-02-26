@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="There is no good coding, only good refactoring">
 <meta itemprop="description" content="On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it.">
-<meta itemprop="datePublished" content="2017-04-15T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2017-04-15T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2017-04-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-04-15T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1100">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="There is no good coding, only good refactoring" />
 <meta property="og:description" content="On a standard 101-key keyboard, there are 100 keys that increase technical debt, and only one key that reduces it." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -356,9 +357,9 @@
 <p>Comments are a code smell. If you have to comment something, it often means you have not named it clearly, or you need to extract it into its own named function</p>
 <h3 id="mutation">Mutation</h3>
 <p>The variables <code>added</code>, <code>changed</code>, and <code>removed</code> are all mutated in the method. Mutation makes code harder to reason about. It’s how the code is actually executed on the processor — imperatively as a set of sequential steps that operate on values in accumulators and registers — but I find that refactoring mutation (variables) out of code is often a pathway to discovering its true essence, as is removing <code>if-then-else</code> statements.</p>
-<h3 id="sideinputs">Side-inputs</h3>
+<h3 id="side-inputs">Side-inputs</h3>
 <p>The method takes no parameters, but it does operate on state from outside the method. This input magically appears via the side-inputs <code>this.files</code> and <code>this.prevFiles</code>. This code was implemented as a TypeScript class, and classes frequently use internal state. However, while a class encapsulates state from the rest of the system, writing methods that operate on the state of the class instance obscures what is going on in the class method itself.</p>
-<h3 id="sideeffects">Side-effects</h3>
+<h3 id="side-effects">Side-effects</h3>
 <p>This method has side-effects by nature — it’s an I/O method that writes to the filesystem, so its outputs are not via return value, by via writing to the filesystem, and sending a message to the user in Minecraft.</p>
 <p>This makes it difficult to test.</p>
 <h2 id="first-refactor">First Refactor</h2>
@@ -390,7 +391,7 @@
 <p>I’ve consolidated the file path into line 2. Now it gets set in a single place, so no hard-to-trace, subtle differing behaviour bugs, and a single place to refactor.</p>
 <h3 id="shun-the-mutant">Shun The Mutant</h3>
 <p>Rather than mutating variables for the counting how many files were added, changed, or removed, I spent the time to write them as functional pipelines, and extract the logic of those functions out into named lambda functions. The essential logic of each is now explicit and clear.</p>
-<h3 id="sideeffects1">Side-Effects</h3>
+<h3 id="side-effects-1">Side-Effects</h3>
 <p>File writing is still a side-effect, and it is done inside the <code>.map</code> of each of the functional pipelines. Those took some thinking about, because I wanted to consolidate the logic as much as possible, and we’re doing two things (and in the case of remove, three) — doing a side-effect, and counting (and in the case of remove, doing a comparison based on an intermediate computation). I got them consolidated down, but now we can’t test this method easily because it writes to the filesystem and also tries to communicate with a running Minecraft server.</p>
 <h3 id="testability">Testability</h3>
 <p>Writing a unit test for this will be complicated. However, unit tests are vital. There is no good code — only good refactoring. It takes several “edits” to the code for its essential structure to emerge: for the dimly grasped ideas to be coalesced into concrete, concise implementations that are clearly grasped, and easily extended or modified; to take code that runs, and turn it into code that clearly and boldly states what it does, and does it well.</p>
@@ -453,7 +454,7 @@
 <p>Side-effects occur in the <code>writeFilesToFileSystem</code> method. This is the right separation of concerns. Logic and I/O should be separated.</p>
 <h2 id="there-is-no-good-coding-only-good-refactoring">There is no good coding, only good refactoring</h2>
 <p>Both of the following pieces of code do the same thing, but one is superior in its clarity, testability, and maintainability.</p>
-<h2 id="before1">Before</h2>
+<h2 id="before-1">Before</h2>
 
 
 
@@ -577,6 +578,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -625,40 +658,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -678,12 +677,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -698,17 +697,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -724,6 +723,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -774,11 +778,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -883,12 +882,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

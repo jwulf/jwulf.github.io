@@ -6,10 +6,17 @@
     <description>Recent content in programming on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rate-limiting REST calls</title>
+      <link>https://joshwulf.com/blog/2020/12/rate-limiter/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/12/rate-limiter/</guid>
+      <description>A typical architecture involves your backend acting as a middle-tier connecting clients to a single external resource over REST: for example, a Discourse or Slack API.
+The amount of requests issued to the remote REST API is proportional to the requests from the clients, so it is not directly under your control.
+External REST services often implement rate-limiting, and will return a 429 status if you make too many requests in a short period of time.</description>
+    </item>
     
     <item>
       <title>Writing a Zeebe Client in 2020</title>
@@ -17,7 +24,7 @@
       <pubDate>Tue, 23 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/06/zeebe-2020/</guid>
-      <description>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &amp;ldquo;Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial&amp;quot;.
+      <description>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &amp;ldquo;Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial&amp;rdquo;.
 As of June 18, 2020, we have Zeebe client libraries in Java and Go, maintained by the core Zeebe Engineering team, as well as community-supported clients in C#, Delphi, Node.js, Python, Ruby, and Rust; as well as Workit - a Node.</description>
     </item>
     
@@ -31,7 +38,7 @@ As of June 18, 2020, we have Zeebe client libraries in Java and Go, maintained b
 You can watch the video of the talk, including the live refactoring, here on YouTube, or below.
   Background In early 2020, I noticed that my worldwide ranking on StackOverflow had dropped, and I was only in the top 25% in the world.
 Unacceptable.
-I went on a burn, and I&#39;m now back in the top 0.60% - where I belong.</description>
+I went on a burn, and I&amp;rsquo;m now back in the top 0.60% - where I belong.</description>
     </item>
     
     <item>
@@ -70,7 +77,7 @@ Motivation Sometimes you have external resources that your microservices access 
       
       <guid>https://joshwulf.com/blog/2020/03/camunda-cloud-connection-2/</guid>
       <description>See Part One of this series here.
-I&#39;m refactoring the Zeebe Node client to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in Camunda Cloud.
+I&amp;rsquo;m refactoring the Zeebe Node client to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in Camunda Cloud.
 Right now, here is what it looks like connecting to Camunda Cloud with the Zeebe Node client:
    Boo!
 The gRPC connection with Camunda Cloud has different characteristics to self-hosted Zeebe, particularly on initial connection, and there is nowhere in the current Node client architecture to model different expectations of connection behaviour.</description>
@@ -82,7 +89,7 @@ The gRPC connection with Camunda Cloud has different characteristics to self-hos
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/refining-method-signature/</guid>
-      <description>When I wrote the first iteration of the Zeebe Node client library in the first months of 2019, I didn&#39;t have any experience in using it. How could I - it didn&#39;t exist.
+      <description>When I wrote the first iteration of the Zeebe Node client library in the first months of 2019, I didn&amp;rsquo;t have any experience in using it. How could I - it didn&amp;rsquo;t exist.
 One early design decision has haunted me for the last year, causing me sleepless nights as I toss and turn, tormented by my guilty conscience.
 The ZBClient.createWorker() method - to create a new job worker process - takes as one of its parameters an id, used to uniquely identify a specific instance of a worker in events exported from the broker.</description>
     </item>
@@ -94,7 +101,7 @@ The ZBClient.createWorker() method - to create a new job worker process - takes 
       
       <guid>https://joshwulf.com/blog/2020/02/camunda-cloud-connection/</guid>
       <description>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node.js client against a running instance of a Camunda Cloud Zeebe cluster.
-I was immediately forced to deal with something I&#39;d been conveniently ignoring:
+I was immediately forced to deal with something I&amp;rsquo;d been conveniently ignoring:
 Camunda Cloud gRPC connections always report failure initially, before eventually succeeding.
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &amp;ldquo;READY&amp;rdquo; state.</description>
     </item>
@@ -145,7 +152,7 @@ let a; var b; const c; // has no meaning To understand the difference between le
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/</guid>
-      <description>Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I&#39;m pretty sure a fair whack of them were homework assignments).
+      <description>Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I&amp;rsquo;m pretty sure a fair whack of them were homework assignments).
 One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (Discord bots are hot right now with the kids).
 There are certain things that people struggle with when learning to program, and when learning to program in JS.</description>
     </item>
@@ -156,7 +163,7 @@ There are certain things that people struggle with when learning to program, and
       <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/creating-github-action/</guid>
-      <description>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository&#39;s repository_dispatch REST endpoint over the GitHub API.
+      <description>GitHub Actions are small, reusable modules of functionality that can participate in GitHub Workflows. You can add a GitHub workflow yaml file to any GitHub repo, and have it run in response to events like code pushes, pull requests - even arbitrary events posted to the repository&amp;rsquo;s repository_dispatch REST endpoint over the GitHub API.
 The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.</description>
     </item>
     
@@ -166,7 +173,7 @@ The obvious things they can be used for are running tests, linting code or rebui
       <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/01/travel-tips/</guid>
-      <description>Over the last 20 years, I&#39;ve done a fair amount of travel around the world. My first trip out of New Zealand on my own - in 1996, to Sydney - was a hot mess. I had no idea that you have to pass through a metal detector at the airport, and I rocked up with batteries, coins, a metal chain on my wallet, a Maglite torch, and a multi-headed screwdriver in my pockets.</description>
+      <description>Over the last 20 years, I&amp;rsquo;ve done a fair amount of travel around the world. My first trip out of New Zealand on my own - in 1996, to Sydney - was a hot mess. I had no idea that you have to pass through a metal detector at the airport, and I rocked up with batteries, coins, a metal chain on my wallet, a Maglite torch, and a multi-headed screwdriver in my pockets.</description>
     </item>
     
     <item>

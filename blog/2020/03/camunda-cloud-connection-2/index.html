@@ -19,17 +19,18 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two">
 <meta itemprop="description" content="Building a state machine with business rules to deal with connection characteristics">
-<meta itemprop="datePublished" content="2020-03-01T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-01T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-03-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-01T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1856">
 <meta itemprop="image" content="https://joshwulf.com/img/2020/03/camunda-cloud-after.png">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two" />
 <meta property="og:description" content="Building a state machine with business rules to deal with connection characteristics" />
 <meta property="og:type" content="article" />
@@ -58,7 +59,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -327,7 +328,7 @@
 
   <div class="content">
     <p><em>See <a href="https://www.joshwulf.com/blog/2020/02/camunda-cloud-connection/">Part One of this series here</a></em>.</p>
-<p>I'm refactoring the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node client</a> to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in <a href="https://camunda.io">Camunda Cloud</a>.</p>
+<p>I&rsquo;m refactoring the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node client</a> to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in <a href="https://camunda.io">Camunda Cloud</a>.</p>
 <p>Right now, here is what it looks like connecting to Camunda Cloud with the Zeebe Node client:</p>
 
 
@@ -355,9 +356,9 @@
 <p>The gRPC connection with Camunda Cloud has different characteristics to self-hosted Zeebe, particularly on initial connection, and there is nowhere in the current Node client architecture to model different expectations of connection behaviour. So I am adding a &ldquo;<em>Connection Characteristics Middleware</em>&rdquo; to it.</p>
 <p>The next step in doing the refactor of the gRPC connection management is to refamiliarise myself with its current operation.</p>
 <p>I did this by reading through the <a href="https://github.com/jwulf/zeebe-client-node-js/blob/38102e7faaebafe199abd7da4e02bb35a6011ab0/src/lib/GRPCClient.ts">current source code of the <code>GRPCClient</code> class</a> and creating a BPMN diagram that models its behaviour.</p>
-<p>BPMN - &ldquo;<a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation">Business Process Model and Notation</a>&rdquo; is an XML standard for modelling business processes that can be rendered graphically. BPMN is perfect for modelling state machines, because that's what a business model is.</p>
-<p>I used the <a href="https://camunda.com/download/modeler/">Camunda Modeler</a> to create the diagram. It has more symbol support than the Zeebe modeler currently does. I'm not intending to execute this diagram, so I don't need to worry about compatibility.</p>
-<p>After creating a model of the current behaviour, I uploaded it to <a href="https://cawemo.com">Cawemo</a>, Camunda's web-based collaborative modeling platform. Here it is:</p>
+<p>BPMN - &ldquo;<a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation">Business Process Model and Notation</a>&rdquo; is an XML standard for modelling business processes that can be rendered graphically. BPMN is perfect for modelling state machines, because that&rsquo;s what a business model is.</p>
+<p>I used the <a href="https://camunda.com/download/modeler/">Camunda Modeler</a> to create the diagram. It has more symbol support than the Zeebe modeler currently does. I&rsquo;m not intending to execute this diagram, so I don&rsquo;t need to worry about compatibility.</p>
+<p>After creating a model of the current behaviour, I uploaded it to <a href="https://cawemo.com">Cawemo</a>, Camunda&rsquo;s web-based collaborative modeling platform. Here it is:</p>
 <iframe
   src="https://cawemo.com/embed/93db6405-211b-499e-ac12-f867c875b63d"
   style="width:700px;height:500px;border:1px solid #ccc"
@@ -373,17 +374,17 @@
 <p>Escalation to the new &ldquo;<em>Connection Characteristics Business Rules Middleware</em>&rdquo; that we are building are noted using the <a href="https://docs.camunda.org/manual/7.12/reference/bpmn20/events/escalation-events/">Escalation Event symbol</a>.</p>
 <p>Signals are used to trigger the debouncing connected (ready) / disconnected (error) state machines.</p>
 <h2 id="preliminary-conclusion">Preliminary Conclusion</h2>
-<p>Looking over it, I'm actually pretty happy with the design. I'm not surprised though - I <em>am</em> pretty good. At least <a href="https://www.joshwulf.com/blog/2020/02/refining-method-signature/">most of the time</a>. And I did refine that state machine continuously over the last year, as I used it in production.</p>
+<p>Looking over it, I&rsquo;m actually pretty happy with the design. I&rsquo;m not surprised though - I <em>am</em> pretty good. At least <a href="https://www.joshwulf.com/blog/2020/02/refining-method-signature/">most of the time</a>. And I did refine that state machine continuously over the last year, as I used it in production.</p>
 <p>There are some obvious escalation points, and it looks like the refactor is going to be mostly lifting the inline logging out of the <code>GRPCClient</code> class and putting it in the middleware, where we encapsulate the business rules around connection characteristics.</p>
 <h2 id="start-mashing-keys">Start Mashing Keys</h2>
 <p>I think I will create a <code>GrpcConnectionFactory</code> class. Instead of directly instantiating a gRPC client as it does now, the ZBClient will get one from this factory.</p>
 <p>The factory will be responsible for instantiating the GRPCClient and a Middleware component with the correct profile; wiring them up; and then passing back the wired up client to the ZBClient. That makes my refactor of the ZBClient code minimal: I just replace all <code>new GRPCClient()</code> calls with <code>GrpcConnectionFactory.getClient()</code>.</p>
-<p>While I'm at it, I will rename the GRPCClient class to GrpcClient to break all existing references and normalise my naming.</p>
+<p>While I&rsquo;m at it, I will rename the GRPCClient class to GrpcClient to break all existing references and normalise my naming.</p>
 <p>I will make the Middleware component responsible for detecting the correct profile to use, determining what constitutes exceptional behaviour of the gRPC connection, and logging it out.</p>
-<p>This will mean injecting the configured logger into it, but we're already doing that with the GRPCClient - I mean GrpcClient - so not much change there.</p>
+<p>This will mean injecting the configured logger into it, but we&rsquo;re already doing that with the GRPCClient - I mean GrpcClient - so not much change there.</p>
 <p>The GrpcClient will no longer log exceptions. Instead it will emit events, and the Middleware component will log them, or supress them, and will also have to maintain some state to determine if an error event during connection is final (after a timeout), or was transient. So it needs to be stateful.</p>
 <p>From my reading of the source code, it looks like I just replace logging in the GrpcClient with events emitted to the Middleware.</p>
-<p>It would be good to be able to make the GrpcClient class private to a module or namespace, but I don't know if you can do that in TypeScript without <a href="https://stackoverflow.com/questions/17162989/typescript-private-class-inside-class-or-something-similar">putting them in the same file</a>. Anyway, the linter settings in the project disallow modules and namespaces. And it's not exported from the library, so <em>whatevs</em>.</p>
+<p>It would be good to be able to make the GrpcClient class private to a module or namespace, but I don&rsquo;t know if you can do that in TypeScript without <a href="https://stackoverflow.com/questions/17162989/typescript-private-class-inside-class-or-something-similar">putting them in the same file</a>. Anyway, the linter settings in the project disallow modules and namespaces. And it&rsquo;s not exported from the library, so <em>whatevs</em>.</p>
 <h2 id="grpcconnectionfactory">GrpcConnectionFactory</h2>
 <p>First cut, I just make a class with a static method <code>getGrpcClient</code>, have it take the same args as the <code>GrpcClient</code> constructor, and return a new instance of the class:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/dc1a619a8da2435526af24d2237a362e.js"></script>
@@ -393,9 +394,9 @@
 <p>&ldquo;We can solve any problem by introducing an extra level of indirection.&rdquo;</p>
 </blockquote>
 <h2 id="grpcmiddleware">GrpcMiddleware</h2>
-<p>OK, so this needs to be a stateful class. Let's create some profile types first, and some characteristic profiles.</p>
-<p>I'll use a <a href="https://mariusschulz.com/blog/string-literal-types-in-typescript">string literal union type</a> for the profile names, and key the characteristics map using them.</p>
-<p>I don't know what shape the characteristics rules will have yet, so I'll type them <code>any</code> for now, but using an alias so that I can update the typing across the entire system when I know what it is:</p>
+<p>OK, so this needs to be a stateful class. Let&rsquo;s create some profile types first, and some characteristic profiles.</p>
+<p>I&rsquo;ll use a <a href="https://mariusschulz.com/blog/string-literal-types-in-typescript">string literal union type</a> for the profile names, and key the characteristics map using them.</p>
+<p>I don&rsquo;t know what shape the characteristics rules will have yet, so I&rsquo;ll type them <code>any</code> for now, but using an alias so that I can update the typing across the entire system when I know what it is:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/efcdc1c36c852b876969d20f384b0079.js"></script>
 
 <p>OK, now the class. It will take in the entire config being passed to the GrpcClient constructor, and we can do an initial naive detection by looking for the address of Camunda Cloud in the host string:</p>
@@ -405,7 +406,7 @@
 <p>Here it what it looks like after that refactor:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/7a41b260caf30cce7972739a0559ea03.js"></script>
 
-<p>The unassigned call to a new GrpcMiddleware looks a bit weird. We won't have a reference to it, but it won't get garbage collected because it will attach event listeners to the GrpcClient.</p>
+<p>The unassigned call to a new GrpcMiddleware looks a bit weird. We won&rsquo;t have a reference to it, but it won&rsquo;t get garbage collected because it will attach event listeners to the GrpcClient.</p>
 <p>We can test the GrpcMiddleware by passing in a mock event emitter as the GrpcClient.</p>
 <h2 id="logging">Logging</h2>
 <p>Next, I rip out the logging from GrpcClient, and put it into the GrpcMiddleware. Then I just look for log calls in GrpcClient and turn them into events for the middleware.</p>
@@ -417,11 +418,11 @@
 <script type="application/javascript" src="https://gist.github.com/jwulf/9e44a5ddc0b2e124943edd30bee04734.js"></script>
 
 <h2 id="events">Events</h2>
-<p>The GrpcClient already emits events. You can chain event listeners to instances of ZBClient and ZBWorker to react to connection (&lsquo;ready&rsquo;) and disconnection (&lsquo;error&rsquo;) events already. I can't change the names of those, because they are a public API.</p>
+<p>The GrpcClient already emits events. You can chain event listeners to instances of ZBClient and ZBWorker to react to connection (&lsquo;ready&rsquo;) and disconnection (&lsquo;error&rsquo;) events already. I can&rsquo;t change the names of those, because they are a public API.</p>
 <p><em>Update: man, emitting an &lsquo;error&rsquo; event caused my program to inexplicably crash and had me debugging for 30 minutes. Eventually, I tracked it down, and consulted the README - the event is <code>connectionError</code>. <a href="https://medium.com/better-programming/using-events-in-node-js-the-basics-9a9c44dcbe30">Emitting &lsquo;error&rsquo; with no listeners throws</a>.</em></p>
 <p>I should namespace events for the Middleware so it clear where they are going, rather than using plain strings.</p>
 <p>I will have to redirect all events through the middleware, actually - otherwise custom listeners on clients connected to Camunda Cloud will not get the benefit of the middleware.</p>
-<p>This poses a challenge, actually. I can trap the current event emitters in the middleware, but since the ZBClient only has access to the GrpcClient, and not the middleware, I will need to re-emit them <em>through</em> the GrpcClient from the middleware. I've never tried that. Let me see if it can be done&hellip;</p>
+<p>This poses a challenge, actually. I can trap the current event emitters in the middleware, but since the ZBClient only has access to the GrpcClient, and not the middleware, I will need to re-emit them <em>through</em> the GrpcClient from the middleware. I&rsquo;ve never tried that. Let me see if it can be done&hellip;</p>
 <p>OK, my IDE is telling me I can call <code>this.GrpcClient.emit('error')</code>, so we will redirect all events through the middleware.</p>
 <p>I will create namespaced events for the existing events as well as the new ones, which will break the connection right now, and then re-emit them from the middleware later. So in the GrpcClient:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/7398a833081e6390fc6977cf7e3f3544.js"></script>
@@ -432,16 +433,16 @@
 <p>Now I can modify my Middleware to construct an intercepted GrpcClient that behaves just like the existing one. This is a good checkpoint, because I can verify my hypotheses and work so far by running the standard unit tests. So I make my GrpcMiddleware component like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/43e8b92ebf14e209542205c3f35af275.js"></script>
 
-<h2 id="eventdriven-spooky-action-at-a-distance">Event-driven: Spooky Action at a Distance</h2>
+<h2 id="event-driven-spooky-action-at-a-distance">Event-driven: Spooky Action at a Distance</h2>
 <p>When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to <a href="https://www.sderosiaux.com/articles/2015/02/12/how-to-communicate-between-react-components/">emit events</a>. That pattern went out, because in lead to unpredictable and hard to reason about architectures.</p>
 <p>Adding namespaced events helps us out here, but - apart from the hell I just created for myself <a href="https://stackoverflow.com/questions/17683458/how-do-i-commit-case-sensitive-only-filename-changes-in-git/17688308#17688308">changing filename casings on a case-insensitive file system</a> - the GrpcClient just went into a stackoverflow loop.</p>
 <p>It turns out that it listens to the same signals internally that it uses to communicate publicly. As soon as I intercepted them in the middleware and rebroadcast them, it went into a loop.</p>
 <p>I fixed that by changing the string value of the Middleware namespaced events - but it means that those events are not only informing the world, but also informing parts of GrpcClient.</p>
-<p>I'm not going to fix that now (<em>just like I didn't fix it then</em>). It's technical debt though. Changes to the &ldquo;Middleware-facing&rdquo; events will have unpredictable side-effects on the GrpcClient behaviour. I will have to fix those at some point.</p>
+<p>I&rsquo;m not going to fix that now (<em>just like I didn&rsquo;t fix it then</em>). It&rsquo;s technical debt though. Changes to the &ldquo;Middleware-facing&rdquo; events will have unpredictable side-effects on the GrpcClient behaviour. I will have to fix those at some point.</p>
 <p>On second thoughts, <em>something something</em> <a href="https://www.joshwulf.com/blog/2020/02/refining-method-signature/">write the best code you can at the time that you write it</a>.</p>
 <p>Architecture diagram in hand, I carefully trace the logic, and create namespaced <code>InternalSignal</code> events for GrpcClient to use internally.</p>
 <h2 id="hours-later">Hours later&hellip;</h2>
-<p>Don't emit an event named &lsquo;error&rsquo; from an event emitter with no listeners attached, otherwise your code will throw. <em>Just so you know&hellip;</em></p>
+<p>Don&rsquo;t emit an event named &lsquo;error&rsquo; from an event emitter with no listeners attached, otherwise your code will throw. <em>Just so you know&hellip;</em></p>
 <p>In the end, I realised that the GrpcClient and the ZBLogger are so tightly coupled that they need to come at the same time from the same place.</p>
 <p>I put the state management into a component called <code>StatefulLogInterceptor</code>. The <code>ConnectionFactory</code> static class takes a Grpc configuration and a Log configuration, and returns a wired GrpcClient and ZBLogger. They are wired together via a StatefulLogInterceptor.</p>
 <p>Check it out:</p>
@@ -493,7 +494,7 @@
 
 <p>Under the hood, the behaviour of the gRPC connection is <em>exactly</em> the same. However, now the library detects that it is connecting to Camunda Cloud, and changes its output while the connection is being established.</p>
 <p>You can see from both that it takes about three seconds for the gRPC connection to settle. Our expectation with Camunda Cloud, however, is that there will be error events emitted as this happens - and there is no benefit exposing these to users. They are expected behaviour.</p>
-<p>Once the connection is established, the behaviour from that point is the same as a self-hosted connection. If the Camunda Cloud connection doesn't settle within five seconds, <em>all</em> the emitted errors are presented to the user (<em>they are being buffered in the background</em>).</p>
+<p>Once the connection is established, the behaviour from that point is the same as a self-hosted connection. If the Camunda Cloud connection doesn&rsquo;t settle within five seconds, <em>all</em> the emitted errors are presented to the user (<em>they are being buffered in the background</em>).</p>
 <p>The adaptive behaviour is completely disabled when the log level is set to DEBUG.</p>
 <p><strong>Happy</strong>.</p>
 <p>Next: get the tests to pass.</p>
@@ -586,6 +587,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -634,40 +667,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -687,12 +686,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -707,17 +706,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -733,6 +732,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -783,11 +787,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -892,12 +891,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

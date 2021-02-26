@@ -19,17 +19,18 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier">
 <meta itemprop="description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question.">
-<meta itemprop="datePublished" content="2020-05-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-05-11T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-05-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-05-11T00:00:00+00:00" />
 <meta itemprop="wordCount" content="694">
 <meta itemprop="image" content="https://joshwulf.com/img/2020/02/stack-overflow.png">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier" />
 <meta property="og:description" content="A talk given at BrisJS on the top five things that will make the biggest difference to your JS programming, including a live refactoring of a StackOverflow question." />
 <meta property="og:type" content="article" />
@@ -58,7 +59,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -336,7 +337,7 @@
 <h2 id="background">Background</h2>
 <p>In early 2020, I noticed that my worldwide ranking on StackOverflow had dropped, and I was only in the top 25% in the world.</p>
 <p>Unacceptable.</p>
-<p>I went on a burn, and I'm now back in the top 0.60% - where I belong. ;-)</p>
+<p>I went on a burn, and I&rsquo;m now back in the top 0.60% - where I belong. ;-)</p>
 
 
 
@@ -362,14 +363,14 @@
 <p><img src="img/2020/05/stackoverflow-ranking.png" alt=""></p>
 <p>When you expose yourself to a vast amount of data in a short period of time, patterns start to emerge.</p>
 <p>I noticed that 80% of questions in the JavaScript tag on StackOverflow had the same fundamental problems.</p>
-<p>They required much deeper refactors than the answer &ldquo;<em>How do I get this code to work</em>&quot;, so they were really out of scope for an answer.</p>
+<p>They required much deeper refactors than the answer &ldquo;<em>How do I get this code to work</em>&rdquo;, so they were really out of scope for an answer.</p>
 <p>To capture them somewhere, I started a category on my blog called &ldquo;<a href="https://www.joshwulf.com/categories/stackoverflowed/">StackOverflowed</a>&rdquo; where I described the deeper issues, and refactored them.</p>
 <p>In the BrisJS talk, I cover the top five things that, I believe, will most improve your JS programming; and did a live refactor of a question from StackOverflow.</p>
 <h2 id="the-five-things-and-one-bonus">The Five Things (and one bonus)</h2>
 <h3 id="0-let-vs-var-vs-const">0. Let vs Var vs Const</h3>
 <p>Use <code>const</code> for <em>everything</em>. Anything that is left is part of a state machine, and should be encapsulated.</p>
-<p>Understand that arrays and objects are <em>object references</em>, and should be declared as <code>const</code>. It's a common misconception that the array contents are immutable if declared as <code>const</code>.</p>
-<p>The object reference of an array is unchanged, even if you modify <em>the contents</em> of the array. And if you push to an array, it's a <em>state machine</em> - so you should refer to the next point.</p>
+<p>Understand that arrays and objects are <em>object references</em>, and should be declared as <code>const</code>. It&rsquo;s a common misconception that the array contents are immutable if declared as <code>const</code>.</p>
+<p>The object reference of an array is unchanged, even if you modify <em>the contents</em> of the array. And if you push to an array, it&rsquo;s a <em>state machine</em> - so you should refer to the next point.</p>
 <p>See the article <a href="https://www.joshwulf.com/blog/2020/02/shun-the-mutant/">Shun the Mutant</a> on my blog.</p>
 <h3 id="1-global-mutable-state">1. Global Mutable State</h3>
 <p>Any genuine variables in a program represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value-returning interfaces. See <a href="https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js">01-global-mutable-state.js</a>, and the article <a href="https://www.joshwulf.com/blog/2020/02/avoid-global-state/">Avoid Global State</a> on my blog.</p>
@@ -381,7 +382,7 @@
 <h3 id="3-data-transformation">3. Data transformation</h3>
 <p>Niklaus Wirth wrote the classic book &ldquo;<a href="https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs">Algorithms + Data Structures = Programs</a>&rdquo; in 1976.</p>
 <p>A lot of programming is transforming data structures. If you are doing a lot of complex transformations, revisit the data structures.</p>
-<p>If you don't control input data structures (for example, you consume them for a web service you don't control), then you will have to transform them.</p>
+<p>If you don&rsquo;t control input data structures (for example, you consume them for a web service you don&rsquo;t control), then you will have to transform them.</p>
 <p>If you find yourself writing a loop and using Array.push, you should be doing Array.map.</p>
 <p>Correctly and accurately naming your data structures, intermediate data structures, and transformer functions will make the Dao clear.</p>
 <p>See the article <a href="https://www.joshwulf.com/blog/2020/02/providing-a-semantic-api/">Providing a Semantic API</a> on my blog.</p>
@@ -456,6 +457,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -504,40 +537,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -557,12 +556,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -577,17 +576,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -603,6 +602,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -653,11 +657,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -762,12 +761,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

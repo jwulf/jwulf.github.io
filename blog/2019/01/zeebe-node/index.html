@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Node.js client for Zeebe Microservices Orchestration Engine">
 <meta itemprop="description" content="I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe.">
-<meta itemprop="datePublished" content="2019-01-29T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-01-29T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2019-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-01-29T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1332">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Node.js client for Zeebe Microservices Orchestration Engine" />
 <meta property="og:description" content="I’m proud to announce that Credit Sense has open-sourced our Node.js client library for Zeebe." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -355,7 +356,7 @@
 <h2 id="working-with-the-zeebe-team">Working with the Zeebe team</h2>
 <p>Basing a project on a developing product is a risk. As part of our evaluation, we’ve been engaged with the Zeebe developers at Camunda in Slack, on GitHub, and have had a couple of calls.</p>
 <p>The speed of their responses, and depth of expertise and passion has given us a lot of confidence in working with them. Most of the devs are in Germany, while we are in Australia. This is an advantage, because we can work around the clock. We have encountered issues, created a reproducer, opened a GitHub issue, chatted with the devs in Slack at the end of our day / beginning of theirs, and then come in the next morning to a fix and been able to keep moving forward.</p>
-<p>This bug got fixed over the recent Australia Day long weekend, and the reproducer is a good example of using the JS client library, including starting the broker using Docker: <a href="https://github.com/jwulf/zeebe-reproducer-1"><a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a></a>.</p>
+<p>This bug got fixed over the recent Australia Day long weekend, and the reproducer is a good example of using the JS client library, including starting the broker using Docker: <a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a>.</p>
 <h2 id="zeebe-modeler">Zeebe Modeler</h2>
 <p>The <a href="https://github.com/zeebe-io/zeebe-modeler">Zeebe Modeler</a> has support for the Zeebe metadata extensions that your BPMN diagrams need to be executable. However, it doesn’t yet support everything that you can do in Zeebe 0.15. We’ve been using the Camunda Modeler to add to our diagrams symbols that the Zeebe modeler doesn’t have yet.</p>
 <h2 id="using-the-javascript-zeebe-client-library">Using the JavaScript Zeebe Client Library</h2>
@@ -365,13 +366,13 @@
 <p>Import the library in your code like this, in JavaScript:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">ZBClient</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;zeebe-node&#39;</span>);
 </code></pre></div><p>Or like this in TypeScript:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ZBClient</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;zeebe-node&#34;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ZBClient</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;zeebe-node&#34;</span>;
 </code></pre></div><p>Now create a new Zeebe Client:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">zbc</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ZBClient</span>(<span style="color:#e6db74">&#34;localhost&#34;</span>);
 </code></pre></div><p>The ZBClient uses <a href="https://www.npmjs.com/package/node-grpc-client"><code>node-grpc-client</code></a> under the hood to establish a connection to a Zeebe broker on port 26500 (you can add a :${port} if you are using a different port). We initially forked node-grpc-client to add support for streaming gRPC methods. Our PR was accepted upstream, so the library is back on the mainstream.</p>
 <h2 id="deploy-a-bpmn-process-to-the-broker">Deploy a BPMN Process to the Broker</h2>
 <p>To deploy a BPMN Process, use the deployWorkflow method <a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#deployworkflow">(API doc)</a> and pass in a file path:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">deployWorkflow</span>(<span style="color:#e6db74">&#34;path/to/file.bpmn&#34;</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">deployWorkflow</span>(<span style="color:#e6db74">&#34;path/to/file.bpmn&#34;</span>);
 </code></pre></div><p>Most methods are asynchronous, because they involve a roundtrip to the broker.</p>
 <p>The response will look something like this:</p>
 <pre><code>{ bpmnProcessId: 'test-process',
@@ -383,9 +384,9 @@
 <p>The JS library has a BPMN Parser (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/bpmnparser.html">API doc</a>) that can emit TypeScript definitions for the string keys of task-types and message names in your BPMN document. This is useful to avoid debugging errors caused by typos, and also to analyse the completeness of your worker coverage.</p>
 <p>Here is an example of using it:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">BpmnParser</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;zeebe-node&#34;</span>);
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outputTypes</span>(<span style="color:#a6e22e">workflowFilePath</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) {
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">outputTypes</span>(<span style="color:#a6e22e">workflowFilePath</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(
-      <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">BpmnParser</span>.<span style="color:#a6e22e">generateConstantsForBpmnFiles</span>(
+      <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">BpmnParser</span>.<span style="color:#a6e22e">generateConstantsForBpmnFiles</span>(
         <span style="color:#a6e22e">workflowFilePath</span>
       )
     );
@@ -420,7 +421,7 @@
 <p>On the topic of debugging, for deeper inspection, you can start your workers with the environment variable <code>DEBUG=zeebe-node:*</code> for some verbose logging during development.</p>
 <h2 id="trigger-a-workflow">Trigger a Workflow</h2>
 <p>Now you can trigger an instance of your workflow, using the <code>createWorkflowInstance</code> method (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#createworkflowinstance">API doc</a>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">createWorkflowInstance</span>(<span style="color:#e6db74">&#34;test-process&#34;</span>, <span style="color:#a6e22e">intialPayload</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">createWorkflowInstance</span>(<span style="color:#e6db74">&#34;test-process&#34;</span>, <span style="color:#a6e22e">intialPayload</span>);
 </code></pre></div><p>The response looks like this:</p>
 <pre><code>{ workflowKey: '3',
   bpmnProcessId: 'test-process',
@@ -428,11 +429,11 @@
   workflowInstanceKey: '569' }
 </code></pre><h2 id="sending-a-message">Sending a Message</h2>
 <p>Workflows can contain message start events — which start a workflow when a message is received — and message catch events — which wait at the catch event until a message arrives.</p>
-<p>Message start events are correlated by the message name, and the JS library method <code>publishStartMessage</code> (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#publishstartmessage">API doc</a>) can be used to send one of these messages (this is the start method used in the <a href="https://github.com/jwulf/zeebe-reproducer-1"><a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a></a> workflow).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">await</span> <span style="color:#a6e22e">publishStartMessage</span>(<span style="color:#a6e22e">MessageName</span>.<span style="color:#a6e22e">MSG_START_TEST</span>, <span style="color:#a6e22e">payload</span>);
+<p>Message start events are correlated by the message name, and the JS library method <code>publishStartMessage</code> (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#publishstartmessage">API doc</a>) can be used to send one of these messages (this is the start method used in the <a href="https://github.com/jwulf/zeebe-reproducer-1">https://github.com/jwulf/zeebe-reproducer-1</a> workflow).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publishStartMessage</span>(<span style="color:#a6e22e">MessageName</span>.<span style="color:#a6e22e">MSG_START_TEST</span>, <span style="color:#a6e22e">payload</span>);
 </code></pre></div><p>This needs no correlation key, as the message start event is correlated by name. It also returns void — fire and forget.</p>
 <p>For message catch events, the message needs to be correlated with a workflow instance using a correlation key (see the <a href="https://docs.zeebe.io/reference/message-correlation.html">Zeebe docs</a> for more details). For this use the publishMessage method (<a href="https://creditsenseau.github.io/zeebe-client-node-js/classes/zbclient.html#publishmessage">API doc</a>).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">publishMessage</span>({
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">zbc</span>.<span style="color:#a6e22e">publishMessage</span>({
     <span style="color:#a6e22e">correlationKey</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;my-order-number&#34;</span>,
     <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MSG-payment-received&#34;</span>,
     <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">payloadJSON</span>,
@@ -498,6 +499,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -546,40 +579,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -599,12 +598,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -619,17 +618,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -645,6 +644,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -695,11 +699,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -804,12 +803,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

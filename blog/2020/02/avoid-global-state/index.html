@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Avoiding global mutable state in browser JS">
 <meta itemprop="description" content="A StackOverflow refactoring.">
-<meta itemprop="datePublished" content="2020-02-24T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-24T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-24T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2955">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Avoiding global mutable state in browser JS" />
 <meta property="og:description" content="A StackOverflow refactoring." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -322,28 +323,28 @@
   <div class="content">
     <p><em>This is part of <a href="https://www.joshwulf.com/categories/stackoverflowed/">a series of posts</a> where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer.</em></p>
 <p><em>The accompanying GitHub repo for this article can be found <a href="https://github.com/jwulf/immutable-global-store">here</a>.</em></p>
-<p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn't just impact the whole application - it creates a <em>entire new surface area</em> for bugs <em>across the entire code base</em>, that has to be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in <em>every function</em> increases as soon as you have global state.</p>
+<p>Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it <em>is</em> global). Global state doesn&rsquo;t just impact the whole application - it creates a <em>entire new surface area</em> for bugs <em>across the entire code base</em>, that has to be managed. Bugs related to global state can happen <em>anywhere</em>. The number of potential bugs in <em>every function</em> increases as soon as you have global state.</p>
 <p>Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.</p>
-<p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
-<p>What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
+<p>In this refactoring we are not going to be able to completely eliminate global state - mostly because we don&rsquo;t have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative.</p>
+<p>What we will do is reduce the bug surface area significantly. And along the way, you&rsquo;ll be introduced to some of the concepts underlying <code>React.setState</code> and Redux.</p>
 <h2 id="the-question">The Question</h2>
 <p>Here is the code from StackOverflow:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/c3b59f4915d4f644ea1a2c4ea0b26bed.js"></script>
 
 <h2 id="discussion">Discussion</h2>
-<p>There is a lot going on this example that can be refactored, and we'll look at a number of things in other articles. But for now, let's look at global state.</p>
+<p>There is a lot going on this example that can be refactored, and we&rsquo;ll look at a number of things in other articles. But for now, let&rsquo;s look at global state.</p>
 <h3 id="memarray">memArray</h3>
 <p>The global <code>memArray</code> has two immediate issues - apart from being global.</p>
 <ul>
 <li><code>var</code></li>
 </ul>
 <p>First, it is declared as <code>var</code>, which means that it can be reassigned at runtime.</p>
-<p>In fact, using <code>var</code> is a declaration to the machine and to other programmers that &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
-<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a <code>var</code> doesn't make the <em>contents</em> of the array mutable - you have to do real deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> itself can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
+<p>In fact, using <code>var</code> is a declaration to the machine and to other programmers that &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&rdquo;.</p>
+<p>It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a <code>var</code> doesn&rsquo;t make the <em>contents</em> of the array mutable - you have to do real deliberate work to make them immutable. Rather, declaring this as <code>var</code> makes <em>the assignment itself mutable</em>. Meaning that <code>memArray</code> itself can be mutated by pointing it to something other than the array you just created and assigned to it.</p>
 <p>Somewhere deep in the code, a function could do:</p>
 <pre><code>memArray = []
-</code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
-<p>And this bug in one function somewhere, that maybe doesn't even use this global state (<em>it probably doesn't, or the programmer wouldn't have reused the variable name</em>), just broke <em>everything</em> that does use it. And when you go to hunt it down, it is not in any of your functions that <em>do</em> use the global state.</p>
+</code></pre><p>This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won&rsquo;t get a warning from your tools about using an undeclared variable, because <em>it is declared</em>.</p>
+<p>And this bug in one function somewhere, that maybe doesn&rsquo;t even use this global state (<em>it probably doesn&rsquo;t, or the programmer wouldn&rsquo;t have reused the variable name</em>), just broke <em>everything</em> that does use it. And when you go to hunt it down, it is not in any of your functions that <em>do</em> use the global state.</p>
 <p>The chances of this happening are increased because of the second issue:</p>
 <ul>
 <li>Naming</li>
@@ -354,13 +355,13 @@
 <h2 id="first-refactor">First Refactor</h2>
 <pre><code>const GlobalMembersArray = []
 </code></pre><p>Make it a <code>const</code> so that it cannot be reassigned, and give it a meaningful and useful name. This is &ldquo;naming by convention&rdquo; that takes away cognitive load when reading the code.</p>
-<p>If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at, and I'm not using that name for a local variable.</p>
+<p>If I find a reference to <code>GlobalMembersArray</code> in a function deep in the code, I immediately know what I am looking at, and I&rsquo;m not using that name for a local variable.</p>
 <h2 id="mutation">Mutation</h2>
 <p>The global is now <em>not</em> reassignable, <em>and</em> unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they <em>can</em> still mutate the contents.</p>
 <p>You want that, right? Presumably, we are going to want to add to, remove from, and update elements in this array.</p>
 <p><em>No</em>. By exposing just the array globally, we have <em>devolved responsibility</em> for mutating it to local functions in the application.</p>
-<p>That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.</p>
-<h2 id="second-refactor--iife">Second Refactor - IIFE</h2>
+<p>That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn&rsquo;t find what it expects - rather than where the bug exists.</p>
+<h2 id="second-refactor---iife">Second Refactor - IIFE</h2>
 <p>Rather than expose an array, we should expose an object that encapsulates the state, <em>plus</em> mutation methods. And we will not expose the actual state, because local functions can still and may be tempted to mutate it directly. Instead we will return <em>a copy of the state</em>, so that the only way to update it is via the object methods.</p>
 <p>We can do this using an IIFE - an <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">Immediately Invoked Function Expression</a>, a JavaScript function that immediately executes and can return an object that has a private scope inside a closure.</p>
 <p>In terms of ES6 classes, it is roughly analogous to creating an instance of a class that has private methods.</p>
@@ -369,8 +370,8 @@
 
 <p>Note the enclosing <code>()</code> and the immediate invocation: <code>(() =&gt; {})()</code>.</p>
 <p>In this case, we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - <code>_members</code> - that cannot be accessed by local functions.</p>
-<p><em>But, but&hellip; aren't you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
-<p>Look, we <em>can</em> remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
+<p><em>But, but&hellip; aren&rsquo;t you the &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Variables</a>&rdquo; guy? What is that <code>let</code> statement doing there?!</em></p>
+<p>Look, we <em>can</em> remove variables completely. But we don&rsquo;t have enough information about the eventual application to do that. So what I&rsquo;ve done here is take a global variable, and put inside a closure where <em>it is invisible to the rest of the application</em>.</p>
 <p>All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application. And the resulting code is <a href="https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js">fully unit-testable</a>.</p>
 <h2 id="implementing-getmembers">Implementing <code>getMembers</code></h2>
 <p>Now we will provide a method to return <em>a copy</em> of the <code>_members</code> array:</p>
@@ -385,12 +386,12 @@
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>Array.map</code></a> returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the <a href="https://en.wikipedia.org/wiki/Functional_predicate"><em>predicate function</em></a> to each value in the original array, and putting the return value in the new array.</p>
 <p>It is &ldquo;make a new array by applying this transform to each element in this other array&rdquo;.</p>
 <p>In the predicate function - <code>m =&gt; ({...m})</code> - we return a <em>copy</em> of each member object from the <code>_members</code> array, again using the ES6 Spread syntax, this time on an object.</p>
-<p>When you return an object in a one-liner arrow function, you need to put <code>()</code> around it so the interpreter doesn't interpret the contents of <code>{}</code> as function code, but knows that it is an object, so: <code>m =&gt; ({...m})</code>.</p>
+<p>When you return an object in a one-liner arrow function, you need to put <code>()</code> around it so the interpreter doesn&rsquo;t interpret the contents of <code>{}</code> as function code, but knows that it is an object, so: <code>m =&gt; ({...m})</code>.</p>
 <p>Now we have a new array, and new objects in the array.</p>
 <p>Local functions now have access to the <em>value</em> of the global members state, but the actual global state is immutable by them, because they have no reference to it. They cannot update the global state from the copy that they get. For that, they will need to call an update method.</p>
 <h2 id="implementing-setmembers">Implementing <code>setMembers</code></h2>
 <p>The first method we will implement is a hydration method that allows a local function to pass in an array of members.</p>
-<p>I'll take out <code>getMembers</code> for now to make it easier to read:</p>
+<p>I&rsquo;ll take out <code>getMembers</code> for now to make it easier to read:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/eff4b5ae21437b66bc0e1cb4a76da1e5.js"></script>
 
 <p>Here we use the Spread syntax to copy the members to a new array, and this becomes the global members.</p>
@@ -400,8 +401,8 @@
 </code></pre><p>Then the local function calling this method would have a local reference to the member objects that are now in the state store. By spreading them, we make a copy - another object in memory that the local function has no reference to.</p>
 <h2 id="implementing-updatemember">Implementing <code>updateMember</code></h2>
 <p>It is likely that a business requirement for this application is that you can update a member.</p>
-<p>So, we will implement an <code>updateMember</code> function. We will use <code>Array.map</code> to return a new array. A naive approach to this might be &ldquo;<em>let's iterate over the array using <code>forEach</code> and mutate the element we are updating</em>&quot;. See the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Loops and Variables</a>&rdquo; for an in-depth explanation of why you <em>don't</em> want to do that.</p>
-<p>To implement the predicate function, let's describe what we want it to do in plain language:</p>
+<p>So, we will implement an <code>updateMember</code> function. We will use <code>Array.map</code> to return a new array. A naive approach to this might be &ldquo;<em>let&rsquo;s iterate over the array using <code>forEach</code> and mutate the element we are updating</em>&rdquo;. See the post &ldquo;<a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">Just Say No to Loops and Variables</a>&rdquo; for an in-depth explanation of why you <em>don&rsquo;t</em> want to do that.</p>
+<p>To implement the predicate function, let&rsquo;s describe what we want it to do in plain language:</p>
 <blockquote>
 <p>For each member in the state,</p>
 </blockquote>
@@ -419,13 +420,13 @@
 
 <p>We enclose the assignment operation <code>_members = </code> in parens <code>()</code> to indicate that we did not forget to return a value, and intended only the side-effect. We could have put it in <code>{}</code>, but that will cause code formatters to turn our single line into three.</p>
 <h2 id="designing-for-failure">Designing for failure</h2>
-<p>20% of programming is getting it to work. The other 80% is programming for <em>when it doesn't work</em>.</p>
+<p>20% of programming is getting it to work. The other 80% is programming for <em>when it doesn&rsquo;t work</em>.</p>
 <p>What happens if a local function requests to update a member who is not in the state? At the moment, the local function receives no information from the call to <code>updateMember</code>, and if you look at the code, what will happen is&hellip; nothing.</p>
 <p>The predicate function will never match, and the new state will be a new copy of the existing state, unmodified.</p>
-<p>We could throw an exception. This gives us the opportunity to figure out where the bug in the application is that it is trying to update a member that doesn't exist. This is a good idea.</p>
-<p>Let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a <code>getMember</code> function that we can use. So, let's implement that.</p>
+<p>We could throw an exception. This gives us the opportunity to figure out where the bug in the application is that it is trying to update a member that doesn&rsquo;t exist. This is a good idea.</p>
+<p>Let&rsquo;s throw an exception so that the root cause can be debugged in the local function. To do this, we will need a <code>getMember</code> function that we can use. So, let&rsquo;s implement that.</p>
 <h2 id="implementing-getmember">Implementing <code>getMember</code></h2>
-<p>It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we <em>can</em> do that in &ldquo;one place, and one place only&rdquo; in the application: <em>here</em>.</p>
+<p>It&rsquo;s likely that local functions will want only a single member. If we don&rsquo;t implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we <em>can</em> do that in &ldquo;one place, and one place only&rdquo; in the application: <em>here</em>.</p>
 <p>Then we only have to test it in one place, and we only ever have to get it to work in one place. That reduces the surface area for bugs in the application.</p>
 <p>We can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>Array.filter</code></a> to find elements in an array. <code>Array.filter</code> returns a new array containing only the elements from the original array for whom the predicate function returned true.</p>
 <p>The predicate function is straight forward:</p>
@@ -475,7 +476,7 @@
 <h2 id="implementing-putmember">Implementing <code>putMember</code></h2>
 <p>Probably, a business requirement of the application will be to put a new member in the store.</p>
 <p>We have to make a decision here about the behaviour of the store. What happens if a local function attempts to put a member with an <code>id</code> that is already in the store?</p>
-<p>That's probably a bug somewhere further upstream in the application logic, so we will throw an exception to allow debugging to start.</p>
+<p>That&rsquo;s probably a bug somewhere further upstream in the application logic, so we will throw an exception to allow debugging to start.</p>
 <p>So we can do this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/430210f61fafa828342a0f61e808e14f.js"></script>
 
@@ -491,7 +492,7 @@
 <p>For our final touch, we are going to freeze the API object using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"><code>Object.freeze</code></a>:</p>
 <pre><code>return Object.freeze(Store)
 </code></pre><p>This prevents anyone from overwriting or modifying the API methods themselves.</p>
-<p>If you wanted, you could (deep) freeze all the return values from the API methods. That would deny local function consumers of the objects the ability to mutate the return values. They would need to use spread on them. We're not going to do that right now.</p>
+<p>If you wanted, you could (deep) freeze all the return values from the API methods. That would deny local function consumers of the objects the ability to mutate the return values. They would need to use spread on them. We&rsquo;re not going to do that right now.</p>
 <p>Freezing objects has an impact on performance. Freezing the API is not going to make a huge difference, so the safety is worth it. The objects returned from the API are copies, so freezing them is overkill, IMHO.</p>
 <h2 id="putting-it-all-together">Putting it all together</h2>
 <p>Here is the whole thing:</p>
@@ -572,6 +573,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -620,40 +653,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -673,12 +672,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -693,17 +692,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -719,6 +718,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -769,11 +773,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -878,12 +877,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

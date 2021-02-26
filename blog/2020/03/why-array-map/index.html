@@ -19,17 +19,18 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Why Array.map">
 <meta itemprop="description" content="Use Array.map instead of loops and Array.push">
-<meta itemprop="datePublished" content="2020-03-04T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-04T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-03-04T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-04T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1003">
 <meta itemprop="image" content="https://joshwulf.com/img/2020/02/stack-overflow.png">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Why Array.map" />
 <meta property="og:description" content="Use Array.map instead of loops and Array.push" />
 <meta property="og:type" content="article" />
@@ -58,7 +59,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -337,7 +338,7 @@
 <p>The actual variable, though - <em>i</em> - is a red flag that we are looking at a <em>state machine</em>.</p>
 <p>Anywhere in your code that you have an <em>actual</em> mutable variable whose value you must keep track of over time, you have a state machine.</p>
 <p><em>State</em> and <em>time</em> are the two biggest sources of complexity in an application. You want to encapsulate those inside bounded contexts with immutable APIs that return constant values that represent <em>the constant value of the state at a point in time</em>.</p>
-<p>To wildly introduce state like this is to unleash Pandora's box on your application. You should be pushing all <em>actual</em> state representation out of your application logic, not creating it inline where it doesn't even exist!</p>
+<p>To wildly introduce state like this is to unleash Pandora&rsquo;s box on your application. You should be pushing all <em>actual</em> state representation out of your application logic, not creating it inline where it doesn&rsquo;t even exist!</p>
 <p>Now you have created bug surface areas for &ldquo;off-by-one&rdquo; errors and &ldquo;array index out of bounds&rdquo; errors.</p>
 <p>You had one job - now you are juggling four variables, and one of them is an actual footgun (the other three are just pretending to be).</p>
 <p>There is <em>already</em> a state machine for a 1:1 data transformation of elements of an array: <code>Array.map</code>. It encapsulates this functionality.</p>
@@ -351,7 +352,7 @@
 <p>We can see that, because this code does <em>one</em> of them - apply a transform to each element of an array and create a new array.</p>
 <p>In addition to the state machine for that, the code from StackOverflow also contains the transformation logic - inline.</p>
 <p>The two are tightly coupled - and they are definitely separate concerns, because one of them has been crystallised as a well-tested prototype method in JavaScript.</p>
-<p>So, even if you were going to reimplement this functionality instead of leveraging the existing method - you would put that state machine in its own bounded context, where it doesn't leak its complexity into the application.</p>
+<p>So, even if you were going to reimplement this functionality instead of leveraging the existing method - you would put that state machine in its own bounded context, where it doesn&rsquo;t leak its complexity into the application.</p>
 <p>Instead, though, novice programmers will freely mix state machines with logic. Every single loop in an application is someone doing at least two things at once, and is another surface area for bugs.</p>
 <p>I adopted programming without variables as a discipline a number of years ago.</p>
 <p>What came out of doing that was a recognition that there <em>are</em> some things that <em>cannot</em> be modelled in a program without variables. A specific class of application concern - state machines.</p>
@@ -360,10 +361,10 @@
 <p>The <em>absolute requirement</em> of a variable is an indication that you are dealing with a state machine. And a state machine is a concern unto itself. It involves variables and time - the two biggest sources of complexity in an application.</p>
 <p>The best way to deal with state machines is to isolate them in a bounded context, with an API that accepts and returns constant values.</p>
 <p>Then the complexity does not leak into the rest of your application.</p>
-<p>And that's what <code>Array.map</code> is.</p>
+<p>And that&rsquo;s what <code>Array.map</code> is.</p>
 <p>If you were programming this way, then you would invent <code>Array.map</code> from first principles, simply through the process of extracting all these state machines out of your code through refactoring.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h2 id="how-to-use-arraymaphowtousearraymap"><a href="#how-to-use-array-map">How to use Array.map</a></h2>
+<h2 id="how-to-use-arraymaphow-to-use-array-map"><a href="#how-to-use-array-map">How to use Array.map</a></h2>
 <p>Here is the original code again:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/b46b22b2b293f87dae2e2b384e7b4172.js"></script>
 
@@ -372,10 +373,10 @@
 
 <p>This code, plus the state machine of <code>Array.map</code> is all it takes to accomplish this. And the complexity and bug surface area of the code is significantly reduced.</p>
 <p>Construct a new array <code>projects</code>, whose elements consist of each element of the <code>content</code> array transformed into an object by the function <code>makeProject</code>.</p>
-<p>That's it.</p>
-<p>Functions over data. That's application logic.</p>
+<p>That&rsquo;s it.</p>
+<p>Functions over data. That&rsquo;s application logic.</p>
 <p>Functions over mutable state, or functions over time are state machines.</p>
-<p>Don't mix them together in your code, and your life will be much, much simpler.</p>
+<p>Don&rsquo;t mix them together in your code, and your life will be much, much simpler.</p>
 <p>There is enough irreducible complexity in programming already, without adding more.</p>
 <p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
@@ -435,6 +436,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -483,40 +516,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -536,12 +535,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -556,17 +555,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -582,6 +581,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -632,11 +636,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -741,12 +740,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

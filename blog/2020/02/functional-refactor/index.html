@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="A Functional Refactor of Zeebe Node with fp-ts">
 <meta itemprop="description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!">
-<meta itemprop="datePublished" content="2020-02-27T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-27T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-27T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1465">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="A Functional Refactor of Zeebe Node with fp-ts" />
 <meta property="og:description" content="Don&#39;t worry, you don&#39;t need to FP to use it, it&#39;s internal!" />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -327,8 +328,8 @@
 <p>While doing other work, I took the opportunity to refactor one method, <code>deployWorkflows</code>, to add a feature that I wanted it to have. I used <a href="https://github.com/gcanti/fp-ts">fp-ts</a>, a TypeScript Functional Programming library to do it.</p>
 <p>I discovered fp-ts after I used <a href="https://github.com/gcanti/io-ts">io-ts</a>, another library by the same author - <a href="https://dev.to/gcanti">Giulio Canti</a> (gcanti), to decode the environment variables for the Zeebe GitHub Action.</p>
 <p>The benefit of using io-ts is that it allows you to express run-time validations of required and optional parameters that also provide design-time type checking and intellisense. Handy!</p>
-<p>You really only appreciate it when you've tried to <a href="https://github.com/jwulf/ghettohub-db/blob/master/src/parameters.ts">write that kind of code by hand</a>. I got run-time validation with property key maps, but couldn't get intellisense without writing interfaces - double handling.</p>
-<p>Using io-ts got me &ldquo;<em>two for the price of one</em>&quot;. One set of definitions for strong typing in the IDE <em>and</em> run-time validation.</p>
+<p>You really only appreciate it when you&rsquo;ve tried to <a href="https://github.com/jwulf/ghettohub-db/blob/master/src/parameters.ts">write that kind of code by hand</a>. I got run-time validation with property key maps, but couldn&rsquo;t get intellisense without writing interfaces - double handling.</p>
+<p>Using io-ts got me &ldquo;<em>two for the price of one</em>&rdquo;. One set of definitions for strong typing in the IDE <em>and</em> run-time validation.</p>
 <p>It did mean, however, that I had to make my consuming code deal with the Monads that io-ts returns, so it pulled in fp-ts.</p>
 <p>After using fp-ts, I could see an opportunity to use the FP approach to implement this new feature in Zeebe Node, so I did.</p>
 <h2 id="the-problem">The Problem</h2>
@@ -338,49 +339,49 @@
 <p>Here is the code, before refactoring:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/068397de244ad0e21f035df04c3a3bd6.js"></script>
 
-<p>It's pretty simple and easy to understand. It has <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">no variables and no loops</a>. It does have a few <code>if</code> statements that could be refactored to ternaries. That would reduce the indentation.</p>
+<p>It&rsquo;s pretty simple and easy to understand. It has <a href="https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/">no variables and no loops</a>. It does have a few <code>if</code> statements that could be refactored to ternaries. That would reduce the indentation.</p>
 <p>Basically, there are three parts to the logic:</p>
 <p>First, if the argument is not an array, put it in an array. Now we have an array of ( one or more strings, or an object ).</p>
 <p>Next, we map over the array, and for each element, if it is an object, append the request. If it
-is a string, read the file and append the resulting buffer; then deploy - or throw if we can't find a file.</p>
+is a string, read the file and append the resulting buffer; then deploy - or throw if we can&rsquo;t find a file.</p>
 <p>Some data transformation, and two outcomes: deploy or throw.</p>
 <p>The issue with this implementation is that we cannot return information about <em>multiple</em> missing files - only the first one we encounter.</p>
 <p>I would like it to read all the files, and exit if one or more are missing with a list of <em>all</em> missing files.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h2 id="refactor-without-fptsrefactorwithoutfpts"><a href="#refactor-without-fp-ts">Refactor Without fp-ts</a></h2>
+<h2 id="refactor-without-fp-tsrefactor-without-fp-ts"><a href="#refactor-without-fp-ts">Refactor Without fp-ts</a></h2>
 <p>This could actually be accomplished by mapping the array with a file reader function and returning <code>{buffer}</code> or <code>{error}</code> objects, then reducing that, then either throwing or constructing the request, like this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/60e1d53d0b38056f9acfd82e05946125.js"></script>
 
-<p>Actually, that's a pretty good solution right there. It borrows heavily from the kind of thinking I had to do to accomplish this with fp-ts. It's obvious to me in hindsight! :-)</p>
-<p>Recently I've been reading <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/">Professor Frisby's Mostly Adequate Guide to Functional Programming</a> - a book on FP in vanilla JS. That has also been changing how I think about coding in JS.</p>
+<p>Actually, that&rsquo;s a pretty good solution right there. It borrows heavily from the kind of thinking I had to do to accomplish this with fp-ts. It&rsquo;s obvious to me in hindsight! :-)</p>
+<p>Recently I&rsquo;ve been reading <a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/">Professor Frisby&rsquo;s Mostly Adequate Guide to Functional Programming</a> - a book on FP in vanilla JS. That has also been changing how I think about coding in JS.</p>
 <p>This refactor uses the functional construct of an <a href="https://gcanti.github.io/fp-ts/modules/Either.ts.html"><code>Either</code></a>, where errors flow down the left-hand path, and values down the right. The <code>read</code> function returns an <code>Either</code>. It returns <em>either</em> an error or a result.</p>
 <p>We map the read function over the workflows array, and end up with an array of <code>Either&lt;Error, Buffer&gt;</code>.</p>
 <p>We then reduce that array down to a single object whose functional type is called <a href="https://gcanti.github.io/fp-ts/modules/These.ts.html"><code>These</code></a>. It contains a collection of Errors and Buffers. We have an anonymous <code>These</code>, and immediately destructure it into its left-hand <code>errors</code> and right-hand <code>buffers</code>.</p>
 <p>We then test the left-hand side of the <code>These</code>, and if it contains any errors, we throw with a list of the missing files - otherwise we move forward with deploying the Buffers.</p>
-<h2 id="refactor-in-fpts">Refactor in fp-ts</h2>
+<h2 id="refactor-in-fp-ts">Refactor in fp-ts</h2>
 <p>Here is what I actually ended up with. This uses the fp-ts first-class entity <code>Either</code>, which has it own methods.</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/d90f7812126c307184104bb69e69b24a.js"></script>
 
 <p>The difference between this one, and the non-fp-ts refactor (that I literally banged up while writing this article), is that in my non-fp-ts implementation I am hand-rolling the Either and the These. Custom-coding them.</p>
-<p>There are two problems with this - the first is that you can't lean into the type system as hard as you can when you use first class Monads that understand how they compose.</p>
+<p>There are two problems with this - the first is that you can&rsquo;t lean into the type system as hard as you can when you use first class Monads that understand how they compose.</p>
 <p>Writing the program with fp-ts is the process of writing the transformations as type signatures, then using the fp-ts functions to implement the type transformations. Then you put your data inside those functions, and it flows from one end to the other.</p>
 <p>That reducer in my non-fp-ts refactor is the kind of thing that is encapsulated by the fp-ts library. That reducer is a custom state reducing machine, and writing those is error-prone and rework.</p>
 <p>The other problem is that with custom-coded implementations, it is more work for other programmers to parse the code. There is no reuse of familiar constructs. That reducer is pretty dense.</p>
-<p>It's easy to think that every problem is novel and needs custom code, but after you've been programming for a while, you start to recognise that there are a limited set of problems and data flow patterns, and well established and maintained solutions for them.</p>
+<p>It&rsquo;s easy to think that every problem is novel and needs custom code, but after you&rsquo;ve been programming for a while, you start to recognise that there are a limited set of problems and data flow patterns, and well established and maintained solutions for them.</p>
 <p>And finally, as Alan Perlis said in his <a href="http://pu.inf.uni-tuebingen.de/users/klaeren/epigrams.html">epigrams on programming</a>:</p>
 <blockquote>
-<p>&ldquo;A language that doesn't affect the way you think about programming, is not worth knowing.&rdquo;</p>
+<p>&ldquo;A language that doesn&rsquo;t affect the way you think about programming, is not worth knowing.&rdquo;</p>
 </blockquote>
-<p>Definitely, this refactor using fp-ts changed the way I think about programming. That kind of reducer may look like something from Mars, but it is just implementing a simple FP concept. Once you know that, it makes perfect sense. And if you know enough to make sense of it, the next question you'd ask is: &ldquo;<em>why did you reimplement that reduction?</em>&rdquo;</p>
+<p>Definitely, this refactor using fp-ts changed the way I think about programming. That kind of reducer may look like something from Mars, but it is just implementing a simple FP concept. Once you know that, it makes perfect sense. And if you know enough to make sense of it, the next question you&rsquo;d ask is: &ldquo;<em>why did you reimplement that reduction?</em>&rdquo;</p>
 <h2 id="props-to-gcanti">Props to gcanti</h2>
-<p>I was struggling with how to accomplish the reduction of <code>Either&lt;Error, Buffer&gt;[] =&gt; These&lt;Error[], Buffer[]&gt;</code> in fp-ts. I read this article by gcanti about <a href="https://dev.to/gcanti/getting-started-with-fp-ts-either-vs-validation-5eja">Either and Validation</a>, but couldn't figure out how to do it with an array.</p>
+<p>I was struggling with how to accomplish the reduction of <code>Either&lt;Error, Buffer&gt;[] =&gt; These&lt;Error[], Buffer[]&gt;</code> in fp-ts. I read this article by gcanti about <a href="https://dev.to/gcanti/getting-started-with-fp-ts-either-vs-validation-5eja">Either and Validation</a>, but couldn&rsquo;t figure out how to do it with an array.</p>
 <p>Late at night I googled for <a href="https://fpchat-invite.herokuapp.com/">an FP Slack</a> to get some help, and ended up on the one where gcanti himself holds court!</p>
 <p>He helped me out by lifting the file reader into the Either context. The code from line 46 - 54 was written by gcanti himself, from my description of the problem.</p>
 <p>Rather than a These, it uses a construct called a <a href="https://gcanti.github.io/fp-ts/modules/ValidationT.ts.html"><code>Validation</code></a>.</p>
 <h2 id="addendum-on-testability">Addendum on testability</h2>
 <p>After I published this article, I got some feedback on it from the FP Chat Slack:</p>
 <blockquote>
-<p>I would've usually extracted any pure functions created during the refactor from the body of the original function.</p>
+<p>I would&rsquo;ve usually extracted any pure functions created during the refactor from the body of the original function.</p>
 </blockquote>
 <p>Here is what it looks like with that done (I left <code>error</code> in to document both return values):</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/5ffa03d23baa993635a69dd62ebe1e0f.js"></script>
@@ -454,6 +455,38 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -502,40 +535,6 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -555,12 +554,12 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -575,17 +574,17 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -601,6 +600,11 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -651,11 +655,6 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -760,12 +759,12 @@ is a string, read the file and append the resulting buffer; then deploy - or thr
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

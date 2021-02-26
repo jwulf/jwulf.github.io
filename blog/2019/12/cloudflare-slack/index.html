@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Zero-Scale Zeebe with Cloudflare Workers">
 <meta itemprop="description" content="A Cloudflare worker that provides a zero-scale Slack messaging task for Camunda Cloud, using the Camunda Cloud HTTP Worker.">
-<meta itemprop="datePublished" content="2019-12-03T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-03T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2019-12-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-12-03T00:00:00+00:00" />
 <meta itemprop="wordCount" content="712">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Zero-Scale Zeebe with Cloudflare Workers" />
 <meta property="og:description" content="A Cloudflare worker that provides a zero-scale Slack messaging task for Camunda Cloud, using the Camunda Cloud HTTP Worker." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -322,7 +323,7 @@
   <div class="content">
     <p>I get questions about running Zeebe at &ldquo;zero-scale&rdquo;. That means workers that consume no resources when there are no tasks to perform.</p>
 <p>The Zeebe service on <a href="https://zeebe.io/blog/2019/09/getting-started-camunda-cloud/">Camunda Cloud</a> includes a generic HTTP-Worker that can be used to achieve this. The HTTP-Worker polls for jobs of type &ldquo;Camunda-HTTP&rdquo;, and then invokes a REST endpoint based on the HTTP verb and URL set in the task headers. If you are not on Camunda Cloud you can use <a href="https://github.com/zeebe-io/zeebe-http-worker">zeebe-http-worker</a>, or just write your own. In combination with &ldquo;serverless&rdquo; functions, this can be used to achieve a zero-scale architecture.</p>
-<p><a href="https://developers.cloudflare.com/workers">Cloudflare workers</a> are serverless processes that run in response to REST requests at the edge of Cloudflare's hosting infrastructure. &ldquo;At the edge&rdquo; means that a request to a Cloudflare worker is routed to the nearest point in Cloudflare's infrastructure and executed there.</p>
+<p><a href="https://developers.cloudflare.com/workers">Cloudflare workers</a> are serverless processes that run in response to REST requests at the edge of Cloudflare&rsquo;s hosting infrastructure. &ldquo;At the edge&rdquo; means that a request to a Cloudflare worker is routed to the nearest point in Cloudflare&rsquo;s infrastructure and executed there.</p>
 <p>Cloudflare workers can be written in JavaScript, or in <a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">WebAssembly</a>.</p>
 <p><a href="https://github.com/jwulf/slack-cloud-worker">This</a> is a Cloudflare worker that provides a zero-scale Slack messaging task for Camunda Cloud, using the Camunda Cloud HTTP Worker.</p>
 <p>On the free tier of Cloudflare Workers, you can send 100,000 messages a day.</p>
@@ -333,16 +334,16 @@
   <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">respondWith</span>(<span style="color:#a6e22e">handleRequest</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">request</span>))
 })
 
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleRequest</span>(<span style="color:#a6e22e">request</span>) {
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleRequest</span>(<span style="color:#a6e22e">request</span>) {
   <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">json</span>()
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">json</span>()
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;message&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;&#39;</span>
 
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderedMessage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">micromustache</span>.<span style="color:#a6e22e">render</span>(<span style="color:#a6e22e">message</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">body</span> <span style="color:#f92672">||</span> {})
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">slackwebhook</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;slackwebhook&#39;</span>)
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">channel</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;channel&#39;</span>)
 
-    <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">slackwebhook</span>, {
+    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">slackwebhook</span>, {
       <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
       <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
         <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
@@ -457,12 +458,12 @@
 </ol>
 <p>Either way, any field that you want replaced by a variable from the workflow should be escaped like this: <code>{{ variable }}</code>.</p>
 <p>The templating is performed using <a href="https://www.npmjs.com/package/micromustache">micromustache</a>.</p>
-<p>In the example, the message is set in the headers: <code>Hello {{ name }}</code>. When the worker receives a job, it substitutes the value of the variable <code>name</code>. If you examine the file <code>bpmn/test.js</code>, you'll see that it kicks off a workflow setting the variable <code>name</code> to &ldquo;World!&quot;, leading to the Slack message &ldquo;Hello World!&quot;.</p>
+<p>In the example, the message is set in the headers: <code>Hello {{ name }}</code>. When the worker receives a job, it substitutes the value of the variable <code>name</code>. If you examine the file <code>bpmn/test.js</code>, you&rsquo;ll see that it kicks off a workflow setting the variable <code>name</code> to &ldquo;World!&rdquo;, leading to the Slack message &ldquo;Hello World!&rdquo;.</p>
 <h2 id="running-the-demo">Running the demo</h2>
 <ol>
 <li>Cd into the <code>bpmn</code> directory.</li>
 <li>Run <code>npm i</code>.</li>
-<li>Grab your config from your Camunda Cloud account (create Client credentials for the cluster if you don't already have some in there).</li>
+<li>Grab your config from your Camunda Cloud account (create Client credentials for the cluster if you don&rsquo;t already have some in there).</li>
 <li>Run the demo like this - substituting your configuration:</li>
 </ol>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ZEEBE_ADDRESS<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>YOUR CLUSTER CONTACT POINT<span style="color:#e6db74">}</span> <span style="color:#ae81ff">\
@@ -523,6 +524,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -571,40 +604,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -624,12 +623,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -644,17 +643,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -670,6 +669,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -720,11 +724,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -829,12 +828,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

@@ -6,10 +6,19 @@
     <description>Recent content in keyboards on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/keyboards/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 26 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/keyboards/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Halmak after a year</title>
+      <link>https://joshwulf.com/blog/2021/02/halmak/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2021/02/halmak/</guid>
+      <description>Over 12 months ago, I switched to the Halmak keyboard layout.
+I blogged about it at the end of 2019. Since then, I periodically get emails and DMs on Twitter asking me if I kept going with it.
+The answer is &amp;ldquo;Yes&amp;rdquo;.
+I use Halmak every day on my Koolertron AE-SMKD62, and when I need to type silently at night on my Anne Pro 2.
+Some observations It turns out that a texting (thumb) keyboard and touch-typing are stored in different parts of the brain.</description>
+    </item>
     
     <item>
       <title>In Search of the Ultimate Keyboard Layout</title>
@@ -18,7 +27,7 @@
       
       <guid>https://joshwulf.com/blog/2019/11/ultimate-keyboard/</guid>
       <description>In July of 2018, after 35 years of typing on QWERTY layout - 24 of those years touch-typing as a professional software developer and author, I switched to the Dvorak keyboard layout.
-I couldn&#39;t tell you why I did it. I just did. At the time I was training for a physique competition (that will be another blog post). But I don&#39;t know if that had anything to do with it (maybe it was a low-carb moment&amp;hellip;).</description>
+I couldn&amp;rsquo;t tell you why I did it. I just did. At the time I was training for a physique competition (that will be another blog post). But I don&amp;rsquo;t know if that had anything to do with it (maybe it was a low-carb moment&amp;hellip;).</description>
     </item>
     
   </channel>

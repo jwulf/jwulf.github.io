@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript">
 <meta itemprop="description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!">
-<meta itemprop="datePublished" content="2020-02-29T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-29T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-29T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1739">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Providing a method signature overload for Zeebe Node&#39;s `createWorker` using TypeScript" />
 <meta property="og:description" content="TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!" />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -320,14 +321,14 @@
 
 
   <div class="content">
-    <p>When I wrote the first iteration of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node client library</a> in the first months of 2019, I didn't have any experience in using it. How could I - it didn't exist.</p>
+    <p>When I wrote the first iteration of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node client library</a> in the first months of 2019, I didn&rsquo;t have any experience in using it. How could I - it didn&rsquo;t exist.</p>
 <p>One early design decision has haunted me for the last year, causing me sleepless nights as I toss and turn, tormented by my guilty conscience.</p>
 <p>The <code>ZBClient.createWorker()</code> method - to create a new job worker process - takes as one of its parameters an <code>id</code>, used to uniquely identify a specific instance of a worker in events exported from the broker.</p>
-<p>Events viewed in the exporter records contain information like &ldquo;<em>Worker THX-1138 activated 3 jobs</em>&quot;.</p>
+<p>Events viewed in the exporter records contain information like &ldquo;<em>Worker THX-1138 activated 3 jobs</em>&rdquo;.</p>
 <p>It turns out, after using the library extensively myself, and observing others use it, that this parameter is not widely used (yet). In fact, the <a href="https://www.npmjs.com/package/@payk/nestjs-zeebe">Zeebe NestJS integration</a>, (written by <a href="https://github.com/danshapir">Dan Shapir</a> at <a href="http://www.payk.com.au/">Pay-K</a>) which integrates the Zeebe Node client with the excellent <a href="https://nestjs.com/">NestJS framework</a>, auto-assigns ids to the workers. The ability to assign a specific <code>id</code> for the worker is not exposed to the user.</p>
-<p>That's not to say that it will not be used in the future. In larger systems with more worker processes than the ones currently in use, the id may well be derived from an environment variable, to allow misbehaving worker instances (including out-of-date ones) to be identified and dealt with.</p>
+<p>That&rsquo;s not to say that it will not be used in the future. In larger systems with more worker processes than the ones currently in use, the id may well be derived from an environment variable, to allow misbehaving worker instances (including out-of-date ones) to be identified and dealt with.</p>
 <p>But for now, <em>requiring</em> a worker id to create a worker is clunky.</p>
-<p>The source of my problem here is that I violated a principle explained in Bob Martin's &ldquo;<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Clean Code: A Handbook of Agile Software Craftsmanship</a>&quot;:</p>
+<p>The source of my problem here is that I violated a principle explained in Bob Martin&rsquo;s &ldquo;<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882">Clean Code: A Handbook of Agile Software Craftsmanship</a>&quot;:</p>
 <blockquote>
 <p>The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided where possible. More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.</p>
 </blockquote>
@@ -342,16 +343,16 @@
 <p>And <em>I did this anyway</em>.</p>
 <p>I reasoned at the time:</p>
 <blockquote>
-<p>I'm just banging out some prototype code here to test this out. I can always come back and refactor it later.</p>
+<p>I&rsquo;m just banging out some prototype code here to test this out. I can always come back and refactor it later.</p>
 </blockquote>
-<p>&ldquo;There is no such thing as good coding, only good refactoring&rdquo;. (<em>That's my adaptation of <a href="https://www.goodreads.com/quotes/9084374-there-is-no-such-thing-as-good-writing-only-good">a quote by author Robert Graves</a></em>).</p>
+<p>&ldquo;There is no such thing as good coding, only good refactoring&rdquo;. (<em>That&rsquo;s my adaptation of <a href="https://www.goodreads.com/quotes/9084374-there-is-no-such-thing-as-good-writing-only-good">a quote by author Robert Graves</a></em>).</p>
 <p>You will always have to refactor as the domain you are modelling becomes clearer, and you materialise and coalesce concerns in your code.</p>
 <p>At the same time, <em>this</em> is not one of those &ldquo;<em>now I can see&hellip;</em>&rdquo; concerns.</p>
 <p>I willfully violated a coding principle where I had full knowledge at the time.</p>
-<p><em>Always</em> write the best code possible <em>at the time you write it</em> - while knowing full well that you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can't afford to add this as well.</p>
-<p>Most of the scratch code you write will go nowhere, and you won't experience the full impact of sloppy coding practices. It's easy to write and throw away thousands of lines of code, and go: &ldquo;<em>What's the big deal?</em>&rdquo;</p>
+<p><em>Always</em> write the best code possible <em>at the time you write it</em> - while knowing full well that you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can&rsquo;t afford to add this as well.</p>
+<p>Most of the scratch code you write will go nowhere, and you won&rsquo;t experience the full impact of sloppy coding practices. It&rsquo;s easy to write and throw away thousands of lines of code, and go: &ldquo;<em>What&rsquo;s the big deal?</em>&rdquo;</p>
 <p>However, the code that <em>does</em> survive will cost you. You should write every line of code as if you have to maintain it for ten years, as a discipline.</p>
-<p><em>Aside #1</em>: I told someone on StackOverflow the other day: &ldquo;<em>You should always make sure the code runs and is formatted. That will solve 35% of your problems as a professional developer</em>&quot;. Poorly formatted code in questions reveals poorly structured thinking. If you just take on structuring your code properly, the structure of the domain problems become soluble in many cases.</p>
+<p><em>Aside #1</em>: I told someone on StackOverflow the other day: &ldquo;<em>You should always make sure the code runs and is formatted. That will solve 35% of your problems as a professional developer</em>&rdquo;. Poorly formatted code in questions reveals poorly structured thinking. If you just take on structuring your code properly, the structure of the domain problems become soluble in many cases.</p>
 <p><em>Aside #2</em>: Also, (<em>and I had forgotten this - obviously</em>) when I joined Red Hat in 2004, I wrote code patches for a version of RHEL that was going EOL, after its three-year support lifetime. Well, that day arrived, and some big financial institutions paid millions of dollars to extend its life to seven years. And when that day arrived, paid more money to extend it to 12 years. When I left Red Hat, after 10 years, the patches I wrote in my first year were still in production and being supported. There is no way you can forsee that, so just write <em>all</em> code as if you have to maintain it for 10 years, as a discipline.</p>
 <h2 id="optional-parameters">Optional parameters</h2>
 <p>You can make trailing parameters optional in TypeScript, but required parameters cannot follow optional ones. So there was no way to make <code>id</code> optional.</p>
@@ -363,7 +364,7 @@
 <p>If it should be ignored, why is it even visible?</p>
 </blockquote>
 <p>I also found myself having to supply information to the method every time I used it that was just thrown away.</p>
-<p>With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can't just change the signature in a breaking way. That breaks it for a lot of people.</p>
+<p>With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can&rsquo;t just change the signature in a breaking way. That breaks it for a lot of people.</p>
 
 
 
@@ -400,7 +401,7 @@
 <p>With TypeScript, you can provide different parameter signatures for the same method, but because all type information is erased at run-time, you have to handle the various signatures in a single implementation.</p>
 <p>Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards-compatible way.</p>
 <p>I held off on it; but finally bit the bullet and did it in the work for the upcoming 0.23.0-alpha.1 release, providing an alternate method signature - one that no longer requires the worker id as an argument.</p>
-<p>Why didn't I just go all the way and move to a single parameter object? Because I'm an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that's a mistake that will pile more technical debt in. I've designed it to reduce that, by encapsulating the new concern that I've added (run-time decoding of the signature).</p>
+<p>Why didn&rsquo;t I just go all the way and move to a single parameter object? Because I&rsquo;m an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that&rsquo;s a mistake that will pile more technical debt in. I&rsquo;ve designed it to reduce that, by encapsulating the new concern that I&rsquo;ve added (run-time decoding of the signature).</p>
 <p>My plan is to add the third method overload to a single parameter object in a future release, if it makes sense. The jury is still out on that. If it needs extension, that will definitely be part of that work.</p>
 <p>This is not released yet, so there is still time for me to deliberate and go all in on the object parameter.</p>
 <p><em><strong>Update:</strong> I did it. It has a single parameter signature now, as well.</em></p>
@@ -419,24 +420,24 @@
 <script type="application/javascript" src="https://gist.github.com/jwulf/7c59ae624ad5a794651cb31658616d5c.js"></script>
 
 <p>You have to provide both signatures as overload signatures, then define an implementation signature that is a union of all overloads. And this is with the Generic Parameterization stripped out to reduce the noise.</p>
-<p>But wait - <em>there's more</em>!</p>
+<p>But wait - <em>there&rsquo;s more</em>!</p>
 <p>Now you have to decode the call at run-time by examining the actual parameters that you received, and determining which signature the caller used, and which parameter is which.</p>
 <p>That is why the implementation signature (not shown to consumers) contains parameter names like <code> taskHandlerOrOptions</code>.</p>
-<p>To reduce the internal complexity of the method (<em>that's</em> about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function.</p>
+<p>To reduce the internal complexity of the method (<em>that&rsquo;s</em> about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function.</p>
 <p>The entire impact on the <em>internal</em> complexity of the method is this:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/0dfa6db868afa330f6a9035f57a5aea4.js"></script>
 
-<p>OK, I've isolated the implementation of the method from the fall-out of my momentary madness in creating that original signature.</p>
+<p>OK, I&rsquo;ve isolated the implementation of the method from the fall-out of my momentary madness in creating that original signature.</p>
 <p>Now I have to implement the run-time decoder:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/b348521de01517647502161b65e5b36f.js"></script>
 
-<p>That's a lot of internal complexity required to go from:</p>
+<p>That&rsquo;s a lot of internal complexity required to go from:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/183b62dce9d1cfe70f05201f6599495a.js"></script>
 
 <p>to this, <em>with backwards-compatibility</em>:</p>
 <script type="application/javascript" src="https://gist.github.com/jwulf/4a3c8a3c10d3dc886b49b573a5c4e8fc.js"></script>
 
-<p>Going to the third signature, with a single object parameter, will be a small amount of additional code: a new signature overload, a line or two in the decoder, then changes to documentation, and a test or two (<em>because I don't touch the implementation, just the run-time decoder</em>).</p>
+<p>Going to the third signature, with a single object parameter, will be a small amount of additional code: a new signature overload, a line or two in the decoder, then changes to documentation, and a test or two (<em>because I don&rsquo;t touch the implementation, just the run-time decoder</em>).</p>
 <p>And to think:</p>
 <p><strong>All that code could have been avoided by using an object parameter for a method that takes more than one parameter</strong>.</p>
 <p>/<em>makes note</em>.</p>
@@ -501,6 +502,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -549,40 +582,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -602,12 +601,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -622,17 +621,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -648,6 +647,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -698,11 +702,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -807,12 +806,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

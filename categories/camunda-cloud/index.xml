@@ -6,11 +6,7 @@
     <description>Recent content in Camunda Cloud on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/camunda-cloud/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/camunda-cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two</title>
       <link>https://joshwulf.com/blog/2020/03/camunda-cloud-connection-2/</link>
@@ -18,7 +14,7 @@
       
       <guid>https://joshwulf.com/blog/2020/03/camunda-cloud-connection-2/</guid>
       <description>See Part One of this series here.
-I&#39;m refactoring the Zeebe Node client to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in Camunda Cloud.
+I&amp;rsquo;m refactoring the Zeebe Node client to give it the ergonomic excellence that developers have come to expect from the library, when running it against Zeebe clusters in Camunda Cloud.
 Right now, here is what it looks like connecting to Camunda Cloud with the Zeebe Node client:
    Boo!
 The gRPC connection with Camunda Cloud has different characteristics to self-hosted Zeebe, particularly on initial connection, and there is nowhere in the current Node client architecture to model different expectations of connection behaviour.</description>
@@ -31,7 +27,7 @@ The gRPC connection with Camunda Cloud has different characteristics to self-hos
       
       <guid>https://joshwulf.com/blog/2020/02/camunda-cloud-connection/</guid>
       <description>Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node.js client against a running instance of a Camunda Cloud Zeebe cluster.
-I was immediately forced to deal with something I&#39;d been conveniently ignoring:
+I was immediately forced to deal with something I&amp;rsquo;d been conveniently ignoring:
 Camunda Cloud gRPC connections always report failure initially, before eventually succeeding.
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual &amp;ldquo;READY&amp;rdquo; state.</description>
     </item>

@@ -6,10 +6,17 @@
     <description>Recent content in typescript on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rate-limiting REST calls</title>
+      <link>https://joshwulf.com/blog/2020/12/rate-limiter/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/blog/2020/12/rate-limiter/</guid>
+      <description>A typical architecture involves your backend acting as a middle-tier connecting clients to a single external resource over REST: for example, a Discourse or Slack API.
+The amount of requests issued to the remote REST API is proportional to the requests from the clients, so it is not directly under your control.
+External REST services often implement rate-limiting, and will return a 429 status if you make too many requests in a short period of time.</description>
+    </item>
     
     <item>
       <title>Writing a Zeebe Client in 2020</title>
@@ -17,7 +24,7 @@
       <pubDate>Tue, 23 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/06/zeebe-2020/</guid>
-      <description>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &amp;ldquo;Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial&amp;quot;.
+      <description>The last time we wrote about creating a Zeebe Client was in November, 2018 in the article &amp;ldquo;Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial&amp;rdquo;.
 As of June 18, 2020, we have Zeebe client libraries in Java and Go, maintained by the core Zeebe Engineering team, as well as community-supported clients in C#, Delphi, Node.js, Python, Ruby, and Rust; as well as Workit - a Node.</description>
     </item>
     
@@ -38,7 +45,7 @@ Motivation Sometimes you have external resources that your microservices access 
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/blog/2020/02/refining-method-signature/</guid>
-      <description>When I wrote the first iteration of the Zeebe Node client library in the first months of 2019, I didn&#39;t have any experience in using it. How could I - it didn&#39;t exist.
+      <description>When I wrote the first iteration of the Zeebe Node client library in the first months of 2019, I didn&amp;rsquo;t have any experience in using it. How could I - it didn&amp;rsquo;t exist.
 One early design decision has haunted me for the last year, causing me sleepless nights as I toss and turn, tormented by my guilty conscience.
 The ZBClient.createWorker() method - to create a new job worker process - takes as one of its parameters an id, used to uniquely identify a specific instance of a worker in events exported from the broker.</description>
     </item>

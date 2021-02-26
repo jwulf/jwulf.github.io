@@ -6,11 +6,7 @@
     <description>Recent content in minecraft on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 21 Apr 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/minecraft/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 21 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/minecraft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to modify Minecraft the easy way with TypeScript</title>
       <link>https://joshwulf.com/blog/2019/04/mod-minecraft/</link>

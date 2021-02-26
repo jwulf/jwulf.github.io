@@ -19,17 +19,18 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="The Zeebe Node Batch Worker">
 <meta itemprop="description" content="A new Zeebe Node worker allows you to batch access to external resources, for great justice.">
-<meta itemprop="datePublished" content="2020-03-03T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-03T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-03-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-03-03T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1197">
 <meta itemprop="image" content="https://joshwulf.com/img/2020/03/batch-worker-feature.jpg">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="The Zeebe Node Batch Worker" />
 <meta property="og:description" content="A new Zeebe Node worker allows you to batch access to external resources, for great justice." />
 <meta property="og:type" content="article" />
@@ -58,7 +59,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -340,10 +341,10 @@
 
 <p>Note that the <code>timeout</code> value must be greater than the <code>jobBatchMaxTime</code>. The <code>timeout</code> is the amount of time that the worker tells the broker it needs to complete the task.</p>
 <p>In this example, for each job that the worker pulls from the broker, it tells the broker that it needs 80 seconds to complete it, max. After 80 seconds, the broker will make that job available to another <code>activateJobs</code> call from a worker. So the batch worker should make sure it gets the job done before then.</p>
-<p>If you set the <code>timeout</code> less than the <code>jobBatchMaxTime</code>, the worker will emit a warning message to the logs. I considered having it throw, but what do I know - someone may come up with a crazy, innovative way to exploit this behaviour, and I'm all about that.</p>
+<p>If you set the <code>timeout</code> less than the <code>jobBatchMaxTime</code>, the worker will emit a warning message to the logs. I considered having it throw, but what do I know - someone may come up with a crazy, innovative way to exploit this behaviour, and I&rsquo;m all about that.</p>
 <p>You want to ensure you allow enough time to deal with any retry logic (related to the external API) that you put in your handler.</p>
 <h2 id="the-zbbatchworker-handler">The ZBBatchWorker handler</h2>
-<p>The <code>ZBWorker</code> handler takes a job - a read-only JavaScript object with the job data, a <code>complete</code> object - with methods to signal the completion state of the job, and an instance of the <code>worker</code> - to allow you to log from the handler using the worker's configured log.</p>
+<p>The <code>ZBWorker</code> handler takes a job - a read-only JavaScript object with the job data, a <code>complete</code> object - with methods to signal the completion state of the job, and an instance of the <code>worker</code> - to allow you to log from the handler using the worker&rsquo;s configured log.</p>
 <p>The <code>ZBBatchWorker</code> handler, on the other hand, takes <em>an array</em> of jobs, and an instance of the worker.</p>
 <p>To allow you to signal the completion state of each of the individual jobs in the batch, the jobs in the array have the complete methods attached to them.</p>
 <p>So, here is a handler that demonstrates doing nothing more than completing each job with <code>success</code>:</p>
@@ -352,12 +353,12 @@
 <h2 id="unhandled-exceptions">Unhandled Exceptions</h2>
 <p>You need to carefully manage exceptions in your handler.</p>
 <p>The <code>ZBWorker</code> will fail a job if an unhandled exception takes place in the job handler, and it has an option to fail the entire workflow if you want that behaviour.</p>
-<p>With the <code>ZBBatchWorker</code>, we don't know what state the job batch is in, or how your handler will act after throwing an unhandled exception. So, no action is taken by the library.</p>
+<p>With the <code>ZBBatchWorker</code>, we don&rsquo;t know what state the job batch is in, or how your handler will act after throwing an unhandled exception. So, no action is taken by the library.</p>
 <p>It also cannot catch errors deep in the handler code, for example inside <code>map</code> or <code>forEach</code> predicate functions, so you gotta manage that.</p>
 <h2 id="internal-implementation-details">Internal Implementation Details</h2>
 <p>There is no API in the broker for batching jobs. You can request a maximum number of jobs at a time, but there is no guarantee about a minimum. You cannot send a request that will be fulfilled when there are enough available jobs.</p>
 <p>So, all the management of the batching takes place on the client.</p>
-<p>To implement this, I used a pattern that I described in the &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant#valid-use-of-variables">Valid Use of Variables</a>&rdquo; section of the article &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant">Shun the Mutant - The case for <code>const</code></a>&quot;, wrapping the batching functionality into a small state machine with an API:</p>
+<p>To implement this, I used a pattern that I described in the &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant#valid-use-of-variables">Valid Use of Variables</a>&rdquo; section of the article &ldquo;<a href="https://joshwulf.com/blog/2020/02/shun-the-mutant">Shun the Mutant - The case for <code>const</code></a>&rdquo;, wrapping the batching functionality into a small state machine with an API:</p>
 <p>Here is a BPMN diagram of the state machine:</p>
 <iframe
   src="https://cawemo.com/embed/20e50f02-50cc-4005-96d6-bf50380f4097"
@@ -372,15 +373,15 @@
 <p>It has two variables in it, but these are &ldquo;true variables&rdquo;. It is a <em>state machine</em>, so it has to model <em>actual</em> variables in the system. One represents the batched jobs. The other is the batch timer.</p>
 <p>The batch timer is started when the first job is pushed into the batch array. From that point, two things will trigger the execution of the job handler on the array of batched jobs: either a job will be pushed in via the <code>batch</code> API method that takes the count of jobs to the maximum batch size, or the timer will trigger the execution.</p>
 <h2 id="race-conditions">Race conditions?</h2>
-<p>That's not a lot of code, but a lot of thought has gone into it.</p>
-<p>I am still slightly concerned about race conditions in this code at high volumes. I gotta admit - my knowledge of how the Node.js event loop and timers work is not complete. Even after reading through <a href="https://nodejs.org/uk/docs/guides/event-loop-timers-and-nexttick/">The Node.js Event Loop, Timers, and <code>process.nextTick()</code></a>, I'm still not 100% clear if this code is susceptible to interrupts that cause its internal state to become inconsistent.</p>
+<p>That&rsquo;s not a lot of code, but a lot of thought has gone into it.</p>
+<p>I am still slightly concerned about race conditions in this code at high volumes. I gotta admit - my knowledge of how the Node.js event loop and timers work is not complete. Even after reading through <a href="https://nodejs.org/uk/docs/guides/event-loop-timers-and-nexttick/">The Node.js Event Loop, Timers, and <code>process.nextTick()</code></a>, I&rsquo;m still not 100% clear if this code is susceptible to interrupts that cause its internal state to become inconsistent.</p>
 <p>The issue is that two different triggers can cause the execution (timer interrupt, or call to <code>batch</code>), and consumers can call <code>batch</code> while the execution is taking place.</p>
-<p>I <em>think</em> that I have guaranteed synchronous execution through <code>execute</code> up to the handler invocation before another call to <code>batch</code> is processed - but I'm not sure.</p>
-<p>I'm <em>pretty sure</em> that if the handler does any I/O, then at <em>that</em> point the execution will yield to the event loop - and all my state machine's mutating code happens before then.</p>
-<p>I pass in a <em>copy</em> of the batched jobs and scrub the state's batched jobs before calling the handler, so that <em>should</em> take care of it.</p>
-<p>Anyway, you'll be glad to know that I'm thinking like this about your run-time state and data while you use the library, <em>and</em> I will get completely flat on this.</p>
-<p>Managing state and time are the biggest sources of complexity in an application, so I've encapsulated all of that with respect to this concern inside a state machine.</p>
-<p>The complexity of managing this state is not leaked out into the application, and although the race condition that I'm concerned about is not easy to test for, it <em>is</em> easy to reason about in such a small bounded context. So all I need to do to be sure that this works as advertised is to increase my understanding of the event loop.</p>
+<p>I <em>think</em> that I have guaranteed synchronous execution through <code>execute</code> up to the handler invocation before another call to <code>batch</code> is processed - but I&rsquo;m not sure.</p>
+<p>I&rsquo;m <em>pretty sure</em> that if the handler does any I/O, then at <em>that</em> point the execution will yield to the event loop - and all my state machine&rsquo;s mutating code happens before then.</p>
+<p>I pass in a <em>copy</em> of the batched jobs and scrub the state&rsquo;s batched jobs before calling the handler, so that <em>should</em> take care of it.</p>
+<p>Anyway, you&rsquo;ll be glad to know that I&rsquo;m thinking like this about your run-time state and data while you use the library, <em>and</em> I will get completely flat on this.</p>
+<p>Managing state and time are the biggest sources of complexity in an application, so I&rsquo;ve encapsulated all of that with respect to this concern inside a state machine.</p>
+<p>The complexity of managing this state is not leaked out into the application, and although the race condition that I&rsquo;m concerned about is not easy to test for, it <em>is</em> easy to reason about in such a small bounded context. So all I need to do to be sure that this works as advertised is to increase my understanding of the event loop.</p>
 <p><strong>About me</strong>: <em>I’m a Developer Advocate at <a href="https://camunda.com">Camunda</a>, working primarily on the <a href="https://zeebe.io">Zeebe Workflow engine for Microservices Orchestration</a>, and the maintainer of the <a href="https://www.npmjs.com/package/zeebe-node">Zeebe Node.js client</a>. In my spare time, I build <a href="https://github.com/Magikcraft">Magikcraft</a>, a platform for programming with JavaScript in Minecraft.</em></p>
 
   </div>
@@ -442,6 +443,38 @@
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -490,40 +523,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -543,12 +542,12 @@
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -563,17 +562,17 @@
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -589,6 +588,11 @@
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -639,11 +643,6 @@
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -748,12 +747,12 @@
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

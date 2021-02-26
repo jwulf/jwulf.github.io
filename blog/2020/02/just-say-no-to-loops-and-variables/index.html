@@ -19,16 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 
-  <meta name="generator" content="Hugo 0.60.0" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <meta itemprop="name" content="Just say No to loops and variables.">
 <meta itemprop="description" content="A hot take on programming without them.">
-<meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-23T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2593">
 
 
 
 <meta itemprop="keywords" content="" />
+
   <meta property="og:title" content="Just say No to loops and variables." />
 <meta property="og:description" content="A hot take on programming without them." />
 <meta property="og:type" content="article" />
@@ -54,7 +55,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
       
       
-      <link rel="stylesheet" href="/css/main.min.aee9255fa86d422cb7da1a43850892fa71e23455608b55b3b4e46b61953632f6.css" integrity="sha256-ruklX6htQiy32hpDhQiS&#43;nHiNFVgi1WztORrYZU2MvY=">
+      <link rel="stylesheet" href="/css/main.min.dc1c156d38a500ea4ba8a05fd35c50593aa02069f109a65a33d3974358b4581b.css" integrity="sha256-3BwVbTilAOpLqKBf01xQWTqgIGnxCaZaM9OXQ1i0WBs=">
       <link rel="stylesheet" href="/css/add-on.css">
     
   
@@ -320,11 +321,11 @@
 
 
   <div class="content">
-    <p>Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (<em>I'm pretty sure a fair whack of them were homework assignments</em>).</p>
+    <p>Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (<em>I&rsquo;m pretty sure a fair whack of them were homework assignments</em>).</p>
 <p>One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (<em>Discord bots are hot right now with the kids</em>).</p>
 <p>There are certain things that people struggle with when learning to program, and when learning to program in JS.</p>
 <p><strong>Asynchronicity</strong> is one. Callbacks not so much - mostly now people are struggling with Promises (which are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: <em>they look the same</em>. At least with callbacks and Promises you have some clue in the indentation.</p>
-<p><strong>Naming</strong> is another one. The power of correctly naming entities in a program cannot be overestimated - I mean, it's one of the two hardest problems in computer science: caching, naming things, and whether or not to move to San Francisco.</p>
+<p><strong>Naming</strong> is another one. The power of correctly naming entities in a program cannot be overestimated - I mean, it&rsquo;s one of the two hardest problems in computer science: caching, naming things, and whether or not to move to San Francisco.</p>
 <p>The impact of <em>not</em> correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that &ldquo;<em>80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE.</em>&rdquo; <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>. (I solved his problem for him.)</p>
 <p>He had started with an entity named <code>x</code> and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.</p>
 <p>As we read in <a href="https://china.usc.edu/confucius-analects-13">the Analects of Confucius</a> (&quot;<em>Confucius say</em>&quot;):</p>
@@ -351,12 +352,12 @@
 <p>In modern software development <a href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a> is a widely accepted best practice for reducing complexity and technical debt.</p>
 <h2 id="mixed-concerns-lead-to-exponential-complexity">Mixed Concerns lead to Exponential Complexity</h2>
 <p>One thing I noticed many novice programmers struggling with was the mixing of the concerns of data transformation - essentially a functional concern - with imperative flow control.</p>
-<p>Nothing wrong with that, but it lead them into situations where they experienced overwhelming complexity. They couldn't get the data transformation that they wanted, <em>and</em> they were struggling with building a custom state machine to produce it at the same time. The intersection of these two problems lead them to throw up their hands and turn to StackOverflow.</p>
-<p>As I said to one questioner: &ldquo;<em>when you solve a problem using loops and variables, now you have three problems</em>&quot;. You have to build a custom state machine, track mutable state, <em>and</em> you still have the original problem you were trying to solve.</p>
-<p>Now, seasoned programmers can often look at these trivial (to them) situations and see a clear way out of the scenario the new programmer has gotten themselves into, and guide the novice to correctly construct the state machine, correctly initialise and scope the variables, and get the desired data transformation with the resulting system - and you might think &ldquo;<em>what's the big deal?</em>&rdquo;</p>
-<p>It can even be a mark of pride to be able to tame it in this way. However, the novice programmer's dilemma is a microcosm that simply scales up when they continue to code this way with more prowess.</p>
+<p>Nothing wrong with that, but it lead them into situations where they experienced overwhelming complexity. They couldn&rsquo;t get the data transformation that they wanted, <em>and</em> they were struggling with building a custom state machine to produce it at the same time. The intersection of these two problems lead them to throw up their hands and turn to StackOverflow.</p>
+<p>As I said to one questioner: &ldquo;<em>when you solve a problem using loops and variables, now you have three problems</em>&rdquo;. You have to build a custom state machine, track mutable state, <em>and</em> you still have the original problem you were trying to solve.</p>
+<p>Now, seasoned programmers can often look at these trivial (to them) situations and see a clear way out of the scenario the new programmer has gotten themselves into, and guide the novice to correctly construct the state machine, correctly initialise and scope the variables, and get the desired data transformation with the resulting system - and you might think &ldquo;<em>what&rsquo;s the big deal?</em>&rdquo;</p>
+<p>It can even be a mark of pride to be able to tame it in this way. However, the novice programmer&rsquo;s dilemma is a microcosm that simply scales up when they continue to code this way with more prowess.</p>
 <h2 id="so-the-hot-take">So, the Hot Take</h2>
-<p>I overstepped the mark in one question. This particular week, I was in the top 0.11% of StackOverflow contributors worldwide, as recognized by the community on StackOverflow (thank you, you're welcome), and on a burn.</p>
+<p>I overstepped the mark in one question. This particular week, I was in the top 0.11% of StackOverflow contributors worldwide, as recognized by the community on StackOverflow (thank you, you&rsquo;re welcome), and on a burn.</p>
 <p>To one question, I said:</p>
 <blockquote>
 <p>I can see two problems with your code straight away:</p>
@@ -375,12 +376,12 @@
 <p>@Josh Wulf - There is no reason not to use loops and variables in code. You are ridiculous. You should know that using certain convenience functions of Array are slower performing than using for loops. Filter is actually a loop that iterates through all elements of an array, and it performs slower than for loops across the board. I recommend keeping your comments constructive and avoid passive agressive remarks like &ldquo;Solid effort though.&rdquo; Its actually a viable solution for many cases. I even pointed out that another solution on the thread might be better. Maybe write a blog where you critique?</p>
 </blockquote>
 <p>Ouch!</p>
-<p>I apologised to him, because I did overstep the mark with that comment. It's fine to have a perspective on something, but leaving a member of our professional community, who is giving their free time to contribute to others, with the experience of being disrespected is not what I am committed to.</p>
+<p>I apologised to him, because I did overstep the mark with that comment. It&rsquo;s fine to have a perspective on something, but leaving a member of our professional community, who is giving their free time to contribute to others, with the experience of being disrespected is not what I am committed to.</p>
 <p>So, I apologised, and accepted his request to write a blog article about it. Thank you to that member of our community for holding me to account to the level of professional courtesy and respect that you are due, and for the opportunity to write this blog.</p>
 <p>Here we go:</p>
 <h2 id="state-mutation-and-complexity">State Mutation and Complexity</h2>
 <p>Mutable state in a program is <em>additional complexity</em>.</p>
-<p>More variables means more moving parts: <em>mo&rsquo; vars mo&rsquo; problems</em>. If an assignment is declared as mutable, guarantees about that assignment are weakened. This means that reasoning about the eventual value of that assignment in other parts of the program is complex. With TypeScript (on a strong setting), the transpiler will make a strong assertion about the <em>type</em> of the value, to reduce complexity, but it cannot make any guarantees about its eventual <em>value</em>. Without TypeScript, <em>neither</em> is guaranteed. (And at run-time, all bets are off, so you are at the mercy of the accuracy and consistency of your typings).</p>
+<p>More variables means more moving parts: <em>mo' vars mo' problems</em>. If an assignment is declared as mutable, guarantees about that assignment are weakened. This means that reasoning about the eventual value of that assignment in other parts of the program is complex. With TypeScript (on a strong setting), the transpiler will make a strong assertion about the <em>type</em> of the value, to reduce complexity, but it cannot make any guarantees about its eventual <em>value</em>. Without TypeScript, <em>neither</em> is guaranteed. (And at run-time, all bets are off, so you are at the mercy of the accuracy and consistency of your typings).</p>
 <p>Deliberately reducing complexity by choosing to eschew the mutant is a programming discipline, and one that I believe pays off.</p>
 <p>Douglas Crockford wrote the famous book <a href="https://www.amazon.com.au/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742">JavaScript: The Good Parts</a>, where he shared his discovery that if he deliberately avoided certain parts of the language - artificially constraining himself to a subset of the language - his productivity improved.</p>
 <p>I believe that variables belong in the category of &ldquo;things to avoid&rdquo;.</p>
@@ -398,26 +399,26 @@ try {
     return handleThis(e)
 }
 </code></pre><p>This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: <em>striving for a single level of indentation</em>.</p>
-<p>Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.</p>
+<p>Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn&rsquo;t sure still produced the same effects, lead me to that.</p>
 <p>I recently resolved this, and that <code>let</code> is no more for me - but that is another blog post.</p>
-<p>I see novice programmers declaring variables as <code>let</code> and <code>var</code>, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&quot;.</p>
-<p>When you don't change it, why communicate that intent? You have incorrectly named a thing.</p>
+<p>I see novice programmers declaring variables as <code>let</code> and <code>var</code>, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: &ldquo;<em>I intend that the value of this assignment change over the course of execution</em>&rdquo;.</p>
+<p>When you don&rsquo;t change it, why communicate that intent? You have incorrectly named a thing.</p>
 <p>And when you <em>do</em> mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.</p>
 <p>And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a &ldquo;<em>case of mistaken identity mutation</em>&rdquo; bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because <em>variables</em>.</p>
 <p>Just say No to variables. Try it for one year (<em>I know that seems like a long time if it represents a significant percentage of your programming career to date</em>).</p>
 <p>If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: <em>variables</em>.</p>
 <h2 id="custom-state-machines-loops">Custom State Machines: Loops</h2>
 <p>Loops are problematic in several ways (and this applies to <code>Array.forEach</code> as well as the classic <code>for</code> loop).</p>
-<p>Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: &ldquo;<em>I have to transform every element in this array</em>&quot;. So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.</p>
-<p>That's an explosion of complexity, and leads to complex and fragile constructions that are resistant to refactoring. As the novice (or maintenance) engineer iterates on the data transformation taking place in the loop, the coupling of the state machine with the data transformation can cause the state machine to break, or to require a change in the state machine to accomodate a change in the data transformation. This is especially problematic for the novice programmer who is trying to get both to work at the same time. Now they are solving a two variable problem when they started with one!</p>
-<p>Niklaus Wirth's classic work on programming distinguished two categories: <a href="https://www.amazon.com/Algorithms-Data-Structures-Niklaus-Wirth/dp/0130220051">Algorithms and Data Structures</a>. A third concern in a program is <em>control flow</em> - in distributed systems it is <em>processes</em> - directed evolution of the program (system) state over time.</p>
+<p>Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: &ldquo;<em>I have to transform every element in this array</em>&rdquo;. So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.</p>
+<p>That&rsquo;s an explosion of complexity, and leads to complex and fragile constructions that are resistant to refactoring. As the novice (or maintenance) engineer iterates on the data transformation taking place in the loop, the coupling of the state machine with the data transformation can cause the state machine to break, or to require a change in the state machine to accomodate a change in the data transformation. This is especially problematic for the novice programmer who is trying to get both to work at the same time. Now they are solving a two variable problem when they started with one!</p>
+<p>Niklaus Wirth&rsquo;s classic work on programming distinguished two categories: <a href="https://www.amazon.com/Algorithms-Data-Structures-Niklaus-Wirth/dp/0130220051">Algorithms and Data Structures</a>. A third concern in a program is <em>control flow</em> - in distributed systems it is <em>processes</em> - directed evolution of the program (system) state over time.</p>
 <p>By using a loop, you are putting all three in one place. Many novice programmers (and experienced ones working on new systems) are operating without a clear picture of the eventual shape of the data that they need to model the state and the transformations required to achieve the outcome. When you put all three in one place, you now have a three-variable equation that you are trying to solve at once.</p>
 <p>And you are doing it by building the machine that will apply the transformation to the data structure, manually.</p>
 <p>This, I believe, is at the core of the breakdown for many of the novice programmers who loop themselves into a knot with these assignments - I mean, work problems. They end up going: &ldquo;<em>What the heck am I even doing???</em>&rdquo;</p>
 <p>The complexity is <em>too much</em>.</p>
-<p>And what got missed, right at the outset, is that the problem is <strong>not</strong> &ldquo;<em>apply a transformation to every element in this array</em>&quot;.</p>
-<p>That is the automatic GOTO (<em>sorry, couldn't resist</em>) of the programmer armed with a loop.</p>
-<p>The problem is in fact, much, much simpler. It is: &ldquo;<em>apply a transformation to <strong>each</strong> element in this array</em>&quot;.</p>
+<p>And what got missed, right at the outset, is that the problem is <strong>not</strong> &ldquo;<em>apply a transformation to every element in this array</em>&rdquo;.</p>
+<p>That is the automatic GOTO (<em>sorry, couldn&rsquo;t resist</em>) of the programmer armed with a loop.</p>
+<p>The problem is in fact, much, much simpler. It is: &ldquo;<em>apply a transformation to <strong>each</strong> element in this array</em>&rdquo;.</p>
 <p>Once this is grasped, the separation of concerns becomes clearer:</p>
 <p>&ldquo;<em>I need to write a data transformation function that takes one element and returns one transformed element</em>.&rdquo;</p>
 <p>&ldquo;<em>And I need to apply this transformer function to each element in the array</em>.&rdquo;</p>
@@ -499,6 +500,38 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
       <article class="mini-post">
         <section>
           
+  <a href="/blog/2021/02/halmak/" class="image featured">
+    <img src="/img/2021/02/halmak.jpeg" alt="">
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2021/02/halmak/">Halmak after a year</a></h1>
+          <time class="published" datetime="">February 26, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+  <a href="/blog/2020/12/rate-limiter/" class="image featured">
+    
+      <img src="/img/2019/01/zeebe.png" alt="">
+    
+  </a>
+
+
+        </section>
+        <header>
+          <h1><a href="/blog/2020/12/rate-limiter/">Rate-limiting REST calls</a></h1>
+          <time class="published" datetime="">December 1, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
   <a href="/blog/2020/06/zeebe-2020/" class="image featured">
     
       <img src="/img/2019/01/zeebe.png" alt="">
@@ -547,40 +580,6 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/why-array-map/" class="image featured">
-    
-      <img src="/img/2020/02/stack-overflow.png" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/why-array-map/">Why Array.map</a></h1>
-          <time class="published" datetime="">March 4, 2020</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-        <section>
-          
-  <a href="/blog/2020/03/zb-batch-worker/" class="image featured">
-    
-      <img src="/img/2020/03/batch-worker-feature.jpg" alt="">
-    
-  </a>
-
-
-        </section>
-        <header>
-          <h1><a href="/blog/2020/03/zb-batch-worker/">The Zeebe Node Batch Worker</a></h1>
-          <time class="published" datetime="">March 3, 2020</time>
-        </header>
-      </article>
-      
       
         <a href="/blog/" class="button">See more</a>
       
@@ -600,12 +599,12 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
           
           <li>
             
-              <a href="/categories/javascript/">javascript<span class="count">21</span></a>
+              <a href="/categories/javascript/">javascript<span class="count">22</span></a>
             
           
           <li>
             
-              <a href="/categories/programming/">programming<span class="count">21</span></a>
+              <a href="/categories/programming/">programming<span class="count">22</span></a>
             
           
           <li>
@@ -620,17 +619,17 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
           
           <li>
             
+              <a href="/categories/typescript/">typescript<span class="count">4</span></a>
+            
+          
+          <li>
+            
               <a href="/categories/events/">events<span class="count">3</span></a>
             
           
           <li>
             
               <a href="/categories/fp-ts/">fp-ts<span class="count">3</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/typescript/">typescript<span class="count">3</span></a>
             
           
           <li>
@@ -646,6 +645,11 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
           <li>
             
               <a href="/categories/hackathon/">hackathon<span class="count">2</span></a>
+            
+          
+          <li>
+            
+              <a href="/categories/keyboards/">keyboards<span class="count">2</span></a>
             
           
           <li>
@@ -696,11 +700,6 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
           <li>
             
               <a href="/categories/fp/">fp<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/keyboards/">keyboards<span class="count">1</span></a>
             
           
           <li>
@@ -805,12 +804,12 @@ const countNumbers = arr =&gt; arr.filter(isNum).length;
   
   <p class="copyright">
     
-      &copy; 2020
+      &copy; 2021
       
         Josh Wulf
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.60.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.80.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

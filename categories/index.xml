@@ -6,15 +6,20 @@
     <description>Recent content in Categories on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 26 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>keyboards</title>
+      <link>https://joshwulf.com/categories/keyboards/</link>
+      <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://joshwulf.com/categories/keyboards/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>javascript</title>
       <link>https://joshwulf.com/categories/javascript/</link>
-      <pubDate>Tue, 23 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/javascript/</guid>
       <description></description>
@@ -23,7 +28,7 @@
     <item>
       <title>programming</title>
       <link>https://joshwulf.com/categories/programming/</link>
-      <pubDate>Tue, 23 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/programming/</guid>
       <description></description>
@@ -32,7 +37,7 @@
     <item>
       <title>typescript</title>
       <link>https://joshwulf.com/categories/typescript/</link>
-      <pubDate>Tue, 23 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/typescript/</guid>
       <description></description>
@@ -107,15 +112,6 @@
       <pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://joshwulf.com/categories/serverless/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>keyboards</title>
-      <link>https://joshwulf.com/categories/keyboards/</link>
-      <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://joshwulf.com/categories/keyboards/</guid>
       <description></description>
     </item>
     

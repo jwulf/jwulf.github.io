@@ -6,11 +6,7 @@
     <description>Recent content in quantum mechanics on Josh Wulf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 20 Sep 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://joshwulf.com/categories/quantum-mechanics/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 20 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://joshwulf.com/categories/quantum-mechanics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Programming Quantum Computers with Q#</title>
       <link>https://joshwulf.com/blog/2018/09/programming-in-q#/</link>
